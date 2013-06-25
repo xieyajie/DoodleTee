@@ -60,6 +60,7 @@
 		3AB1FFC817546F4200B72E93 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB1FFC717546F4200B72E93 /* main.m */; };
 		3AB1FFFA175484FC00B72E93 /* XDAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB1FFF7175484FC00B72E93 /* XDAppDelegate.m */; };
 		3AB1FFFB175484FC00B72E93 /* XDRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB1FFF9175484FC00B72E93 /* XDRootViewController.m */; };
+		3AC5FDE217799AD400C48CBB /* ImageUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AC5FDE117799AD400C48CBB /* ImageUtil.m */; };
 		3AFAD8A9175CDC4D00E7A4DB /* setting_cellSelectBackground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3AFAD8A7175CDC4D00E7A4DB /* setting_cellSelectBackground@2x.png */; };
 		3AFAD8AA175CDC4D00E7A4DB /* setting_unchoiceBox@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3AFAD8A8175CDC4D00E7A4DB /* setting_unchoiceBox@2x.png */; };
 /* End PBXBuildFile section */
@@ -127,6 +128,9 @@
 		3AB1FFF7175484FC00B72E93 /* XDAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XDAppDelegate.m; sourceTree = "<group>"; };
 		3AB1FFF8175484FC00B72E93 /* XDRootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDRootViewController.h; sourceTree = "<group>"; };
 		3AB1FFF9175484FC00B72E93 /* XDRootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XDRootViewController.m; sourceTree = "<group>"; };
+		3AC5FDDF17799AD400C48CBB /* ColorMatrix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorMatrix.h; sourceTree = "<group>"; };
+		3AC5FDE017799AD400C48CBB /* ImageUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageUtil.h; sourceTree = "<group>"; };
+		3AC5FDE117799AD400C48CBB /* ImageUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageUtil.m; sourceTree = "<group>"; };
 		3AFAD8A7175CDC4D00E7A4DB /* setting_cellSelectBackground@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "setting_cellSelectBackground@2x.png"; sourceTree = "<group>"; };
 		3AFAD8A8175CDC4D00E7A4DB /* setting_unchoiceBox@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "setting_unchoiceBox@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -148,6 +152,7 @@
 		3A19C6C0175A3288001FC0D5 /* CustomControl */ = {
 			isa = PBXGroup;
 			children = (
+				3AC5FDDE17799AD400C48CBB /* ImageUtil */,
 				3A19C6C1175A3288001FC0D5 /* AKSegmentedControl */,
 			);
 			path = CustomControl;
@@ -303,6 +308,16 @@
 			path = Images;
 			sourceTree = "<group>";
 		};
+		3AC5FDDE17799AD400C48CBB /* ImageUtil */ = {
+			isa = PBXGroup;
+			children = (
+				3AC5FDDF17799AD400C48CBB /* ColorMatrix.h */,
+				3AC5FDE017799AD400C48CBB /* ImageUtil.h */,
+				3AC5FDE117799AD400C48CBB /* ImageUtil.m */,
+			);
+			path = ImageUtil;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -417,6 +432,7 @@
 				3AB1000A1754907100B72E93 /* XDAccountViewController.m in Sources */,
 				3A19C6C4175A3288001FC0D5 /* AKSegmentedControl.m in Sources */,
 				3AB17FFB1759DFAF00D72F83 /* XDSettingViewController.m in Sources */,
+				3AC5FDE217799AD400C48CBB /* ImageUtil.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

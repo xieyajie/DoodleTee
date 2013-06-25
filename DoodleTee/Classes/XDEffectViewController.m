@@ -8,6 +8,8 @@
 #import <QuartzCore/QuartzCore.h>
 
 #import "XDEffectViewController.h"
+#import "ImageUtil.h"
+#import "ColorMatrix.h"
 
 #define kTagTopView 0
 #define kTagBottomView 1
@@ -23,6 +25,7 @@
     UIScrollView *_clothScroll;   //衣服编辑部分
     UIView *_bottomView;          //底部操作栏
     UIView *_bgView;              //上部选项栏选中项背景
+    UIImage *_originalImage;        //原始图片
     
     UIImageView *_processImageView;   //上部选项栏选项
     UIImagePickerController *_imagePicker;
@@ -121,7 +124,8 @@
 {
     if (_imagePicker == nil) {
         _imagePicker = [[UIImagePickerController alloc] init];//图像选取器
-//        _imagePicker.delegate = self;
+        _imagePicker.delegate = self;
+        _imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;//打开相册
         _imagePicker.modalTransitionStyle = UIModalTransitionStyleCoverVertical;//过渡类型,有四种
     }
     return _imagePicker;
@@ -138,11 +142,12 @@
         UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil);//将拍到的图片保存到相册
     }
     
-//    UIImage *currentImage = [self imageWithImageSimple:image scaledToSize:CGSizeMake(260, 340)];
-    UIImage *currentImage = image;
+    _originalImage = [[self imageWithImageSimple:image scaledToSize:CGSizeMake(_processImageView.frame.size.width, _processImageView.frame.size.height)] retain];
+    _processImageView.image = _originalImage;
     
-    //调用imageWithImageSimple:scaledToSize:方法
-    _processImageView.image = currentImage;
+    if (_processScroll.tag == kTagProcessScroll && _processClickIndex != 0) {
+        [self processImageAction:_processClickIndex];
+    }
     
 //    imageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 45, 50)];
 //    rootImage = [UIImage imageNamed:@"110.png"];
@@ -439,6 +444,62 @@
 - (void)processImageAction: (NSInteger)aIndex
 {
     [self layoutBgView:aIndex];
+    
+    switch (aIndex) {
+        case 0:
+        {
+            _processImageView.image = _originalImage;
+            
+            [UIView beginAnimations:nil context:nil];
+            [UIView setAnimationDelay:0.3];
+//            imageView.frame = CGRectMake(0, 0, 45, 50);
+            [UIView commitAnimations];
+        }
+            break;
+        case 1:
+        {
+            _processImageView.image = [ImageUtil imageWithImage:_originalImage withColorMatrix: colormatrix_lomo];
+            
+            [UIView beginAnimations:nil context:nil];
+            [UIView setAnimationDelay:0.3];
+//            imageView.Frame = CGRectMake(46, 0, 45, 50);
+            [UIView commitAnimations];
+        }
+            break;
+        case 2:
+        {
+            _processImageView.image = [ImageUtil imageWithImage:_originalImage withColorMatrix:colormatrix_heibai];
+            
+            [UIView beginAnimations:nil context:nil];
+            [UIView setAnimationDelay:0.3];
+//            imageView.frame = CGRectMake(46*2, 0, 45, 50);
+            [UIView commitAnimations];
+        }
+            break;
+        case 3:
+        {
+            _processImageView.image = [ImageUtil imageWithImage:_originalImage withColorMatrix:colormatrix_huajiu];
+            
+            [UIView beginAnimations:nil context:nil];
+            [UIView setAnimationDelay:0.3];
+//            imageView.frame = CGRectMake(46*3, 0, 45, 50);
+            [UIView commitAnimations];
+        }
+            break;
+        case 4:
+        {
+            _processImageView.image = [ImageUtil imageWithImage:_originalImage withColorMatrix:colormatrix_gete];
+            
+            [UIView beginAnimations:nil context:nil];
+            [UIView setAnimationDelay:0.3];
+//            imageView.frame = CGRectMake(46*4, 0, 45, 50);
+            [UIView commitAnimations];
+        }
+            break;
+            
+        default:
+            break;
+    }
 }
 
 - (void)drawImageAction: (NSInteger)aIndex
@@ -484,7 +545,6 @@
 
 -(UIImage *)imageWithImageSimple:(UIImage*)image scaledToSize:(CGSize)newSize
 {
-    
     UIGraphicsBeginImageContext(newSize);//根据当前大小创建一个基于位图图形的环境
     
     [image drawInRect:CGRectMake(0,0,newSize.width,newSize.height)];//根据新的尺寸画出传过来的图片
