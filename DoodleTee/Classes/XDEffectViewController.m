@@ -161,9 +161,12 @@
     {
         switch (index) {
             case 0:
-                [self imageAction];
+                [self backAction];
                 break;
             case 1:
+                [self imageAction];
+                break;
+            case 2:
                 [self cameraAction];
                 break;
                 
@@ -250,10 +253,23 @@
     segmentedControl.backgroundColor = [UIColor clearColor];
     [_bottomView addSubview:segmentedControl];
     
+    CGFloat width = segmentedControl.frame.size.width / 3;
     [segmentedControl setSeparatorImage:[UIImage imageNamed:@"segmented_separator.png"]];
     
+    //返回
+    UIButton *buttonback = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, width, segmentedControl.frame.size.height)];
+    buttonback.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+    buttonback.contentEdgeInsets = UIEdgeInsetsMake(0, 12, 0, 13);
+    [buttonback setTitle:@"返回" forState:UIControlStateNormal];
+    [buttonback setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [buttonback.titleLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Bold" size:15.0]];
+    [buttonback setTitleEdgeInsets:UIEdgeInsetsMake(0.0, 10.0, 0.0, 0.0)];
+    
+    UIImage *buttonBackNormal = [UIImage imageNamed:@"effect_image_icon.png"];
+    [buttonback setImage:buttonBackNormal forState:UIControlStateNormal];
+    
     // 相册
-    UIButton *buttonImage = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 120, _topView.frame.size.height)];
+    UIButton *buttonImage = [[UIButton alloc] initWithFrame:CGRectMake(buttonback.frame.origin.x + buttonback.frame.size.width, 0, width, segmentedControl.frame.size.height)];
     buttonImage.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     buttonImage.contentEdgeInsets = UIEdgeInsetsMake(0, 12, 0, 13);
     [buttonImage setTitle:@"相册" forState:UIControlStateNormal];
@@ -265,7 +281,7 @@
     [buttonImage setImage:buttonImageNormal forState:UIControlStateNormal];
     
     //相机
-    UIButton *buttonCamera = [[UIButton alloc] initWithFrame:CGRectMake(buttonImage.frame.origin.x + buttonImage.frame.size.width, 0, segmentedControl.frame.size.width - buttonImage.frame.size.width, segmentedControl.frame.size.height)];
+    UIButton *buttonCamera = [[UIButton alloc] initWithFrame:CGRectMake(buttonImage.frame.origin.x + buttonImage.frame.size.width, 0, width, segmentedControl.frame.size.height)];
     buttonCamera.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     buttonCamera.contentEdgeInsets = UIEdgeInsetsMake(0, 12, 0, 13);
     [buttonCamera setTitle:@"相机" forState:UIControlStateNormal];
@@ -276,7 +292,8 @@
     UIImage *buttonCameraImageNormal = [UIImage imageNamed:@"effect_camera_icon.png"];
     [buttonCamera setImage:buttonCameraImageNormal forState:UIControlStateNormal];
     
-    [segmentedControl setButtonsArray:@[buttonImage, buttonCamera]];
+    [segmentedControl setButtonsArray:@[buttonback, buttonImage, buttonCamera]];
+    [buttonback release];
     [buttonImage release];
     [buttonCamera release];
 }
@@ -342,6 +359,11 @@
         [imgView release];
         [imgName release];
     }
+}
+
+- (void)backAction
+{
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)imageAction
