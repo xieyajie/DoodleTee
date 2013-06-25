@@ -12,15 +12,24 @@
 #define kTagTopView 0
 #define kTagBottomView 1
 
+#define kTagProcessScroll 100
+#define kTagDrawScroll 99
+#define kTagTextScroll 98
+
 @interface XDEffectViewController ()
 {
-    AKSegmentedControl *_topView;
-    UIScrollView *_processScroll;
-    UIScrollView *_clothScroll;
-    UIView *_bottomView;
+    AKSegmentedControl *_topView; //顶部操作栏
+    UIScrollView *_processScroll; //上部选项栏
+    UIScrollView *_clothScroll;   //衣服编辑部分
+    UIView *_bottomView;          //底部操作栏
+    UIView *_bgView;              //上部选项栏选中项背景
     
-    UIImageView *_processImageView;
+    UIImageView *_processImageView;   //上部选项栏选项
     UIImagePickerController *_imagePicker;
+    
+    NSInteger _processClickIndex;
+    NSInteger _drawClickIndex;
+    NSInteger _textClickIndex;
 }
 
 @property (nonatomic, retain) UIImagePickerController *imagePicker;
@@ -58,11 +67,18 @@
     _bottomView.layer.shadowRadius = 10.0;
     _bottomView.layer.shadowOffset = CGSizeMake(0.0f, 0.0f);
     
+    _bgView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, _processScroll.frame.size.width / 5, _processScroll.frame.size.height)];
+    _bgView.backgroundColor = [UIColor blueColor];
+    _bgView.alpha = 0.8;
+    
+    _processClickIndex = 0;
+    _drawClickIndex = -1;
+    _textClickIndex = -1;
+    
     _clothScroll = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height - _bottomView.frame.size.height)];
     _clothScroll.contentSize = CGSizeMake(_clothScroll.frame.size.width * 1.5, _clothScroll.frame.size.height * 1.5);
     _clothScroll.scrollEnabled = NO;
     [self.view addSubview:_clothScroll];
-//    _clothScroll.backgroundColor = [UIColor redColor];
     
     _topView = [[AKSegmentedControl alloc] initWithFrame:CGRectMake(20, 10, self.view.frame.size.width - 40, 42.5)];
     _topView.tag = kTagTopView;
@@ -73,6 +89,10 @@
     
     _processScroll = [[UIScrollView alloc] initWithFrame:CGRectMake(0, _topView.frame.origin.y + _topView.frame.size.height + 5, self.view.frame.size.width, 45)];
     [self.view addSubview:_processScroll];
+    //添加单击手势
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(processScrollTapAction:)];
+    [_processScroll addGestureRecognizer:tap];
+    [tap release];
     _processScroll.backgroundColor = [UIColor blackColor];
     _processScroll.alpha = 0.7;
     [self processAction];
@@ -86,11 +106,9 @@
     _processImageView = [[UIImageView alloc] initWithFrame:CGRectMake((_clothScroll.frame.size.width - 200) / 2, 120, 200, 250)];
     _processImageView.backgroundColor = [UIColor lightGrayColor];
     _processImageView.contentMode = UIViewContentModeScaleAspectFit;
-//    _processImageView.center = _clothScroll.center;
     [_clothScroll addSubview:_processImageView];
     
     [cloth release];
-    
 }
 
 - (void)didReceiveMemoryWarning
@@ -103,7 +121,7 @@
 {
     if (_imagePicker == nil) {
         _imagePicker = [[UIImagePickerController alloc] init];//图像选取器
-        _imagePicker.delegate = self;
+//        _imagePicker.delegate = self;
         _imagePicker.modalTransitionStyle = UIModalTransitionStyleCoverVertical;//过渡类型,有四种
     }
     return _imagePicker;
@@ -172,6 +190,36 @@
                 
             default:
                 break;
+        }
+    }
+}
+
+#pragma mark - UIGestureRecognizer action
+
+//tap
+- (void)processScrollTapAction: (UITapGestureRecognizer *)sender
+{
+    NSInteger index = 0;
+    
+    if (sender.state == UIGestureRecognizerStateEnded) {
+        //判断点击的是那个选项
+        CGPoint location = [sender locationInView:_processScroll];
+        index = location.x / (_processScroll.frame.size.width / 5);
+        
+        //若是未选中状态
+        if (_processScroll.tag == kTagProcessScroll && _processClickIndex != index) {
+            _processClickIndex = index;
+            [self processImageAction:index];
+        }
+        else if (_processScroll.tag == kTagDrawScroll && _drawClickIndex != index)
+        {
+            _drawClickIndex = index;
+            [self drawImageAction:index];
+        }
+        else if(_processScroll.tag == kTagTextScroll && _textClickIndex != index)
+        {
+            _textClickIndex = index;
+            [self textImageAction:index];
         }
     }
 }
@@ -298,8 +346,19 @@
     [buttonCamera release];
 }
 
+- (void)layoutBgView: (NSInteger)aIndex
+{
+    CGFloat width = _processScroll.frame.size.width / 5;
+    CGFloat height = _processScroll.frame.size.height;
+    _bgView.frame = CGRectMake(aIndex * width, 0, width, height);
+    [_processScroll addSubview:_bgView];
+    [_processScroll sendSubviewToBack:_bgView];
+}
+
 - (void)processAction
 {
+    _processScroll.tag = kTagProcessScroll;
+    
     for (UIView *view in _processScroll.subviews) {
         [view removeFromSuperview];
     }
@@ -317,10 +376,16 @@
         [imgView release];
         [imgName release];
     }
+    
+    if (_processClickIndex > -1) {
+        [self layoutBgView:_processClickIndex];
+    }
 }
 
 - (void)drawAction
 {
+    _processScroll.tag = kTagDrawScroll;
+    
     for (UIView *view in _processScroll.subviews) {
         [view removeFromSuperview];
     }
@@ -338,10 +403,16 @@
         [imgView release];
         [imgName release];
     }
+    
+//    if (_drawClickIndex > -1) {
+//        [self layoutBgView:_drawClickIndex];
+//    }
 }
 
 - (void)textAction
 {
+    _processScroll.tag = kTagTextScroll;
+    
     for (UIView *view in _processScroll.subviews) {
         [view removeFromSuperview];
     }
@@ -359,6 +430,25 @@
         [imgView release];
         [imgName release];
     }
+//    
+//    if (_textClickIndex > -1) {
+//        [self layoutBgView:_textClickIndex];
+//    }
+}
+
+- (void)processImageAction: (NSInteger)aIndex
+{
+    [self layoutBgView:aIndex];
+}
+
+- (void)drawImageAction: (NSInteger)aIndex
+{
+    [self layoutBgView:aIndex];
+}
+
+- (void)textImageAction: (NSInteger)aIndex
+{
+    [self layoutBgView:aIndex];
 }
 
 - (void)backAction
