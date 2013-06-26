@@ -44,7 +44,7 @@
 @synthesize bufferArray = _bufferArray;
 
 @synthesize currentImage = _currentImage;
-@synthesize effectType;
+@synthesize effectType = _effectType;
 
 @synthesize drawColor;
 @synthesize bgColor;
@@ -76,6 +76,7 @@
 {
     _pathArray = [[NSMutableArray alloc] init];
     _bufferArray = [[NSMutableArray alloc] init];
+    _imageArray = [[NSMutableArray alloc] init];
     
     _imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
     [self addSubview:_imageView];
@@ -247,10 +248,21 @@
 
 #pragma mark - public
 
+//- (void)setEffectType:(XDEffectType)aEffectType
+//{
+//    self.effectType = aEffectType;
+//    if (aEffectType == XDEffectTypeProcess) {
+//        [self addSubview:_imageView];
+//    }
+//    else{
+//        _imageView.image = nil;
+//        [_imageView removeFromSuperview];
+//    }
+//}
+
 - (void)setImage:(UIImage *)image
 {
     UIImage *img = [self imageWithImageSimple:image scaledToSize:CGSizeMake(self.frame.size.width, self.frame.size.height)];
-    img = [UIImage im];
     _originalImage = [img retain];
     _imageView.image = _originalImage;
 }
@@ -312,6 +324,22 @@
 - (void)drawForType:(XDDrawType)type
 {
     _drawType = type;
+}
+
+- (void)undo
+{
+//    if (self.effectType == XDEffectTypeProcess) {
+//        <#statements#>
+//    }
+//    else{
+//        
+//    }
+    _imageView.image = nil;
+}
+
+- (void)saveCurrentContextToImage
+{
+    
 }
 
 @end

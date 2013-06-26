@@ -13,7 +13,7 @@
 #import "ProcessState.h"
 
 typedef enum{
-    XDEffectTypeProcess,
+    XDEffectTypeProcess = 0,
     XDEffectTypeDraw,
     XDEffectTypeText
 }XDEffectType;
@@ -27,11 +27,14 @@ typedef enum{
 @interface XDEffectView : UIView<UITextViewDelegate>
 {
     UIImageView *_imageView;
-    
-    UIImage *_originalImage;        //原始图片
     UIImage *_currentImage;         //当前编辑中的图片
     
+    NSMutableArray *_imageArray;
+    
+    UIImage *_originalImage;        //原始图片
+    
     XDDrawType _drawType;
+    XDEffectType _effectType;
 }
 
 @property (nonatomic, retain, readonly) UIImage *currentImage;
@@ -44,10 +47,16 @@ typedef enum{
 
 @property (nonatomic, readonly) NSInteger undoSteps;
 
+//- (void)setEffectType:(XDEffectType)aEffectType;
+
 - (void)setImage:(UIImage *)image;
 
 - (void)processImageToState:(XDProcessState)state;
 
 - (void)drawForType:(XDDrawType)type;
+
+- (void)undo;
+
+- (void)saveCurrentContextToImage;
 
 @end

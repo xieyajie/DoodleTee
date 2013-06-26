@@ -63,6 +63,7 @@
 		3AB1FFC817546F4200B72E93 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB1FFC717546F4200B72E93 /* main.m */; };
 		3AB1FFFA175484FC00B72E93 /* XDAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB1FFF7175484FC00B72E93 /* XDAppDelegate.m */; };
 		3AB1FFFB175484FC00B72E93 /* XDRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB1FFF9175484FC00B72E93 /* XDRootViewController.m */; };
+		3AB99EF3177B2C0B000C82A6 /* XDFinishShowViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB99EF1177B2C0B000C82A6 /* XDFinishShowViewController.m */; };
 		3AC5FDE217799AD400C48CBB /* ImageUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AC5FDE117799AD400C48CBB /* ImageUtil.m */; };
 		3AFAD8A9175CDC4D00E7A4DB /* setting_cellSelectBackground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3AFAD8A7175CDC4D00E7A4DB /* setting_cellSelectBackground@2x.png */; };
 		3AFAD8AA175CDC4D00E7A4DB /* setting_unchoiceBox@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3AFAD8A8175CDC4D00E7A4DB /* setting_unchoiceBox@2x.png */; };
@@ -137,6 +138,8 @@
 		3AB1FFF7175484FC00B72E93 /* XDAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XDAppDelegate.m; sourceTree = "<group>"; };
 		3AB1FFF8175484FC00B72E93 /* XDRootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDRootViewController.h; sourceTree = "<group>"; };
 		3AB1FFF9175484FC00B72E93 /* XDRootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XDRootViewController.m; sourceTree = "<group>"; };
+		3AB99EF0177B2C0B000C82A6 /* XDFinishShowViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDFinishShowViewController.h; sourceTree = "<group>"; };
+		3AB99EF1177B2C0B000C82A6 /* XDFinishShowViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XDFinishShowViewController.m; sourceTree = "<group>"; };
 		3AC5FDDF17799AD400C48CBB /* ColorMatrix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorMatrix.h; sourceTree = "<group>"; };
 		3AC5FDE017799AD400C48CBB /* ImageUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageUtil.h; sourceTree = "<group>"; };
 		3AC5FDE117799AD400C48CBB /* ImageUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageUtil.m; sourceTree = "<group>"; };
@@ -297,6 +300,8 @@
 				3AB17FF81759DFAF00D72F83 /* XDSettingViewController.h */,
 				3AB17FF91759DFAF00D72F83 /* XDSettingViewController.m */,
 				3AB17FFE1759E1D000D72F83 /* XDSettingViewController.xib */,
+				3AB99EF0177B2C0B000C82A6 /* XDFinishShowViewController.h */,
+				3AB99EF1177B2C0B000C82A6 /* XDFinishShowViewController.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -459,6 +464,7 @@
 				3AC5FDE217799AD400C48CBB /* ImageUtil.m in Sources */,
 				3A457278177A976900453B7B /* XDEffectView.m in Sources */,
 				3A85E56A177AC4C1003A1016 /* XDDrawTools.m in Sources */,
+				3AB99EF3177B2C0B000C82A6 /* XDFinishShowViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

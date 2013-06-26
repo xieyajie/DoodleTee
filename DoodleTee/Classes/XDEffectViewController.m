@@ -8,8 +8,11 @@
 
 #import "XDEffectViewController.h"
 
+#import "XDFinishShowViewController.h"
+
 #define kTagTopView 0
-#define kTagBottomView 1
+#define kTagNormalBottomSegmented 1
+#define kTagActionBottomSegmented 2
 
 #define kTagProcessScroll 100
 #define kTagDrawScroll 99
@@ -25,6 +28,8 @@
     UIScrollView *_processScroll; //上部选项栏
     UIScrollView *_clothScroll;   //衣服编辑部分
     UIView *_bottomView;          //底部操作栏
+    AKSegmentedControl *_normalSegmentedControl;    //默认情况下底部选项卡
+    AKSegmentedControl *_actionSegmentedControl;   //选择某种选项后出现的底部选项卡
     UIView *_bgView;              //上部选项栏选中项背景
     
     XDEffectView *_effectView;   //图片编辑区域
@@ -57,18 +62,7 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
-    _bottomView = [[UIView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - 62.5, self.view.frame.size.width, 62.5)];
-    UIImageView *bottomImgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"bottomBarBg.png"]];
-    bottomImgView.frame = CGRectMake(0, 0, _bottomView.frame.size.width, _bottomView.frame.size.height);
-    [_bottomView addSubview:bottomImgView];
-    [bottomImgView release];
-    [self initBottomSegmentedView];
-    [self.view addSubview:_bottomView];
-    
-    _bottomView.layer.shadowColor = [[UIColor blackColor] CGColor];
-    _bottomView.layer.shadowOpacity = 1.0;
-    _bottomView.layer.shadowRadius = 10.0;
-    _bottomView.layer.shadowOffset = CGSizeMake(0.0f, 0.0f);
+    [self layoutBottomView];
     
     _bgView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, _processScroll.frame.size.width / 5, _processScroll.frame.size.height)];
     _bgView.backgroundColor = [UIColor blueColor];
@@ -140,6 +134,7 @@
         UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil);//将拍到的图片保存到相册
     }
     
+    [self hideNormalBottomSegmentedControl];
     [_effectView setImage:image];
     
     if (_processScroll.tag == kTagProcessScroll && _processClickIndex != 0) {
@@ -154,14 +149,18 @@
 - (void)segmentedViewController:(AKSegmentedControl *)segmentedControl touchedAtIndex:(NSUInteger)index
 {
     if (segmentedControl.tag == kTagTopView) {
+        [_effectView saveCurrentContextToImage];
         switch (index) {
             case 0:
+                [self hideActionBottomSegmentedControl];
                 [self processAction];
                 break;
             case 1:
+                [self hideNormalBottomSegmentedControl];
                 [self drawAction];
                 break;
             case 2:
+                [self hideNormalBottomSegmentedControl];
                 [self textAction];
                 break;
                 
@@ -169,7 +168,7 @@
                 break;
         }
     }
-    else if (segmentedControl.tag == kTagBottomView)
+    else if (segmentedControl.tag == kTagNormalBottomSegmented)
     {
         switch (index) {
             case 0:
@@ -185,6 +184,21 @@
             default:
                 break;
         }
+    }
+    else if (segmentedControl.tag == kTagActionBottomSegmented)
+    {
+        switch (index) {
+            case 0:
+                [self undoAction];
+                break;
+            case 1:
+                [self doneAction];
+                break;
+                            
+            default:
+                break;
+        }
+
     }
 }
 
@@ -258,6 +272,35 @@
     }
 }
 
+- (void)hideActionBottomSegmentedControl
+{
+    _actionSegmentedControl.hidden = YES;
+    _normalSegmentedControl.hidden = NO;
+}
+
+- (void)hideNormalBottomSegmentedControl
+{
+    _actionSegmentedControl.hidden = NO;
+    _normalSegmentedControl.hidden = YES;
+}
+
+- (void)layoutBottomView
+{
+    _bottomView = [[UIView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - 62.5, self.view.frame.size.width, 62.5)];
+    _bottomView.layer.shadowColor = [[UIColor blackColor] CGColor];
+    _bottomView.layer.shadowOpacity = 1.0;
+    _bottomView.layer.shadowRadius = 10.0;
+    _bottomView.layer.shadowOffset = CGSizeMake(0.0f, 0.0f);
+    
+    UIImageView *bottomImgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"bottomBarBg.png"]];
+    bottomImgView.frame = CGRectMake(0, 0, _bottomView.frame.size.width, _bottomView.frame.size.height);
+    [_bottomView addSubview:bottomImgView];
+    [bottomImgView release];
+    
+    [self initBottomSegmentedView];
+    [self.view addSubview:_bottomView];
+}
+
 #pragma mark - other
 
 - (void)initTopSegmentedView
@@ -326,20 +369,20 @@
     [buttonTitle release];
 }
 
-- (void)initBottomSegmentedView
+- (void)initNormalBottomSegmentedControl
 {
-    AKSegmentedControl *segmentedControl = [[AKSegmentedControl alloc] initWithFrame:CGRectMake(14, 12, _bottomView.frame.size.width - 14 * 2, 35)];
-    segmentedControl.tag = kTagBottomView;
-    [segmentedControl setSegmentedControlMode: AKSegmentedControlModeButton];
-    [segmentedControl setDelegate:self];
-    segmentedControl.backgroundColor = [UIColor clearColor];
-    [_bottomView addSubview:segmentedControl];
+    _normalSegmentedControl = [[AKSegmentedControl alloc] initWithFrame:CGRectMake(14, 12, _bottomView.frame.size.width - 14 * 2, 35)];
+    _normalSegmentedControl.tag = kTagNormalBottomSegmented;
+    [_normalSegmentedControl setSegmentedControlMode: AKSegmentedControlModeButton];
+    [_normalSegmentedControl setDelegate:self];
+    _normalSegmentedControl.backgroundColor = [UIColor clearColor];
+    [_bottomView addSubview:_normalSegmentedControl];
     
-    CGFloat width = segmentedControl.frame.size.width / 3;
-    [segmentedControl setSeparatorImage:[UIImage imageNamed:@"segmented_separator.png"]];
+    CGFloat width = _normalSegmentedControl.frame.size.width / 3;
+    [_normalSegmentedControl setSeparatorImage:[UIImage imageNamed:@"segmented_separator.png"]];
     
     //返回
-    UIButton *buttonback = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, width, segmentedControl.frame.size.height)];
+    UIButton *buttonback = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, width, _normalSegmentedControl.frame.size.height)];
     buttonback.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     buttonback.contentEdgeInsets = UIEdgeInsetsMake(0, 12, 0, 13);
     [buttonback setTitle:@"返回" forState:UIControlStateNormal];
@@ -351,7 +394,7 @@
     [buttonback setImage:buttonBackNormal forState:UIControlStateNormal];
     
     // 相册
-    UIButton *buttonImage = [[UIButton alloc] initWithFrame:CGRectMake(buttonback.frame.origin.x + buttonback.frame.size.width, 0, width, segmentedControl.frame.size.height)];
+    UIButton *buttonImage = [[UIButton alloc] initWithFrame:CGRectMake(buttonback.frame.origin.x + buttonback.frame.size.width, 0, width, _normalSegmentedControl.frame.size.height)];
     buttonImage.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     buttonImage.contentEdgeInsets = UIEdgeInsetsMake(0, 12, 0, 13);
     [buttonImage setTitle:@"相册" forState:UIControlStateNormal];
@@ -363,7 +406,7 @@
     [buttonImage setImage:buttonImageNormal forState:UIControlStateNormal];
     
     //相机
-    UIButton *buttonCamera = [[UIButton alloc] initWithFrame:CGRectMake(buttonImage.frame.origin.x + buttonImage.frame.size.width, 0, width, segmentedControl.frame.size.height)];
+    UIButton *buttonCamera = [[UIButton alloc] initWithFrame:CGRectMake(buttonImage.frame.origin.x + buttonImage.frame.size.width, 0, width, _normalSegmentedControl.frame.size.height)];
     buttonCamera.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     buttonCamera.contentEdgeInsets = UIEdgeInsetsMake(0, 12, 0, 13);
     [buttonCamera setTitle:@"相机" forState:UIControlStateNormal];
@@ -374,16 +417,64 @@
     UIImage *buttonCameraImageNormal = [UIImage imageNamed:@"effect_camera_icon.png"];
     [buttonCamera setImage:buttonCameraImageNormal forState:UIControlStateNormal];
     
-    [segmentedControl setButtonsArray:@[buttonback, buttonImage, buttonCamera]];
+    [_normalSegmentedControl setButtonsArray:@[buttonback, buttonImage, buttonCamera]];
     [buttonback release];
     [buttonImage release];
     [buttonCamera release];
 }
 
+- (void)initActionBottomSegmentedControl
+{
+    _actionSegmentedControl = [[AKSegmentedControl alloc] initWithFrame:CGRectMake(14, 12, _bottomView.frame.size.width - 14 * 2, 35)];
+    _actionSegmentedControl.tag = kTagActionBottomSegmented;
+    [_actionSegmentedControl setSegmentedControlMode: AKSegmentedControlModeButton];
+    [_actionSegmentedControl setDelegate:self];
+    _actionSegmentedControl.backgroundColor = [UIColor clearColor];
+    _actionSegmentedControl.hidden = YES;
+    [_bottomView addSubview:_actionSegmentedControl];
+    
+    CGFloat width = _actionSegmentedControl.frame.size.width / 2;
+    [_actionSegmentedControl setSeparatorImage:[UIImage imageNamed:@"segmented_separator.png"]];
+    
+    //重来
+    UIButton *buttonUndo = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, width, _normalSegmentedControl.frame.size.height)];
+    buttonUndo.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+    buttonUndo.contentEdgeInsets = UIEdgeInsetsMake(0, 12, 0, 13);
+    [buttonUndo setTitle:@"重来" forState:UIControlStateNormal];
+    [buttonUndo setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [buttonUndo.titleLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Bold" size:15.0]];
+    [buttonUndo setTitleEdgeInsets:UIEdgeInsetsMake(0.0, 10.0, 0.0, 0.0)];
+    
+    UIImage *buttonUndoNormal = [UIImage imageNamed:@"effect_image_icon.png"];
+    [buttonUndo setImage:buttonUndoNormal forState:UIControlStateNormal];
+    
+    //完成
+    UIButton *buttonDone = [[UIButton alloc] initWithFrame:CGRectMake(buttonUndo.frame.origin.x + buttonUndo.frame.size.width, 0, width, _actionSegmentedControl.frame.size.height)];
+    buttonDone.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+    buttonDone.contentEdgeInsets = UIEdgeInsetsMake(0, 12, 0, 13);
+    [buttonDone setTitle:@"完成" forState:UIControlStateNormal];
+    [buttonDone setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [buttonDone.titleLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Bold" size:15.0]];
+    [buttonDone setTitleEdgeInsets:UIEdgeInsetsMake(0.0, 10.0, 0.0, 0.0)];
+    
+    UIImage *buttonDoneNormal = [UIImage imageNamed:@"effect_image_icon.png"];
+    [buttonDone setImage:buttonDoneNormal forState:UIControlStateNormal];
+    
+    [_actionSegmentedControl setButtonsArray:@[buttonUndo, buttonDone]];
+    [buttonUndo release];
+    [buttonDone release];
+}
+
+- (void)initBottomSegmentedView
+{
+    [self initNormalBottomSegmentedControl];
+    [self initActionBottomSegmentedControl];
+}
+
 - (void)processAction
 {
     _processScroll.tag = kTagProcessScroll;
-    _effectView.effectType = XDEffectTypeProcess;
+    [_effectView setEffectType:XDEffectTypeProcess];
     
     for (UIView *view in _processScroll.subviews) {
         [view removeFromSuperview];
@@ -411,7 +502,7 @@
 - (void)drawAction
 {
     _processScroll.tag = kTagDrawScroll;
-    _effectView.effectType = XDEffectTypeDraw;
+    [_effectView setEffectType:XDEffectTypeDraw];
     
     for (UIView *view in _processScroll.subviews) {
         [view removeFromSuperview];
@@ -439,7 +530,7 @@
 - (void)textAction
 {
     _processScroll.tag = kTagTextScroll;
-    _effectView.effectType = XDEffectTypeText;
+    [_effectView setEffectType:XDEffectTypeText];
     
     for (UIView *view in _processScroll.subviews) {
         [view removeFromSuperview];
@@ -522,6 +613,21 @@
         [alert show];
         [alert release];
     }
+}
+
+- (void)undoAction
+{
+    if (_effectView.effectType == XDEffectTypeProcess) {
+        [self hideActionBottomSegmentedControl];
+    }
+    [_effectView undo];
+}
+
+- (void)doneAction
+{
+    XDFinishShowViewController *finishViewCOntroller = [[XDFinishShowViewController alloc] init];
+    [self.navigationController pushViewController:finishViewCOntroller animated:YES];
+    [finishViewCOntroller release];
 }
 
 @end
