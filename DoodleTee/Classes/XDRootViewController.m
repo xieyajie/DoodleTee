@@ -5,7 +5,6 @@
 //  Created by xie yajie on 13-5-28.
 //  Copyright (c) 2013年 XD. All rights reserved.
 //
-#import <QuartzCore/QuartzCore.h>
 
 #import "XDRootViewController.h"
 

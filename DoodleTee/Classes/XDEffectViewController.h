@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+#import "XDEffectView.h"
+
 #import "AKSegmentedControl.h"
 
 @interface XDEffectViewController : UIViewController<UINavigationControllerDelegate, UIImagePickerControllerDelegate, AKSegmentedControlDelegate>

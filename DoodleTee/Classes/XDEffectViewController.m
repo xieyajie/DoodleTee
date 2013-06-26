@@ -5,11 +5,8 @@
 //  Created by xie yajie on 13-5-28.
 //  Copyright (c) 2013年 XD. All rights reserved.
 //
-#import <QuartzCore/QuartzCore.h>
 
 #import "XDEffectViewController.h"
-#import "ImageUtil.h"
-#import "ColorMatrix.h"
 
 #define kTagTopView 0
 #define kTagBottomView 1
@@ -18,6 +15,10 @@
 #define kTagDrawScroll 99
 #define kTagTextScroll 98
 
+#define kProcessSelected 0
+#define kDrawSelected 1
+#define kTextSelected 2
+
 @interface XDEffectViewController ()
 {
     AKSegmentedControl *_topView; //顶部操作栏
@@ -25,9 +26,8 @@
     UIScrollView *_clothScroll;   //衣服编辑部分
     UIView *_bottomView;          //底部操作栏
     UIView *_bgView;              //上部选项栏选中项背景
-    UIImage *_originalImage;        //原始图片
     
-    UIImageView *_processImageView;   //上部选项栏选项
+    XDEffectView *_effectView;   //图片编辑区域
     UIImagePickerController *_imagePicker;
     
     NSInteger _processClickIndex;
@@ -106,10 +106,8 @@
     cloth.image = [UIImage imageNamed:@"clothe_default.png"];
     [_clothScroll addSubview:cloth];
     
-    _processImageView = [[UIImageView alloc] initWithFrame:CGRectMake((_clothScroll.frame.size.width - 200) / 2, 120, 200, 250)];
-    _processImageView.backgroundColor = [UIColor lightGrayColor];
-    _processImageView.contentMode = UIViewContentModeScaleAspectFit;
-    [_clothScroll addSubview:_processImageView];
+    _effectView = [[XDEffectView alloc] initWithFrame:CGRectMake((_clothScroll.frame.size.width - 200) / 2, 120, 200, 250)];
+    [_clothScroll addSubview:_effectView];
     
     [cloth release];
 }
@@ -142,20 +140,11 @@
         UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil);//将拍到的图片保存到相册
     }
     
-    _originalImage = [[self imageWithImageSimple:image scaledToSize:CGSizeMake(_processImageView.frame.size.width, _processImageView.frame.size.height)] retain];
-    _processImageView.image = _originalImage;
+    [_effectView setImage:image];
     
     if (_processScroll.tag == kTagProcessScroll && _processClickIndex != 0) {
         [self processImageAction:_processClickIndex];
     }
-    
-//    imageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 45, 50)];
-//    rootImage = [UIImage imageNamed:@"110.png"];
-//    imageView.image = rootImage;
-//    [scrollerView addSubview:imageView];
-//    [imageView release];
-//    
-//    seg.userInteractionEnabled = YES;
 
     [self dismissViewControllerAnimated:YES completion:nil];//关闭模态视图控制器
 }
@@ -226,6 +215,46 @@
             _textClickIndex = index;
             [self textImageAction:index];
         }
+    }
+}
+
+#pragma mark - private
+
+//设置上部选项栏选中选项时的背景frame
+- (void)layoutBgView: (NSInteger)aIndex
+{
+    CGFloat width = _processScroll.frame.size.width / 5;
+    CGFloat height = _processScroll.frame.size.height;
+    _bgView.frame = CGRectMake(aIndex * width, 0, width, height);
+    [_processScroll addSubview:_bgView];
+    [_processScroll sendSubviewToBack:_bgView];
+}
+
+- (UIColor *)textColorForIndex:(NSInteger)aIndex
+{
+    _effectView.bgColor = [UIColor clearColor];
+    switch (aIndex) {
+        case 0:
+            return [UIColor blackColor];
+            break;
+        case 1:
+            return [UIColor blueColor];
+            break;
+        case 2:
+            return [UIColor redColor];
+            break;
+        case 3:
+            _effectView.bgColor = [UIColor blackColor];
+            return [UIColor whiteColor];
+            break;
+        case 4:
+            _effectView.bgColor = [UIColor blueColor];
+            return [UIColor whiteColor];
+            break;
+            
+        default:
+            return [UIColor blackColor];
+            break;
     }
 }
 
@@ -351,18 +380,10 @@
     [buttonCamera release];
 }
 
-- (void)layoutBgView: (NSInteger)aIndex
-{
-    CGFloat width = _processScroll.frame.size.width / 5;
-    CGFloat height = _processScroll.frame.size.height;
-    _bgView.frame = CGRectMake(aIndex * width, 0, width, height);
-    [_processScroll addSubview:_bgView];
-    [_processScroll sendSubviewToBack:_bgView];
-}
-
 - (void)processAction
 {
     _processScroll.tag = kTagProcessScroll;
+    _effectView.effectType = XDEffectTypeProcess;
     
     for (UIView *view in _processScroll.subviews) {
         [view removeFromSuperview];
@@ -390,6 +411,7 @@
 - (void)drawAction
 {
     _processScroll.tag = kTagDrawScroll;
+    _effectView.effectType = XDEffectTypeDraw;
     
     for (UIView *view in _processScroll.subviews) {
         [view removeFromSuperview];
@@ -417,6 +439,7 @@
 - (void)textAction
 {
     _processScroll.tag = kTagTextScroll;
+    _effectView.effectType = XDEffectTypeText;
     
     for (UIView *view in _processScroll.subviews) {
         [view removeFromSuperview];
@@ -444,57 +467,19 @@
 - (void)processImageAction: (NSInteger)aIndex
 {
     [self layoutBgView:aIndex];
+    [_effectView processImageToState:aIndex];
+}
+
+- (void)drawImageAction: (NSInteger)aIndex
+{
+    [self layoutBgView:aIndex];
     
     switch (aIndex) {
-        case 0:
-        {
-            _processImageView.image = _originalImage;
-            
-            [UIView beginAnimations:nil context:nil];
-            [UIView setAnimationDelay:0.3];
-//            imageView.frame = CGRectMake(0, 0, 45, 50);
-            [UIView commitAnimations];
-        }
-            break;
-        case 1:
-        {
-            _processImageView.image = [ImageUtil imageWithImage:_originalImage withColorMatrix: colormatrix_lomo];
-            
-            [UIView beginAnimations:nil context:nil];
-            [UIView setAnimationDelay:0.3];
-//            imageView.Frame = CGRectMake(46, 0, 45, 50);
-            [UIView commitAnimations];
-        }
-            break;
-        case 2:
-        {
-            _processImageView.image = [ImageUtil imageWithImage:_originalImage withColorMatrix:colormatrix_heibai];
-            
-            [UIView beginAnimations:nil context:nil];
-            [UIView setAnimationDelay:0.3];
-//            imageView.frame = CGRectMake(46*2, 0, 45, 50);
-            [UIView commitAnimations];
-        }
-            break;
         case 3:
-        {
-            _processImageView.image = [ImageUtil imageWithImage:_originalImage withColorMatrix:colormatrix_huajiu];
-            
-            [UIView beginAnimations:nil context:nil];
-            [UIView setAnimationDelay:0.3];
-//            imageView.frame = CGRectMake(46*3, 0, 45, 50);
-            [UIView commitAnimations];
-        }
+            [_effectView drawForType:XDDrawTypePen];
             break;
         case 4:
-        {
-            _processImageView.image = [ImageUtil imageWithImage:_originalImage withColorMatrix:colormatrix_gete];
-            
-            [UIView beginAnimations:nil context:nil];
-            [UIView setAnimationDelay:0.3];
-//            imageView.frame = CGRectMake(46*4, 0, 45, 50);
-            [UIView commitAnimations];
-        }
+            [_effectView drawForType:XDDrawTypePen];
             break;
             
         default:
@@ -502,14 +487,10 @@
     }
 }
 
-- (void)drawImageAction: (NSInteger)aIndex
-{
-    [self layoutBgView:aIndex];
-}
-
 - (void)textImageAction: (NSInteger)aIndex
 {
     [self layoutBgView:aIndex];
+    _effectView.drawColor = [self textColorForIndex:aIndex];
 }
 
 - (void)backAction
@@ -541,19 +522,6 @@
         [alert show];
         [alert release];
     }
-}
-
--(UIImage *)imageWithImageSimple:(UIImage*)image scaledToSize:(CGSize)newSize
-{
-    UIGraphicsBeginImageContext(newSize);//根据当前大小创建一个基于位图图形的环境
-    
-    [image drawInRect:CGRectMake(0,0,newSize.width,newSize.height)];//根据新的尺寸画出传过来的图片
-    
-    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();//从当前环境当中得到重绘的图片
-    
-    UIGraphicsEndImageContext();//关闭当前环境
-    
-    return newImage;
 }
 
 @end

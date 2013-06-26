@@ -17,6 +17,8 @@
 		3A19C6DA175A3288001FC0D5 /* root_effect_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A19C6D7175A3288001FC0D5 /* root_effect_icon@2x.png */; };
 		3A19C6DB175A3288001FC0D5 /* root_piazza_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A19C6D8175A3288001FC0D5 /* root_piazza_icon@2x.png */; };
 		3A19C6DC175A3288001FC0D5 /* root_share_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A19C6D9175A3288001FC0D5 /* root_share_icon@2x.png */; };
+		3A457278177A976900453B7B /* XDEffectView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A457277177A976900453B7B /* XDEffectView.m */; };
+		3A45727B177AB45400453B7B /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A45727A177AB45400453B7B /* QuartzCore.framework */; };
 		3A6E1936175B045100806F8A /* effect_camera_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A6E1933175B045100806F8A /* effect_camera_icon@2x.png */; };
 		3A6E1937175B045100806F8A /* effect_draw_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A6E1934175B045100806F8A /* effect_draw_icon@2x.png */; };
 		3A6E1938175B045100806F8A /* effect_text_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A6E1935175B045100806F8A /* effect_text_icon@2x.png */; };
@@ -41,6 +43,7 @@
 		3A6E196C175B0D2700806F8A /* icon114.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A6E196B175B0D2700806F8A /* icon114.png */; };
 		3A6E196E175B0D2A00806F8A /* icon57.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A6E196D175B0D2A00806F8A /* icon57.png */; };
 		3A6E1970175B11CA00806F8A /* stroke_2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A6E196F175B11CA00806F8A /* stroke_2@2x.png */; };
+		3A85E56A177AC4C1003A1016 /* XDDrawTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A85E569177AC4C1003A1016 /* XDDrawTools.m */; };
 		3AB10002175486AC00B72E93 /* clothe_default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3AB10001175486AC00B72E93 /* clothe_default@2x.png */; };
 		3AB1000417548AF600B72E93 /* root_add@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3AB1000317548AF600B72E93 /* root_add@2x.png */; };
 		3AB1000717548C9700B72E93 /* XDEffectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB1000617548C9700B72E93 /* XDEffectViewController.m */; };
@@ -77,6 +80,10 @@
 		3A19C6D7175A3288001FC0D5 /* root_effect_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "root_effect_icon@2x.png"; sourceTree = "<group>"; };
 		3A19C6D8175A3288001FC0D5 /* root_piazza_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "root_piazza_icon@2x.png"; sourceTree = "<group>"; };
 		3A19C6D9175A3288001FC0D5 /* root_share_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "root_share_icon@2x.png"; sourceTree = "<group>"; };
+		3A457276177A976900453B7B /* XDEffectView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDEffectView.h; sourceTree = "<group>"; };
+		3A457277177A976900453B7B /* XDEffectView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XDEffectView.m; sourceTree = "<group>"; };
+		3A457279177A9BFE00453B7B /* ProcessState.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProcessState.h; sourceTree = "<group>"; };
+		3A45727A177AB45400453B7B /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		3A6E1933175B045100806F8A /* effect_camera_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "effect_camera_icon@2x.png"; sourceTree = "<group>"; };
 		3A6E1934175B045100806F8A /* effect_draw_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "effect_draw_icon@2x.png"; sourceTree = "<group>"; };
 		3A6E1935175B045100806F8A /* effect_text_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "effect_text_icon@2x.png"; sourceTree = "<group>"; };
@@ -101,6 +108,8 @@
 		3A6E196B175B0D2700806F8A /* icon114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon114.png; path = ../icon114.png; sourceTree = "<group>"; };
 		3A6E196D175B0D2A00806F8A /* icon57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon57.png; path = ../icon57.png; sourceTree = "<group>"; };
 		3A6E196F175B11CA00806F8A /* stroke_2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "stroke_2@2x.png"; sourceTree = "<group>"; };
+		3A85E568177AC4C0003A1016 /* XDDrawTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDDrawTools.h; sourceTree = "<group>"; };
+		3A85E569177AC4C1003A1016 /* XDDrawTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XDDrawTools.m; sourceTree = "<group>"; };
 		3AB10001175486AC00B72E93 /* clothe_default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "clothe_default@2x.png"; sourceTree = "<group>"; };
 		3AB1000317548AF600B72E93 /* root_add@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "root_add@2x.png"; sourceTree = "<group>"; };
 		3AB1000517548C9700B72E93 /* XDEffectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDEffectViewController.h; sourceTree = "<group>"; };
@@ -140,6 +149,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3A45727B177AB45400453B7B /* QuartzCore.framework in Frameworks */,
 				3AB1FFBC17546F4200B72E93 /* UIKit.framework in Frameworks */,
 				3AB1FFBE17546F4200B72E93 /* Foundation.framework in Frameworks */,
 				3AB1FFC017546F4200B72E93 /* CoreGraphics.framework in Frameworks */,
@@ -152,6 +162,7 @@
 		3A19C6C0175A3288001FC0D5 /* CustomControl */ = {
 			isa = PBXGroup;
 			children = (
+				3A457275177A975400453B7B /* EffectView */,
 				3AC5FDDE17799AD400C48CBB /* ImageUtil */,
 				3A19C6C1175A3288001FC0D5 /* AKSegmentedControl */,
 			);
@@ -165,6 +176,18 @@
 				3A19C6C3175A3288001FC0D5 /* AKSegmentedControl.m */,
 			);
 			path = AKSegmentedControl;
+			sourceTree = "<group>";
+		};
+		3A457275177A975400453B7B /* EffectView */ = {
+			isa = PBXGroup;
+			children = (
+				3A457276177A976900453B7B /* XDEffectView.h */,
+				3A457277177A976900453B7B /* XDEffectView.m */,
+				3A457279177A9BFE00453B7B /* ProcessState.h */,
+				3A85E568177AC4C0003A1016 /* XDDrawTools.h */,
+				3A85E569177AC4C1003A1016 /* XDDrawTools.m */,
+			);
+			path = EffectView;
 			sourceTree = "<group>";
 		};
 		3A6E1944175B0AE800806F8A /* draw */ = {
@@ -224,6 +247,7 @@
 		3AB1FFBA17546F4200B72E93 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3A45727A177AB45400453B7B /* QuartzCore.framework */,
 				3AB1FFBB17546F4200B72E93 /* UIKit.framework */,
 				3AB1FFBD17546F4200B72E93 /* Foundation.framework */,
 				3AB1FFBF17546F4200B72E93 /* CoreGraphics.framework */,
@@ -433,6 +457,8 @@
 				3A19C6C4175A3288001FC0D5 /* AKSegmentedControl.m in Sources */,
 				3AB17FFB1759DFAF00D72F83 /* XDSettingViewController.m in Sources */,
 				3AC5FDE217799AD400C48CBB /* ImageUtil.m in Sources */,
+				3A457278177A976900453B7B /* XDEffectView.m in Sources */,
+				3A85E56A177AC4C1003A1016 /* XDDrawTools.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
