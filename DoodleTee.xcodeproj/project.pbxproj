@@ -70,6 +70,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3A0865BB177BC65B00DC6381 /* LocalDefault.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LocalDefault.h; path = Classes/LocalDefault.h; sourceTree = "<group>"; };
 		3A19C6B3175A2D34001FC0D5 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default@2x.png"; path = "../Default@2x.png"; sourceTree = "<group>"; };
 		3A19C6B6175A2D38001FC0D5 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Default.png; path = ../Default.png; sourceTree = "<group>"; };
 		3A19C6BE175A3224001FC0D5 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "../Default-568h@2x.png"; sourceTree = "<group>"; };
@@ -270,6 +271,7 @@
 		3AB1FFC217546F4200B72E93 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				3A0865BB177BC65B00DC6381 /* LocalDefault.h */,
 				3A6E196D175B0D2A00806F8A /* icon57.png */,
 				3A6E196B175B0D2700806F8A /* icon114.png */,
 				3A19C6BE175A3224001FC0D5 /* Default-568h@2x.png */,

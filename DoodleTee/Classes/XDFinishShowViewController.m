@@ -12,6 +12,8 @@
 
 #import "AKSegmentedControl.h"
 
+#import "LocalDefault.h"
+
 @interface XDFinishShowViewController ()<AKSegmentedControlDelegate>
 {
     AKSegmentedControl *_topSegmentControl;
@@ -149,6 +151,7 @@
 
 - (void)doneAction
 {
+//    [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationFinishName object:nil];
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
 

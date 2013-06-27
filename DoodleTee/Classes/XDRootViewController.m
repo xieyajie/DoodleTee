@@ -14,6 +14,8 @@
 
 #import "XDAccountViewController.h"
 
+#import "LocalDefault.h"
+
 #define kTagTopView 0
 #define kTagBottomView 1
 
@@ -21,6 +23,7 @@
 {
     AKSegmentedControl *_topView;
     UIView *_bottomView;
+    UIButton *_addButton;
     
     UIImageView *_clotheView;
 }
@@ -73,12 +76,16 @@
     _clotheView.image = image;
     [self.view addSubview:_clotheView];
     
-    UIButton *addButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    _addButton = [UIButton buttonWithType:UIButtonTypeCustom];
     UIImage *img = [UIImage imageNamed:@"root_add.png"];
-    addButton.frame = [self viewFrameForImage:img];
-    [addButton setImage:img forState:UIControlStateNormal];
-    [addButton addTarget:self action:@selector(addEffect) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:addButton];
+    _addButton.frame = [self viewFrameForImage:img];
+    [_addButton setImage:img forState:UIControlStateNormal];
+    [_addButton addTarget:self action:@selector(addEffect) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:_addButton];
+    
+    if ([self respondsToSelector:@selector(finishedEffectWithImage:)]) {
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(finishedEffectWithImage:) name:kNotificationFinishName object:nil];
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -121,6 +128,14 @@
                 break;
         }
     }
+}
+
+#pragma mark -  NSNotificationCenter
+
+- (void)finishedEffectWithImage:(NSNotification *)aNotification
+{
+    _addButton.hidden = YES;
+//    _clotheView.image = 
 }
 
 #pragma mark - 页面排版
