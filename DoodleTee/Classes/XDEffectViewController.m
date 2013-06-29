@@ -14,9 +14,9 @@
 #define kTagNormalBottomSegmented 1
 #define kTagActionBottomSegmented 2
 
-#define kTagProcessScroll 100
-#define kTagDrawScroll 99
-#define kTagTextScroll 98
+#define kTagProcessScroll 0
+#define kTagDrawScroll 1
+#define kTagTextScroll 2
 
 #define kProcessSelected 0
 #define kDrawSelected 1
@@ -38,6 +38,9 @@
     NSInteger _processClickIndex;
     NSInteger _drawClickIndex;
     NSInteger _textClickIndex;
+    
+    NSMutableDictionary *_cacheClothImages;
+    NSInteger _prevSegmentedSelectedIndex;
 }
 
 @property (nonatomic, retain) UIImagePickerController *imagePicker;
@@ -104,6 +107,9 @@
     [_clothScroll addSubview:_effectView];
     
     [cloth release];
+    
+    _cacheClothImages = [[NSMutableDictionary alloc] init];
+    _prevSegmentedSelectedIndex = -1;
 }
 
 - (void)didReceiveMemoryWarning
@@ -149,7 +155,15 @@
 - (void)segmentedViewController:(AKSegmentedControl *)segmentedControl touchedAtIndex:(NSUInteger)index
 {
     if (segmentedControl.tag == kTagTopView) {
-        [_effectView saveCurrentContextToImage];
+        if (_prevSegmentedSelectedIndex != index) {
+            UIImage *image = [_effectView imageWithCurrentContext];
+            if (_prevSegmentedSelectedIndex == -1) {
+                _prevSegmentedSelectedIndex = 0;
+            }
+            [_cacheClothImages setObject:image forKey:[NSString stringWithFormat:@"%d", _prevSegmentedSelectedIndex]];
+            _prevSegmentedSelectedIndex = index;
+        }
+        
         switch (index) {
             case 0:
                 [self hideActionBottomSegmentedControl];
@@ -475,6 +489,8 @@
 {
     _processScroll.tag = kTagProcessScroll;
     [_effectView setEffectType:XDEffectTypeProcess];
+    UIImage *image = [_cacheClothImages objectForKey:[NSString stringWithFormat:@"%d", _processScroll.tag]];
+    [_effectView setImage:image];
     
     for (UIView *view in _processScroll.subviews) {
         [view removeFromSuperview];
@@ -503,6 +519,8 @@
 {
     _processScroll.tag = kTagDrawScroll;
     [_effectView setEffectType:XDEffectTypeDraw];
+    UIImage *image = [_cacheClothImages objectForKey:[NSString stringWithFormat:@"%d", _processScroll.tag]];
+    [_effectView setImage:image];
     
     for (UIView *view in _processScroll.subviews) {
         [view removeFromSuperview];
@@ -531,6 +549,8 @@
 {
     _processScroll.tag = kTagTextScroll;
     [_effectView setEffectType:XDEffectTypeText];
+    UIImage *image = [_cacheClothImages objectForKey:[NSString stringWithFormat:@"%d", _processScroll.tag]];
+    [_effectView setImage:image];
     
     for (UIView *view in _processScroll.subviews) {
         [view removeFromSuperview];

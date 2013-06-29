@@ -337,9 +337,13 @@
     _imageView.image = nil;
 }
 
-- (void)saveCurrentContextToImage
+- (UIImage *)imageWithCurrentContext
 {
-    
+    UIGraphicsBeginImageContextWithOptions(self.bounds.size, YES, self.layer.contentsScale);
+    [self.layer renderInContext:UIGraphicsGetCurrentContext()];
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return image;
 }
 
 @end

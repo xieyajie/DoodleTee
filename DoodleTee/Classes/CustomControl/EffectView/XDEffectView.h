@@ -57,6 +57,6 @@ typedef enum{
 
 - (void)undo;
 
-- (void)saveCurrentContextToImage;
+- (UIImage *)imageWithCurrentContext;
 
 @end
