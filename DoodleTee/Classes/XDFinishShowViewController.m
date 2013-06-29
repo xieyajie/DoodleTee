@@ -151,7 +151,7 @@
 
 - (void)doneAction
 {
-//    [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationFinishName object:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationFinishName object:nil];
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
 

@@ -43,6 +43,7 @@
 						<int key="NSvFlags">292</int>
 						<string key="NSFrameSize">{320, 568}</string>
 						<reference key="NSSuperview" ref="132972269"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="250809741"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
@@ -57,6 +58,7 @@
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{20, 13}, {280, 555}}</string>
 						<reference key="NSSuperview" ref="132972269"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="743287175"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<object class="NSColor" key="IBUIBackgroundColor">
@@ -73,6 +75,7 @@
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{0, 506}, {320, 62}}</string>
 						<reference key="NSSuperview" ref="132972269"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="685837396"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
@@ -87,6 +90,7 @@
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{12, 519}, {148, 36}}</string>
 						<reference key="NSSuperview" ref="132972269"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="952897639"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
@@ -125,6 +129,7 @@
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{177, 519}, {100, 36}}</string>
 						<reference key="NSSuperview" ref="132972269"/>
+						<reference key="NSWindow"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -146,6 +151,7 @@
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{159, 519}, {1, 36}}</string>
 						<reference key="NSSuperview" ref="132972269"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="643567270"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<object class="NSColor" key="IBUIBackgroundColor">
@@ -175,6 +181,7 @@
 				</array>
 				<string key="NSFrameSize">{320, 568}</string>
 				<reference key="NSSuperview"/>
+				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="476705401"/>
 				<string key="NSReuseIdentifierKey">_NS:9</string>
 				<object class="NSColor" key="IBUIBackgroundColor">
@@ -255,12 +262,12 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
-						<string key="label">backAction:</string>
+						<string key="label">overAction:</string>
 						<reference key="source" ref="643567270"/>
 						<reference key="destination" ref="841351856"/>
 						<int key="IBEventType">7</int>
 					</object>
-					<int key="connectionID">141</int>
+					<int key="connectionID">180</int>
 				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -923,9 +930,66 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">179</int>
+			<int key="maxID">180</int>
 		</object>
-		<object class="IBClassDescriber" key="IBDocument.Classes"/>
+		<object class="IBClassDescriber" key="IBDocument.Classes">
+			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
+				<object class="IBPartialClassDescription">
+					<string key="className">NSLayoutConstraint</string>
+					<string key="superclassName">NSObject</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/NSLayoutConstraint.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">XDSettingViewController</string>
+					<string key="superclassName">UIViewController</string>
+					<dictionary class="NSMutableDictionary" key="actions">
+						<string key="backAction:">id</string>
+						<string key="overAction:">id</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="actionInfosByName">
+						<object class="IBActionInfo" key="backAction:">
+							<string key="name">backAction:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="overAction:">
+							<string key="name">overAction:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="outlets">
+						<string key="_backButton">UIButton</string>
+						<string key="_bottomImageView">UIImageView</string>
+						<string key="_mainView">UIView</string>
+						<string key="_overButton">UIButton</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<object class="IBToOneOutletInfo" key="_backButton">
+							<string key="name">_backButton</string>
+							<string key="candidateClassName">UIButton</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="_bottomImageView">
+							<string key="name">_bottomImageView</string>
+							<string key="candidateClassName">UIImageView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="_mainView">
+							<string key="name">_mainView</string>
+							<string key="candidateClassName">UIView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="_overButton">
+							<string key="name">_overButton</string>
+							<string key="candidateClassName">UIButton</string>
+						</object>
+					</dictionary>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/XDSettingViewController.h</string>
+					</object>
+				</object>
+			</array>
+		</object>
 		<int key="IBDocument.localizationMode">0</int>
 		<string key="IBDocument.TargetRuntimeIdentifier">IBCocoaTouchFramework</string>
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>

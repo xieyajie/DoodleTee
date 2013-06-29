@@ -24,6 +24,8 @@
     AKSegmentedControl *_topView;
     UIView *_bottomView;
     UIButton *_addButton;
+    UIButton *_buttonShare;
+    UIButton *_buttonEffect;
     
     UIImageView *_clotheView;
 }
@@ -81,7 +83,10 @@
     _addButton.frame = [self viewFrameForImage:img];
     [_addButton setImage:img forState:UIControlStateNormal];
     [_addButton addTarget:self action:@selector(addEffect) forControlEvents:UIControlEventTouchUpInside];
+    _addButton.hidden = YES;
     [self.view addSubview:_addButton];
+    
+    [self piazzaAction];
     
     if ([self respondsToSelector:@selector(finishedEffectWithImage:)]) {
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(finishedEffectWithImage:) name:kNotificationFinishName object:nil];
@@ -135,6 +140,11 @@
 - (void)finishedEffectWithImage:(NSNotification *)aNotification
 {
     _addButton.hidden = YES;
+    _buttonShare.enabled = YES;
+    [_buttonShare setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    _buttonEffect.enabled = YES;
+    [_buttonEffect setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    
 //    _clotheView.image = 
 }
 
@@ -225,39 +235,33 @@
     [buttonSettings setImage:buttonSettingsImageNormal forState:UIControlStateNormal];
     
     //分享管理
-    UIButton *buttonShare = [[UIButton alloc] initWithFrame:CGRectMake(buttonSettings.frame.origin.x + buttonSettings.frame.size.width, 0, width, segmentedControl.frame.size.height)];
-    buttonShare.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-    buttonShare.contentEdgeInsets = UIEdgeInsetsMake(0, 12, 0, 13);
-    [buttonShare setTitle:@"分享" forState:UIControlStateNormal];
-    [buttonShare setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
-    [buttonShare.titleLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Bold" size:15.0]];
-    [buttonShare setTitleEdgeInsets:UIEdgeInsetsMake(0.0, 10.0, 0.0, 0.0)];
-    
-    [buttonShare setBackgroundImage:buttonBackgroundImagePressedCenter forState:UIControlStateHighlighted];
+    _buttonShare = [[UIButton alloc] initWithFrame:CGRectMake(buttonSettings.frame.origin.x + buttonSettings.frame.size.width, 0, width, segmentedControl.frame.size.height)];
+    _buttonShare.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+    _buttonShare.contentEdgeInsets = UIEdgeInsetsMake(0, 12, 0, 13);
+    [_buttonShare setTitle:@"分享" forState:UIControlStateNormal];
+    [_buttonShare.titleLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Bold" size:15.0]];
+    [_buttonShare setTitleEdgeInsets:UIEdgeInsetsMake(0.0, 10.0, 0.0, 0.0)];
+    [_buttonShare setBackgroundImage:buttonBackgroundImagePressedCenter forState:UIControlStateHighlighted];
     
     UIImage *buttonShareImageNormal = [UIImage imageNamed:@"root_share_icon.png"];
-    [buttonShare setImage:buttonShareImageNormal forState:UIControlStateNormal];
-    buttonShare.enabled = NO;
+    [_buttonShare setImage:buttonShareImageNormal forState:UIControlStateNormal];
+    
     
     //定制
-    UIButton *buttonEffect = [[UIButton alloc] initWithFrame:CGRectMake(buttonSettings.frame.origin.x + buttonSettings.frame.size.width, 0, width, segmentedControl.frame.size.height)];
-    buttonEffect.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-    buttonEffect.contentEdgeInsets = UIEdgeInsetsMake(0, 12, 0, 13);
-    [buttonEffect setTitle:@"定制" forState:UIControlStateNormal];
-    [buttonEffect setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
-    [buttonEffect.titleLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Bold" size:15.0]];
-    [buttonEffect setTitleEdgeInsets:UIEdgeInsetsMake(0.0, 10.0, 0.0, 0.0)];
-    
-    [buttonEffect setBackgroundImage:buttonBackgroundImagePressedRight forState:UIControlStateHighlighted];
+    _buttonEffect = [[UIButton alloc] initWithFrame:CGRectMake(buttonSettings.frame.origin.x + buttonSettings.frame.size.width, 0, width, segmentedControl.frame.size.height)];
+    _buttonEffect.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+    _buttonEffect.contentEdgeInsets = UIEdgeInsetsMake(0, 12, 0, 13);
+    [_buttonEffect setTitle:@"定制" forState:UIControlStateNormal];
+    [_buttonEffect.titleLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Bold" size:15.0]];
+    [_buttonEffect setTitleEdgeInsets:UIEdgeInsetsMake(0.0, 10.0, 0.0, 0.0)];
+    [_buttonEffect setBackgroundImage:buttonBackgroundImagePressedRight forState:UIControlStateHighlighted];
     
     UIImage *buttonEffectImageNormal = [UIImage imageNamed:@"root_effect_icon.png"];
-    [buttonEffect setImage:buttonEffectImageNormal forState:UIControlStateNormal];
-    buttonEffect.enabled = NO;
+    [_buttonEffect setImage:buttonEffectImageNormal forState:UIControlStateNormal];
     
-    [segmentedControl setButtonsArray:@[buttonSettings, buttonShare, buttonEffect]];
+    
+    [segmentedControl setButtonsArray:@[buttonSettings, _buttonShare, _buttonEffect]];
     [buttonSettings release];
-    [buttonShare release];
-    [buttonEffect release];
 }
 
 #pragma mark - button action
@@ -286,6 +290,12 @@
 - (void)piazzaAction
 {
      NSLog(@"piazza");
+    
+    _addButton.hidden = NO;
+    _buttonShare.enabled = NO;
+    [_buttonShare setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+    _buttonEffect.enabled = NO;
+    [_buttonEffect setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
 }
 
 - (void)shareAction

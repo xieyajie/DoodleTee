@@ -296,4 +296,10 @@
     [self dismissViewControllerAnimated: YES completion: nil];
 }
 
+- (IBAction)overAction:(id)sender
+{
+    //存储数据？？？？？
+    [self backAction:sender];
+}
+
 @end
