@@ -26,8 +26,7 @@ typedef enum{
 @protocol XDDrawTools;
 @interface XDEffectView : UIView<UITextViewDelegate>
 {
-    UIImageView *_imageView;
-    UIImage *_currentImage;         //当前编辑中的图片
+//    UIImage *_currentImage;         //当前编辑中的图片
     
     NSMutableArray *_imageArray;
     
@@ -37,7 +36,6 @@ typedef enum{
     XDEffectType _effectType;
 }
 
-@property (nonatomic, retain, readonly) UIImage *currentImage;
 @property (nonatomic, assign) XDEffectType effectType;
 
 @property (nonatomic, assign) UIColor *drawColor;
@@ -47,9 +45,13 @@ typedef enum{
 
 @property (nonatomic, readonly) NSInteger undoSteps;
 
+//@property (nonatomic, retain) UIImage *image;  //编辑图片
+
 //- (void)setEffectType:(XDEffectType)aEffectType;
 
-- (void)setImage:(UIImage *)image;
+//- (void)setImage:(UIImage *)image;
+
+//- (void)setCache:(UIView *)cacheView;
 
 - (void)processImageToState:(XDProcessState)state;
 
@@ -57,6 +59,11 @@ typedef enum{
 
 - (void)undo;
 
-- (UIImage *)imageWithCurrentContext;
+//- (UIImage *)imageWithCurrentContext;
+
+
+- (void)layoutEditorAreaWithObject:(id)object;
+
+- (id)cacheWithCurrentContext;
 
 @end

@@ -141,7 +141,7 @@
     }
     
     [self hideNormalBottomSegmentedControl];
-    [_effectView setImage:image];
+    [_effectView layoutEditorAreaWithObject:image];
     
     if (_processScroll.tag == kTagProcessScroll && _processClickIndex != 0) {
         [self processImageAction:_processClickIndex];
@@ -156,11 +156,11 @@
 {
     if (segmentedControl.tag == kTagTopView) {
         if (_prevSegmentedSelectedIndex != index) {
-            UIImage *image = [_effectView imageWithCurrentContext];
+            id cacheObject = [_effectView cacheWithCurrentContext];
             if (_prevSegmentedSelectedIndex == -1) {
                 _prevSegmentedSelectedIndex = 0;
             }
-            [_cacheClothImages setObject:image forKey:[NSString stringWithFormat:@"%d", _prevSegmentedSelectedIndex]];
+            [_cacheClothImages setObject:cacheObject forKey:[NSString stringWithFormat:@"%d", _prevSegmentedSelectedIndex]];
             _prevSegmentedSelectedIndex = index;
         }
         
@@ -487,10 +487,11 @@
 
 - (void)processAction
 {
+    _clothScroll.scrollEnabled = NO;
     _processScroll.tag = kTagProcessScroll;
     [_effectView setEffectType:XDEffectTypeProcess];
-    UIImage *image = [_cacheClothImages objectForKey:[NSString stringWithFormat:@"%d", _processScroll.tag]];
-    [_effectView setImage:image];
+    id cacheObject = [_cacheClothImages objectForKey:[NSString stringWithFormat:@"%d", _processScroll.tag]];
+    [_effectView layoutEditorAreaWithObject:cacheObject];
     
     for (UIView *view in _processScroll.subviews) {
         [view removeFromSuperview];
@@ -517,10 +518,11 @@
 
 - (void)drawAction
 {
+    _clothScroll.scrollEnabled = NO;
     _processScroll.tag = kTagDrawScroll;
     [_effectView setEffectType:XDEffectTypeDraw];
-    UIImage *image = [_cacheClothImages objectForKey:[NSString stringWithFormat:@"%d", _processScroll.tag]];
-    [_effectView setImage:image];
+    id cacheObject = [_cacheClothImages objectForKey:[NSString stringWithFormat:@"%d", _processScroll.tag]];
+    [_effectView layoutEditorAreaWithObject:cacheObject];
     
     for (UIView *view in _processScroll.subviews) {
         [view removeFromSuperview];
@@ -539,18 +541,18 @@
         [imgView release];
         [imgName release];
     }
-    
-//    if (_drawClickIndex > -1) {
-//        [self layoutBgView:_drawClickIndex];
-//    }
 }
 
 - (void)textAction
 {
+    _clothScroll.scrollEnabled = YES;
+    _clothScroll.alwaysBounceHorizontal = YES;
+    _clothScroll.alwaysBounceVertical = NO;
+    
     _processScroll.tag = kTagTextScroll;
     [_effectView setEffectType:XDEffectTypeText];
-    UIImage *image = [_cacheClothImages objectForKey:[NSString stringWithFormat:@"%d", _processScroll.tag]];
-    [_effectView setImage:image];
+    id cacheObject = [_cacheClothImages objectForKey:[NSString stringWithFormat:@"%d", _processScroll.tag]];
+    [_effectView layoutEditorAreaWithObject:cacheObject];
     
     for (UIView *view in _processScroll.subviews) {
         [view removeFromSuperview];
@@ -569,10 +571,6 @@
         [imgView release];
         [imgName release];
     }
-//    
-//    if (_textClickIndex > -1) {
-//        [self layoutBgView:_textClickIndex];
-//    }
 }
 
 - (void)processImageAction: (NSInteger)aIndex

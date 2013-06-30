@@ -24,9 +24,16 @@
 
 @interface XDEffectView()
 {
+    UIImageView *_imageView; //@"图像"和@“涂鸦”选项下的编辑区域
+    UITextView *_textView;   //@“文字”选项下的编辑区域
+    
     NSMutableArray *_pathArray;
     NSMutableArray *_bufferArray;
 }
+
+@property (nonatomic, retain) UIImageView *imageView;
+
+@property (nonatomic, retain) UITextView *textView;
 
 @property (nonatomic, assign) id<XDDrawTools> drawTool;
 
@@ -38,13 +45,18 @@
 
 @implementation XDEffectView
 
+@synthesize imageView = _imageView;
+@synthesize textView = _textView;
+
 @synthesize drawTool = _drawTool;
 
 @synthesize pathArray = _pathArray;
 @synthesize bufferArray = _bufferArray;
 
-@synthesize currentImage = _currentImage;
+//@synthesize currentImage = _currentImage;
 @synthesize effectType = _effectType;
+
+//@synthesize image = _image;
 
 @synthesize drawColor;
 @synthesize bgColor;
@@ -79,7 +91,9 @@
     _imageArray = [[NSMutableArray alloc] init];
     
     _imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
-    [self addSubview:_imageView];
+    _textView = [[UITextView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
+    _textView.
+    _textView.backgroundColor = [UIColor redColor];
     
     self.drawColor = kDefaultDrawColor;
     self.bgColor = kDefaultBgColor;
@@ -186,13 +200,13 @@
     CGPoint beginPoint = [touch locationInView:self];
     
     if (self.effectType == XDEffectTypeText) {
-        UITextView *textView = [[UITextView alloc] initWithFrame:CGRectMake(beginPoint.x, beginPoint.y, self.frame.size.width - beginPoint.x, kTextViewHeightMin)];
-        textView.delegate = self;
-        textView.textColor = self.drawColor;
-        textView.font = [UIFont systemFontOfSize:self.fontSize];
-        textView.backgroundColor = self.bgColor;
-        [self addSubview:textView];
-        [textView becomeFirstResponder];
+//        UITextView *textView = [[UITextView alloc] initWithFrame:CGRectMake(beginPoint.x, beginPoint.y, self.frame.size.width - beginPoint.x, kTextViewHeightMin)];
+//        textView.delegate = self;
+//        textView.textColor = self.drawColor;
+//        textView.font = [UIFont systemFontOfSize:self.fontSize];
+//        textView.backgroundColor = self.bgColor;
+//        [self addSubview:textView];
+//        [textView becomeFirstResponder];
     }
     else if(self.effectType == XDEffectTypeDraw){
         self.drawTool = [self toolWithCurrentSetting];
@@ -246,19 +260,7 @@
     [self touchesEnded:touches withEvent:event];
 }
 
-#pragma mark - public
-
-//- (void)setEffectType:(XDEffectType)aEffectType
-//{
-//    self.effectType = aEffectType;
-//    if (aEffectType == XDEffectTypeProcess) {
-//        [self addSubview:_imageView];
-//    }
-//    else{
-//        _imageView.image = nil;
-//        [_imageView removeFromSuperview];
-//    }
-//}
+#pragma mark - private
 
 - (void)setImage:(UIImage *)image
 {
@@ -266,6 +268,18 @@
     _originalImage = [img retain];
     _imageView.image = _originalImage;
 }
+
+- (UIImage *)imageWithCurrentContext
+{
+    UIGraphicsBeginImageContextWithOptions(self.bounds.size, YES, self.layer.contentsScale);
+    [self.layer renderInContext:UIGraphicsGetCurrentContext()];
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return image;
+}
+
+
+#pragma mark - public
 
 - (void)processImageToState:(XDProcessState)state
 {
@@ -328,22 +342,37 @@
 
 - (void)undo
 {
-//    if (self.effectType == XDEffectTypeProcess) {
-//        <#statements#>
-//    }
-//    else{
-//        
-//    }
     _imageView.image = nil;
+    _textView.text = @"";
+    
+    [_imageView removeFromSuperview];
+    [_textView removeFromSuperview];
 }
 
-- (UIImage *)imageWithCurrentContext
+- (void)layoutEditorAreaWithObject:(id)object
 {
-    UIGraphicsBeginImageContextWithOptions(self.bounds.size, YES, self.layer.contentsScale);
-    [self.layer renderInContext:UIGraphicsGetCurrentContext()];
-    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    return image;
+    if(self.effectType != XDEffectTypeText){
+        [_textView removeFromSuperview];
+        [self addSubview:_imageView];
+        [self setImage:(UIImage *)object];
+    }
+    else{
+        [_imageView removeFromSuperview];
+        if (object != nil) {
+            self.textView = (UITextView *)object;
+        }
+        [self addSubview:_textView];
+    }
+}
+
+- (id)cacheWithCurrentContext
+{
+    if (self.effectType != XDEffectTypeText) {
+        return [self imageWithCurrentContext];
+    }
+    else {
+        return _textView;
+    }
 }
 
 @end
