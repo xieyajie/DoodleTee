@@ -78,6 +78,22 @@
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
+//在使用SSO授权方式（即跳转到相应客户端进行授权的方式）或者集成微信、QQ好友分享时，需要在处理请求URL的委托方法中加入ShareSDK的处理方法
+- (BOOL)application:(UIApplication *)application
+      handleOpenURL:(NSURL *)url
+{
+    return [ShareSDK handleOpenURL:url wxDelegate:self];
+}
+
+
+- (BOOL)application:(UIApplication *)application
+            openURL:(NSURL *)url
+  sourceApplication:(NSString  *)sourceApplication
+         annotation:(id)annotation
+{
+    return [ShareSDK handleOpenURL:url sourceApplication:sourceApplication annotation:annotation wxDelegate:self];
+}
+
 #pragma mark - ShareSDK
 
 - (void)initializePlat
