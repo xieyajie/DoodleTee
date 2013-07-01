@@ -17,6 +17,12 @@
 #define SINAWEIBO_APPKEY @"1251171938"
 #define SINAWEIBO_APPSECRET @"c3902934f160d04152be60dd1db7131b"
 
+#define TENCENT_APPKEY @"801379879"
+#define TENCENT_APPSECRET @"f4715cb1e72046e5e3fef967d1998cbf"
+
+#define RENREN_APPKEY @"2c26831c0e974fe0af9e26e68b872aca"
+#define RENREN_APPSECRET @"fcb380838b0e474291378305c6860421"
+
 @implementation XDAppDelegate
 
 - (void)dealloc
@@ -81,17 +87,17 @@
                                appSecret:SINAWEIBO_APPSECRET
                              redirectUri:nil];
     //添加腾讯微博应用
-    [ShareSDK connectTencentWeiboWithAppKey:@"801307650"
-                                  appSecret:@"ae36f4ee3946e1cbb98d6965b0b2ff5c"
-                                redirectUri:@"http://www.sharesdk.cn"];
+    [ShareSDK connectTencentWeiboWithAppKey:TENCENT_APPKEY
+                                  appSecret:TENCENT_APPSECRET
+                                redirectUri:nil];
     
     //添加QQ空间应用
-    [ShareSDK connectQZoneWithAppKey:@"100371282"
-                           appSecret:@"aed9b0303e3ed1e27bae87c33761161d"];
+    [ShareSDK connectQZoneWithAppKey:TENCENT_APPKEY
+                           appSecret:TENCENT_APPSECRET];
     
     //添加人人网应用
-    [ShareSDK connectRenRenWithAppKey:@"fc5b8aed373c4c27a05b712acba0f8c3"
-                            appSecret:@"f29df781abdd4f49beca5a2194676ca4"];
+    [ShareSDK connectRenRenWithAppKey:RENREN_APPKEY
+                            appSecret:RENREN_APPSECRET];
 }
 
 @end
