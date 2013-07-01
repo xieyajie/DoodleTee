@@ -14,6 +14,8 @@
 
 #import "XDAccountViewController.h"
 
+#import "XDShareViewController.h"
+
 #import "LocalDefault.h"
 
 #define kTagTopView 0
@@ -120,7 +122,8 @@
     {
         switch (index) {
             case 0:
-                [self piazzaAction];
+//                [self piazzaAction];
+                [self shareAction];
                 break;
             case 1:
                 [self shareAction];
@@ -300,6 +303,9 @@
 
 - (void)shareAction
 {
+    XDShareViewController *shareViewController = [[XDShareViewController alloc] initWithNibName:@"XDShareViewController" bundle:nil];
+    [self.navigationController presentViewController:shareViewController animated:YES completion:^(){}];
+    [shareViewController release];
      NSLog(@"share");
 }
 

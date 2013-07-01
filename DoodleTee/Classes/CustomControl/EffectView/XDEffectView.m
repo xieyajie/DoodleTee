@@ -92,7 +92,6 @@
     
     _imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
     _textView = [[UITextView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
-    _textView.
     _textView.backgroundColor = [UIColor redColor];
     
     self.drawColor = kDefaultDrawColor;

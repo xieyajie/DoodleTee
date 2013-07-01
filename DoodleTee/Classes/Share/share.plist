@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>selector</key>
+		<string>shareWithSina</string>
+		<key>icon</key>
+		<string>share_sina.png</string>
+		<key>name</key>
+		<string>新浪微博</string>
+	</dict>
+	<dict>
+		<key>selector</key>
+		<string>shareWithQQ</string>
+		<key>icon</key>
+		<string>share_QQ.png</string>
+		<key>name</key>
+		<string>QQ空间</string>
+	</dict>
+	<dict>
+		<key>selector</key>
+		<string>shareWithRenren</string>
+		<key>icon</key>
+		<string>share_renren.png</string>
+		<key>name</key>
+		<string>人人</string>
+	</dict>
+	<dict>
+		<key>selector</key>
+		<string>shareWithTencetWeibo</string>
+		<key>icon</key>
+		<string>share_tencetWeibo.png</string>
+		<key>name</key>
+		<string>腾讯微博</string>
+	</dict>
+</array>
+</plist>
