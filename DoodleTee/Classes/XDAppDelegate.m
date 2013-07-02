@@ -16,9 +16,11 @@
 
 #define SINAWEIBO_APPKEY @"1251171938"
 #define SINAWEIBO_APPSECRET @"c3902934f160d04152be60dd1db7131b"
+#define SINAWEIBO_REDIRECTURL @"https://api.weibo.com/oauth2/default.html"
 
 #define TENCENT_APPKEY @"801379879"
 #define TENCENT_APPSECRET @"f4715cb1e72046e5e3fef967d1998cbf"
+#define TENCENT_REDIRECTURL nil
 
 #define RENREN_APPKEY @"2c26831c0e974fe0af9e26e68b872aca"
 #define RENREN_APPSECRET @"fcb380838b0e474291378305c6860421"
@@ -79,20 +81,20 @@
 }
 
 //在使用SSO授权方式（即跳转到相应客户端进行授权的方式）或者集成微信、QQ好友分享时，需要在处理请求URL的委托方法中加入ShareSDK的处理方法
-- (BOOL)application:(UIApplication *)application
-      handleOpenURL:(NSURL *)url
-{
-    return [ShareSDK handleOpenURL:url wxDelegate:self];
-}
-
-
-- (BOOL)application:(UIApplication *)application
-            openURL:(NSURL *)url
-  sourceApplication:(NSString  *)sourceApplication
-         annotation:(id)annotation
-{
-    return [ShareSDK handleOpenURL:url sourceApplication:sourceApplication annotation:annotation wxDelegate:self];
-}
+//- (BOOL)application:(UIApplication *)application
+//      handleOpenURL:(NSURL *)url
+//{
+//    return [ShareSDK handleOpenURL:url wxDelegate:self];
+//}
+//
+//
+//- (BOOL)application:(UIApplication *)application
+//            openURL:(NSURL *)url
+//  sourceApplication:(NSString  *)sourceApplication
+//         annotation:(id)annotation
+//{
+//    return [ShareSDK handleOpenURL:url sourceApplication:sourceApplication annotation:annotation wxDelegate:self];
+//}
 
 #pragma mark - ShareSDK
 
@@ -101,11 +103,11 @@
     //添加新浪微博应用
     [ShareSDK connectSinaWeiboWithAppKey:SINAWEIBO_APPKEY
                                appSecret:SINAWEIBO_APPSECRET
-                             redirectUri:nil];
+                             redirectUri:SINAWEIBO_REDIRECTURL];
     //添加腾讯微博应用
     [ShareSDK connectTencentWeiboWithAppKey:TENCENT_APPKEY
                                   appSecret:TENCENT_APPSECRET
-                                redirectUri:nil];
+                                redirectUri:TENCENT_REDIRECTURL];
     
     //添加QQ空间应用
     [ShareSDK connectQZoneWithAppKey:TENCENT_APPKEY

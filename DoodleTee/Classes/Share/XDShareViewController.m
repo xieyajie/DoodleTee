@@ -20,10 +20,22 @@
 
 @interface XDShareViewController ()
 {
-    NSArray *_dataSource;
+    NSArray *_dataSource;  //分享平台信息
+    
+    UIImage *_shareImage;  //要分享的图片
+    
+    id<ISSContent> _publishContent; //分享内容
+    
+    id<ISSShareOptions> _shareOptions; //分享选项，用于定义分享视图部分属性（如：标题、一键分享列表、功能按钮等）,默认可传入nil
 }
 
 @property (nonatomic, retain) NSArray *dataSource;
+
+@property (nonatomic, retain) UIImage *shareImage;
+
+@property (nonatomic, retain) id<ISSContent> publishContent;
+
+@property (nonatomic, retain) id<ISSShareOptions> shareOptions;
 
 @end
 
@@ -32,6 +44,12 @@
 @synthesize dataSource = _dataSource;
 
 @synthesize tableView = _tableView;
+
+@synthesize shareImage = _shareImage;
+
+@synthesize publishContent = _publishContent;
+
+@synthesize shareOptions = _shareOptions;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -42,12 +60,22 @@
     return self;
 }
 
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil shareImage:(UIImage *)image
+{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+        _shareImage = [image retain];
+    }
+    return self;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
 //    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self readInfoFromPlist];
+    [self configurationShare];
     
 }
 
@@ -65,6 +93,8 @@
     NSString *sn = [dic objectForKey:kShareKeySelector];
     SEL method = NSSelectorFromString(sn);
     [self performSelector:method];
+    
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 #pragma mark - UITableViewDataSource
@@ -105,52 +135,33 @@
     _dataSource = [[NSArray alloc] initWithContentsOfFile:plistPath];
 }
 
-#pragma mark - share methods
+#pragma mark - 配置分享内容和选项
 
-- (void)shareWithSina
+- (void)configurationShare
 {
-    //创建分享内容
-//    NSString *imagePath = [[NSBundle mainBundle] pathForResource:IMAGE_NAME ofType:IMAGE_EXT];
-    id<ISSContent> publishContent = [ShareSDK content:SHARE_CONTENT
-                                       defaultContent:@""
-                                                image:[ShareSDK imageWithPath:@"clothe_default.png"]
-                                                title:nil
-                                                  url:nil
-                                          description:nil
-                                            mediaType:SSPublishContentMediaTypeText];
+    self.publishContent = [ShareSDK content:SHARE_CONTENT
+                         defaultContent:@""
+                                  image:[ShareSDK pngImageWithImage:self.shareImage]
+                                  title:nil
+                                    url:nil
+                            description:nil
+                              mediaType:SSPublishContentMediaTypeNews];
     
-    //创建弹出菜单容器
-    id<ISSContainer> container = [ShareSDK container];
-//    [container setIPadContainerWithView:sender arrowDirect:UIPopoverArrowDirectionUp];
+    self.shareOptions = [ShareSDK simpleShareOptionsWithTitle:@"分享" shareViewDelegate:nil];
+}
+
+#pragma mark - 显示分享页面
+
+- (void)showShareViewWithType:(ShareType)type title:(NSString *)title
+{
+    [_shareOptions setTitle:title];
     
-    id<ISSAuthOptions> authOptions = [ShareSDK authOptionsWithAutoAuth:YES
-                                                         allowCallback:YES
-                                                         authViewStyle:SSAuthViewStyleFullScreenPopup
-                                                          viewDelegate:nil
-                                               authManagerViewDelegate:nil];
-//    //在授权页面中添加关注官方微博
-//    [authOptions setFollowAccounts:[NSDictionary dictionaryWithObjectsAndKeys:
-//                                    [ShareSDK userFieldWithType:SSUserFieldTypeName value:@"ShareSDK"],
-//                                    SHARE_TYPE_NUMBER(ShareTypeSinaWeibo),
-//                                    [ShareSDK userFieldWithType:SSUserFieldTypeName value:@"ShareSDK"],
-//                                    SHARE_TYPE_NUMBER(ShareTypeTencentWeibo),
-//                                    nil]];
-    
-    //显示分享菜单
-    [ShareSDK showShareViewWithType:ShareTypeSinaWeibo
-                          container:container
-                            content:publishContent
+    [ShareSDK showShareViewWithType:type
+                          container:nil
+                            content:self.publishContent
                       statusBarTips:YES
-                        authOptions:authOptions
-                       shareOptions:[ShareSDK defaultShareOptionsWithTitle:nil
-                                                           oneKeyShareList:[NSArray defaultOneKeyShareList]
-                                                            qqButtonHidden:NO
-                                                     wxSessionButtonHidden:NO
-                                                    wxTimelineButtonHidden:NO
-                                                      showKeyboardOnAppear:NO
-                                                         shareViewDelegate:nil
-                                                       friendsViewDelegate:nil
-                                                     picViewerViewDelegate:nil]
+                        authOptions:nil
+                       shareOptions:self.shareOptions
                              result:^(ShareType type, SSPublishContentState state, id<ISSStatusInfo> statusInfo, id<ICMErrorInfo> error, BOOL end) {
                                  if (state == SSPublishContentStateSuccess)
                                  {
@@ -163,19 +174,26 @@
                              }];
 }
 
+#pragma mark - share methods
+
+- (void)shareWithSina
+{
+    [self showShareViewWithType:ShareTypeSinaWeibo title:@"分享到新浪微博"];
+}
+
 - (void)shareWithQQ
 {
-    
+    [self showShareViewWithType:ShareTypeQQSpace title:@"分享到QQ空间"];
 }
 
 - (void)shareWithRenren
 {
-    
+    [self showShareViewWithType:ShareTypeRenren title:@"分享到人人"];
 }
 
 - (void)shareWithTencetWeibo
 {
-    
+    [self showShareViewWithType:ShareTypeTencentWeibo title:@"分享到腾讯微博"];
 }
 
 #pragma mark - public

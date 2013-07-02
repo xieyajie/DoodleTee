@@ -303,7 +303,7 @@
 
 - (void)shareAction
 {
-    XDShareViewController *shareViewController = [[XDShareViewController alloc] initWithNibName:@"XDShareViewController" bundle:nil];
+    XDShareViewController *shareViewController = [[XDShareViewController alloc] initWithNibName:@"XDShareViewController" bundle:nil shareImage:nil];
     [self.navigationController presentViewController:shareViewController animated:YES completion:^(){}];
     [shareViewController release];
      NSLog(@"share");

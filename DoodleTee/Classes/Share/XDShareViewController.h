@@ -15,6 +15,9 @@
 
 @property (nonatomic, retain) IBOutlet UITableView *tableView;
 
+
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil shareImage:(UIImage *)image;
+
 - (IBAction)cancel:(id)sender;
 
 @end
