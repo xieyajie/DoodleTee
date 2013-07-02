@@ -64,7 +64,8 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        _shareImage = [image retain];
+//        _shareImage = [image retain];
+        _shareImage = [UIImage imageNamed:@"root_bg.png"];
     }
     return self;
 }

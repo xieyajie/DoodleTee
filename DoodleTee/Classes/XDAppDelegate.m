@@ -16,11 +16,14 @@
 
 #define SINAWEIBO_APPKEY @"1251171938"
 #define SINAWEIBO_APPSECRET @"c3902934f160d04152be60dd1db7131b"
-#define SINAWEIBO_REDIRECTURL @"https://api.weibo.com/oauth2/default.html"
+#define SINAWEIBO_REDIRECTURL @"http://www.sina.com"
 
-#define TENCENT_APPKEY @"801379879"
-#define TENCENT_APPSECRET @"f4715cb1e72046e5e3fef967d1998cbf"
-#define TENCENT_REDIRECTURL nil
+#define TENCENTWEIBO_APPKEY @"801379879"
+#define TENCENTWEIBO_APPSECRET @"f4715cb1e72046e5e3fef967d1998cbf"
+#define TENCENTWEIBO_REDIRECTURL @"http://www.qq.com"
+
+#define TENCENTQZONE_APPKEY @"100477361"
+#define TENCENTQZONE_APPSECRET @"72fbceff8eb8acdbc09f2e65ccf03b47"
 
 #define RENREN_APPKEY @"2c26831c0e974fe0af9e26e68b872aca"
 #define RENREN_APPSECRET @"fcb380838b0e474291378305c6860421"
@@ -105,13 +108,13 @@
                                appSecret:SINAWEIBO_APPSECRET
                              redirectUri:SINAWEIBO_REDIRECTURL];
     //添加腾讯微博应用
-    [ShareSDK connectTencentWeiboWithAppKey:TENCENT_APPKEY
-                                  appSecret:TENCENT_APPSECRET
-                                redirectUri:TENCENT_REDIRECTURL];
+    [ShareSDK connectTencentWeiboWithAppKey:TENCENTWEIBO_APPKEY
+                                  appSecret:TENCENTWEIBO_APPSECRET
+                                redirectUri:TENCENTWEIBO_REDIRECTURL];
     
     //添加QQ空间应用
-    [ShareSDK connectQZoneWithAppKey:TENCENT_APPKEY
-                           appSecret:TENCENT_APPSECRET];
+    [ShareSDK connectQZoneWithAppKey:TENCENTQZONE_APPKEY
+                           appSecret:TENCENTQZONE_APPSECRET];
     
     //添加人人网应用
     [ShareSDK connectRenRenWithAppKey:RENREN_APPKEY
