@@ -16,6 +16,8 @@
 
 #import "XDShareViewController.h"
 
+#import "XDCustomMadeViewController.h"
+
 #import "LocalDefault.h"
 
 #define kTagTopView 0
@@ -123,7 +125,7 @@
         switch (index) {
             case 0:
 //                [self piazzaAction];
-                [self shareAction];
+                [self effectAction];
                 break;
             case 1:
                 [self shareAction];
@@ -311,6 +313,9 @@
 
 - (void)effectAction
 {
+    XDCustomMadeViewController *customViewController = [[XDCustomMadeViewController alloc] initWithNibName:@"XDCustomMadeViewController" bundle:nil];
+    [self.navigationController presentViewController:customViewController animated:YES completion:^(){}];
+    [customViewController release];
      NSLog(@"effect");
 }
 
