@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3A0BF981178312EC006BB126 /* share_sina@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A0BF980178312EC006BB126 /* share_sina@2x.png */; };
 		3A11469F178269230084CA0A /* XDCustomMadeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A11469D178269230084CA0A /* XDCustomMadeViewController.m */; };
 		3A1146A0178269230084CA0A /* XDCustomMadeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A11469E178269230084CA0A /* XDCustomMadeViewController.xib */; };
 		3A19C6B4175A2D34001FC0D5 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A19C6B3175A2D34001FC0D5 /* Default@2x.png */; };
@@ -103,6 +104,7 @@
 
 /* Begin PBXFileReference section */
 		3A0865BB177BC65B00DC6381 /* LocalDefault.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LocalDefault.h; path = Classes/LocalDefault.h; sourceTree = "<group>"; };
+		3A0BF980178312EC006BB126 /* share_sina@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "share_sina@2x.png"; sourceTree = "<group>"; };
 		3A11469C178269230084CA0A /* XDCustomMadeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDCustomMadeViewController.h; sourceTree = "<group>"; };
 		3A11469D178269230084CA0A /* XDCustomMadeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XDCustomMadeViewController.m; sourceTree = "<group>"; };
 		3A11469E178269230084CA0A /* XDCustomMadeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = XDCustomMadeViewController.xib; sourceTree = "<group>"; };
@@ -528,6 +530,7 @@
 		3AB1FFFC1754850500B72E93 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				3A0BF980178312EC006BB126 /* share_sina@2x.png */,
 				3AFAD8A7175CDC4D00E7A4DB /* setting_cellSelectBackground@2x.png */,
 				3AFAD8A8175CDC4D00E7A4DB /* setting_unchoiceBox@2x.png */,
 				3A6E1944175B0AE800806F8A /* draw */,
@@ -672,6 +675,7 @@
 				3A3F1C31178126A800A64C93 /* ShareSDKiPhoneDefaultShareViewUI.bundle in Resources */,
 				3A3F1C33178126A800A64C93 /* ShareSDKiPhoneSimpleShareViewUI.bundle in Resources */,
 				3A1146A0178269230084CA0A /* XDCustomMadeViewController.xib in Resources */,
+				3A0BF981178312EC006BB126 /* share_sina@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
