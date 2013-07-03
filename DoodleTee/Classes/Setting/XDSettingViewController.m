@@ -6,7 +6,10 @@
 //  Copyright (c) 2013年 XD. All rights reserved.
 //
 #import <QuartzCore/QuartzCore.h>
+
 #import "XDSettingViewController.h"
+
+#import "LocalDefault.h"
 
 #define kTagLeftView 0
 #define kTagRightView 1
@@ -37,6 +40,7 @@
                           [NSIndexPath indexPathForRow:0 inSection:0],
                           [NSIndexPath indexPathForRow:0 inSection:1],
                           [NSIndexPath indexPathForRow:0 inSection:2],
+                          [NSIndexPath indexPathForRow:0 inSection:0],
                           nil] retain];
         
         _chimaArray = [[NSArray arrayWithObjects:
@@ -166,6 +170,13 @@
         if (oldIndexPath.section == indexPath.section && oldIndexPath.row != indexPath.row) {
             [tableView deselectRowAtIndexPath: [_selectionArray objectAtIndex: indexPath.section] animated: YES];
             [_selectionArray replaceObjectAtIndex: indexPath.section withObject: indexPath];
+        }
+    }
+    if (kTagRightView == tableView.tag) {
+        NSIndexPath *oldIndexPath = [_selectionArray objectAtIndex: 3];
+        if (oldIndexPath.section == indexPath.section && oldIndexPath.row != indexPath.row) {
+            [tableView deselectRowAtIndexPath: [_selectionArray objectAtIndex: 3] animated: YES];
+            [_selectionArray replaceObjectAtIndex: 3 withObject: indexPath];
         }
     }
 }
@@ -299,6 +310,26 @@
 - (IBAction)overAction:(id)sender
 {
     //存储数据？？？？？
+    NSString *plistPath = [NSHomeDirectory() stringByAppendingPathComponent: KSETTINGPLIST];
+    NSFileManager *fileManage = [NSFileManager defaultManager];
+    if (![fileManage fileExistsAtPath: plistPath])
+    {
+        [fileManage createFileAtPath: plistPath contents: nil attributes: nil];
+    }
+    
+    NSMutableDictionary *settingDic = [[NSMutableDictionary alloc] initWithContentsOfFile: plistPath];
+    if (settingDic == nil)
+    {
+        settingDic = [[NSMutableDictionary alloc] init];
+    }
+    
+    [settingDic setObject: [_pinpaiArray objectAtIndex:[[_selectionArray objectAtIndex:0] row]] forKey: kSETTINGBRAND];
+    [settingDic setObject: [_caizhiArray objectAtIndex:[[_selectionArray objectAtIndex:1] row]] forKey: kSETTINGMATERIAL];
+    [settingDic setObject: [_yanseArray objectAtIndex:[[_selectionArray objectAtIndex:2] row]] forKey: kSETTINGCOLOR];
+    [settingDic setObject: [_chimaArray objectAtIndex:[[_selectionArray objectAtIndex:3] row]] forKey: kSETTINGSIZE];
+    
+    [settingDic writeToFile: plistPath atomically: YES];
+    
     [self backAction:sender];
 }
 

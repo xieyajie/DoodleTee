@@ -8,8 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		3A0BF981178312EC006BB126 /* share_sina@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A0BF980178312EC006BB126 /* share_sina@2x.png */; };
-		3A11469F178269230084CA0A /* XDCustomMadeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A11469D178269230084CA0A /* XDCustomMadeViewController.m */; };
-		3A1146A0178269230084CA0A /* XDCustomMadeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A11469E178269230084CA0A /* XDCustomMadeViewController.xib */; };
 		3A19C6B4175A2D34001FC0D5 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A19C6B3175A2D34001FC0D5 /* Default@2x.png */; };
 		3A19C6B7175A2D38001FC0D5 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A19C6B6175A2D38001FC0D5 /* Default.png */; };
 		3A19C6BF175A3224001FC0D5 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A19C6BE175A3224001FC0D5 /* Default-568h@2x.png */; };
@@ -20,6 +18,11 @@
 		3A19C6DA175A3288001FC0D5 /* root_effect_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A19C6D7175A3288001FC0D5 /* root_effect_icon@2x.png */; };
 		3A19C6DB175A3288001FC0D5 /* root_piazza_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A19C6D8175A3288001FC0D5 /* root_piazza_icon@2x.png */; };
 		3A19C6DC175A3288001FC0D5 /* root_share_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A19C6D9175A3288001FC0D5 /* root_share_icon@2x.png */; };
+		3A2638061783ABB1002BF47E /* XDTemplateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A2638041783ABB1002BF47E /* XDTemplateViewController.m */; };
+		3A2638131783BA47002BF47E /* XDAttributeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A26380C1783BA47002BF47E /* XDAttributeCell.m */; };
+		3A2638141783BA47002BF47E /* XDCustomMadeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A26380E1783BA47002BF47E /* XDCustomMadeViewController.m */; };
+		3A2638151783BA47002BF47E /* XDCustomMadeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A26380F1783BA47002BF47E /* XDCustomMadeViewController.xib */; };
+		3A2638161783BA47002BF47E /* XDPayMoneyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A2638111783BA47002BF47E /* XDPayMoneyViewController.m */; };
 		3A29C12B177FE5AC00CD53D7 /* root_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A29C12A177FE5AC00CD53D7 /* root_bg@2x.png */; };
 		3A3F1B94178116BE00A64C93 /* XDAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A3F1B89178116BE00A64C93 /* XDAccountViewController.m */; };
 		3A3F1B95178116BE00A64C93 /* XDAccountViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A3F1B8A178116BE00A64C93 /* XDAccountViewController.xib */; };
@@ -105,9 +108,6 @@
 /* Begin PBXFileReference section */
 		3A0865BB177BC65B00DC6381 /* LocalDefault.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LocalDefault.h; path = Classes/LocalDefault.h; sourceTree = "<group>"; };
 		3A0BF980178312EC006BB126 /* share_sina@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "share_sina@2x.png"; sourceTree = "<group>"; };
-		3A11469C178269230084CA0A /* XDCustomMadeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDCustomMadeViewController.h; sourceTree = "<group>"; };
-		3A11469D178269230084CA0A /* XDCustomMadeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XDCustomMadeViewController.m; sourceTree = "<group>"; };
-		3A11469E178269230084CA0A /* XDCustomMadeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = XDCustomMadeViewController.xib; sourceTree = "<group>"; };
 		3A19C6B3175A2D34001FC0D5 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default@2x.png"; path = "../Default@2x.png"; sourceTree = "<group>"; };
 		3A19C6B6175A2D38001FC0D5 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Default.png; path = ../Default.png; sourceTree = "<group>"; };
 		3A19C6BE175A3224001FC0D5 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "../Default-568h@2x.png"; sourceTree = "<group>"; };
@@ -119,6 +119,15 @@
 		3A19C6D7175A3288001FC0D5 /* root_effect_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "root_effect_icon@2x.png"; sourceTree = "<group>"; };
 		3A19C6D8175A3288001FC0D5 /* root_piazza_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "root_piazza_icon@2x.png"; sourceTree = "<group>"; };
 		3A19C6D9175A3288001FC0D5 /* root_share_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "root_share_icon@2x.png"; sourceTree = "<group>"; };
+		3A2638031783ABB1002BF47E /* XDTemplateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDTemplateViewController.h; sourceTree = "<group>"; };
+		3A2638041783ABB1002BF47E /* XDTemplateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XDTemplateViewController.m; sourceTree = "<group>"; };
+		3A26380B1783BA47002BF47E /* XDAttributeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDAttributeCell.h; sourceTree = "<group>"; };
+		3A26380C1783BA47002BF47E /* XDAttributeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XDAttributeCell.m; sourceTree = "<group>"; };
+		3A26380D1783BA47002BF47E /* XDCustomMadeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDCustomMadeViewController.h; sourceTree = "<group>"; };
+		3A26380E1783BA47002BF47E /* XDCustomMadeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XDCustomMadeViewController.m; sourceTree = "<group>"; };
+		3A26380F1783BA47002BF47E /* XDCustomMadeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = XDCustomMadeViewController.xib; sourceTree = "<group>"; };
+		3A2638101783BA47002BF47E /* XDPayMoneyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDPayMoneyViewController.h; sourceTree = "<group>"; };
+		3A2638111783BA47002BF47E /* XDPayMoneyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XDPayMoneyViewController.m; sourceTree = "<group>"; };
 		3A29C12A177FE5AC00CD53D7 /* root_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "root_bg@2x.png"; path = "Images/root_bg@2x.png"; sourceTree = "<group>"; };
 		3A3F1B88178116BE00A64C93 /* XDAccountViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDAccountViewController.h; sourceTree = "<group>"; };
 		3A3F1B89178116BE00A64C93 /* XDAccountViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XDAccountViewController.m; sourceTree = "<group>"; };
@@ -256,16 +265,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		3A11469B178269010084CA0A /* CustomMade */ = {
-			isa = PBXGroup;
-			children = (
-				3A11469C178269230084CA0A /* XDCustomMadeViewController.h */,
-				3A11469D178269230084CA0A /* XDCustomMadeViewController.m */,
-				3A11469E178269230084CA0A /* XDCustomMadeViewController.xib */,
-			);
-			path = CustomMade;
-			sourceTree = "<group>";
-		};
 		3A19C6C0175A3288001FC0D5 /* CustomControl */ = {
 			isa = PBXGroup;
 			children = (
@@ -283,6 +282,20 @@
 				3A19C6C3175A3288001FC0D5 /* AKSegmentedControl.m */,
 			);
 			path = AKSegmentedControl;
+			sourceTree = "<group>";
+		};
+		3A26380A1783BA47002BF47E /* CustomMade */ = {
+			isa = PBXGroup;
+			children = (
+				3A26380B1783BA47002BF47E /* XDAttributeCell.h */,
+				3A26380C1783BA47002BF47E /* XDAttributeCell.m */,
+				3A26380D1783BA47002BF47E /* XDCustomMadeViewController.h */,
+				3A26380E1783BA47002BF47E /* XDCustomMadeViewController.m */,
+				3A26380F1783BA47002BF47E /* XDCustomMadeViewController.xib */,
+				3A2638101783BA47002BF47E /* XDPayMoneyViewController.h */,
+				3A2638111783BA47002BF47E /* XDPayMoneyViewController.m */,
+			);
+			path = CustomMade;
 			sourceTree = "<group>";
 		};
 		3A3F1B87178116BE00A64C93 /* Account */ = {
@@ -510,7 +523,7 @@
 		3AB1FFF5175484FC00B72E93 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				3A11469B178269010084CA0A /* CustomMade */,
+				3A26380A1783BA47002BF47E /* CustomMade */,
 				3A3F1B87178116BE00A64C93 /* Account */,
 				3A3F1B8B178116BE00A64C93 /* Setting */,
 				3A3F1B8F178116BE00A64C93 /* Share */,
@@ -523,6 +536,8 @@
 				3AB1000617548C9700B72E93 /* XDEffectViewController.m */,
 				3AB99EF0177B2C0B000C82A6 /* XDFinishShowViewController.h */,
 				3AB99EF1177B2C0B000C82A6 /* XDFinishShowViewController.m */,
+				3A2638031783ABB1002BF47E /* XDTemplateViewController.h */,
+				3A2638041783ABB1002BF47E /* XDTemplateViewController.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -674,8 +689,8 @@
 				3A3F1C2D178126A800A64C93 /* TencentOpenApi_IOS_Bundle.bundle in Resources */,
 				3A3F1C31178126A800A64C93 /* ShareSDKiPhoneDefaultShareViewUI.bundle in Resources */,
 				3A3F1C33178126A800A64C93 /* ShareSDKiPhoneSimpleShareViewUI.bundle in Resources */,
-				3A1146A0178269230084CA0A /* XDCustomMadeViewController.xib in Resources */,
 				3A0BF981178312EC006BB126 /* share_sina@2x.png in Resources */,
+				3A2638151783BA47002BF47E /* XDCustomMadeViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -698,7 +713,10 @@
 				3A3F1B94178116BE00A64C93 /* XDAccountViewController.m in Sources */,
 				3A3F1B96178116BE00A64C93 /* XDSettingViewController.m in Sources */,
 				3A3F1B99178116BE00A64C93 /* XDShareViewController.m in Sources */,
-				3A11469F178269230084CA0A /* XDCustomMadeViewController.m in Sources */,
+				3A2638061783ABB1002BF47E /* XDTemplateViewController.m in Sources */,
+				3A2638131783BA47002BF47E /* XDAttributeCell.m in Sources */,
+				3A2638141783BA47002BF47E /* XDCustomMadeViewController.m in Sources */,
+				3A2638161783BA47002BF47E /* XDPayMoneyViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

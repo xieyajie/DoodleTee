@@ -313,10 +313,20 @@
 
 - (void)effectAction
 {
-    XDCustomMadeViewController *customViewController = [[XDCustomMadeViewController alloc] initWithNibName:@"XDCustomMadeViewController" bundle:nil];
-    [self.navigationController presentViewController:customViewController animated:YES completion:^(){}];
-    [customViewController release];
-     NSLog(@"effect");
+    NSString *plistPath = [NSHomeDirectory() stringByAppendingPathComponent: KSETTINGPLIST];
+    NSFileManager *fileManage = [NSFileManager defaultManager];
+    if ([fileManage fileExistsAtPath: plistPath])
+    {
+        XDCustomMadeViewController *customViewController = [[XDCustomMadeViewController alloc] initWithNibName:@"XDCustomMadeViewController" bundle:nil];
+        [self.navigationController pushViewController:customViewController animated:YES];
+        [customViewController release];
+        NSLog(@"effect");
+    }
+    else{
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"请先选择底衫" message:@"" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+        [alert show];
+        [alert release];
+    }
 }
 
 @end

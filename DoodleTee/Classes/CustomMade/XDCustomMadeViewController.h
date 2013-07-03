@@ -16,4 +16,8 @@
 
 @property (nonatomic, retain) IBOutlet UIView *bottomView;
 
+- (IBAction)backAction;
+
+- (IBAction)doneAction;
+
 @end
