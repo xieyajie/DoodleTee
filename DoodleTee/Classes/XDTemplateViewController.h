@@ -12,15 +12,11 @@
 {
     UILabel *_titleLabel;
     
-    UIView *_mainView;
-    
     UIView *_bottomView;
 }
 
-@property (nonatomic, retain) UIView *mainView;
-
 - (void)configurationBottomView;
 
-- (void)configurationMainView;
+- (void)configurationMainView:(UIView *)view;
 
 @end

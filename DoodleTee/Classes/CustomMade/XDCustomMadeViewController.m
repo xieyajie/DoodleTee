@@ -64,6 +64,14 @@
     _bottomView.layer.shadowOpacity = 1.0;
     _bottomView.layer.shadowRadius = 10.0;
     _bottomView.layer.shadowOffset = CGSizeMake(0.0f, 0.0f);
+    [self.view bringSubviewToFront:_bottomView];
+}
+
+- (void)loadView
+{
+    [super loadView];
+    
+    NSLog(@"%@", _tableView);
 }
 
 - (void)didReceiveMemoryWarning

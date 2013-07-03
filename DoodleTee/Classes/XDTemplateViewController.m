@@ -24,8 +24,6 @@
 
 @implementation XDTemplateViewController
 
-@synthesize mainView = _mainView;
-
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -49,13 +47,12 @@
     _titleLabel.textAlignment = KTextAlignmentCenter;
     [self.view addSubview:_titleLabel];
     
-    [self configurationMainView];
-    
     _bottomView = [[UIView alloc] initWithFrame:CGRectMake(0, kScreenHeight - kBottomHeight, self.view.frame.size.width, kBottomHeight)];
     UIImageView *bg = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, _bottomView.frame.size.width, kBottomHeight)];
     bg.image = [UIImage imageNamed:@"bottomBarBg.png"];
     [_bottomView addSubview:bg];
     [bg release];
+    [self.view addSubview:_bottomView];
     [self configurationBottomView];
 }
 
@@ -72,11 +69,19 @@
     
 }
 
-- (void)configurationMainView
+- (void)configurationMainView:(UIView *)view
 {
-    _mainView.frame = CGRectMake(kViewX, kTitleY + kTitleHeight, kViewWidth, kScreenHeight - kBottomHeight - (kTitleY + kTitleHeight));
-    [self.view addSubview:_mainView];
-    _mainView.backgroundColor = [UIColor colorWithRed:220 / 255.0 green:220 / 255.0 blue:220 / 255.0 alpha:1.0];
+    view.frame = CGRectMake(kViewX, kTitleY + kTitleHeight, kViewWidth, kScreenHeight - kBottomHeight - (kTitleY + kTitleHeight));
+//    [self.view addSubview:view];
+    if (view.superview)
+    {
+        [self.view bringSubviewToFront: view];
+    }
+    else
+    {
+        [self.view addSubview: view];
+    }
+    view.backgroundColor = [UIColor colorWithRed:220 / 255.0 green:220 / 255.0 blue:220 / 255.0 alpha:1.0];
     
     [self.view bringSubviewToFront:_bottomView];
 }
