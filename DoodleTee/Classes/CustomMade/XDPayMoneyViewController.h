@@ -8,9 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-#import "XDTemplateViewController.h"
-
-@interface XDPayMoneyViewController : XDTemplateViewController
+@interface XDPayMoneyViewController : UIViewController
 {
     IBOutlet UIView *_payMoneyView;
     
@@ -24,6 +22,10 @@
     IBOutlet UIButton *_paymentAlipay;
     IBOutlet UIButton *_paymentCreditCard;
     IBOutlet UIButton *_paymentCheckButton;
+    
+    UILabel *_titleLabel;
+    
+    UIView *_bottomView;
 }
 
 - (IBAction)consigneeCheck:(id)sender;

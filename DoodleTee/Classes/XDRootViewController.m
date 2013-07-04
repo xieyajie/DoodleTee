@@ -317,7 +317,7 @@
     NSFileManager *fileManage = [NSFileManager defaultManager];
     if ([fileManage fileExistsAtPath: plistPath])
     {
-        XDCustomMadeViewController *customViewController = [[XDCustomMadeViewController alloc] initWithNibName:@"XDCustomMadeViewController" bundle:nil];
+        XDCustomMadeViewController *customViewController = [[XDCustomMadeViewController alloc] init];
         [self.navigationController pushViewController:customViewController animated:YES];
         [customViewController release];
         NSLog(@"effect");

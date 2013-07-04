@@ -21,7 +21,7 @@
 #define kRowCount 5
 #define kRowMoney 6
 
-@interface XDCustomMadeViewController ()<AKSegmentedControlDelegate>
+@interface XDCustomMadeViewController ()<AKSegmentedControlDelegate, UITableViewDelegate, UITableViewDataSource>
 {
     NSDictionary *_attributeDic;
 }
@@ -36,11 +36,13 @@
 
 @synthesize tableView = _tableView;
 
+@synthesize bottomView = _bottomView;
+
 @synthesize attributeDic = _attributeDic;
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+- (id)init
 {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    self = [super init];
     if (self) {
         // Custom initialization
     }
@@ -53,13 +55,35 @@
     // Do any additional setup after loading the view from its nib.
     [self configurationAttribute];
     
+    UIImageView *bgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
+    bgView.image = [UIImage imageNamed:@"root_bg.png"];
+    [self.view addSubview:bgView];
+    [bgView release];
+    
+    _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(kViewX, kTitleY, kViewWidth, kTitleHeight)];
+    _titleLabel.textAlignment = KTextAlignmentCenter;
     _titleLabel.backgroundColor = [UIColor colorWithRed:143 / 255.0 green:143 / 255.0 blue:143 / 255.0 alpha:1.0];
+    _titleLabel.text = @"定制我设计的T恤";
+    [self.view addSubview:_titleLabel];
+    
+    _bottomView = [[UIView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - kBottomHeight, self.view.frame.size.width, kBottomHeight)];
+    UIImageView *bg = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, _bottomView.frame.size.width, kBottomHeight)];
+    bg.contentMode = UIViewContentModeScaleAspectFit;
+    bg.image = [UIImage imageNamed:@"bottomBarBg.png"];
+    [_bottomView addSubview:bg];
+    [bg release];
+    [self layoutBottomView];
+    [self.view addSubview:_bottomView];
     
     CGFloat y = _titleLabel.frame.origin.y + _titleLabel.frame.size.height;
-    _tableView.frame = CGRectMake(_titleLabel.frame.origin.x, y, _titleLabel.frame.size.width, _bottomView.frame.origin.y - y);
+    CGRect rect = CGRectMake(_titleLabel.frame.origin.x, y, _titleLabel.frame.size.width, _bottomView.frame.origin.y - y);
+    _tableView = [[UITableView alloc] initWithFrame:rect style:UITableViewStylePlain];
     _tableView.backgroundColor = [UIColor colorWithRed:220 / 255.0 green:220 / 255.0 blue:220 / 255.0 alpha:1.0];
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    
+    _tableView.delegate = self;
+    _tableView.dataSource = self;
+    [self.view addSubview:_tableView];
+
     _bottomView.layer.shadowColor = [[UIColor blackColor] CGColor];
     _bottomView.layer.shadowOpacity = 1.0;
     _bottomView.layer.shadowRadius = 10.0;
@@ -123,11 +147,11 @@
     }
     else{
         static NSString *CellIdentifier = @"Cell";
-        XDAttributeCell *cell = [(XDAttributeCell *)[tableView dequeueReusableCellWithIdentifier: CellIdentifier] autorelease];
+        XDAttributeCell *cell = (XDAttributeCell *)[tableView dequeueReusableCellWithIdentifier: CellIdentifier];
         
         if (nil == cell)
         {
-            cell = [[XDAttributeCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
+            cell = [[[XDAttributeCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
         }
         cell.title = @"123";
         cell.value = @"456";
@@ -151,7 +175,6 @@
         default:
             break;
     }
-
 }
 
 #pragma mark - private
@@ -230,21 +253,18 @@
     
     //返回
     UIButton *buttonBack = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, width, segmentedControl.frame.size.height)];
-    buttonBack.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-    buttonBack.contentEdgeInsets = UIEdgeInsetsMake(0, 12, 0, 13);
+    buttonBack.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
     [buttonBack setTitle:@"返回" forState:UIControlStateNormal];
     [buttonBack setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [buttonBack.titleLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Bold" size:15.0]];
-    [buttonBack setTitleEdgeInsets:UIEdgeInsetsMake(0.0, 10.0, 0.0, 0.0)];
     [buttonBack setBackgroundImage:buttonBackgroundImagePressedLeft forState:UIControlStateHighlighted];
     
     //提交订单
     UIButton *buttonDone = [[UIButton alloc] initWithFrame:CGRectMake(buttonBack.frame.origin.x + buttonBack.frame.size.width, 0, width, segmentedControl.frame.size.height)];
-    buttonDone.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-    buttonDone.contentEdgeInsets = UIEdgeInsetsMake(0, 12, 0, 13);
+    buttonDone.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
     [buttonDone setTitle:@"提交订单" forState:UIControlStateNormal];
     [buttonDone.titleLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Bold" size:15.0]];
-    [buttonDone setTitleEdgeInsets:UIEdgeInsetsMake(0.0, 10.0, 0.0, 0.0)];
+    [buttonDone setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [buttonDone setBackgroundImage:buttonBackgroundImagePressedRight forState:UIControlStateHighlighted];
     
     [segmentedControl setButtonsArray:@[buttonBack, buttonDone]];
@@ -252,12 +272,12 @@
     [buttonDone release];
 }
 
-- (IBAction)backAction
+- (void)backAction
 {
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-- (IBAction)doneAction
+- (void)doneAction
 {
     XDPayMoneyViewController *payViewController = [[XDPayMoneyViewController alloc] initWithNibName:@"XDPayMoneyViewController" bundle:nil];
     [self.navigationController pushViewController:payViewController animated:YES];

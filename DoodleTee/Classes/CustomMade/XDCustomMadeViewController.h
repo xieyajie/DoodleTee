@@ -10,14 +10,14 @@
 
 @interface XDCustomMadeViewController : UIViewController
 
-@property (nonatomic, retain) IBOutlet UILabel *titleLabel;
+@property (nonatomic, retain) UILabel *titleLabel;
 
-@property (nonatomic, retain) IBOutlet UITableView *tableView;
+@property (nonatomic, retain) UITableView *tableView;
 
-@property (nonatomic, retain) IBOutlet UIView *bottomView;
+@property (nonatomic, retain) UIView *bottomView;
 
-- (IBAction)backAction;
+- (void)backAction;
 
-- (IBAction)doneAction;
+- (void)doneAction;
 
 @end

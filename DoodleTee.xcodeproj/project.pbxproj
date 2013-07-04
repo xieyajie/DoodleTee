@@ -18,10 +18,8 @@
 		3A19C6DA175A3288001FC0D5 /* root_effect_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A19C6D7175A3288001FC0D5 /* root_effect_icon@2x.png */; };
 		3A19C6DB175A3288001FC0D5 /* root_piazza_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A19C6D8175A3288001FC0D5 /* root_piazza_icon@2x.png */; };
 		3A19C6DC175A3288001FC0D5 /* root_share_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A19C6D9175A3288001FC0D5 /* root_share_icon@2x.png */; };
-		3A2638061783ABB1002BF47E /* XDTemplateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A2638041783ABB1002BF47E /* XDTemplateViewController.m */; };
 		3A2638131783BA47002BF47E /* XDAttributeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A26380C1783BA47002BF47E /* XDAttributeCell.m */; };
 		3A2638141783BA47002BF47E /* XDCustomMadeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A26380E1783BA47002BF47E /* XDCustomMadeViewController.m */; };
-		3A2638151783BA47002BF47E /* XDCustomMadeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A26380F1783BA47002BF47E /* XDCustomMadeViewController.xib */; };
 		3A2638161783BA47002BF47E /* XDPayMoneyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A2638111783BA47002BF47E /* XDPayMoneyViewController.m */; };
 		3A29C12B177FE5AC00CD53D7 /* root_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A29C12A177FE5AC00CD53D7 /* root_bg@2x.png */; };
 		3A3F1B94178116BE00A64C93 /* XDAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A3F1B89178116BE00A64C93 /* XDAccountViewController.m */; };
@@ -122,13 +120,10 @@
 		3A19C6D7175A3288001FC0D5 /* root_effect_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "root_effect_icon@2x.png"; sourceTree = "<group>"; };
 		3A19C6D8175A3288001FC0D5 /* root_piazza_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "root_piazza_icon@2x.png"; sourceTree = "<group>"; };
 		3A19C6D9175A3288001FC0D5 /* root_share_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "root_share_icon@2x.png"; sourceTree = "<group>"; };
-		3A2638031783ABB1002BF47E /* XDTemplateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDTemplateViewController.h; sourceTree = "<group>"; };
-		3A2638041783ABB1002BF47E /* XDTemplateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XDTemplateViewController.m; sourceTree = "<group>"; };
 		3A26380B1783BA47002BF47E /* XDAttributeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDAttributeCell.h; sourceTree = "<group>"; };
 		3A26380C1783BA47002BF47E /* XDAttributeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XDAttributeCell.m; sourceTree = "<group>"; };
 		3A26380D1783BA47002BF47E /* XDCustomMadeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDCustomMadeViewController.h; sourceTree = "<group>"; };
 		3A26380E1783BA47002BF47E /* XDCustomMadeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XDCustomMadeViewController.m; sourceTree = "<group>"; };
-		3A26380F1783BA47002BF47E /* XDCustomMadeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = XDCustomMadeViewController.xib; sourceTree = "<group>"; };
 		3A2638101783BA47002BF47E /* XDPayMoneyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDPayMoneyViewController.h; sourceTree = "<group>"; };
 		3A2638111783BA47002BF47E /* XDPayMoneyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XDPayMoneyViewController.m; sourceTree = "<group>"; };
 		3A29C12A177FE5AC00CD53D7 /* root_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "root_bg@2x.png"; path = "Images/root_bg@2x.png"; sourceTree = "<group>"; };
@@ -297,7 +292,6 @@
 				3A26380C1783BA47002BF47E /* XDAttributeCell.m */,
 				3A26380D1783BA47002BF47E /* XDCustomMadeViewController.h */,
 				3A26380E1783BA47002BF47E /* XDCustomMadeViewController.m */,
-				3A26380F1783BA47002BF47E /* XDCustomMadeViewController.xib */,
 				3A2638101783BA47002BF47E /* XDPayMoneyViewController.h */,
 				3A2638111783BA47002BF47E /* XDPayMoneyViewController.m */,
 				3AE8AA3417846034005AC6AB /* XDPayMoneyViewController.xib */,
@@ -544,8 +538,6 @@
 				3AB1000617548C9700B72E93 /* XDEffectViewController.m */,
 				3AB99EF0177B2C0B000C82A6 /* XDFinishShowViewController.h */,
 				3AB99EF1177B2C0B000C82A6 /* XDFinishShowViewController.m */,
-				3A2638031783ABB1002BF47E /* XDTemplateViewController.h */,
-				3A2638041783ABB1002BF47E /* XDTemplateViewController.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -700,7 +692,6 @@
 				3A3F1C31178126A800A64C93 /* ShareSDKiPhoneDefaultShareViewUI.bundle in Resources */,
 				3A3F1C33178126A800A64C93 /* ShareSDKiPhoneSimpleShareViewUI.bundle in Resources */,
 				3A0BF981178312EC006BB126 /* share_sina@2x.png in Resources */,
-				3A2638151783BA47002BF47E /* XDCustomMadeViewController.xib in Resources */,
 				3AE8AA3217845398005AC6AB /* check@2x.png in Resources */,
 				3AE8AA3317845398005AC6AB /* uncheck@2x.png in Resources */,
 				3AE8AA3517846034005AC6AB /* XDPayMoneyViewController.xib in Resources */,
@@ -726,7 +717,6 @@
 				3A3F1B94178116BE00A64C93 /* XDAccountViewController.m in Sources */,
 				3A3F1B96178116BE00A64C93 /* XDSettingViewController.m in Sources */,
 				3A3F1B99178116BE00A64C93 /* XDShareViewController.m in Sources */,
-				3A2638061783ABB1002BF47E /* XDTemplateViewController.m in Sources */,
 				3A2638131783BA47002BF47E /* XDAttributeCell.m in Sources */,
 				3A2638141783BA47002BF47E /* XDCustomMadeViewController.m in Sources */,
 				3A2638161783BA47002BF47E /* XDPayMoneyViewController.m in Sources */,

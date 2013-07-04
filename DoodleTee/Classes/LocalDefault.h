@@ -20,7 +20,7 @@
 # define KTextAlignmentRight NSTextAlignmentRight
 #endif
 
-#define kScreenHeight [[UIScreen mainScreen] bounds].size.height
+#define kScreenHeight [[UIScreen mainScreen] bounds].size.height - 20
 
 #define kViewX 20
 #define kViewWidth 280
@@ -28,9 +28,7 @@
 #define kTitleY 13
 #define kTitleHeight 30
 
-#define kBottomHeight 62
-#define kTitleFrame CGRectMake(kViewX, kTitleY, kViewWidth, kTitleHeight)
-#define kBottomFrame CGRectMake(0, kScreenHeight - kBottomHeight, self.view.frame.size.width, kBottomHeight)
+#define kBottomHeight 62.5
 
 #define kNotificationFinishName @"finishedEffect"
 
