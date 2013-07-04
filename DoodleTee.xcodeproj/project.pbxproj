@@ -305,7 +305,6 @@
 				3A3F1B88178116BE00A64C93 /* XDAccountViewController.h */,
 				3A3F1B89178116BE00A64C93 /* XDAccountViewController.m */,
 				3A3F1B8A178116BE00A64C93 /* XDAccountViewController.xib */,
-				3A3F1B8B178116BE00A64C93 /* Setting */,
 			);
 			path = Account;
 			sourceTree = "<group>";
@@ -317,8 +316,7 @@
 				3A3F1B8D178116BE00A64C93 /* XDSettingViewController.m */,
 				3A3F1B8E178116BE00A64C93 /* XDSettingViewController.xib */,
 			);
-			name = Setting;
-			path = ../Setting;
+			path = Setting;
 			sourceTree = "<group>";
 		};
 		3A3F1B8F178116BE00A64C93 /* Share */ = {
@@ -526,6 +524,7 @@
 		3AB1FFF5175484FC00B72E93 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				3A3F1B8B178116BE00A64C93 /* Setting */,
 				3A26380A1783BA47002BF47E /* CustomMade */,
 				3A3F1B87178116BE00A64C93 /* Account */,
 				3A3F1B8F178116BE00A64C93 /* Share */,

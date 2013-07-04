@@ -357,6 +357,7 @@
 - (void)doneAction
 {
     XDPayMoneyViewController *payViewController = [[XDPayMoneyViewController alloc] initWithNibName:@"XDPayMoneyViewController" bundle:nil];
+    payViewController.payMoney = _moneyLabel.text;
     [self.navigationController pushViewController:payViewController animated:YES];
     [payViewController release];
 }

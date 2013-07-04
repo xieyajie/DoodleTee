@@ -28,12 +28,14 @@
     UIView *_bottomView;
 }
 
+@property (nonatomic, retain, setter = setPayMoney:) NSString *payMoney;
+
 - (IBAction)consigneeCheck:(id)sender;
 
 - (IBAction)paymentCheck:(id)sender;
 
 - (IBAction)alipaySelecte:(id)sender;
 
-- (IBAction)creditCard:(id)sender;
+- (IBAction)creditCardSelect:(id)sender;
 
 @end

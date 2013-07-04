@@ -14,7 +14,7 @@
 
 #import "LocalDefault.h"
 
-@interface XDPayMoneyViewController ()<UITableViewDataSource, UITableViewDelegate, AKSegmentedControlDelegate>
+@interface XDPayMoneyViewController ()<UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate, AKSegmentedControlDelegate>
 
 @property (nonatomic, retain) UIView *payMoneyView;
 
@@ -23,6 +23,8 @@
 @implementation XDPayMoneyViewController
 
 @synthesize payMoneyView = _payMoneyView;
+
+@synthesize payMoney = _payMoney;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -55,9 +57,12 @@
     [self configurationMainView:_payMoneyView];
     
     _moneyLabel.backgroundColor = [UIColor clearColor];
+    _moneyLabel.text = self.payMoney;
+    
     _payerField.backgroundColor = [UIColor colorWithRed:194 / 255.0 green:194 / 255.0 blue:194 / 255.0 alpha:1.0];
     _consigneeField.backgroundColor = [UIColor colorWithRed:194 / 255.0 green:194 / 255.0 blue:194 / 255.0 alpha:1.0];
     _telField.backgroundColor = [UIColor colorWithRed:194 / 255.0 green:194 / 255.0 blue:194 / 255.0 alpha:1.0];
+    _telField.keyboardType = UIKeyboardTypeNumberPad;
     _addressField.backgroundColor = [UIColor colorWithRed:194 / 255.0 green:194 / 255.0 blue:194 / 255.0 alpha:1.0];
     
     [_consigneeCheckButton setImage:[UIImage imageNamed:@"uncheck.png"] forState:UIControlStateNormal];
@@ -66,17 +71,34 @@
     [_paymentCheckButton setImage:[UIImage imageNamed:@"uncheck.png"] forState:UIControlStateNormal];
     [_paymentCheckButton setImage:[UIImage imageNamed:@"check.png"] forState:UIControlStateSelected];
     
+    [_paymentCreditCard setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [_paymentCreditCard setTitleColor:[UIColor blackColor] forState:UIControlStateHighlighted];
+    [_paymentAlipay setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [_paymentAlipay setTitleColor:[UIColor blackColor] forState:UIControlStateHighlighted];
+    
     _bottomView.layer.shadowColor = [[UIColor blackColor] CGColor];
     _bottomView.layer.shadowOpacity = 1.0;
     _bottomView.layer.shadowRadius = 8.0;
     _bottomView.layer.shadowOffset = CGSizeMake(0.0f, 0.0f);
     [self.view bringSubviewToFront:_bottomView];
+    
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyboard:)];
+    [self.view addGestureRecognizer:tap];
+    [tap release];
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - UITextField delegate
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    return YES;
 }
 
 #pragma mark - AKSegmentedControl delegate
@@ -94,6 +116,16 @@
         default:
             break;
     }
+}
+
+#pragma mark - tap
+
+- (void)hideKeyboard:(UITapGestureRecognizer *)tap
+{
+    [_payerField resignFirstResponder];
+    [_consigneeField resignFirstResponder];
+    [_telField resignFirstResponder];
+    [_addressField resignFirstResponder];
 }
 
 #pragma mark - layout subviews
@@ -157,8 +189,9 @@
 - (IBAction)alipaySelecte:(id)sender
 {
     _paymentAlipay.selected = !_paymentAlipay.selected;
-    if (_paymentCheckButton.selected) {
+    if (_paymentAlipay.selected) {
         [_paymentAlipay setBackgroundColor:[UIColor blueColor]];
+        _paymentCreditCard.selected = NO;
         [_paymentCreditCard setBackgroundColor:[UIColor clearColor]];
     }
     else{
@@ -166,12 +199,13 @@
     }
 }
 
-- (IBAction)creditCard:(id)sender
+- (IBAction)creditCardSelect:(id)sender
 {
     _paymentCreditCard.selected = !_paymentCreditCard.selected;
     if(_paymentCreditCard.selected)
     {
         [_paymentCreditCard setBackgroundColor:[UIColor blueColor]];
+        _paymentAlipay.selected = NO;
         [_paymentAlipay setBackgroundColor:[UIColor clearColor]];
     }
     else{
@@ -187,6 +221,14 @@
 - (void)doneAction
 {
     
+}
+
+#pragma mark - public
+
+- (void)setPayMoney:(NSString *)money
+{
+    _payMoney = money;
+    _moneyLabel.text = money;
 }
 
 
