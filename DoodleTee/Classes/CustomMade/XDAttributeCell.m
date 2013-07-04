@@ -42,7 +42,7 @@
 
 - (void)initSubviews
 {
-    _attributeLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, 90, self.contentView.frame.size.height)];
+    _attributeLabel = [[UILabel alloc] initWithFrame:CGRectMake(30, 0, 70, self.contentView.frame.size.height)];
     _attributeLabel.backgroundColor = [UIColor clearColor];
     _attributeLabel.font = [UIFont boldSystemFontOfSize:20];
     [self.contentView addSubview:_attributeLabel];
@@ -51,7 +51,7 @@
     _valueLabel.backgroundColor = [UIColor clearColor];
     _valueLabel.textColor = [UIColor grayColor];
     _valueLabel.font = [UIFont boldSystemFontOfSize:20];
-    _valueLabel.textAlignment = NSTextAlignmentCenter;
+//    _valueLabel.textAlignment = NSTextAlignmentCenter;
     [self.contentView addSubview:_valueLabel];
 
     self.accessoryType = UITableViewCellAccessoryNone;

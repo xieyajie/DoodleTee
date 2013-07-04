@@ -21,9 +21,16 @@
 #define kRowCount 5
 #define kRowMoney 6
 
+#define kUnitPrice 20
+
 @interface XDCustomMadeViewController ()<AKSegmentedControlDelegate, UITableViewDelegate, UITableViewDataSource>
 {
     NSDictionary *_attributeDic;
+    NSArray *_titleArray;
+    
+    UITextField *_countField;
+    UILabel *_moneyLabel;
+    UIButton *_subButton;
 }
 
 @property (nonatomic, retain) NSDictionary *attributeDic;
@@ -45,6 +52,17 @@
     self = [super init];
     if (self) {
         // Custom initialization
+        _countField = [[UITextField alloc] init];
+        _countField.textAlignment = KTextAlignmentCenter;
+        _countField.borderStyle = UITextBorderStyleRoundedRect;
+        _countField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
+        _countField.text = @"1";
+        
+        _moneyLabel = [[UILabel alloc] init];
+        _moneyLabel.backgroundColor = [UIColor clearColor];
+        _moneyLabel.text = @"20 元";
+        
+        _titleArray = [[NSArray alloc] initWithObjects:kSETTINGBRAND, kSETTINGMATERIAL, kSETTINGSIZE, kSETTINGCOLOR, nil];
     }
     return self;
 }
@@ -153,8 +171,9 @@
         {
             cell = [[[XDAttributeCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
         }
-        cell.title = @"123";
-        cell.value = @"456";
+        NSString *str = [_titleArray objectAtIndex:(indexPath.row - 1)];
+        cell.title = [NSString stringWithFormat:@"%@：", str];
+        cell.value = [_attributeDic objectForKey:str];
         
         return cell;
     }
@@ -204,35 +223,93 @@
         [imageView release];
     }
     
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }
 
 - (UITableViewCell *)configurationCountCell
 {
-    UITableViewCell *cell = [[[UITableViewCell alloc] init] autorelease];
+    static NSString *CountCellIdentifier = @"CountCell";
+    UITableViewCell *cell = [_tableView dequeueReusableCellWithIdentifier: CountCellIdentifier];
     
-    UILabel *attributeLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, 90, cell.contentView.frame.size.height)];
-    attributeLabel.backgroundColor = [UIColor clearColor];
-    attributeLabel.font = [UIFont boldSystemFontOfSize:20];
-    [cell.contentView addSubview:attributeLabel];
+    if (nil == cell) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CountCellIdentifier];
+        
+        CGFloat height = cell.contentView.frame.size.height;
+        
+        UILabel *attributeLabel = [[UILabel alloc] initWithFrame:CGRectMake(30, 0, 70, height)];
+        attributeLabel.backgroundColor = [UIColor clearColor];
+        attributeLabel.font = [UIFont boldSystemFontOfSize:20];
+        [cell.contentView addSubview:attributeLabel];
+        attributeLabel.text = @"数量：";
+        
+        _subButton = [[UIButton alloc] initWithFrame:CGRectMake(attributeLabel.frame.origin.x + attributeLabel.frame.size.width, 0, 30, height)];
+        [_subButton setImage:[UIImage imageNamed:@"check.png"] forState:UIControlStateNormal];
+        [_subButton addTarget:self action:@selector(subCount:) forControlEvents:UIControlEventTouchUpInside];
+        [cell.contentView addSubview:_subButton];
+        _subButton.enabled = NO;
+        
+        _countField.frame = CGRectMake(_subButton.frame.origin.x + _subButton.frame.size.width + 10, (height - 30) / 2, 50, 30);
+        [cell.contentView addSubview:_countField];
+        
+        UIButton *addButton = [[UIButton alloc] initWithFrame:CGRectMake(_countField.frame.origin.x + _countField.frame.size.width + 10, 0, 30, height)];
+        [addButton setImage:[UIImage imageNamed:@"uncheck.png"] forState:UIControlStateNormal];
+        [addButton addTarget:self action:@selector(addCount:) forControlEvents:UIControlEventTouchUpInside];
+        [cell.contentView addSubview:addButton];
+        
+        [attributeLabel release];
+        [addButton release];
+    }
     
-    attributeLabel.text = @"321";
-    
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }
 
 - (UITableViewCell *)configurationMoneyCell
 {
-    UITableViewCell *cell = [[[UITableViewCell alloc] init] autorelease];
+    static NSString *MoneyCellIdentifier = @"MoneyCell";
+    UITableViewCell *cell = [_tableView dequeueReusableCellWithIdentifier: MoneyCellIdentifier];
     
-    UILabel *attributeLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, 90, cell.contentView.frame.size.height)];
-    attributeLabel.backgroundColor = [UIColor clearColor];
-    attributeLabel.font = [UIFont boldSystemFontOfSize:20];
-    [cell.contentView addSubview:attributeLabel];
+    if (nil == cell) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:MoneyCellIdentifier];
+        
+        UILabel *attributeLabel = [[UILabel alloc] initWithFrame:CGRectMake(30, 0, 70, cell.contentView.frame.size.height)];
+        attributeLabel.backgroundColor = [UIColor clearColor];
+        attributeLabel.font = [UIFont boldSystemFontOfSize:20];
+        [cell.contentView addSubview:attributeLabel];
+        attributeLabel.text = @"总价：";
+        
+        _moneyLabel.frame = CGRectMake(attributeLabel.frame.origin.x + attributeLabel.frame.size.width, 0, 200, cell.contentView.frame.size.height);
+        [cell.contentView addSubview:_moneyLabel];
+    }
     
-    attributeLabel.text = @"321";
-    
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
+}
+
+#pragma mark - 
+
+- (void)subCount:(id)sender
+{
+    NSInteger count = [_countField.text integerValue];
+    count - 1 > 0 ? count-- : 1;
+    if (count == 1) {
+        _subButton.enabled = NO;
+    }
+    else{
+        _subButton.enabled = YES;
+    }
+    _countField.text = [NSString stringWithFormat:@"%i", count];
+    _moneyLabel.text = [NSString stringWithFormat:@"%i 元", (count * kUnitPrice)];
+}
+
+- (void)addCount:(id)sender
+{
+    _subButton.enabled = YES;
+    
+    NSInteger count = [_countField.text integerValue];
+    _countField.text = [NSString stringWithFormat:@"%i", ++count];
+    _moneyLabel.text = [NSString stringWithFormat:@"%i 元", (count * kUnitPrice)];
 }
 
 #pragma mark - private
