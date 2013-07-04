@@ -31,6 +31,7 @@
 #define kBottomHeight 62.5
 
 #define kNotificationFinishName @"finishedEffect"
+#define kNotificationLandSuccess @"landSuccess"
 
 #define KSETTINGPLIST @"setting.plist"
 #define kSETTINGBRAND @"品牌"
@@ -39,5 +40,11 @@
 #define kSETTINGSIZE @"尺寸"
 #define kSETTINGCOUNT @"数量"
 #define kSETTINGMONEY @"价格"
+
+#define kACCOUNTCONSIGNEE @"常用收货信息"
+#define kACCOUNTPAY @"常用支付信息"
+#define kACCOUNTDESIGN @"设计历史"
+#define kACCOUNTBUY @"购买历史"
+#define kACCOUNTSELL @"销售历史"
 
 #endif

@@ -57,6 +57,7 @@
         _countField.borderStyle = UITextBorderStyleRoundedRect;
         _countField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
         _countField.text = @"1";
+        _countField.userInteractionEnabled = NO;
         
         _moneyLabel = [[UILabel alloc] init];
         _moneyLabel.backgroundColor = [UIColor clearColor];

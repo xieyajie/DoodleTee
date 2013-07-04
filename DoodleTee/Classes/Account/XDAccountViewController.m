@@ -7,7 +7,10 @@
 //
 
 #import <QuartzCore/QuartzCore.h>
+
 #import "XDAccountViewController.h"
+
+#import "LocalDefault.h"
 
 @interface XDAccountViewController ()
 
@@ -47,6 +50,21 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark - private
+
+- (BOOL)checkAccountInfo
+{
+    if ([_userNameField.text isEqualToString:@""] || [_pasdField.text isEqualToString:@""]) {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"警告" message:@"用户名或密码不能为空" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
+        [alertView show];
+        [alertView release];
+        
+        return NO;
+    }
+    
+    return YES;
+}
+
 #pragma mark - button action
 
 - (IBAction)backAction:(id)sender
@@ -56,20 +74,19 @@
 
 - (IBAction)registerAction:(id)sender
 {
-    if ([_userNameField.text isEqualToString:@""] || [_pasdField.text isEqualToString:@""]) {
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"警告" message:@"用户名或密码不能为空" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
-        [alertView show];
-        [alertView release];
+    if ([self checkAccountInfo]) {
+        //
     }
 }
 
 - (IBAction)loginAction:(id)sender
 {
-    if ([_userNameField.text isEqualToString:@""] || [_pasdField.text isEqualToString:@""]) {
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"警告" message:@"用户名或密码不能为空" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
-        [alertView show];
-        [alertView release];
-    }
+//    if ([self checkAccountInfo]) {
+//        //
+//    }
+    [self dismissViewControllerAnimated: NO completion: ^{
+        [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationLandSuccess object:nil];
+    }];
 }
 
 @end

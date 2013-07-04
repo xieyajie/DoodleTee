@@ -14,6 +14,8 @@
 
 #import "XDAccountViewController.h"
 
+#import "XDAccountInfoViewController.h"
+
 #import "XDShareViewController.h"
 
 #import "XDCustomMadeViewController.h"
@@ -95,6 +97,10 @@
     if ([self respondsToSelector:@selector(finishedEffectWithImage:)]) {
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(finishedEffectWithImage:) name:kNotificationFinishName object:nil];
     }
+    
+    if ([self respondsToSelector:@selector(successOfLanding:)]) {
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(successOfLanding:) name:kNotificationLandSuccess object:nil];
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -124,8 +130,7 @@
     {
         switch (index) {
             case 0:
-//                [self piazzaAction];
-                [self effectAction];
+                [self piazzaAction];
                 break;
             case 1:
                 [self shareAction];
@@ -151,6 +156,13 @@
     [_buttonEffect setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     
 //    _clotheView.image = 
+}
+
+- (void)successOfLanding:(NSNotification *)aNotification
+{
+    XDAccountInfoViewController *infoViewController = [[XDAccountInfoViewController alloc] init];
+    [self.navigationController presentViewController:infoViewController animated:YES completion:nil];
+    [infoViewController release];
 }
 
 #pragma mark - 页面排版
