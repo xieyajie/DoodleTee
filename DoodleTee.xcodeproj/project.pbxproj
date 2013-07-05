@@ -7,6 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3A0A29FE17867D2C0086543A /* XDAccountInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A0A29F817867D2C0086543A /* XDAccountInfoCell.m */; };
+		3A0A29FF17867D2C0086543A /* XDAccountInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A0A29FA17867D2C0086543A /* XDAccountInfoViewController.m */; };
+		3A0A2A0017867D2C0086543A /* XDAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A0A29FC17867D2C0086543A /* XDAccountViewController.m */; };
+		3A0A2A0117867D2C0086543A /* XDAccountViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A0A29FD17867D2C0086543A /* XDAccountViewController.xib */; };
+		3A0A2A16178690A90086543A /* XDImagePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A0A2A15178690A90086543A /* XDImagePicker.m */; };
+		3A0A2A19178690BD0086543A /* XDDrawPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A0A2A18178690BD0086543A /* XDDrawPicker.m */; };
+		3A0A2A1C178690E20086543A /* XDTextPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A0A2A1B178690E20086543A /* XDTextPicker.m */; };
+		3A0A2A21178692C80086543A /* ImageUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A0A2A20178692C80086543A /* ImageUtil.m */; };
+		3A0A2A24178694710086543A /* XDEffectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A0A2A23178694710086543A /* XDEffectViewController.m */; };
 		3A0BF981178312EC006BB126 /* share_sina@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A0BF980178312EC006BB126 /* share_sina@2x.png */; };
 		3A19C6B4175A2D34001FC0D5 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A19C6B3175A2D34001FC0D5 /* Default@2x.png */; };
 		3A19C6B7175A2D38001FC0D5 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A19C6B6175A2D38001FC0D5 /* Default.png */; };
@@ -22,8 +31,6 @@
 		3A2638141783BA47002BF47E /* XDCustomMadeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A26380E1783BA47002BF47E /* XDCustomMadeViewController.m */; };
 		3A2638161783BA47002BF47E /* XDPayMoneyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A2638111783BA47002BF47E /* XDPayMoneyViewController.m */; };
 		3A29C12B177FE5AC00CD53D7 /* root_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A29C12A177FE5AC00CD53D7 /* root_bg@2x.png */; };
-		3A3F1B94178116BE00A64C93 /* XDAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A3F1B89178116BE00A64C93 /* XDAccountViewController.m */; };
-		3A3F1B95178116BE00A64C93 /* XDAccountViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A3F1B8A178116BE00A64C93 /* XDAccountViewController.xib */; };
 		3A3F1B96178116BE00A64C93 /* XDSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A3F1B8D178116BE00A64C93 /* XDSettingViewController.m */; };
 		3A3F1B97178116BE00A64C93 /* XDSettingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A3F1B8E178116BE00A64C93 /* XDSettingViewController.xib */; };
 		3A3F1B98178116BE00A64C93 /* share.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3A3F1B90178116BE00A64C93 /* share.plist */; };
@@ -55,7 +62,6 @@
 		3A3F1C3E1781272A00A64C93 /* libstdc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A3F1C3D1781272A00A64C93 /* libstdc++.dylib */; };
 		3A3F1C401781273600A64C93 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A3F1C3F1781273600A64C93 /* libsqlite3.dylib */; };
 		3A3F1C421781273E00A64C93 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A3F1C411781273E00A64C93 /* CoreTelephony.framework */; };
-		3A457278177A976900453B7B /* XDEffectView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A457277177A976900453B7B /* XDEffectView.m */; };
 		3A45727B177AB45400453B7B /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A45727A177AB45400453B7B /* QuartzCore.framework */; };
 		3A6E1936175B045100806F8A /* effect_camera_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A6E1933175B045100806F8A /* effect_camera_icon@2x.png */; };
 		3A6E1937175B045100806F8A /* effect_draw_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A6E1934175B045100806F8A /* effect_draw_icon@2x.png */; };
@@ -81,10 +87,8 @@
 		3A6E196C175B0D2700806F8A /* icon114.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A6E196B175B0D2700806F8A /* icon114.png */; };
 		3A6E196E175B0D2A00806F8A /* icon57.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A6E196D175B0D2A00806F8A /* icon57.png */; };
 		3A6E1970175B11CA00806F8A /* stroke_2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A6E196F175B11CA00806F8A /* stroke_2@2x.png */; };
-		3A85E56A177AC4C1003A1016 /* XDDrawTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A85E569177AC4C1003A1016 /* XDDrawTools.m */; };
 		3AB10002175486AC00B72E93 /* clothe_default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3AB10001175486AC00B72E93 /* clothe_default@2x.png */; };
 		3AB1000417548AF600B72E93 /* root_add@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3AB1000317548AF600B72E93 /* root_add@2x.png */; };
-		3AB1000717548C9700B72E93 /* XDEffectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB1000617548C9700B72E93 /* XDEffectViewController.m */; };
 		3AB1000E1754941D00B72E93 /* buttonBg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3AB1000D1754941D00B72E93 /* buttonBg@2x.png */; };
 		3AB10010175494B600B72E93 /* bottomBarBg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3AB1000F175494B600B72E93 /* bottomBarBg@2x.png */; };
 		3AB10012175496F000B72E93 /* functionBarBg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3AB10011175496F000B72E93 /* functionBarBg@2x.png */; };
@@ -98,9 +102,6 @@
 		3AB1FFFA175484FC00B72E93 /* XDAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB1FFF7175484FC00B72E93 /* XDAppDelegate.m */; };
 		3AB1FFFB175484FC00B72E93 /* XDRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB1FFF9175484FC00B72E93 /* XDRootViewController.m */; };
 		3AB99EF3177B2C0B000C82A6 /* XDFinishShowViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB99EF1177B2C0B000C82A6 /* XDFinishShowViewController.m */; };
-		3AC5FDE217799AD400C48CBB /* ImageUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AC5FDE117799AD400C48CBB /* ImageUtil.m */; };
-		3AE299C11785A8CA00CDB041 /* XDAccountInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AE299C01785A8CA00CDB041 /* XDAccountInfoViewController.m */; };
-		3AE299C41785A92E00CDB041 /* XDAccountInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AE299C31785A92E00CDB041 /* XDAccountInfoCell.m */; };
 		3AE299C61785BE8000CDB041 /* account_userDeaultImage@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3AE299C51785BE8000CDB041 /* account_userDeaultImage@2x.png */; };
 		3AE8AA3217845398005AC6AB /* check@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3AE8AA3017845398005AC6AB /* check@2x.png */; };
 		3AE8AA3317845398005AC6AB /* uncheck@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3AE8AA3117845398005AC6AB /* uncheck@2x.png */; };
@@ -111,6 +112,24 @@
 
 /* Begin PBXFileReference section */
 		3A0865BB177BC65B00DC6381 /* LocalDefault.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LocalDefault.h; path = Classes/LocalDefault.h; sourceTree = "<group>"; };
+		3A0A29F717867D2C0086543A /* XDAccountInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDAccountInfoCell.h; sourceTree = "<group>"; };
+		3A0A29F817867D2C0086543A /* XDAccountInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XDAccountInfoCell.m; sourceTree = "<group>"; };
+		3A0A29F917867D2C0086543A /* XDAccountInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDAccountInfoViewController.h; sourceTree = "<group>"; };
+		3A0A29FA17867D2C0086543A /* XDAccountInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XDAccountInfoViewController.m; sourceTree = "<group>"; };
+		3A0A29FB17867D2C0086543A /* XDAccountViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDAccountViewController.h; sourceTree = "<group>"; };
+		3A0A29FC17867D2C0086543A /* XDAccountViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XDAccountViewController.m; sourceTree = "<group>"; };
+		3A0A29FD17867D2C0086543A /* XDAccountViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = XDAccountViewController.xib; sourceTree = "<group>"; };
+		3A0A2A14178690A90086543A /* XDImagePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDImagePicker.h; sourceTree = "<group>"; };
+		3A0A2A15178690A90086543A /* XDImagePicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XDImagePicker.m; sourceTree = "<group>"; };
+		3A0A2A17178690BD0086543A /* XDDrawPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDDrawPicker.h; sourceTree = "<group>"; };
+		3A0A2A18178690BD0086543A /* XDDrawPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XDDrawPicker.m; sourceTree = "<group>"; };
+		3A0A2A1A178690E20086543A /* XDTextPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDTextPicker.h; sourceTree = "<group>"; };
+		3A0A2A1B178690E20086543A /* XDTextPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XDTextPicker.m; sourceTree = "<group>"; };
+		3A0A2A1E178692C80086543A /* ColorMatrix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorMatrix.h; sourceTree = "<group>"; };
+		3A0A2A1F178692C80086543A /* ImageUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageUtil.h; sourceTree = "<group>"; };
+		3A0A2A20178692C80086543A /* ImageUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageUtil.m; sourceTree = "<group>"; };
+		3A0A2A22178694710086543A /* XDEffectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDEffectViewController.h; sourceTree = "<group>"; };
+		3A0A2A23178694710086543A /* XDEffectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XDEffectViewController.m; sourceTree = "<group>"; };
 		3A0BF980178312EC006BB126 /* share_sina@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "share_sina@2x.png"; sourceTree = "<group>"; };
 		3A19C6B3175A2D34001FC0D5 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default@2x.png"; path = "../Default@2x.png"; sourceTree = "<group>"; };
 		3A19C6B6175A2D38001FC0D5 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Default.png; path = ../Default.png; sourceTree = "<group>"; };
@@ -130,9 +149,6 @@
 		3A2638101783BA47002BF47E /* XDPayMoneyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDPayMoneyViewController.h; sourceTree = "<group>"; };
 		3A2638111783BA47002BF47E /* XDPayMoneyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XDPayMoneyViewController.m; sourceTree = "<group>"; };
 		3A29C12A177FE5AC00CD53D7 /* root_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "root_bg@2x.png"; path = "Images/root_bg@2x.png"; sourceTree = "<group>"; };
-		3A3F1B88178116BE00A64C93 /* XDAccountViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDAccountViewController.h; sourceTree = "<group>"; };
-		3A3F1B89178116BE00A64C93 /* XDAccountViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XDAccountViewController.m; sourceTree = "<group>"; };
-		3A3F1B8A178116BE00A64C93 /* XDAccountViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = XDAccountViewController.xib; sourceTree = "<group>"; };
 		3A3F1B8C178116BE00A64C93 /* XDSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDSettingViewController.h; sourceTree = "<group>"; };
 		3A3F1B8D178116BE00A64C93 /* XDSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XDSettingViewController.m; sourceTree = "<group>"; };
 		3A3F1B8E178116BE00A64C93 /* XDSettingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = XDSettingViewController.xib; sourceTree = "<group>"; };
@@ -170,9 +186,6 @@
 		3A3F1C3D1781272A00A64C93 /* libstdc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.dylib"; path = "usr/lib/libstdc++.dylib"; sourceTree = SDKROOT; };
 		3A3F1C3F1781273600A64C93 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		3A3F1C411781273E00A64C93 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
-		3A457276177A976900453B7B /* XDEffectView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDEffectView.h; sourceTree = "<group>"; };
-		3A457277177A976900453B7B /* XDEffectView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XDEffectView.m; sourceTree = "<group>"; };
-		3A457279177A9BFE00453B7B /* ProcessState.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProcessState.h; sourceTree = "<group>"; };
 		3A45727A177AB45400453B7B /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		3A6E1933175B045100806F8A /* effect_camera_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "effect_camera_icon@2x.png"; sourceTree = "<group>"; };
 		3A6E1934175B045100806F8A /* effect_draw_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "effect_draw_icon@2x.png"; sourceTree = "<group>"; };
@@ -198,12 +211,8 @@
 		3A6E196B175B0D2700806F8A /* icon114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon114.png; path = ../icon114.png; sourceTree = "<group>"; };
 		3A6E196D175B0D2A00806F8A /* icon57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon57.png; path = ../icon57.png; sourceTree = "<group>"; };
 		3A6E196F175B11CA00806F8A /* stroke_2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "stroke_2@2x.png"; sourceTree = "<group>"; };
-		3A85E568177AC4C0003A1016 /* XDDrawTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDDrawTools.h; sourceTree = "<group>"; };
-		3A85E569177AC4C1003A1016 /* XDDrawTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XDDrawTools.m; sourceTree = "<group>"; };
 		3AB10001175486AC00B72E93 /* clothe_default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "clothe_default@2x.png"; sourceTree = "<group>"; };
 		3AB1000317548AF600B72E93 /* root_add@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "root_add@2x.png"; sourceTree = "<group>"; };
-		3AB1000517548C9700B72E93 /* XDEffectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDEffectViewController.h; sourceTree = "<group>"; };
-		3AB1000617548C9700B72E93 /* XDEffectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XDEffectViewController.m; sourceTree = "<group>"; };
 		3AB1000D1754941D00B72E93 /* buttonBg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "buttonBg@2x.png"; sourceTree = "<group>"; };
 		3AB1000F175494B600B72E93 /* bottomBarBg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bottomBarBg@2x.png"; sourceTree = "<group>"; };
 		3AB10011175496F000B72E93 /* functionBarBg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "functionBarBg@2x.png"; sourceTree = "<group>"; };
@@ -223,13 +232,6 @@
 		3AB1FFF9175484FC00B72E93 /* XDRootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XDRootViewController.m; sourceTree = "<group>"; };
 		3AB99EF0177B2C0B000C82A6 /* XDFinishShowViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDFinishShowViewController.h; sourceTree = "<group>"; };
 		3AB99EF1177B2C0B000C82A6 /* XDFinishShowViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XDFinishShowViewController.m; sourceTree = "<group>"; };
-		3AC5FDDF17799AD400C48CBB /* ColorMatrix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorMatrix.h; sourceTree = "<group>"; };
-		3AC5FDE017799AD400C48CBB /* ImageUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageUtil.h; sourceTree = "<group>"; };
-		3AC5FDE117799AD400C48CBB /* ImageUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageUtil.m; sourceTree = "<group>"; };
-		3AE299BF1785A8CA00CDB041 /* XDAccountInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDAccountInfoViewController.h; sourceTree = "<group>"; };
-		3AE299C01785A8CA00CDB041 /* XDAccountInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XDAccountInfoViewController.m; sourceTree = "<group>"; };
-		3AE299C21785A92E00CDB041 /* XDAccountInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDAccountInfoCell.h; sourceTree = "<group>"; };
-		3AE299C31785A92E00CDB041 /* XDAccountInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XDAccountInfoCell.m; sourceTree = "<group>"; };
 		3AE299C51785BE8000CDB041 /* account_userDeaultImage@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "account_userDeaultImage@2x.png"; sourceTree = "<group>"; };
 		3AE8AA3017845398005AC6AB /* check@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "check@2x.png"; sourceTree = "<group>"; };
 		3AE8AA3117845398005AC6AB /* uncheck@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "uncheck@2x.png"; sourceTree = "<group>"; };
@@ -274,11 +276,57 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3A0A29F617867D2C0086543A /* Account */ = {
+			isa = PBXGroup;
+			children = (
+				3A0A29F717867D2C0086543A /* XDAccountInfoCell.h */,
+				3A0A29F817867D2C0086543A /* XDAccountInfoCell.m */,
+				3A0A29F917867D2C0086543A /* XDAccountInfoViewController.h */,
+				3A0A29FA17867D2C0086543A /* XDAccountInfoViewController.m */,
+				3A0A29FB17867D2C0086543A /* XDAccountViewController.h */,
+				3A0A29FC17867D2C0086543A /* XDAccountViewController.m */,
+				3A0A29FD17867D2C0086543A /* XDAccountViewController.xib */,
+			);
+			path = Account;
+			sourceTree = "<group>";
+		};
+		3A0A2A0217868FFF0086543A /* Effect */ = {
+			isa = PBXGroup;
+			children = (
+				3A0A2A13178690850086543A /* EffectPicker */,
+				3A0A2A22178694710086543A /* XDEffectViewController.h */,
+				3A0A2A23178694710086543A /* XDEffectViewController.m */,
+			);
+			path = Effect;
+			sourceTree = "<group>";
+		};
+		3A0A2A13178690850086543A /* EffectPicker */ = {
+			isa = PBXGroup;
+			children = (
+				3A0A2A1D178692C80086543A /* ImageUtil */,
+				3A0A2A14178690A90086543A /* XDImagePicker.h */,
+				3A0A2A15178690A90086543A /* XDImagePicker.m */,
+				3A0A2A17178690BD0086543A /* XDDrawPicker.h */,
+				3A0A2A18178690BD0086543A /* XDDrawPicker.m */,
+				3A0A2A1A178690E20086543A /* XDTextPicker.h */,
+				3A0A2A1B178690E20086543A /* XDTextPicker.m */,
+			);
+			path = EffectPicker;
+			sourceTree = "<group>";
+		};
+		3A0A2A1D178692C80086543A /* ImageUtil */ = {
+			isa = PBXGroup;
+			children = (
+				3A0A2A1E178692C80086543A /* ColorMatrix.h */,
+				3A0A2A1F178692C80086543A /* ImageUtil.h */,
+				3A0A2A20178692C80086543A /* ImageUtil.m */,
+			);
+			path = ImageUtil;
+			sourceTree = "<group>";
+		};
 		3A19C6C0175A3288001FC0D5 /* CustomControl */ = {
 			isa = PBXGroup;
 			children = (
-				3A457275177A975400453B7B /* EffectView */,
-				3AC5FDDE17799AD400C48CBB /* ImageUtil */,
 				3A19C6C1175A3288001FC0D5 /* AKSegmentedControl */,
 			);
 			path = CustomControl;
@@ -305,20 +353,6 @@
 				3AE8AA3417846034005AC6AB /* XDPayMoneyViewController.xib */,
 			);
 			path = CustomMade;
-			sourceTree = "<group>";
-		};
-		3A3F1B87178116BE00A64C93 /* Account */ = {
-			isa = PBXGroup;
-			children = (
-				3A3F1B88178116BE00A64C93 /* XDAccountViewController.h */,
-				3A3F1B89178116BE00A64C93 /* XDAccountViewController.m */,
-				3A3F1B8A178116BE00A64C93 /* XDAccountViewController.xib */,
-				3AE299BF1785A8CA00CDB041 /* XDAccountInfoViewController.h */,
-				3AE299C01785A8CA00CDB041 /* XDAccountInfoViewController.m */,
-				3AE299C21785A92E00CDB041 /* XDAccountInfoCell.h */,
-				3AE299C31785A92E00CDB041 /* XDAccountInfoCell.m */,
-			);
-			path = Account;
 			sourceTree = "<group>";
 		};
 		3A3F1B8B178116BE00A64C93 /* Setting */ = {
@@ -419,18 +453,6 @@
 				3A3F1C1A178126A800A64C93 /* ShareSDKiPhoneSimpleShareViewUI.framework */,
 			);
 			path = UI;
-			sourceTree = "<group>";
-		};
-		3A457275177A975400453B7B /* EffectView */ = {
-			isa = PBXGroup;
-			children = (
-				3A457276177A976900453B7B /* XDEffectView.h */,
-				3A457277177A976900453B7B /* XDEffectView.m */,
-				3A457279177A9BFE00453B7B /* ProcessState.h */,
-				3A85E568177AC4C0003A1016 /* XDDrawTools.h */,
-				3A85E569177AC4C1003A1016 /* XDDrawTools.m */,
-			);
-			path = EffectView;
 			sourceTree = "<group>";
 		};
 		3A6E1944175B0AE800806F8A /* draw */ = {
@@ -536,17 +558,16 @@
 		3AB1FFF5175484FC00B72E93 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				3A0A2A0217868FFF0086543A /* Effect */,
+				3A0A29F617867D2C0086543A /* Account */,
 				3A3F1B8B178116BE00A64C93 /* Setting */,
 				3A26380A1783BA47002BF47E /* CustomMade */,
-				3A3F1B87178116BE00A64C93 /* Account */,
 				3A3F1B8F178116BE00A64C93 /* Share */,
 				3A19C6C0175A3288001FC0D5 /* CustomControl */,
 				3AB1FFF6175484FC00B72E93 /* XDAppDelegate.h */,
 				3AB1FFF7175484FC00B72E93 /* XDAppDelegate.m */,
 				3AB1FFF8175484FC00B72E93 /* XDRootViewController.h */,
 				3AB1FFF9175484FC00B72E93 /* XDRootViewController.m */,
-				3AB1000517548C9700B72E93 /* XDEffectViewController.h */,
-				3AB1000617548C9700B72E93 /* XDEffectViewController.m */,
 				3AB99EF0177B2C0B000C82A6 /* XDFinishShowViewController.h */,
 				3AB99EF1177B2C0B000C82A6 /* XDFinishShowViewController.m */,
 			);
@@ -586,16 +607,6 @@
 				3AB10001175486AC00B72E93 /* clothe_default@2x.png */,
 			);
 			path = Images;
-			sourceTree = "<group>";
-		};
-		3AC5FDDE17799AD400C48CBB /* ImageUtil */ = {
-			isa = PBXGroup;
-			children = (
-				3AC5FDDF17799AD400C48CBB /* ColorMatrix.h */,
-				3AC5FDE017799AD400C48CBB /* ImageUtil.h */,
-				3AC5FDE117799AD400C48CBB /* ImageUtil.m */,
-			);
-			path = ImageUtil;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -694,7 +705,6 @@
 				3AFAD8A9175CDC4D00E7A4DB /* setting_cellSelectBackground@2x.png in Resources */,
 				3AFAD8AA175CDC4D00E7A4DB /* setting_unchoiceBox@2x.png in Resources */,
 				3A29C12B177FE5AC00CD53D7 /* root_bg@2x.png in Resources */,
-				3A3F1B95178116BE00A64C93 /* XDAccountViewController.xib in Resources */,
 				3A3F1B97178116BE00A64C93 /* XDSettingViewController.xib in Resources */,
 				3A3F1B98178116BE00A64C93 /* share.plist in Resources */,
 				3A3F1B9A178116BE00A64C93 /* XDShareViewController.xib in Resources */,
@@ -708,6 +718,7 @@
 				3AE8AA3317845398005AC6AB /* uncheck@2x.png in Resources */,
 				3AE8AA3517846034005AC6AB /* XDPayMoneyViewController.xib in Resources */,
 				3AE299C61785BE8000CDB041 /* account_userDeaultImage@2x.png in Resources */,
+				3A0A2A0117867D2C0086543A /* XDAccountViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -721,20 +732,21 @@
 				3AB1FFC817546F4200B72E93 /* main.m in Sources */,
 				3AB1FFFA175484FC00B72E93 /* XDAppDelegate.m in Sources */,
 				3AB1FFFB175484FC00B72E93 /* XDRootViewController.m in Sources */,
-				3AB1000717548C9700B72E93 /* XDEffectViewController.m in Sources */,
 				3A19C6C4175A3288001FC0D5 /* AKSegmentedControl.m in Sources */,
-				3AC5FDE217799AD400C48CBB /* ImageUtil.m in Sources */,
-				3A457278177A976900453B7B /* XDEffectView.m in Sources */,
-				3A85E56A177AC4C1003A1016 /* XDDrawTools.m in Sources */,
 				3AB99EF3177B2C0B000C82A6 /* XDFinishShowViewController.m in Sources */,
-				3A3F1B94178116BE00A64C93 /* XDAccountViewController.m in Sources */,
 				3A3F1B96178116BE00A64C93 /* XDSettingViewController.m in Sources */,
 				3A3F1B99178116BE00A64C93 /* XDShareViewController.m in Sources */,
 				3A2638131783BA47002BF47E /* XDAttributeCell.m in Sources */,
 				3A2638141783BA47002BF47E /* XDCustomMadeViewController.m in Sources */,
 				3A2638161783BA47002BF47E /* XDPayMoneyViewController.m in Sources */,
-				3AE299C11785A8CA00CDB041 /* XDAccountInfoViewController.m in Sources */,
-				3AE299C41785A92E00CDB041 /* XDAccountInfoCell.m in Sources */,
+				3A0A29FE17867D2C0086543A /* XDAccountInfoCell.m in Sources */,
+				3A0A29FF17867D2C0086543A /* XDAccountInfoViewController.m in Sources */,
+				3A0A2A0017867D2C0086543A /* XDAccountViewController.m in Sources */,
+				3A0A2A16178690A90086543A /* XDImagePicker.m in Sources */,
+				3A0A2A19178690BD0086543A /* XDDrawPicker.m in Sources */,
+				3A0A2A1C178690E20086543A /* XDTextPicker.m in Sources */,
+				3A0A2A21178692C80086543A /* ImageUtil.m in Sources */,
+				3A0A2A24178694710086543A /* XDEffectViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -71,7 +71,7 @@
     _bgView.backgroundColor = [UIColor blueColor];
     _bgView.alpha = 0.8;
     
-    _processClickIndex = 0;
+    _processClickIndex = -1;
     _drawClickIndex = -1;
     _textClickIndex = -1;
     
@@ -82,9 +82,9 @@
     
     _topView = [[AKSegmentedControl alloc] initWithFrame:CGRectMake(20, 10, self.view.frame.size.width - 40, 42.5)];
     _topView.tag = kTagTopView;
-    [_topView setSelectedIndex:0];
     [_topView setDelegate:self];
     [self initTopSegmentedView];
+    [_topView setSelectedIndex:0];
     [self.view addSubview:_topView];
     
     _processScroll = [[UIScrollView alloc] initWithFrame:CGRectMake(0, _topView.frame.origin.y + _topView.frame.size.height + 5, self.view.frame.size.width, 45)];
@@ -585,9 +585,10 @@
     
     switch (aIndex) {
         case 3:
-            [_effectView drawForType:XDDrawTypePen];
+            [_effectView drawForType:XDDrawTypeColorPen];
             break;
         case 4:
+            _effectView.drawColor = [UIColor blueColor];
             [_effectView drawForType:XDDrawTypePen];
             break;
             

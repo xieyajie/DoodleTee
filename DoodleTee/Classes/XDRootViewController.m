@@ -6,6 +6,8 @@
 //  Copyright (c) 2013年 XD. All rights reserved.
 //
 
+#import <QuartzCore/QuartzCore.h>
+
 #import "XDRootViewController.h"
 
 #import "XDEffectViewController.h"

@@ -20,6 +20,7 @@ typedef enum{
 
 typedef enum{
     XDDrawTypePoint,
+    XDDrawTypeColorPen,
     XDDrawTypePen
 }XDDrawType;
 

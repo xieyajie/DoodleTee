@@ -208,6 +208,9 @@
 //        [textView becomeFirstResponder];
     }
     else if(self.effectType == XDEffectTypeDraw){
+        if (_drawType == XDDrawTypeColorPen) {
+            self.drawTool.lineColor = [UIColor redColor];
+        }
         self.drawTool = [self toolWithCurrentSetting];
         [self.drawTool setInitialPoint:beginPoint];
         [self.pathArray addObject:self.drawTool];
@@ -219,7 +222,7 @@
     UITouch *touch = [touches anyObject];
     
     // add the current point to the path
-    if(self.effectType == XDEffectTypeDraw && _drawType == XDDrawTypePen){
+    if(self.effectType == XDEffectTypeDraw && (_drawType == XDDrawTypePen || _drawType == XDDrawTypeColorPen)){
         CGPoint currentLocation = [touch locationInView:self];
         CGPoint previousLocation = [touch previousLocationInView:self];
         [self.drawTool moveFromPoint:previousLocation toPoint:currentLocation];
@@ -337,6 +340,7 @@
 - (void)drawForType:(XDDrawType)type
 {
     _drawType = type;
+    self.drawTool.lineColor = self.drawColor;
 }
 
 - (void)undo

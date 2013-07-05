@@ -27,7 +27,6 @@ CGPoint midPoint(CGPoint p1, CGPoint p2)
     self = [super init];
     if (self != nil) {
         self.lineCapStyle = kCGLineCapRound;
-        self.lineColor = [UIColor blueColor];
         self.lineAlpha = 1.0;
     }
     return self;
