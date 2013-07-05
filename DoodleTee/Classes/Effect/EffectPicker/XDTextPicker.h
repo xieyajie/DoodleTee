@@ -9,12 +9,12 @@
 #import <Foundation/Foundation.h>
 
 typedef enum{
-    XDTextStateClearBgBlackFont = 0,  //透明背景色，黑色字体
-    XDTextStateClearBgSkyBlueFont = 1, //透明背景色，天蓝色字体
-    XDTextStateClearBgRedFont = 2,    //透明背景色，红色字体
-    XDTextStateBlackBgWhiteFont = 3,   //黑背景色，白色字体
-    XDTextStateSkyBlueBgWhiteFont = 4  //天蓝背景色，白色字体
-}XDTextState;
+    XDTextTypeClearBgBlackFont = 0,  //透明背景色，黑色字体
+    XDTextTypeClearBgSkyBlueFont = 1, //透明背景色，天蓝色字体
+    XDTextTypeClearBgRedFont = 2,    //透明背景色，红色字体
+    XDTextTypeBlackBgWhiteFont = 3,   //黑背景色，白色字体
+    XDTextTypeSkyBlueBgWhiteFont = 4  //天蓝背景色，白色字体
+}XDTextType;
 
 @interface XDTextPicker : NSObject
 
@@ -22,7 +22,7 @@ typedef enum{
 
 - (id)initWithEffectViewFrame:(CGRect)frame;
 
-- (void)textWithState:(XDTextState)state;
+- (void)textWithType:(XDTextType)state;
 
 - (void)textWithBackgroundColor:(UIColor *)bgColor titleColor:(UIColor *)titleColor;
 

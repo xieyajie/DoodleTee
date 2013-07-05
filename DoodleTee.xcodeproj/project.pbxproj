@@ -103,6 +103,8 @@
 		3AB1FFFB175484FC00B72E93 /* XDRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB1FFF9175484FC00B72E93 /* XDRootViewController.m */; };
 		3AB99EF3177B2C0B000C82A6 /* XDFinishShowViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB99EF1177B2C0B000C82A6 /* XDFinishShowViewController.m */; };
 		3AE299C61785BE8000CDB041 /* account_userDeaultImage@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3AE299C51785BE8000CDB041 /* account_userDeaultImage@2x.png */; };
+		3AE3A6E617870D86009EBE44 /* XDDrawView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AE3A6E517870D86009EBE44 /* XDDrawView.m */; };
+		3AE3A6ED1787143B009EBE44 /* UIColor_Random.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AE3A6EC1787143B009EBE44 /* UIColor_Random.m */; };
 		3AE8AA3217845398005AC6AB /* check@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3AE8AA3017845398005AC6AB /* check@2x.png */; };
 		3AE8AA3317845398005AC6AB /* uncheck@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3AE8AA3117845398005AC6AB /* uncheck@2x.png */; };
 		3AE8AA3517846034005AC6AB /* XDPayMoneyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3AE8AA3417846034005AC6AB /* XDPayMoneyViewController.xib */; };
@@ -233,6 +235,10 @@
 		3AB99EF0177B2C0B000C82A6 /* XDFinishShowViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDFinishShowViewController.h; sourceTree = "<group>"; };
 		3AB99EF1177B2C0B000C82A6 /* XDFinishShowViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XDFinishShowViewController.m; sourceTree = "<group>"; };
 		3AE299C51785BE8000CDB041 /* account_userDeaultImage@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "account_userDeaultImage@2x.png"; sourceTree = "<group>"; };
+		3AE3A6E417870D86009EBE44 /* XDDrawView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDDrawView.h; sourceTree = "<group>"; };
+		3AE3A6E517870D86009EBE44 /* XDDrawView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XDDrawView.m; sourceTree = "<group>"; };
+		3AE3A6EB17871382009EBE44 /* UIColor_Random.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UIColor_Random.h; sourceTree = "<group>"; };
+		3AE3A6EC1787143B009EBE44 /* UIColor_Random.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIColor_Random.m; sourceTree = "<group>"; };
 		3AE8AA3017845398005AC6AB /* check@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "check@2x.png"; sourceTree = "<group>"; };
 		3AE8AA3117845398005AC6AB /* uncheck@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "uncheck@2x.png"; sourceTree = "<group>"; };
 		3AE8AA3417846034005AC6AB /* XDPayMoneyViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = XDPayMoneyViewController.xib; sourceTree = "<group>"; };
@@ -303,6 +309,8 @@
 		3A0A2A13178690850086543A /* EffectPicker */ = {
 			isa = PBXGroup;
 			children = (
+				3AE3A6E417870D86009EBE44 /* XDDrawView.h */,
+				3AE3A6E517870D86009EBE44 /* XDDrawView.m */,
 				3A0A2A1D178692C80086543A /* ImageUtil */,
 				3A0A2A14178690A90086543A /* XDImagePicker.h */,
 				3A0A2A15178690A90086543A /* XDImagePicker.m */,
@@ -320,6 +328,8 @@
 				3A0A2A1E178692C80086543A /* ColorMatrix.h */,
 				3A0A2A1F178692C80086543A /* ImageUtil.h */,
 				3A0A2A20178692C80086543A /* ImageUtil.m */,
+				3AE3A6EB17871382009EBE44 /* UIColor_Random.h */,
+				3AE3A6EC1787143B009EBE44 /* UIColor_Random.m */,
 			);
 			path = ImageUtil;
 			sourceTree = "<group>";
@@ -747,6 +757,8 @@
 				3A0A2A1C178690E20086543A /* XDTextPicker.m in Sources */,
 				3A0A2A21178692C80086543A /* ImageUtil.m in Sources */,
 				3A0A2A24178694710086543A /* XDEffectViewController.m in Sources */,
+				3AE3A6E617870D86009EBE44 /* XDDrawView.m in Sources */,
+				3AE3A6ED1787143B009EBE44 /* UIColor_Random.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

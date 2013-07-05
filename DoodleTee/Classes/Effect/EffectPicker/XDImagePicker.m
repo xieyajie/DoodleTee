@@ -34,14 +34,14 @@
 
 #pragma mark - public
 
-- (void)effectImageToState:(XDProcessState)state
+- (void)effectImageToType:(XDProcessType)type
 {
     if (_originalImage == nil) {
         return ;
     }
     
-    switch (state) {
-        case XDProcessStateNormal:
+    switch (type) {
+        case XDProcessTypeNormal:
         {
             _effectView.image = _originalImage;
             
@@ -50,7 +50,7 @@
             [UIView commitAnimations];
         }
             break;
-        case XDProcessStateLomo:
+        case XDProcessTypeLomo:
         {
             _effectView.image = [ImageUtil imageWithImage:_originalImage withColorMatrix: colormatrix_lomo];
             
@@ -59,7 +59,7 @@
             [UIView commitAnimations];
         }
             break;
-        case XDProcessStateBlackAndWhite:
+        case XDProcessTypeBlackAndWhite:
         {
             _effectView.image = [ImageUtil imageWithImage:_originalImage withColorMatrix:colormatrix_heibai];
             
@@ -68,7 +68,7 @@
             [UIView commitAnimations];
         }
             break;
-        case XDProcessStateBlues:
+        case XDProcessTypeBlues:
         {
             _effectView.image = [ImageUtil imageWithImage:_originalImage withColorMatrix:colormatrix_landiao];
             
@@ -77,7 +77,7 @@
             [UIView commitAnimations];
         }
             break;
-        case XDProcessStateGothic:
+        case XDProcessTypeGothic:
         {
             _effectView.image = [ImageUtil imageWithImage:_originalImage withColorMatrix:colormatrix_gete];
             

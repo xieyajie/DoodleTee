@@ -9,20 +9,20 @@
 #import <Foundation/Foundation.h>
 
 typedef enum{
-    XDProcessStateNormal = 0,  //原始状态
-    XDProcessStateBlackAndWhite = 1, //黑白
-    XDProcessStateLomo = 2,    //lomo
-    XDProcessStateBlues = 3,   //蓝调
-    XDProcessStateGothic = 4,  //哥特
-    XDProcessStateSharpen = 5, //锐化
-    XDProcessStateVintage, //复古
-    XDProcessStateHalo,    //光晕
-    XDProcessStateDream,   //梦幻
-    XDProcessStateDarlness,//夜色
-    XDProcessStateRomantic,//浪漫
-    XDProcessStateQuietly, //淡雅
-    XDProcessStateClaret,  //酒红
-}XDProcessState;
+    XDProcessTypeNormal = 0,  //原始状态
+    XDProcessTypeBlackAndWhite = 1, //黑白
+    XDProcessTypeLomo = 2,    //lomo
+    XDProcessTypeBlues = 3,   //蓝调
+    XDProcessTypeGothic = 4,  //哥特
+    XDProcessTypeSharpen = 5, //锐化
+    XDProcessTypeVintage, //复古
+    XDProcessTypeHalo,    //光晕
+    XDProcessTypeDream,   //梦幻
+    XDProcessTypeDarlness,//夜色
+    XDProcessTypeRomantic,//浪漫
+    XDProcessTypeQuietly, //淡雅
+    XDProcessTypeClaret,  //酒红
+}XDProcessType;
 
 
 @interface XDImagePicker : NSObject
@@ -33,6 +33,6 @@ typedef enum{
 
 - (id)initWithEffectViewFrame:(CGRect)frame;
 
-- (void)effectImageToState:(XDProcessState)state;
+- (void)effectImageToType:(XDProcessType)type;
 
 @end
