@@ -21,6 +21,9 @@
     CGPoint _lastTouch;
     
     BOOL _needSave;
+    
+    CGPoint _lastDrowCyclePoint;
+    CGFloat _lastDrowCycleRadius;
 }
 
 @property (nonatomic, retain) UIImage *image;
@@ -121,6 +124,8 @@
     _beginTouch = [touch locationInView:self];
 	_lastTouch = [touch locationInView:self];
 //    _needDisplay = NO;
+    
+    [self randomACycleAtPoint: _beginTouch];
 }
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
@@ -131,6 +136,11 @@
     _beginTouch = [touch previousLocationInView:self];
     _lastTouch = [touch locationInView:self];
     [self setNeedsDisplay];
+    
+    if ([self distanceForPoint: _lastTouch andPoint: _beginTouch] >= _lastDrowCycleRadius)
+    {
+        [self randomACycleAtPoint: _lastTouch];
+    }
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
@@ -147,7 +157,45 @@
 }
 
 #pragma mark - private
+- (void)randomACycleAtPoint:(CGPoint)point
+{
+    [self drawCycleWithPoint: point
+                      radius: random()%10
+                       color: [UIColor colorWithRed: random()%255/255.0f
+                                              green: random()%255/255.0f
+                                               blue: random()%255/255.0f
+                                              alpha: random()%255/255.0f]];
+}
 
+- (void)drawCycleWithPoint:(CGPoint)point radius:(CGFloat)radius color:(UIColor*)color
+{
+    CGRect cycleRect = CGRectMake(0, 0, 2*radius, 2*radius);
+    
+    UIGraphicsBeginImageContextWithOptions(cycleRect.size, NO, [[UIScreen mainScreen] scale]);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    
+    CGContextSetFillColorWithColor(context, color.CGColor);
+    CGContextFillEllipseInRect(context, cycleRect);
+    
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    
+    UIGraphicsEndImageContext();
+    
+    UIImageView *imageView = [[UIImageView alloc] initWithImage: image];
+    imageView.center = point;
+    [self addSubview: imageView];
+    [imageView release];
+    
+    _lastDrowCyclePoint = point;
+    _lastDrowCycleRadius = radius;
+}
+
+- (CGFloat)distanceForPoint:(CGPoint)point andPoint:(CGPoint)anotherPoint
+{
+    CGFloat distance = sqrt((point.x*point.x - anotherPoint.x*anotherPoint.x) + (point.y*point.y - anotherPoint.y*anotherPoint.y));
+    
+    return distance;
+}
 
 #pragma mark - public
 
