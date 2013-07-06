@@ -28,6 +28,7 @@
 
 
 typedef enum{
+    XDEffectTypeNone,
     XDEffectTypeImage,//图像
     XDEffectTypeDraw,//涂鸦
     XDEffectTypeText//文字
@@ -304,8 +305,8 @@ typedef enum{
 - (void)configurationAbility
 {
     _imageTypeSelectedIndex = -1;
-    _drawTypeSelectedIndex = -1;
-    _textTypeSelectedIndex = -1;
+    _drawTypeSelectedIndex = 0;
+    _textTypeSelectedIndex = 0;
 }
 
 
@@ -699,24 +700,27 @@ typedef enum{
 
 #pragma mark - effectType selected
 
-- (void)imageEffectWithType:(XDProcessState)state
+- (void)imageEffectWithType:(XDProcessType)type
 {
-    [self layoutBackgroundViewForSelectedType:state];
+    [self layoutBackgroundViewForSelectedType:type];
     if (_imageTypeSelectedIndex > -1) {
-        [self.imagePicker effectImageToState:state];
+        [self.imagePicker effectImageToType:type];
     }
 }
 
-- (void)drawEffectWithType:(XDProcessState)state
+- (void)drawEffectWithType:(XDProcessType)type
 {
-    [self layoutBackgroundViewForSelectedType:state];
+    [self layoutBackgroundViewForSelectedType:type];
+    if (_drawTypeSelectedIndex > -1) {
+        [self.drawPicker drawWithType:type];
+    }
 }
 
-- (void)textEffectWithType:(XDProcessState)state
+- (void)textEffectWithType:(XDProcessType)type
 {
-    [self layoutBackgroundViewForSelectedType:state];
+    [self layoutBackgroundViewForSelectedType:type];
     if (_textTypeSelectedIndex > -1) {
-        [self.textPicker textWithState:state];
+        [self.textPicker textWithType:type];
     }
 }
 

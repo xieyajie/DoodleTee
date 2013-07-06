@@ -47,28 +47,28 @@
 
 #pragma mark - public
 
-- (void)textWithState:(XDTextState)state
+- (void)textWithType:(XDTextType)type
 {
     UIColor *bgColor = nil;
     UIColor *fontColor = nil;
-    switch (state) {
-        case XDTextStateClearBgBlackFont:
+    switch (type) {
+        case XDTextTypeClearBgBlackFont:
             bgColor = [UIColor clearColor];
             fontColor = [UIColor blackColor];
             break;
-        case XDTextStateClearBgSkyBlueFont:
+        case XDTextTypeClearBgSkyBlueFont:
             bgColor = [UIColor clearColor];
             fontColor = [UIColor blueColor];
             break;
-        case XDTextStateClearBgRedFont:
+        case XDTextTypeClearBgRedFont:
             bgColor = [UIColor clearColor];
             fontColor = [UIColor purpleColor];
             break;
-        case XDTextStateBlackBgWhiteFont:
+        case XDTextTypeBlackBgWhiteFont:
             bgColor = [UIColor blackColor];
             fontColor = [UIColor whiteColor];
             break;
-        case XDTextStateSkyBlueBgWhiteFont:
+        case XDTextTypeSkyBlueBgWhiteFont:
             bgColor = [UIColor blueColor];
             fontColor = [UIColor whiteColor];
             break;
