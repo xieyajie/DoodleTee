@@ -25,7 +25,7 @@
 
 + (UIColor *)randonColorWithRangeForm:(CGFloat)fromValue to:(CGFloat)toValue
 {
-    
+    return nil;
 }
 
 @end
