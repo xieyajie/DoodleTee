@@ -64,13 +64,13 @@
         case XDDrawTypeColorLineNoRange:
             _useRandomColorNoRange = YES;
             _useRandomColorRange = NO;
-            _brushSize = 20.0;
+            _brushSize = 2.0;
             break;
         case XDDrawTypeSkyBlueLine:
             _useRandomColorNoRange = NO;
             _useRandomColorRange = NO;
             _brushColor = [UIColor blueColor];
-            _brushSize = 20.0;
+            _brushSize = 2.0;
             break;
             
         default:

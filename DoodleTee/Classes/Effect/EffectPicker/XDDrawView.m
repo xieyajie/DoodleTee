@@ -72,6 +72,8 @@
     }
     
     CGContextRef context = UIGraphicsGetCurrentContext();
+    CGContextSetStrokeColorWithColor(context, self.drawColor.CGColor);
+	CGContextSetFillColorWithColor(context, self.drawColor.CGColor);
     CGContextSetLineWidth(context, self.picker.brushSize);
 	CGContextSetLineCap(context, kCGLineJoinRound); //线条开始样式，设置为平滑
 	CGContextSetLineJoin(context, kCGLineJoinRound);//线条拐角样式，设置为平滑
@@ -80,8 +82,7 @@
 //		CGContextSetLineDash(context, 5.0f, patterns[DashLinePatternIndex].pattern,
 //                             patterns[DashLinePatternIndex].count);
 //	}
-	CGContextSetStrokeColorWithColor(context, self.drawColor.CGColor);
-	CGContextSetFillColorWithColor(context, self.drawColor.CGColor);
+	
 //	CGRect currentRect = CGRectMake(
 //								    (_beginTouch.x > _lastTouch.x) ? _lastTouch.x : _beginTouch.x,
 //								    (_beginTouch.y > _lastTouch.y) ? _lastTouch.y : _beginTouch.y,
@@ -89,6 +90,11 @@
 //								    fabsf(_beginTouch.y - _lastTouch.y));
     
 //    if (_needSave) {
+    
+    CGContextMoveToPoint(context, _beginTouch.x, _beginTouch.y);
+    CGContextAddLineToPoint(context, _lastTouch.x, _lastTouch.y);
+    CGContextStrokePath(context);
+    
         CGImageRef imageRef = CGBitmapContextCreateImage(context);
         self.image = [UIImage imageWithCGImage:imageRef];
         CGImageRelease(imageRef);
@@ -183,7 +189,7 @@
     
     UIImageView *imageView = [[UIImageView alloc] initWithImage: image];
     imageView.center = point;
-    [self addSubview: imageView];
+//    [self addSubview: imageView];
     [imageView release];
     
     _lastDrowCyclePoint = point;
