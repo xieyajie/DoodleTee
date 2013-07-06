@@ -44,6 +44,7 @@
 
 - (void)drawWithType:(XDDrawType)type
 {
+    self.brushType = type;
     switch (type) {
         case XDDrawTypeColorCircleNoRange:
             _useRandomColorNoRange = YES;
