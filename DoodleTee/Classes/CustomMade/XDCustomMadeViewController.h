@@ -16,6 +16,8 @@
 
 @property (nonatomic, retain) UIView *bottomView;
 
+- (id)initWithClothImage:(UIImage *)image;
+
 - (void)backAction;
 
 - (void)doneAction;

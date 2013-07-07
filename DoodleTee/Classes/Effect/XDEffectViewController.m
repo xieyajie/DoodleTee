@@ -26,7 +26,6 @@
 
 #define kEffectTypeShowViewHeight 45
 
-
 typedef enum{
     XDEffectTypeNone,
     XDEffectTypeImage,//图像
@@ -51,6 +50,8 @@ typedef enum{
     NSInteger _imageTypeSelectedIndex;
     NSInteger _drawTypeSelectedIndex;
     NSInteger _textTypeSelectedIndex;
+    
+    UITapGestureRecognizer *_tapGesture;
 }
 
 @property (nonatomic, retain) UIImagePickerController *imagePickerController;
@@ -307,6 +308,8 @@ typedef enum{
     _imageTypeSelectedIndex = -1;
     _drawTypeSelectedIndex = 0;
     _textTypeSelectedIndex = 0;
+    
+    _tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapGesture:)];
 }
 
 
@@ -536,7 +539,7 @@ typedef enum{
 - (void)layoutEffectView
 {
     _effectView = [[UIView alloc] initWithFrame:CGRectMake((self.view.frame.size.width - 200) / 2, 120, 200, 250)];
-    _effectView.backgroundColor = [UIColor lightGrayColor];
+    _effectView.backgroundColor = [UIColor clearColor];
 }
 
 - (void)layoutBackgroundViewForSelectedType:(NSInteger)index
@@ -547,6 +550,13 @@ typedef enum{
         [_effectTypeShowView addSubview:self.selectedTypeBgView];
         [_effectTypeShowView sendSubviewToBack:self.selectedTypeBgView];
     }];
+}
+
+#pragma mark - tap
+
+- (void)tapGesture:(UITapGestureRecognizer *)tap
+{
+    [self.textPicker.effectView resignFirstResponder];
 }
 
 #pragma mark - top segmentedControl button
@@ -603,6 +613,7 @@ typedef enum{
     }
     
     if (_drawTypeSelectedIndex > -1) {
+        [self.drawPicker drawWithType:_drawTypeSelectedIndex];
         [self layoutBackgroundViewForSelectedType:_drawTypeSelectedIndex];
     }
 }
@@ -673,15 +684,29 @@ typedef enum{
 //重来
 - (void)clearAction
 {
-    
+    switch (_currentEffectType) {
+        case XDEffectTypeImage:
+            [self.imagePicker clear];
+            [self hideActionBottomSegmentedControl];
+            break;
+        case XDEffectTypeDraw:
+            [self.drawPicker clear];
+            break;
+        case XDEffectTypeText:
+            [self.textPicker clear];
+            break;
+            
+        default:
+            break;
+    }
 }
 
 //完成
 - (void)doneAction
 {
-    XDFinishShowViewController *finishViewCOntroller = [[XDFinishShowViewController alloc] init];
-    [self.navigationController pushViewController:finishViewCOntroller animated:YES];
-    [finishViewCOntroller release];
+    XDFinishShowViewController *finishViewController = [[XDFinishShowViewController alloc] initWithClothImage:[self imageWithEffectView]];
+    [self.navigationController pushViewController:finishViewController animated:YES];
+    [finishViewController release];
 }
 
 #pragma mark - change bottom segmentedControl
@@ -748,6 +773,7 @@ typedef enum{
             break;
     }
     
+    [self.view removeGestureRecognizer:_tapGesture];
     switch (toType) {
         case XDEffectTypeImage:
             [_effectView addSubview:self.imagePicker.effectView];
@@ -757,9 +783,26 @@ typedef enum{
             break;
         case XDEffectTypeText:
             [_effectView addSubview:self.textPicker.effectView];
+            [self.view addGestureRecognizer:_tapGesture];
             break;
             
         default:
+            break;
+    }
+}
+
+- (UIImage *)imageWithEffectView
+{
+    switch (_currentEffectType) {
+        case XDEffectTypeImage:
+            return self.imagePicker.effectView.image;
+        case XDEffectTypeDraw:
+            return self.drawPicker.effectView.image;
+        case XDEffectTypeText:
+            return [self.textPicker imageWithContext];
+            
+        default:
+            return nil;
             break;
     }
 }

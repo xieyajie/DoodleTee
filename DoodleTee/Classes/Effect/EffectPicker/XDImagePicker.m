@@ -6,6 +6,8 @@
 //  Copyright (c) 2013年 XD. All rights reserved.
 //
 
+#import <QuartzCore/QuartzCore.h>
+
 #import "XDImagePicker.h"
 
 #import "ImageUtil.h"
@@ -27,7 +29,9 @@
     if (self) {
         // Custom initialization
         _effectView = [[UIImageView alloc] initWithFrame:frame];
-        _effectView.backgroundColor = [UIColor redColor];
+        _effectView.backgroundColor = [UIColor clearColor];
+        _effectView.layer.borderWidth = 1;
+        _effectView.layer.borderColor = [[UIColor blackColor] CGColor];
     }
     return self;
 }
@@ -90,6 +94,12 @@
         default:
             break;
     }
+}
+
+- (void)clear
+{
+    self.originalImage = nil;
+    self.effectView.image = nil;
 }
 
 @end

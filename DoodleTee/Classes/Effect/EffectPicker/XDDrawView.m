@@ -24,9 +24,9 @@
     
     CGPoint _lastDrowCyclePoint;
     CGFloat _lastDrowCycleRadius;
+    
+    BOOL _needClear;
 }
-
-@property (nonatomic, retain) UIImage *image;
 
 @property (nonatomic, retain) UIColor *drawColor;
 
@@ -62,15 +62,22 @@
 // An empty implementation adversely affects performance during animation.
 - (void)drawRect:(CGRect)rect
 {
+    if (_needClear)
+    {
+        CGContextRef context = UIGraphicsGetCurrentContext();
+        CGContextSetFillColorWithColor(context, [UIColor clearColor].CGColor);
+        CGContextFillRect(context, self.bounds);
+        _needClear = NO;
+        
+        return ;
+    }
+    
     //加载上一次的绘图结果
     if (_image) {
         [_image drawInRect:[self bounds]];
-//        _needSave = YES;
-    }
-    else{
-//        _needSave = NO;
     }
     
+    //自由画曲线
     if (XDDrawTypeColorLineNoRange == self.picker.brushType ||
         XDDrawTypeSkyBlueLine == self.picker.brushType)
     {
@@ -89,6 +96,12 @@
         self.image = [UIImage imageWithCGImage:imageRef];
         CGImageRelease(imageRef);
     }
+    //画圆圈
+    else
+    {
+        self.drawColor = [self configurationColorWithBrushType:self.picker.brushType];
+        [self randomACycleAtPoint: _lastTouch];
+    }
 }
 
 #pragma mark - private
@@ -96,6 +109,7 @@
 - (void)initializeVariable
 {
     self.clipsToBounds = YES;
+    _needClear = YES;
 }
 
 #pragma mark - touch methods
@@ -111,27 +125,14 @@
         return;
     }
     
-    //设置画笔颜色
-    if (self.picker.useRandomColorNoRange) {
-        self.drawColor = [UIColor randomColor];
-    }
-    else if (self.picker.useRandomColorRange)
-    {
-        self.drawColor = [UIColor randonColorWithRangeForm:self.picker.fromColorValue to:self.picker.toColorValue];
-    }
-    else{
-        self.drawColor = self.picker.brushColor;
-    }
-    
     _beginTouch = [touch locationInView:self];
 	_lastTouch = [touch locationInView:self];
-//    _needDisplay = NO;
     
-    if (XDDrawTypeColorCircleNoRange == self.picker.brushType ||
-        XDDrawTypeColorCircleRangeBlack == self.picker.brushType ||
-        XDDrawTypeColorCircleRangeBlue == self.picker.brushType)
+    self.drawColor = [self configurationColorWithBrushType:self.picker.brushType];
+    if (XDDrawTypeColorCircleRangeBlack == self.picker.brushType ||
+        XDDrawTypeColorCircleRangeBlue == self.picker.brushType || XDDrawTypeColorCircleNoRange == self.picker.brushType)
     {
-        [self randomACycleAtPoint: _beginTouch];
+        [self setNeedsDisplay];
     }
 }
 
@@ -150,16 +151,6 @@
     }
     
     [self setNeedsDisplay];
-    
-    if (XDDrawTypeColorCircleNoRange == self.picker.brushType ||
-        XDDrawTypeColorCircleRangeBlack == self.picker.brushType ||
-        XDDrawTypeColorCircleRangeBlue == self.picker.brushType)
-    {
-//        if ([self distanceForPoint: _lastTouch andPoint: _beginTouch] >= _lastDrowCycleRadius)
-//        {
-            [self randomACycleAtPoint: _lastTouch];
-//        }
-    }
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
@@ -182,55 +173,66 @@
     [self touchesEnded:touches withEvent:event];
 }
 
-#pragma mark - private
+#pragma mark - private 画笔颜色
+
+//设置画笔颜色
+- (UIColor *)configurationColorWithBrushType:(XDDrawType)type
+{
+    if (self.picker.useRandomColorNoRange) {
+        return [UIColor randomColor];
+    }
+    else if (self.picker.useRandomColorRange)
+    {
+       return [self randomColorWithBrushType:self.picker.brushType];
+    }
+    else{
+        return self.picker.brushColor;
+    }
+}
+
+//自由获取画笔色系颜色
+- (UIColor *)randomColorWithBrushType:(XDDrawType)type
+{
+    switch (type) {
+        case XDDrawTypeColorCircleRangeBlack:
+        {
+            return [UIColor randomBlackSeries];
+        }
+            break;
+        case XDDrawTypeColorCircleRangeBlue:
+        {
+            return [UIColor randomBlueSeries];
+        }
+            break;
+            
+        default:
+            return [UIColor clearColor];
+            break;
+    }
+}
+
+#pragma mark - private 画圆
+
 - (void)randomACycleAtPoint:(CGPoint)point
 {
-    UIColor *color = nil;
-    if (XDDrawTypeColorCircleNoRange == self.picker.brushType)
-    {
-        color = [UIColor colorWithRed: random()%255/255.0f
-                                green: random()%255/255.0f
-                                 blue: random()%255/255.0f
-                                alpha: random()%255/(255.0f/4.0f)];
-    }
-    else if (XDDrawTypeColorCircleRangeBlack == self.picker.brushType)
-    {
-        CGFloat value = random()%255/(255.0f*2.0f);
-        color = [UIColor colorWithRed: value
-                                green: value
-                                 blue: value
-                                alpha: random()%255/(255.0f/4.0f)];
-    }
-    else if (XDDrawTypeColorCircleRangeBlue == self.picker.brushType)
-    {
-        color = [UIColor colorWithRed: random()%255/(255.0f*2.0f)
-                                green: random()%255/(255.0f*2.0f)
-                                 blue: random()%255/(255.0f/2.0f)
-                                alpha: random()%255/(255.0f/4.0f)];
-    }
     [self drawCycleWithPoint: point
-                      radius: random()%13
-                       color: color];
+                      radius: random()% 13
+                       color: self.drawColor];
 }
 
 - (void)drawCycleWithPoint:(CGPoint)point radius:(CGFloat)radius color:(UIColor*)color
 {
-    CGRect cycleRect = CGRectMake(0, 0, 2*radius, 2*radius);
-    
-    UIGraphicsBeginImageContextWithOptions(cycleRect.size, NO, [[UIScreen mainScreen] scale]);
+    CGRect rect = CGRectMake(point.x, point.y, 2*radius, 2*radius);
     CGContextRef context = UIGraphicsGetCurrentContext();
     
     CGContextSetFillColorWithColor(context, color.CGColor);
-    CGContextFillEllipseInRect(context, cycleRect);
+    CGContextAddEllipseInRect(context, rect);
+    CGContextFillEllipseInRect(context, rect);
+    CGContextStrokePath(context);
     
-    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
-    
-    UIGraphicsEndImageContext();
-    
-    UIImageView *imageView = [[UIImageView alloc] initWithImage: image];
-    imageView.center = point;
-    [self addSubview: imageView];
-    [imageView release];
+    CGImageRef imageRef = CGBitmapContextCreateImage(context);
+    self.image = [UIImage imageWithCGImage:imageRef];
+    CGImageRelease(imageRef);
     
     _lastDrowCyclePoint = point;
     _lastDrowCycleRadius = radius;
@@ -244,5 +246,13 @@
 }
 
 #pragma mark - public
+
+- (void)clear
+{
+    self.image = nil;
+    _needClear = YES;
+    
+    [self setNeedsDisplay];
+}
 
 @end

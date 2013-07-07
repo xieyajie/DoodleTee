@@ -157,7 +157,8 @@
     _buttonEffect.enabled = YES;
     [_buttonEffect setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     
-//    _clotheView.image = 
+    UIImage *image = (UIImage *)[aNotification object];
+    _clotheView.image = image;
 }
 
 - (void)successOfLanding:(NSNotification *)aNotification
@@ -315,6 +316,8 @@
     [_buttonShare setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
     _buttonEffect.enabled = NO;
     [_buttonEffect setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+    
+    _clotheView.image = [UIImage imageNamed:@"clothe_default.png"];
 }
 
 - (void)shareAction
@@ -331,7 +334,7 @@
     NSFileManager *fileManage = [NSFileManager defaultManager];
     if ([fileManage fileExistsAtPath: plistPath])
     {
-        XDCustomMadeViewController *customViewController = [[XDCustomMadeViewController alloc] init];
+        XDCustomMadeViewController *customViewController = [[XDCustomMadeViewController alloc] initWithClothImage:_clotheView.image];
         [self.navigationController pushViewController:customViewController animated:YES];
         [customViewController release];
         NSLog(@"effect");

@@ -10,4 +10,6 @@
 
 @interface XDFinishShowViewController : UIViewController
 
+- (id)initWithClothImage:(UIImage *)image;
+
 @end

@@ -27,6 +27,7 @@
 {
     NSDictionary *_attributeDic;
     NSArray *_titleArray;
+    UIImage *_clothImage;
     
     UITextField *_countField;
     UILabel *_moneyLabel;
@@ -47,7 +48,7 @@
 
 @synthesize attributeDic = _attributeDic;
 
-- (id)init
+- (id)initWithClothImage:(UIImage *)image
 {
     self = [super init];
     if (self) {
@@ -64,6 +65,8 @@
         _moneyLabel.text = @"20 元";
         
         _titleArray = [[NSArray alloc] initWithObjects:kSETTINGBRAND, kSETTINGMATERIAL, kSETTINGSIZE, kSETTINGCOLOR, nil];
+        
+        _clothImage = [image retain];
     }
     return self;
 }
@@ -219,7 +222,7 @@
         UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 30, self.tableView.frame.size.width, 200)];
         imageView.contentMode = UIViewContentModeScaleAspectFit;
         imageView.backgroundColor = [UIColor clearColor];
-        imageView.image = [UIImage imageNamed:@"clothe_default.png"];
+        imageView.image = _clothImage;
         [cell.contentView addSubview:imageView];
         [imageView release];
     }

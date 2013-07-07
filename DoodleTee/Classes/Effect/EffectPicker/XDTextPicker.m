@@ -6,11 +6,15 @@
 //  Copyright (c) 2013年 XD. All rights reserved.
 //
 
+#import <QuartzCore/QuartzCore.h>
+
 #import "XDTextPicker.h"
 
 #define FONT_SIZE 20
 
 @interface XDTextPicker ()<UITextViewDelegate>
+
+- (void)textWithBackgroundColor:(UIColor *)bgColor titleColor:(UIColor *)titleColor;
 
 @end
 
@@ -24,10 +28,10 @@
     if (self) {
         // Custom initialization
         _effectView = [[UITextView alloc] initWithFrame:frame];
-        _effectView.backgroundColor = [UIColor magentaColor];
+        _effectView.backgroundColor = [UIColor clearColor];
         _effectView.font = [UIFont systemFontOfSize:FONT_SIZE];
-//        _effectView.returnKeyType = UIReturnKeyDone;
-//        _effectView.delegate = self;
+        _effectView.layer.borderWidth = 1;
+        _effectView.layer.borderColor = [[UIColor blackColor] CGColor];
     }
     return self;
 }
@@ -43,6 +47,14 @@
     }
     
     return YES;
+}
+
+#pragma mark - private
+
+- (void)textWithBackgroundColor:(UIColor *)bgColor titleColor:(UIColor *)titleColor
+{
+    _effectView.backgroundColor = bgColor;
+    _effectView.textColor = titleColor;
 }
 
 #pragma mark - public
@@ -80,11 +92,20 @@
     [self textWithBackgroundColor:bgColor titleColor:fontColor];
 }
 
-- (void)textWithBackgroundColor:(UIColor *)bgColor titleColor:(UIColor *)titleColor
+- (UIImage *)imageWithContext
 {
-    _effectView.backgroundColor = bgColor;
-    _effectView.textColor = titleColor;
+    UIGraphicsBeginImageContext(_effectView.bounds.size);
+    [_effectView.layer renderInContext:UIGraphicsGetCurrentContext()];
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return image;
 }
 
+- (void)clear
+{
+    _effectView.font = [UIFont systemFontOfSize:FONT_SIZE];
+    _effectView.text = @"";
+    [self textWithType:XDTextTypeClearBgBlackFont];
+}
 
 @end

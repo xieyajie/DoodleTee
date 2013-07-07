@@ -12,23 +12,32 @@
 
 #import "AKSegmentedControl.h"
 
+#import "XDShareMethods.h"
+
 #import "LocalDefault.h"
 
 @interface XDFinishShowViewController ()<AKSegmentedControlDelegate>
 {
     AKSegmentedControl *_topSegmentControl;
     UIView *_bottomView;
+    
+    UIImage *_clothImage;
 }
+
+@property (nonatomic, retain) UIImage *clothImage;
 
 @end
 
 @implementation XDFinishShowViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+@synthesize clothImage = _clothImage;
+
+- (id)initWithClothImage:(UIImage *)image
 {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    self = [super init];
     if (self) {
         // Custom initialization
+        _clothImage = [image retain];
     }
     return self;
 }
@@ -41,6 +50,15 @@
     bgView.image = [UIImage imageNamed:@"root_bg.png"];
     [self.view addSubview:bgView];
     [bgView release];
+    
+    
+    UIImageView *clotheView = [[UIImageView alloc] init];
+    UIImage *image = [UIImage imageNamed:@"clothe_default.png"];
+    clotheView.frame = [self frameForImage:image addToView:self.view];
+    clotheView.image = [[XDShareMethods defaultShare] composeImage:_clothImage toImage:image finishToView:clotheView];
+    self.clothImage = clotheView.image;
+    [self.view addSubview:clotheView];
+    [clotheView release];
     
     [self initTopView];
     [self initBottomView];
@@ -68,6 +86,19 @@
             break;
     }
 }
+
+#pragma mark - 
+
+- (CGRect)frameForImage:(UIImage *)image addToView:(UIView *)view
+{
+    CGFloat width = image.size.width;
+    CGFloat height = image.size.height;
+    
+    return CGRectMake((view.frame.size.width - width) / 2,
+                      (view.frame.size.height - height - (_topSegmentControl.frame.origin.y + _topSegmentControl.frame.size.height) - _bottomView.frame.size.height) / 2 + (_topSegmentControl.frame.origin.y + _topSegmentControl.frame.size.height),
+                      width, height);
+}
+
 
 #pragma mark - private
 
@@ -151,7 +182,7 @@
 
 - (void)doneAction
 {
-    [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationFinishName object:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationFinishName object:self.clothImage];
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
 

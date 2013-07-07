@@ -24,6 +24,8 @@ typedef enum{
 
 - (void)textWithType:(XDTextType)state;
 
-- (void)textWithBackgroundColor:(UIColor *)bgColor titleColor:(UIColor *)titleColor;
+- (UIImage *)imageWithContext;
+
+- (void)clear;
 
 @end

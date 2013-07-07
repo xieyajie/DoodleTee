@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+#import "XDDrawView.h"
+
 typedef enum{
     XDDrawTypeColorCircleNoRange = 0,  //不连续的生成，不同颜色，大小不同的圆
     XDDrawTypeColorCircleRangeBlack = 1, //不连续的生成，黑色系，大小不同的圆
@@ -34,5 +36,7 @@ typedef enum{
 - (id)initWithEffectViewFrame:(CGRect)frame;
 
 - (void)drawWithType:(XDDrawType)type;
+
+- (void)clear;
 
 @end

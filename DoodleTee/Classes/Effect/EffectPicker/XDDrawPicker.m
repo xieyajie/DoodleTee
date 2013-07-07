@@ -6,9 +6,9 @@
 //  Copyright (c) 2013年 XD. All rights reserved.
 //
 
-#import "XDDrawPicker.h"
+#import <QuartzCore/QuartzCore.h>
 
-#import "XDDrawView.h"
+#import "XDDrawPicker.h"
 
 @interface XDDrawPicker ()
 
@@ -34,7 +34,10 @@
     if (self) {
         // Custom initialization
         _effectView = [[XDDrawView alloc] initWithFrame:frame];
-        _effectView.backgroundColor = [UIColor greenColor];
+        _effectView.backgroundColor = [UIColor clearColor];
+        _effectView.layer.borderWidth = 1;
+        _effectView.layer.borderColor = [[UIColor blackColor] CGColor];
+        
         _effectView.picker = self;
     }
     return self;
@@ -77,6 +80,11 @@
         default:
             break;
     }
+}
+
+- (void)clear
+{
+    [_effectView clear];
 }
 
 

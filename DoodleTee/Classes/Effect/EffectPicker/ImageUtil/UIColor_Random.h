@@ -12,6 +12,10 @@
 
 + (UIColor *)randomColor;
 
-+ (UIColor *)randonColorWithRangeForm:(CGFloat)fromValue to:(CGFloat)toValue;
+//黑色系颜色
++ (UIColor *)randomBlackSeries;
+
+//蓝色系颜色
++ (UIColor *)randomBlueSeries;
 
 @end

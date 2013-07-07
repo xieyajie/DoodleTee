@@ -13,5 +13,9 @@
 
 @property (nonatomic, retain) XDDrawPicker *picker;
 
+@property (nonatomic, retain) UIImage *image;
+
+- (void)clear;
+
 
 @end

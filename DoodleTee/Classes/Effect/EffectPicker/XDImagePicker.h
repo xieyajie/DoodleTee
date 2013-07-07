@@ -35,4 +35,6 @@ typedef enum{
 
 - (void)effectImageToType:(XDProcessType)type;
 
+- (void)clear;
+
 @end
