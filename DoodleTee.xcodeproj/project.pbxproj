@@ -858,6 +858,7 @@
 		3AB1FFDC17546F4200B72E93 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/DoodleTee/Classes/Share/ShareSDK_v2.2.4/Connection\"",
@@ -875,6 +876,7 @@
 					"\"$(SRCROOT)/DoodleTee/Classes/Share/ShareSDK_v2.2.4/Extend/TencentWeiboSSO\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -882,6 +884,7 @@
 		3AB1FFDD17546F4200B72E93 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/DoodleTee/Classes/Share/ShareSDK_v2.2.4/Connection\"",
@@ -899,6 +902,7 @@
 					"\"$(SRCROOT)/DoodleTee/Classes/Share/ShareSDK_v2.2.4/Extend/TencentWeiboSSO\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
