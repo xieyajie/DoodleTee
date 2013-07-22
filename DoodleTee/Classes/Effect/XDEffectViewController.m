@@ -125,7 +125,6 @@ typedef enum{
     if (_imagePickerController == nil) {
         _imagePickerController = [[UIImagePickerController alloc] init];//图像选取器
         _imagePickerController.delegate = self;
-        _imagePickerController.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;//打开相册
         _imagePickerController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;//过渡类型,有四种
     }
     return _imagePickerController;
@@ -540,6 +539,8 @@ typedef enum{
 {
     _effectView = [[UIView alloc] initWithFrame:CGRectMake((self.view.frame.size.width - 200) / 2, 120, 200, 250)];
     _effectView.backgroundColor = [UIColor clearColor];
+    _effectView.layer.borderWidth = 1;
+    _effectView.layer.borderColor = [[UIColor blackColor] CGColor];
 }
 
 - (void)layoutBackgroundViewForSelectedType:(NSInteger)index
@@ -667,9 +668,16 @@ typedef enum{
 {
     if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera])
     {
-//        self.imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;//照片来源为相机
-//        
-//        [self presentViewController:self.imagePicker animated:YES completion:nil];
+        self.imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;//照片来源为相机
+        self.imagePickerController.view.frame = CGRectMake(0, 0, _effectView.frame.size.width, _effectView.frame.size.height);
+        self.imagePickerController.showsCameraControls = NO;
+        [_effectView addSubview:self.self.imagePickerController.view];
+        [self hideNormalBottomSegmentedControl];
+        
+        if (_imageTypeSelectedIndex == -1) {
+            _imageTypeSelectedIndex = 0;
+        }
+        [self cameraEffectWithType:_imageTypeSelectedIndex];
     }
     else
     {
@@ -687,6 +695,7 @@ typedef enum{
     switch (_currentEffectType) {
         case XDEffectTypeImage:
             [self.imagePicker clear];
+            [self.imagePickerController.view removeFromSuperview];
             [self hideActionBottomSegmentedControl];
             break;
         case XDEffectTypeDraw:
@@ -733,7 +742,15 @@ typedef enum{
     }
 }
 
-- (void)drawEffectWithType:(XDProcessType)type
+- (void)cameraEffectWithType:(XDProcessType)type
+{
+    [self layoutBackgroundViewForSelectedType:type];
+    if (_imageTypeSelectedIndex > -1) {
+        [self.imagePicker effectCameraToType:type];
+    }
+}
+
+- (void)drawEffectWithType:(XDDrawType)type
 {
     [self layoutBackgroundViewForSelectedType:type];
     if (_drawTypeSelectedIndex > -1) {
@@ -741,7 +758,7 @@ typedef enum{
     }
 }
 
-- (void)textEffectWithType:(XDProcessType)type
+- (void)textEffectWithType:(XDTextType)type
 {
     [self layoutBackgroundViewForSelectedType:type];
     if (_textTypeSelectedIndex > -1) {

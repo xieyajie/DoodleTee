@@ -30,8 +30,6 @@
         // Custom initialization
         _effectView = [[UIImageView alloc] initWithFrame:frame];
         _effectView.backgroundColor = [UIColor clearColor];
-        _effectView.layer.borderWidth = 1;
-        _effectView.layer.borderColor = [[UIColor blackColor] CGColor];
     }
     return self;
 }
@@ -94,6 +92,11 @@
         default:
             break;
     }
+}
+
+- (void)effectCameraToType:(XDProcessType)type
+{
+    
 }
 
 - (void)clear

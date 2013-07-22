@@ -18,6 +18,10 @@
 		3A19C6DB175A3288001FC0D5 /* root_piazza_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A19C6D8175A3288001FC0D5 /* root_piazza_icon@2x.png */; };
 		3A19C6DC175A3288001FC0D5 /* root_share_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A19C6D9175A3288001FC0D5 /* root_share_icon@2x.png */; };
 		3A29C12B177FE5AC00CD53D7 /* root_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A29C12A177FE5AC00CD53D7 /* root_bg@2x.png */; };
+		3A33267E178ABDE1009D1477 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A33267D178ABDE1009D1477 /* OpenGLES.framework */; };
+		3A332680178ABE21009D1477 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A33267F178ABE21009D1477 /* AVFoundation.framework */; };
+		3A332682178ABE55009D1477 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A332681178ABE55009D1477 /* CoreVideo.framework */; };
+		3A332684178ABE69009D1477 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A332683178ABE69009D1477 /* CoreMedia.framework */; };
 		3A3F1C36178126F300A64C93 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A3F1C35178126F300A64C93 /* SystemConfiguration.framework */; };
 		3A3F1C381781270300A64C93 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A3F1C371781270300A64C93 /* MessageUI.framework */; };
 		3A3F1C3A1781271000A64C93 /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A3F1C391781271000A64C93 /* libicucore.dylib */; };
@@ -126,6 +130,10 @@
 		3A19C6D8175A3288001FC0D5 /* root_piazza_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "root_piazza_icon@2x.png"; sourceTree = "<group>"; };
 		3A19C6D9175A3288001FC0D5 /* root_share_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "root_share_icon@2x.png"; sourceTree = "<group>"; };
 		3A29C12A177FE5AC00CD53D7 /* root_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "root_bg@2x.png"; path = "Images/root_bg@2x.png"; sourceTree = "<group>"; };
+		3A33267D178ABDE1009D1477 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
+		3A33267F178ABE21009D1477 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		3A332681178ABE55009D1477 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
+		3A332683178ABE69009D1477 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		3A3F1C35178126F300A64C93 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		3A3F1C371781270300A64C93 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		3A3F1C391781271000A64C93 /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
@@ -255,6 +263,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3A332684178ABE69009D1477 /* CoreMedia.framework in Frameworks */,
+				3A332682178ABE55009D1477 /* CoreVideo.framework in Frameworks */,
+				3A332680178ABE21009D1477 /* AVFoundation.framework in Frameworks */,
+				3A33267E178ABDE1009D1477 /* OpenGLES.framework in Frameworks */,
 				3A3F1C421781273E00A64C93 /* CoreTelephony.framework in Frameworks */,
 				3A3F1C401781273600A64C93 /* libsqlite3.dylib in Frameworks */,
 				3A3F1C3E1781272A00A64C93 /* libstdc++.dylib in Frameworks */,
@@ -326,6 +338,10 @@
 		3AB1FFAC17546F4200B72E93 = {
 			isa = PBXGroup;
 			children = (
+				3A332683178ABE69009D1477 /* CoreMedia.framework */,
+				3A332681178ABE55009D1477 /* CoreVideo.framework */,
+				3A33267F178ABE21009D1477 /* AVFoundation.framework */,
+				3A33267D178ABDE1009D1477 /* OpenGLES.framework */,
 				3AB1FFC117546F4200B72E93 /* DoodleTee */,
 				3AB1FFBA17546F4200B72E93 /* Frameworks */,
 				3AB1FFB817546F4200B72E93 /* Products */,

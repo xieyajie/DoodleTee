@@ -35,8 +35,6 @@
         // Custom initialization
         _effectView = [[XDDrawView alloc] initWithFrame:frame];
         _effectView.backgroundColor = [UIColor clearColor];
-        _effectView.layer.borderWidth = 1;
-        _effectView.layer.borderColor = [[UIColor blackColor] CGColor];
         
         _effectView.picker = self;
     }

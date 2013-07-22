@@ -30,8 +30,6 @@
         _effectView = [[UITextView alloc] initWithFrame:frame];
         _effectView.backgroundColor = [UIColor clearColor];
         _effectView.font = [UIFont systemFontOfSize:FONT_SIZE];
-        _effectView.layer.borderWidth = 1;
-        _effectView.layer.borderColor = [[UIColor blackColor] CGColor];
     }
     return self;
 }
