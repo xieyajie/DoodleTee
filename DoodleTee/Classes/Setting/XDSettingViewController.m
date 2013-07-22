@@ -309,7 +309,7 @@
 
 - (IBAction)overAction:(id)sender
 {
-    //存储数据？？？？？
+    //存储数据
     NSString *plistPath = [NSHomeDirectory() stringByAppendingPathComponent: KSETTINGPLIST];
     NSFileManager *fileManage = [NSFileManager defaultManager];
     if (![fileManage fileExistsAtPath: plistPath])
