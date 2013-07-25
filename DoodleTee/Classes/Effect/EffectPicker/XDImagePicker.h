@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
+
 typedef enum{
     XDProcessTypeNormal = 0,  //原始状态
     XDProcessTypeBlackAndWhite = 1, //黑白

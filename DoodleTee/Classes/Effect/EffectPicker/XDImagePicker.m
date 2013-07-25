@@ -8,13 +8,22 @@
 
 #import <QuartzCore/QuartzCore.h>
 
+#import <AssetsLibrary/AssetsLibrary.h>
+
 #import "XDImagePicker.h"
+
+#import "GPUImage.h"
 
 #import "ImageUtil.h"
 
 #import "ColorMatrix.h"
 
 @interface XDImagePicker ()
+{
+    GPUImageView *_cameraView;
+    GPUImageStillCamera *_stillCamera;
+    GPUImageFilter *_filter;
+}
 
 @end
 
@@ -30,6 +39,10 @@
         // Custom initialization
         _effectView = [[UIImageView alloc] initWithFrame:frame];
         _effectView.backgroundColor = [UIColor clearColor];
+        
+        _cameraView = [[GPUImageView alloc] initWithFrame:frame];
+        _stillCamera = [[GPUImageStillCamera alloc] init];
+        _stillCamera.outputImageOrientation = UIInterfaceOrientationPortrait;
     }
     return self;
 }
@@ -96,7 +109,12 @@
 
 - (void)effectCameraToType:(XDProcessType)type
 {
-    
+    [_effectView addSubview:_cameraView];
+    [_stillCamera removeTarget:_filter];
+    _filter = [[GPUImageSketchFilter alloc] init];
+    [_stillCamera addTarget:_filter];
+    [_filter addTarget:_cameraView];
+    [_stillCamera startCameraCapture];
 }
 
 - (void)clear

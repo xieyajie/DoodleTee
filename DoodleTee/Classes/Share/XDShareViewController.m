@@ -181,21 +181,21 @@
 {
     [self showShareViewWithType:ShareTypeSinaWeibo title:@"分享到新浪微博"];
 }
-
-- (void)shareWithQQ
-{
-    [self showShareViewWithType:ShareTypeQQSpace title:@"分享到QQ空间"];
-}
-
-- (void)shareWithRenren
-{
-    [self showShareViewWithType:ShareTypeRenren title:@"分享到人人"];
-}
-
-- (void)shareWithTencetWeibo
-{
-    [self showShareViewWithType:ShareTypeTencentWeibo title:@"分享到腾讯微博"];
-}
+//
+//- (void)shareWithQQ
+//{
+//    [self showShareViewWithType:ShareTypeQQSpace title:@"分享到QQ空间"];
+//}
+//
+//- (void)shareWithRenren
+//{
+//    [self showShareViewWithType:ShareTypeRenren title:@"分享到人人"];
+//}
+//
+//- (void)shareWithTencetWeibo
+//{
+//    [self showShareViewWithType:ShareTypeTencentWeibo title:@"分享到腾讯微博"];
+//}
 
 #pragma mark - public
 

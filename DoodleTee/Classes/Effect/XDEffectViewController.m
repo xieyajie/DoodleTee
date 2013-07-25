@@ -6,6 +6,8 @@
 //  Copyright (c) 2013年 XD. All rights reserved.
 //
 
+#import <AVFoundation/AVFoundation.h>
+
 #import <QuartzCore/QuartzCore.h>
 
 #import "XDEffectViewController.h"
@@ -33,7 +35,7 @@ typedef enum{
     XDEffectTypeText//文字
 }XDEffectType;
 
-@interface XDEffectViewController ()<UINavigationControllerDelegate, UIImagePickerControllerDelegate, AKSegmentedControlDelegate>
+@interface XDEffectViewController ()<UINavigationControllerDelegate, UIImagePickerControllerDelegate, AKSegmentedControlDelegate, AVCaptureVideoDataOutputSampleBufferDelegate>
 {
     AKSegmentedControl *_topSegmentedControl; //顶部操作栏
     UIView *_bottomView;          //底部操作栏
@@ -230,8 +232,6 @@ typedef enum{
         [self hideNormalBottomSegmentedControl];
     }];//关闭模态视图控制器
 }
-
-
 
 #pragma mark - AKSegmentedControl Delegate
 
@@ -668,10 +668,6 @@ typedef enum{
 {
     if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera])
     {
-        self.imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;//照片来源为相机
-        self.imagePickerController.view.frame = CGRectMake(0, 0, _effectView.frame.size.width, _effectView.frame.size.height);
-        self.imagePickerController.showsCameraControls = NO;
-        [_effectView addSubview:self.self.imagePickerController.view];
         [self hideNormalBottomSegmentedControl];
         
         if (_imageTypeSelectedIndex == -1) {
