@@ -199,6 +199,7 @@ typedef enum{
         if (_currentEffectType == XDEffectTypeImage && _imageTypeSelectedIndex != index) {
             _imageTypeSelectedIndex = index;
             [self imageEffectWithType:index];
+            [self cameraEffectWithType:index];
         }
         else if (_currentEffectType == XDEffectTypeDraw && _drawTypeSelectedIndex != index)
         {

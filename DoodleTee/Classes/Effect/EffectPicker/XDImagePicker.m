@@ -41,7 +41,7 @@
         _effectView.backgroundColor = [UIColor clearColor];
         
         _cameraView = [[GPUImageView alloc] initWithFrame:frame];
-        _stillCamera = [[GPUImageStillCamera alloc] init];
+        _stillCamera = [[GPUImageStillCamera alloc] initWithSessionPreset:AVCaptureSessionPreset640x480 cameraPosition:AVCaptureDevicePositionBack];
         _stillCamera.outputImageOrientation = UIInterfaceOrientationPortrait;
     }
     return self;
@@ -111,9 +111,33 @@
 {
     [_effectView addSubview:_cameraView];
     [_stillCamera removeTarget:_filter];
-    _filter = [[GPUImageSketchFilter alloc] init];
-    [_stillCamera addTarget:_filter];
-    [_filter addTarget:_cameraView];
+    switch (type)
+    {
+        case 0:
+            _filter = nil;
+            break;
+        case 1:
+            _filter = [[GPUImageSketchFilter alloc] init];
+            break;
+        case 2:
+            _filter = [[GPUImageSoftLightBlendFilter alloc] init];
+            break;
+        case 3:
+            _filter = [[GPUImageColorBurnBlendFilter alloc] init];
+            break;
+        case 4:
+            _filter = [[GPUImagePolkaDotFilter alloc] init];
+            break;
+            
+            default:
+            break;
+    }
+    
+    if (type != 0) {
+        [_stillCamera addTarget:_filter];
+        [_filter addTarget:_cameraView];
+    }
+    
     [_stillCamera startCameraCapture];
 }
 
