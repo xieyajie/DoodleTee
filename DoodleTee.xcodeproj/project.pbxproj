@@ -64,6 +64,13 @@
 		3A6E196C175B0D2700806F8A /* icon114.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A6E196B175B0D2700806F8A /* icon114.png */; };
 		3A6E196E175B0D2A00806F8A /* icon57.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A6E196D175B0D2A00806F8A /* icon57.png */; };
 		3A6E1970175B11CA00806F8A /* stroke_2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A6E196F175B11CA00806F8A /* stroke_2@2x.png */; };
+		3A6FD7C017A1495D00EDD52D /* 02.acv in Resources */ = {isa = PBXBuildFile; fileRef = 3A6FD7B917A1495D00EDD52D /* 02.acv */; };
+		3A6FD7C117A1495D00EDD52D /* 06.acv in Resources */ = {isa = PBXBuildFile; fileRef = 3A6FD7BA17A1495D00EDD52D /* 06.acv */; };
+		3A6FD7C217A1495D00EDD52D /* 17.acv in Resources */ = {isa = PBXBuildFile; fileRef = 3A6FD7BB17A1495D00EDD52D /* 17.acv */; };
+		3A6FD7C317A1495D00EDD52D /* aqua.acv in Resources */ = {isa = PBXBuildFile; fileRef = 3A6FD7BC17A1495D00EDD52D /* aqua.acv */; };
+		3A6FD7C417A1495D00EDD52D /* crossprocess.acv in Resources */ = {isa = PBXBuildFile; fileRef = 3A6FD7BD17A1495D00EDD52D /* crossprocess.acv */; };
+		3A6FD7C517A1495D00EDD52D /* purple-green.acv in Resources */ = {isa = PBXBuildFile; fileRef = 3A6FD7BE17A1495D00EDD52D /* purple-green.acv */; };
+		3A6FD7C617A1495D00EDD52D /* yellow-red.acv in Resources */ = {isa = PBXBuildFile; fileRef = 3A6FD7BF17A1495D00EDD52D /* yellow-red.acv */; };
 		3AB10002175486AC00B72E93 /* clothe_default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3AB10001175486AC00B72E93 /* clothe_default@2x.png */; };
 		3AB1000417548AF600B72E93 /* root_add@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3AB1000317548AF600B72E93 /* root_add@2x.png */; };
 		3AB1000E1754941D00B72E93 /* buttonBg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3AB1000D1754941D00B72E93 /* buttonBg@2x.png */; };
@@ -186,6 +193,13 @@
 		3A6E196B175B0D2700806F8A /* icon114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon114.png; path = ../icon114.png; sourceTree = "<group>"; };
 		3A6E196D175B0D2A00806F8A /* icon57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon57.png; path = ../icon57.png; sourceTree = "<group>"; };
 		3A6E196F175B11CA00806F8A /* stroke_2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "stroke_2@2x.png"; sourceTree = "<group>"; };
+		3A6FD7B917A1495D00EDD52D /* 02.acv */ = {isa = PBXFileReference; lastKnownFileType = file; path = 02.acv; sourceTree = "<group>"; };
+		3A6FD7BA17A1495D00EDD52D /* 06.acv */ = {isa = PBXFileReference; lastKnownFileType = file; path = 06.acv; sourceTree = "<group>"; };
+		3A6FD7BB17A1495D00EDD52D /* 17.acv */ = {isa = PBXFileReference; lastKnownFileType = file; path = 17.acv; sourceTree = "<group>"; };
+		3A6FD7BC17A1495D00EDD52D /* aqua.acv */ = {isa = PBXFileReference; lastKnownFileType = file; path = aqua.acv; sourceTree = "<group>"; };
+		3A6FD7BD17A1495D00EDD52D /* crossprocess.acv */ = {isa = PBXFileReference; lastKnownFileType = file; path = crossprocess.acv; sourceTree = "<group>"; };
+		3A6FD7BE17A1495D00EDD52D /* purple-green.acv */ = {isa = PBXFileReference; lastKnownFileType = file; path = "purple-green.acv"; sourceTree = "<group>"; };
+		3A6FD7BF17A1495D00EDD52D /* yellow-red.acv */ = {isa = PBXFileReference; lastKnownFileType = file; path = "yellow-red.acv"; sourceTree = "<group>"; };
 		3AB10001175486AC00B72E93 /* clothe_default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "clothe_default@2x.png"; sourceTree = "<group>"; };
 		3AB1000317548AF600B72E93 /* root_add@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "root_add@2x.png"; sourceTree = "<group>"; };
 		3AB1000D1754941D00B72E93 /* buttonBg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "buttonBg@2x.png"; sourceTree = "<group>"; };
@@ -391,6 +405,20 @@
 			path = text;
 			sourceTree = "<group>";
 		};
+		3A6FD7B817A1495D00EDD52D /* Filters */ = {
+			isa = PBXGroup;
+			children = (
+				3A6FD7B917A1495D00EDD52D /* 02.acv */,
+				3A6FD7BA17A1495D00EDD52D /* 06.acv */,
+				3A6FD7BB17A1495D00EDD52D /* 17.acv */,
+				3A6FD7BC17A1495D00EDD52D /* aqua.acv */,
+				3A6FD7BD17A1495D00EDD52D /* crossprocess.acv */,
+				3A6FD7BE17A1495D00EDD52D /* purple-green.acv */,
+				3A6FD7BF17A1495D00EDD52D /* yellow-red.acv */,
+			);
+			path = Filters;
+			sourceTree = "<group>";
+		};
 		3AB1FFAC17546F4200B72E93 = {
 			isa = PBXGroup;
 			children = (
@@ -574,6 +602,7 @@
 		3AD5A5FB17896A1600CEF762 /* EffectPicker */ = {
 			isa = PBXGroup;
 			children = (
+				3A6FD7B817A1495D00EDD52D /* Filters */,
 				3AD5A5FC17896A1600CEF762 /* ImageUtil */,
 				3AD5A60217896A1600CEF762 /* XDDrawPicker.h */,
 				3AD5A60317896A1600CEF762 /* XDDrawPicker.m */,
@@ -753,6 +782,13 @@
 				3A23A26C17A0A8D40098D969 /* Resource.bundle in Resources */,
 				3A23A27017A0A8D40098D969 /* ShareSDKiPhoneDefaultShareViewUI.bundle in Resources */,
 				3A23A27217A0A8D40098D969 /* ShareSDKiPhoneSimpleShareViewUI.bundle in Resources */,
+				3A6FD7C017A1495D00EDD52D /* 02.acv in Resources */,
+				3A6FD7C117A1495D00EDD52D /* 06.acv in Resources */,
+				3A6FD7C217A1495D00EDD52D /* 17.acv in Resources */,
+				3A6FD7C317A1495D00EDD52D /* aqua.acv in Resources */,
+				3A6FD7C417A1495D00EDD52D /* crossprocess.acv in Resources */,
+				3A6FD7C517A1495D00EDD52D /* purple-green.acv in Resources */,
+				3A6FD7C617A1495D00EDD52D /* yellow-red.acv in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

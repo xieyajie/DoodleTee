@@ -20,7 +20,7 @@ typedef enum{
 
 @property (nonatomic, retain) UITextView *effectView;//正在编辑的文字输入区域
 
-- (id)initWithEffectViewFrame:(CGRect)frame;
+- (id)initWithEffectViewSize:(CGSize)size;
 
 - (void)textWithType:(XDTextType)state;
 

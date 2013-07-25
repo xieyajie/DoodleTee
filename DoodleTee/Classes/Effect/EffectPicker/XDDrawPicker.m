@@ -28,12 +28,12 @@
 @synthesize fromColorValue = _fromColorValue;
 @synthesize toColorValue = _toColorValue;
 
-- (id)initWithEffectViewFrame:(CGRect)frame
+- (id)initWithEffectViewSize:(CGSize)size
 {
     self = [super init];
     if (self) {
         // Custom initialization
-        _effectView = [[XDDrawView alloc] initWithFrame:frame];
+        _effectView = [[XDDrawView alloc] initWithFrame:CGRectMake(0, 0, size.width, size.height)];
         _effectView.backgroundColor = [UIColor clearColor];
         
         _effectView.picker = self;

@@ -22,12 +22,12 @@
 
 @synthesize effectView = _effectView;
 
-- (id)initWithEffectViewFrame:(CGRect)frame
+- (id)initWithEffectViewSize:(CGSize)size
 {
     self = [super init];
     if (self) {
         // Custom initialization
-        _effectView = [[UITextView alloc] initWithFrame:frame];
+        _effectView = [[UITextView alloc] initWithFrame:CGRectMake(0, 0, size.width, size.height)];
         _effectView.backgroundColor = [UIColor clearColor];
         _effectView.font = [UIFont systemFontOfSize:FONT_SIZE];
     }

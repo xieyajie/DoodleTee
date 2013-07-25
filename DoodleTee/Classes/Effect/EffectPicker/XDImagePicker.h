@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
+#import "GPUImage.h"
 
 typedef enum{
     XDProcessTypeNormal = 0,  //原始状态
@@ -28,15 +29,17 @@ typedef enum{
 
 @interface XDImagePicker : NSObject
 
-@property (nonatomic, retain) UIImage *originalImage;//原始图片
+@property (nonatomic, retain, setter = setImage:) UIImage *image;//原始图片
 
-@property (nonatomic, retain) UIImageView *effectView;//正在编辑的图片
+@property (nonatomic, retain) GPUImageView *effectView;//正在编辑的图片
 
-- (id)initWithEffectViewFrame:(CGRect)frame;
+@property (nonatomic, assign) BOOL isStatic;
+
+- (id)initWithEffectViewSize:(CGSize)size;
 
 - (void)effectImageToType:(XDProcessType)type;
 
-- (void)effectCameraToType:(XDProcessType)type;
+- (void)startCamera;
 
 - (void)clear;
 

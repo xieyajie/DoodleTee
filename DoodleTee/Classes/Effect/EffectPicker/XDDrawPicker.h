@@ -33,7 +33,7 @@ typedef enum{
 @property (nonatomic, assign) CGFloat fromColorValue;
 @property (nonatomic, assign) CGFloat toColorValue;
 
-- (id)initWithEffectViewFrame:(CGRect)frame;
+- (id)initWithEffectViewSize:(CGSize)size;
 
 - (void)drawWithType:(XDDrawType)type;
 
