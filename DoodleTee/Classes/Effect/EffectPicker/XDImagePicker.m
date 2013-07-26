@@ -16,8 +16,6 @@
 
 #import "ColorMatrix.h"
 
-#import "XDBWImageFilter.h"
-
 @interface XDImagePicker ()
 {
     GPUImageStillCamera *_stillCamera;
