@@ -28,7 +28,7 @@
     BOOL _needClear;
 }
 
-@property (nonatomic, retain) UIColor *drawColor;
+@property (nonatomic, strong) UIColor *drawColor;
 
 @end
 

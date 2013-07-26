@@ -18,7 +18,7 @@ typedef enum{
 
 @interface XDTextPicker : NSObject
 
-@property (nonatomic, retain) UITextView *effectView;//正在编辑的文字输入区域
+@property (nonatomic, strong) UITextView *effectView;//正在编辑的文字输入区域
 
 - (id)initWithEffectViewSize:(CGSize)size;
 

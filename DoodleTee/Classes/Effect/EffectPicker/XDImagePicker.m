@@ -16,6 +16,9 @@
 
 #import "ColorMatrix.h"
 
+#define kTagEffectViewClose 0
+#define kTagEffectViewOpen 1
+
 @interface XDImagePicker ()
 {
     GPUImageStillCamera *_stillCamera;
@@ -23,6 +26,8 @@
     
     GPUImageFilter *_filter;
     GPUImagePicture *_staticPicture;
+    
+    UIActivityIndicatorView *_activityView;
 }
 
 @end
@@ -45,13 +50,19 @@
         _stillCamera.outputImageOrientation = UIInterfaceOrientationPortrait;
         
         _cropFilter = [[GPUImageCropFilter alloc] initWithCropRegion:CGRectMake(0.0f, 0.0f, 1.0f, 0.75f)];
+        
+//        _activityView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+//        _activityView.frame = CGRectMake(0, 0, 100, 100);
+//        _activityView.backgroundColor = [UIColor redColor];
+//         [_effectView addSubview:_activityView];
+//        [_effectView bringSubviewToFront:_activityView];
     }
     return self;
 }
 
 - (void)setImage:(UIImage *)aImage
 {
-    _image = [aImage retain];
+    _image = aImage;
     _staticPicture = [[GPUImagePicture alloc] initWithImage:aImage smoothlyScaleOutput:NO];
 }
 
@@ -76,11 +87,12 @@
             _filter = [[GPUImageSepiaFilter alloc] init];
             break;
         case 3:
-            _filter = [[GPUImageXYDerivativeFilter alloc] init];
+            _filter = [[GPUImageRGBFilter alloc] init];
+            [(GPUImageRGBFilter *)_filter setGreen:2.0];
             break;
         case 4:
-            _filter = [[GPUImageContrastFilter alloc] init];
-            [(GPUImageContrastFilter *)_filter setContrast:1.75];
+            _filter = [[GPUImageExposureFilter alloc] init];
+            [(GPUImageExposureFilter *)_filter setExposure:1.1];
             break;
             
         default:
@@ -100,14 +112,16 @@
 
 - (void)effectImageToType:(XDProcessType)type
 {
+//    [_activityView startAnimating];
+    if ((_isStatic && _staticPicture == nil) || (!_isStatic && _effectView.tag == kTagEffectViewClose)) {
+        return ;
+    }
+    
     [self removeAllTargets];
     [self setFilter:type];
     
     if (self.isStatic) {
-        if (_staticPicture == nil) {
-            return ;
-        }
-        
+        _effectView.tag = kTagEffectViewOpen;
         [_staticPicture addTarget:_filter];
         [_filter addTarget:_effectView];
         [_staticPicture processImage];
@@ -120,6 +134,8 @@
         [_filter addTarget:_effectView];
         [_filter prepareForImageCapture];
     }
+    
+//    [_activityView stopAnimating];
 }
 
 - (void)cameraTakePhoto
@@ -139,20 +155,33 @@
 
 - (void)startCamera
 {
-    [_stillCamera rotateCamera];
+    [_stillCamera startCameraCapture];
+    _effectView.tag = kTagEffectViewOpen;
 }
 
 - (void)stopCamera
 {
     [_stillCamera stopCameraCapture];
     [self removeAllTargets];
-//    _staticPicture = nil;
 }
 
 - (void)clear
 {
-    self.image = nil;
+    if (_isStatic) {
+        [self stopCamera];
+    }
+    UIView *superView = _effectView.superview;
+    CGSize size = _effectView.frame.size;
+    
+    [self removeAllTargets];
+    [_effectView removeFromSuperview];
     _staticPicture = nil;
+    _image = nil;
+
+    _effectView = [[GPUImageView alloc] initWithFrame:CGRectMake(0, 0, size.width, size.height)];
+    _effectView.tag = kTagEffectViewClose;
+    _effectView.fillMode = kGPUImageFillModePreserveAspectRatioAndFill;
+    [superView addSubview:_effectView];
 }
 
 @end

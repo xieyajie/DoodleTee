@@ -30,13 +30,6 @@
 
 @implementation XDAppDelegate
 
-- (void)dealloc
-{
-    [_window release];
-    [_navigationController release];
-    [super dealloc];
-}
-
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     //初始化SDK使用的appKey
@@ -45,12 +38,11 @@
     [self initializePlat];
     
     //
-    self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     XDRootViewController *rootViewController = [[XDRootViewController alloc] init];
-    self.navigationController = [[[UINavigationController alloc] initWithRootViewController:rootViewController] autorelease];
+    self.navigationController = [[UINavigationController alloc] initWithRootViewController:rootViewController];
     self.navigationController.navigationBarHidden = YES;
-    [rootViewController release];
     self.window.rootViewController = self.navigationController;
     [self.window makeKeyAndVisible];
     return YES;

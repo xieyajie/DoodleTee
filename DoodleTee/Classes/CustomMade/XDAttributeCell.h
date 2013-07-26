@@ -14,8 +14,8 @@
     UILabel *_valueLabel;
 }
 
-@property (nonatomic, retain, setter = setAttributeTitle:) NSString *title;
+@property (nonatomic, strong, setter = setAttributeTitle:) NSString *title;
 
-@property (nonatomic, retain, setter = setValue:) NSString *value;
+@property (nonatomic, strong, setter = setValue:) NSString *value;
 
 @end

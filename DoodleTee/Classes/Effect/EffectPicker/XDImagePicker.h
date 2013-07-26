@@ -29,9 +29,9 @@ typedef enum{
 
 @interface XDImagePicker : NSObject
 
-@property (nonatomic, retain, setter = setImage:) UIImage *image;//原始图片
+@property (nonatomic, strong, setter = setImage:) UIImage *image;//原始图片
 
-@property (nonatomic, retain) GPUImageView *effectView;//正在编辑的图片
+@property (nonatomic, strong) GPUImageView *effectView;//正在编辑的图片
 
 @property (nonatomic, assign) BOOL isStatic;
 

@@ -24,7 +24,7 @@
     UIImage *_clothImage;
 }
 
-@property (nonatomic, retain) UIImage *clothImage;
+@property (nonatomic, strong) UIImage *clothImage;
 
 @end
 
@@ -37,7 +37,7 @@
     self = [super init];
     if (self) {
         // Custom initialization
-        _clothImage = [image retain];
+        _clothImage = image;
     }
     return self;
 }
@@ -49,7 +49,6 @@
     UIImageView *bgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
     bgView.image = [UIImage imageNamed:@"root_bg.png"];
     [self.view addSubview:bgView];
-    [bgView release];
     
     
     UIImageView *clotheView = [[UIImageView alloc] init];
@@ -58,7 +57,6 @@
     clotheView.image = [[XDShareMethods defaultShare] composeImage:_clothImage toImage:image finishToView:clotheView];
     self.clothImage = clotheView.image;
     [self.view addSubview:clotheView];
-    [clotheView release];
     
     [self initTopView];
     [self initBottomView];
@@ -117,7 +115,6 @@
     title.textAlignment = NSTextAlignmentCenter;
     title.text = @"这是您设计的T恤衫";
     [_topSegmentControl addSubview:title];
-    [title release];
     
     [self.view addSubview:_topSegmentControl];
 }
@@ -133,7 +130,6 @@
     UIImageView *bottomImgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"bottomBarBg.png"]];
     bottomImgView.frame = CGRectMake(0, 0, _bottomView.frame.size.width, _bottomView.frame.size.height);
     [_bottomView addSubview:bottomImgView];
-    [bottomImgView release];
     
     AKSegmentedControl *segmentedControl = [[AKSegmentedControl alloc] initWithFrame:CGRectMake(14, 12, _bottomView.frame.size.width - 14 * 2, 35)];
     [segmentedControl setSegmentedControlMode: AKSegmentedControlModeButton];
@@ -169,8 +165,6 @@
     [buttonDone setImage:buttonDoneNormal forState:UIControlStateNormal];
     
     [segmentedControl setButtonsArray:@[buttonUndo, buttonDone]];
-    [buttonUndo release];
-    [buttonDone release];
     
     [self.view addSubview:_bottomView];
 }

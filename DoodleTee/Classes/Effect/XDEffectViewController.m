@@ -56,13 +56,13 @@ typedef enum{
     UITapGestureRecognizer *_tapGesture;
 }
 
-@property (nonatomic, retain) UIImagePickerController *imagePickerController;
+@property (nonatomic, strong) UIImagePickerController *imagePickerController;
 
-@property (nonatomic, retain) XDImagePicker *imagePicker;
-@property (nonatomic, retain) XDDrawPicker *drawPicker;
-@property (nonatomic, retain) XDTextPicker *textPicker;
+@property (nonatomic, strong) XDImagePicker *imagePicker;
+@property (nonatomic, strong) XDDrawPicker *drawPicker;
+@property (nonatomic, strong) XDTextPicker *textPicker;
 
-@property (nonatomic, retain) UIView *selectedTypeBgView;
+@property (nonatomic, strong) UIView *selectedTypeBgView;
 
 @end
 
@@ -236,18 +236,11 @@ typedef enum{
 - (void)segmentedViewController:(AKSegmentedControl *)segmentedControl touchedAtIndex:(NSUInteger)index
 {
     if (segmentedControl.tag == kTagTopSegmentedControl) {
-//        if (_prevSegmentedSelectedIndex != index) {
-//            id cacheObject = [_effectView cacheWithCurrentContext];
-//            if (_prevSegmentedSelectedIndex == -1) {
-//                _prevSegmentedSelectedIndex = 0;
-//            }
-//            [_cacheClothImages setObject:cacheObject forKey:[NSString stringWithFormat:@"%d", _prevSegmentedSelectedIndex]];
-//            _prevSegmentedSelectedIndex = index;
-//        }
-        
         switch (index) {
             case 0:
-                [self hideActionBottomSegmentedControl];
+                if (_imageTypeSelectedIndex == -1) {
+                    [self hideActionBottomSegmentedControl];
+                }
                 [self imageAction];
                 break;
             case 1:
@@ -381,9 +374,6 @@ typedef enum{
     [buttonTitle setImage:buttonTitleImageNormal forState:UIControlStateSelected];
     
     [_topSegmentedControl setButtonsArray:@[buttonProcess, buttonDraw, buttonTitle]];
-    [buttonProcess release];
-    [buttonDraw release];
-    [buttonTitle release];
 }
 
 - (void)layoutBottomView
@@ -397,7 +387,6 @@ typedef enum{
     UIImageView *bottomImgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"bottomBarBg.png"]];
     bottomImgView.frame = CGRectMake(0, 0, _bottomView.frame.size.width, _bottomView.frame.size.height);
     [_bottomView addSubview:bottomImgView];
-    [bottomImgView release];
     
     [self initBottomSegmentedControl];
 }
@@ -457,9 +446,6 @@ typedef enum{
     [buttonCamera setImage:buttonCameraImageNormal forState:UIControlStateNormal];
     
     [_normalSegmentedControl setButtonsArray:@[buttonback, buttonImage, buttonCamera]];
-    [buttonback release];
-    [buttonImage release];
-    [buttonCamera release];
 }
 
 - (void)initActionBottomSegmentedControl
@@ -500,8 +486,6 @@ typedef enum{
     [buttonDone setImage:buttonDoneNormal forState:UIControlStateNormal];
     
     [_actionSegmentedControl setButtonsArray:@[buttonUndo, buttonDone]];
-    [buttonUndo release];
-    [buttonDone release];
 }
 
 - (void)layoutClothBackground
@@ -517,7 +501,6 @@ typedef enum{
     cloth.contentMode = UIViewContentModeScaleAspectFill;
     cloth.image = [UIImage imageNamed:@"clothe_default.png"];
     [_clothBgView addSubview:cloth];
-    [cloth release];
 }
 
 - (void)layoutEffectTypeShowView
@@ -530,7 +513,6 @@ typedef enum{
     //添加单击手势
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapEffectTypeShowView:)];
     [_effectTypeShowView addGestureRecognizer:tap];
-    [tap release];
 }
 
 - (void)layoutEffectView
@@ -578,9 +560,6 @@ typedef enum{
         imgView.frame = CGRectMake(i * width, 0, width, kEffectTypeShowViewHeight);
         imgView.contentMode = UIViewContentModeScaleAspectFit;
         [_effectTypeShowView addSubview:imgView];
-        
-        [imgView release];
-        [imgName release];
     }
     
     if (_imageTypeSelectedIndex > -1) {
@@ -606,9 +585,6 @@ typedef enum{
         imgView.frame = CGRectMake(i * width, 0, width, kEffectTypeShowViewHeight);
         imgView.contentMode = UIViewContentModeScaleAspectFit;
         [_effectTypeShowView addSubview:imgView];
-        
-        [imgView release];
-        [imgName release];
     }
     
     if (_drawTypeSelectedIndex > -1) {
@@ -635,9 +611,6 @@ typedef enum{
         imgView.frame = CGRectMake(i * width, 0, width, kEffectTypeShowViewHeight);
         imgView.contentMode = UIViewContentModeScaleAspectFit;
         [_effectTypeShowView addSubview:imgView];
-        
-        [imgView release];
-        [imgName release];
     }
     
     if (_textTypeSelectedIndex > -1) {
@@ -680,7 +653,6 @@ typedef enum{
     {
         UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"该设备没有照相机" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
         [alert show];
-        [alert release];
     }
 }
 
@@ -691,8 +663,8 @@ typedef enum{
 {
     switch (_currentEffectType) {
         case XDEffectTypeImage:
+            _imageTypeSelectedIndex = -1;
             [self.imagePicker clear];
-            [self.imagePickerController.view removeFromSuperview];
             [self hideActionBottomSegmentedControl];
             break;
         case XDEffectTypeDraw:
@@ -712,7 +684,6 @@ typedef enum{
 {
     XDFinishShowViewController *finishViewController = [[XDFinishShowViewController alloc] initWithClothImage:[self imageWithEffectView]];
     [self.navigationController pushViewController:finishViewController animated:YES];
-    [finishViewController release];
 }
 
 #pragma mark - change bottom segmentedControl

@@ -29,13 +29,13 @@
     id<ISSShareOptions> _shareOptions; //分享选项，用于定义分享视图部分属性（如：标题、一键分享列表、功能按钮等）,默认可传入nil
 }
 
-@property (nonatomic, retain) NSArray *dataSource;
+@property (nonatomic, strong) NSArray *dataSource;
 
-@property (nonatomic, retain) UIImage *shareImage;
+@property (nonatomic, strong) UIImage *shareImage;
 
-@property (nonatomic, retain) id<ISSContent> publishContent;
+@property (nonatomic, strong) id<ISSContent> publishContent;
 
-@property (nonatomic, retain) id<ISSShareOptions> shareOptions;
+@property (nonatomic, strong) id<ISSShareOptions> shareOptions;
 
 @end
 
@@ -116,8 +116,8 @@
     
     if (nil == cell)
     {
-        cell = [[[UITableViewCell alloc] initWithStyle: UITableViewCellStyleDefault
-                                       reuseIdentifier: CellIdentifier] autorelease];
+        cell = [[UITableViewCell alloc] initWithStyle: UITableViewCellStyleDefault
+                                       reuseIdentifier: CellIdentifier];
     }
     
     NSDictionary *infoDic = [_dataSource objectAtIndex:indexPath.row];

@@ -10,11 +10,11 @@
 
 @interface XDCustomMadeViewController : UIViewController
 
-@property (nonatomic, retain) UILabel *titleLabel;
+@property (nonatomic, strong) UILabel *titleLabel;
 
-@property (nonatomic, retain) UITableView *tableView;
+@property (nonatomic, strong) UITableView *tableView;
 
-@property (nonatomic, retain) UIView *bottomView;
+@property (nonatomic, strong) UIView *bottomView;
 
 - (id)initWithClothImage:(UIImage *)image;
 

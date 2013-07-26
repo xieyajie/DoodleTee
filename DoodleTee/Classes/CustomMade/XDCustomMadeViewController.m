@@ -34,7 +34,7 @@
     UIButton *_subButton;
 }
 
-@property (nonatomic, retain) NSDictionary *attributeDic;
+@property (nonatomic, strong) NSDictionary *attributeDic;
 
 @end
 
@@ -66,7 +66,7 @@
         
         _titleArray = [[NSArray alloc] initWithObjects:kSETTINGBRAND, kSETTINGMATERIAL, kSETTINGSIZE, kSETTINGCOLOR, nil];
         
-        _clothImage = [image retain];
+        _clothImage = image;
     }
     return self;
 }
@@ -80,7 +80,6 @@
     UIImageView *bgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
     bgView.image = [UIImage imageNamed:@"root_bg.png"];
     [self.view addSubview:bgView];
-    [bgView release];
     
     _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(kViewX, kTitleY, kViewWidth, kTitleHeight)];
     _titleLabel.textAlignment = KTextAlignmentCenter;
@@ -93,7 +92,6 @@
     bg.contentMode = UIViewContentModeScaleAspectFit;
     bg.image = [UIImage imageNamed:@"bottomBarBg.png"];
     [_bottomView addSubview:bg];
-    [bg release];
     [self layoutBottomView];
     [self.view addSubview:_bottomView];
     
@@ -173,7 +171,7 @@
         
         if (nil == cell)
         {
-            cell = [[[XDAttributeCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
+            cell = [[XDAttributeCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
         }
         NSString *str = [_titleArray objectAtIndex:(indexPath.row - 1)];
         cell.title = [NSString stringWithFormat:@"%@：", str];
@@ -207,7 +205,6 @@
     NSString *plistPath = [NSHomeDirectory() stringByAppendingPathComponent: KSETTINGPLIST];
     NSDictionary *settingDic = [[NSDictionary alloc] initWithContentsOfFile: plistPath];
     self.attributeDic = settingDic;
-    [settingDic release];
 }
 
 - (UITableViewCell *)configurationImageCell
@@ -217,14 +214,13 @@
     
     if (nil == cell)
     {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ImageCellIdentifier] autorelease];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ImageCellIdentifier];
         
         UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 30, self.tableView.frame.size.width, 200)];
         imageView.contentMode = UIViewContentModeScaleAspectFit;
         imageView.backgroundColor = [UIColor clearColor];
         imageView.image = _clothImage;
         [cell.contentView addSubview:imageView];
-        [imageView release];
     }
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -260,9 +256,6 @@
         [addButton setImage:[UIImage imageNamed:@"uncheck.png"] forState:UIControlStateNormal];
         [addButton addTarget:self action:@selector(addCount:) forControlEvents:UIControlEventTouchUpInside];
         [cell.contentView addSubview:addButton];
-        
-        [attributeLabel release];
-        [addButton release];
     }
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -349,8 +342,6 @@
     [buttonDone setBackgroundImage:buttonBackgroundImagePressedRight forState:UIControlStateHighlighted];
     
     [segmentedControl setButtonsArray:@[buttonBack, buttonDone]];
-    [buttonBack release];
-    [buttonDone release];
 }
 
 - (void)backAction
@@ -363,7 +354,6 @@
     XDPayMoneyViewController *payViewController = [[XDPayMoneyViewController alloc] initWithNibName:@"XDPayMoneyViewController" bundle:nil];
     payViewController.payMoney = _moneyLabel.text;
     [self.navigationController pushViewController:payViewController animated:YES];
-    [payViewController release];
 }
 
 @end

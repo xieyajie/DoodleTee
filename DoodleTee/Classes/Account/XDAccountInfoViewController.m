@@ -44,7 +44,6 @@
     UIImageView *bgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
     bgView.image = [UIImage imageNamed:@"root_bg.png"];
     [self.view addSubview:bgView];
-    [bgView release];
     
     _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(kViewX, kTitleY, kViewWidth, kTitleHeight)];
     _titleLabel.textAlignment = KTextAlignmentCenter;
@@ -57,7 +56,6 @@
     bg.contentMode = UIViewContentModeScaleAspectFit;
     bg.image = [UIImage imageNamed:@"bottomBarBg.png"];
     [_bottomView addSubview:bg];
-    [bg release];
     [self layoutBottomView];
     [self.view addSubview:_bottomView];
     
@@ -115,7 +113,7 @@
         XDAccountInfoCell *cell = (XDAccountInfoCell *)[tableView dequeueReusableCellWithIdentifier:BasicCellIdentifier];
         
         if (nil == cell) {
-            cell = [[[XDAccountInfoCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:BasicCellIdentifier] autorelease];
+            cell = [[XDAccountInfoCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:BasicCellIdentifier];
             [cell cellForBasicInfo];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
         }
@@ -299,13 +297,11 @@
     UILabel *colorLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, _tableView.frame.size.width - 20, 30)];
     colorLabel.backgroundColor = [UIColor colorWithRed:194 / 255.0 green:194 / 255.0 blue:194 / 255.0 alpha:1.0];
     [headerView addSubview:colorLabel];
-    [colorLabel release];
     
     UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 5, 200, 20)];
     titleLabel.text = title;
     titleLabel.backgroundColor = [UIColor clearColor];
     [headerView addSubview:titleLabel];
-    [titleLabel release];
     
     UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(_tableView.frame.size.width - 10 - 25, 5, 20, 20)];
     button.tag = section;
@@ -313,12 +309,8 @@
     [button setImage:[UIImage imageNamed:@"check.png"] forState:UIControlStateSelected];
     [button addTarget:self action:@selector(moreOrLessAction:) forControlEvents:UIControlEventTouchUpInside];
     [headerView addSubview:button];
-    [button release];
     
     [_headerViews addObject:headerView];
-    NSLog(@"_headerViews--------%i", _headerViews.retainCount);
-    [headerView release];
-    NSLog(@"headerView =========%i", headerView.retainCount);
 }
 
 - (void)showSection:(NSInteger)section isMore:(BOOL)isMore

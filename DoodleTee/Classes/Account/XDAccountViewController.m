@@ -56,9 +56,7 @@
 {
     if ([_userNameField.text isEqualToString:@""] || [_pasdField.text isEqualToString:@""]) {
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"警告" message:@"用户名或密码不能为空" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
-        [alertView show];
-        [alertView release];
-        
+        [alertView show];        
         return NO;
     }
     

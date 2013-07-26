@@ -58,7 +58,6 @@
     UIImageView *bgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
     bgView.image = [UIImage imageNamed:@"root_bg.png"];
     [self.view addSubview:bgView];
-    [bgView release];
     
     _topView = [[AKSegmentedControl alloc] initWithFrame:CGRectMake(20, 10, self.view.frame.size.width - 40, 42.5)];
     _topView.tag = kTagTopView;
@@ -71,7 +70,6 @@
     UIImageView *bottomImgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"bottomBarBg.png"]];
     bottomImgView.frame = CGRectMake(0, 0, _bottomView.frame.size.width, _bottomView.frame.size.height);
     [_bottomView addSubview:bottomImgView];
-    [bottomImgView release];
     [self initBottomSegmentedView];
     [self.view addSubview:_bottomView];
 
@@ -165,7 +163,6 @@
 {
     XDAccountInfoViewController *infoViewController = [[XDAccountInfoViewController alloc] init];
     [self.navigationController presentViewController:infoViewController animated:YES completion:nil];
-    [infoViewController release];
 }
 
 #pragma mark - 页面排版
@@ -220,8 +217,6 @@
     [buttonAccount setImage:buttonSocialImageNormal forState:UIControlStateNormal];
     
     [_topView setButtonsArray:@[buttonSettings, buttonAccount]];
-    [buttonSettings release];
-    [buttonAccount release];
 }
 
 - (void)initBottomSegmentedView
@@ -279,9 +274,7 @@
     UIImage *buttonEffectImageNormal = [UIImage imageNamed:@"root_effect_icon.png"];
     [_buttonEffect setImage:buttonEffectImageNormal forState:UIControlStateNormal];
     
-    
     [segmentedControl setButtonsArray:@[buttonSettings, _buttonShare, _buttonEffect]];
-    [buttonSettings release];
 }
 
 #pragma mark - button action
@@ -290,22 +283,18 @@
 {
     XDSettingViewController *settingViewController = [[XDSettingViewController alloc] init];
     [self.navigationController presentViewController:settingViewController animated:YES completion:nil];
-    [settingViewController release];
 }
 
 - (void)accountAction
 {
     XDAccountViewController *accountViewController = [[XDAccountViewController alloc] init];
     [self.navigationController presentViewController:accountViewController animated:YES completion:nil];
-    [accountViewController release];
 }
 
 - (void)addEffect
 {
     XDEffectViewController *effectViewController = [[XDEffectViewController alloc] init];
-    [self.navigationController pushViewController:effectViewController animated:YES];
-    [effectViewController release];
-}
+    [self.navigationController pushViewController:effectViewController animated:YES];}
 
 - (void)piazzaAction
 {
@@ -324,7 +313,6 @@
 {
     XDShareViewController *shareViewController = [[XDShareViewController alloc] initWithNibName:@"XDShareViewController" bundle:nil shareImage:nil];
     [self.navigationController presentViewController:shareViewController animated:YES completion:^(){}];
-    [shareViewController release];
      NSLog(@"share");
 }
 
@@ -336,13 +324,11 @@
     {
         XDCustomMadeViewController *customViewController = [[XDCustomMadeViewController alloc] initWithClothImage:_clotheView.image];
         [self.navigationController pushViewController:customViewController animated:YES];
-        [customViewController release];
         NSLog(@"effect");
     }
     else{
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"请先选择底衫" message:@"" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
         [alert show];
-        [alert release];
     }
 }
 

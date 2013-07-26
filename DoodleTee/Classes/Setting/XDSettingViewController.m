@@ -36,24 +36,24 @@
     if (self) {
         // Custom initializationi]
         
-        _selectionArray = [[NSMutableArray arrayWithObjects:
+        _selectionArray = [NSMutableArray arrayWithObjects:
                           [NSIndexPath indexPathForRow:0 inSection:0],
                           [NSIndexPath indexPathForRow:0 inSection:1],
                           [NSIndexPath indexPathForRow:0 inSection:2],
                           [NSIndexPath indexPathForRow:0 inSection:0],
-                          nil] retain];
+                          nil];
         
-        _chimaArray = [[NSArray arrayWithObjects:
-                        @"XS", @"S", @"M", @"L", @"XL", @"XXL", nil] retain];
+        _chimaArray = [NSArray arrayWithObjects:
+                        @"XS", @"S", @"M", @"L", @"XL", @"XXL", nil];
         
-        _pinpaiArray = [[NSArray arrayWithObjects:
-                         @"C.K.", @"Jack Jones", @"Armani", @"凡客诚品", nil] retain];
+        _pinpaiArray = [NSArray arrayWithObjects:
+                         @"C.K.", @"Jack Jones", @"Armani", @"凡客诚品", nil];
         
-        _caizhiArray = [[NSArray arrayWithObjects:
-                         @"纯棉", @"亚麻", nil] retain];
+        _caizhiArray = [NSArray arrayWithObjects:
+                         @"纯棉", @"亚麻", nil];
         
-        _yanseArray = [[NSArray arrayWithObjects:
-                        @"白色", @"黑色", @"灰色", @"绿色", @"红色", @"蓝色", nil] retain];
+        _yanseArray = [NSArray arrayWithObjects:
+                        @"白色", @"黑色", @"灰色", @"绿色", @"红色", @"蓝色", nil];
     }
     return self;
 }
@@ -87,7 +87,6 @@
     UILabel *line = [[UILabel alloc] initWithFrame:CGRectMake(_mainView.frame.size.width / 2 - 1, 0, 1, height)];
     line.backgroundColor = [UIColor grayColor];
     [_mainView addSubview:line];
-    [line release];
 
     for (int i = 0; i < _selectionArray.count; i++)
     {
@@ -122,7 +121,6 @@
     label.backgroundColor = [UIColor clearColor];
     label.textColor = [UIColor blackColor];
     [headerView addSubview: label];
-    [label release];
     
     switch (tableView.tag)
     {
@@ -159,7 +157,7 @@
             break;
     }
     
-    return [headerView autorelease];
+    return headerView;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -249,14 +247,13 @@
     
     if (nil == cell)
     {
-        cell = [[[UITableViewCell alloc] initWithStyle: UITableViewCellStyleDefault
-                                               reuseIdentifier: cellIdentifier] autorelease];
+        cell = [[UITableViewCell alloc] initWithStyle: UITableViewCellStyleDefault
+                                               reuseIdentifier: cellIdentifier];
 //        cell.contentView.backgroundColor = [[UIColor grayColor] colorWithAlphaComponent: 0.1f];
         cell.textLabel.backgroundColor = [UIColor clearColor];
         UIView *selectedBackgroundView = [[UIView alloc] init];
         selectedBackgroundView.backgroundColor = [UIColor colorWithPatternImage: [UIImage imageNamed: @"setting_cellSelectBackground"]];
         cell.selectedBackgroundView = selectedBackgroundView;
-        [selectedBackgroundView release];
         
         if (PCellIdentifier == cellIdentifier)
         {

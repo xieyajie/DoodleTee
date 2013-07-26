@@ -90,10 +90,6 @@
     [self.contentView addSubview:_achieveLabel];
     self.balanceLabel.frame = CGRectMake(name.frame.origin.x + name.frame.size.width, balance.frame.origin.y, 120, 20);
     [self.contentView addSubview:_balanceLabel];
-    
-    [name release];
-    [achieve release];
-    [balance release];
 }
 
 - (void)cellForLineChart

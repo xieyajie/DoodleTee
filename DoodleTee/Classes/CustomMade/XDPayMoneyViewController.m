@@ -16,7 +16,7 @@
 
 @interface XDPayMoneyViewController ()<UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate, AKSegmentedControlDelegate>
 
-@property (nonatomic, retain) UIView *payMoneyView;
+@property (nonatomic, strong) UIView *payMoneyView;
 
 @end
 
@@ -50,7 +50,6 @@
     bg.contentMode = UIViewContentModeScaleAspectFit;
     bg.image = [UIImage imageNamed:@"bottomBarBg.png"];
     [_bottomView addSubview:bg];
-    [bg release];
     [self configurationBottomView];
     [self.view addSubview:_bottomView];
     
@@ -84,7 +83,6 @@
     
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyboard:)];
     [self.view addGestureRecognizer:tap];
-    [tap release];
 }
 
 - (void)didReceiveMemoryWarning
@@ -169,8 +167,6 @@
     [buttonDone setBackgroundImage:buttonBackgroundImagePressedRight forState:UIControlStateHighlighted];
     
     [segmentedControl setButtonsArray:@[buttonBack, buttonDone]];
-    [buttonBack release];
-    [buttonDone release];
 }
 
 

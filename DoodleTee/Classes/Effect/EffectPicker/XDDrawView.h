@@ -11,9 +11,9 @@
 @class XDDrawPicker;
 @interface XDDrawView : UIView<UITextViewDelegate>
 
-@property (nonatomic, retain) XDDrawPicker *picker;
+@property (nonatomic, strong) XDDrawPicker *picker;
 
-@property (nonatomic, retain) UIImage *image;
+@property (nonatomic, strong) UIImage *image;
 
 - (void)clear;
 

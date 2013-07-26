@@ -21,12 +21,12 @@ typedef enum{
 @class XDDrawView;
 @interface XDDrawPicker : NSObject
 
-@property (nonatomic, retain) XDDrawView *effectView;//正在编辑的区域
+@property (nonatomic, strong) XDDrawView *effectView;//正在编辑的区域
 
 @property (nonatomic, assign) BOOL useRandomColorNoRange;//画笔颜色没有范围，在0-255之间自动生成
 @property (nonatomic, assign) BOOL useRandomColorRange;//画笔颜色有自动生成的范围
 
-@property (nonatomic, retain) UIColor *brushColor;
+@property (nonatomic, strong) UIColor *brushColor;
 @property (nonatomic, assign) CGFloat brushSize;
 @property (nonatomic, assign) XDDrawType brushType;
 

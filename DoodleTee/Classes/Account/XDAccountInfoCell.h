@@ -16,9 +16,9 @@
     UILabel *_balanceLabel;
 }
 
-@property (nonatomic, retain) UILabel *nameLabel;
-@property (nonatomic, retain) UILabel *achieveLabel;
-@property (nonatomic, retain) UILabel *balanceLabel;
+@property (nonatomic, strong) UILabel *nameLabel;
+@property (nonatomic, strong) UILabel *achieveLabel;
+@property (nonatomic, strong) UILabel *balanceLabel;
 
 - (void)cellForBasicInfo;
 

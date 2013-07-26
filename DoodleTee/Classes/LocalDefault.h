@@ -32,11 +32,11 @@
 
 //start 编辑区域边框
 #define kEffectWidthScale 254/616
-#define kEffectHeightScale 346/637
+#define kEffectHeightScale 336/637
 
 #define kEffectLeftMarginScale 184/616
 #define kEffectRightMarginScale 178/616
-#define kEffectTopMarginScale 160/637
+#define kEffectTopMarginScale 170/637
 #define kEffectBottomMarginScale 131/637
 //end
 
