@@ -14,9 +14,28 @@
 
 #import "LocalDefault.h"
 
+#import "AlixPayOrder.h"
+#import "AlixPayResult.h"
+#import "AlixPay.h"
+#import "DataSigner.h"
+
+@implementation Product
+@synthesize price = _price;
+@synthesize subject = _subject;
+@synthesize body = _body;
+@synthesize orderId = _orderId;
+
+@end
+
+
 @interface XDPayMoneyViewController ()<UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate, AKSegmentedControlDelegate>
+{
+    Product *_product;
+}
 
 @property (nonatomic, strong) UIView *payMoneyView;
+
+@property (nonatomic, strong) Product *product;
 
 @end
 
@@ -25,6 +44,8 @@
 @synthesize payMoneyView = _payMoneyView;
 
 @synthesize payMoney = _payMoney;
+
+@synthesize product = _product;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -216,8 +237,210 @@
 
 - (void)doneAction
 {
-    
+    if ([self checkOrderInfo]) {
+        /*
+         *商户的唯一的parnter和seller。
+         *本demo将parnter和seller信息存于（AlixPayDemo-Info.plist）中,外部商户可以考虑存于服务端或本地其他地方。
+         *签约后，支付宝会为每个商户分配一个唯一的 parnter 和 seller。
+         */
+        //如果partner和seller数据存于其他位置,请改写下面两行代码
+        NSString *partner = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"Partner"];
+        NSString *seller = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"Seller"];
+        
+        //partner和seller获取失败,提示
+        if ([partner length] == 0 || [seller length] == 0)
+        {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示"
+                                                            message:@"缺少partner或者seller。"
+                                                           delegate:self
+                                                  cancelButtonTitle:@"确定"
+                                                  otherButtonTitles:nil];
+            [alert show];
+            return;
+        }
+        
+        /*
+         *生成订单信息及签名
+         *由于demo的局限性，本demo中的公私钥存放在AlixPayDemo-Info.plist中,外部商户可以存放在服务端或本地其他地方。
+         */
+        //将商品信息赋予AlixPayOrder的成员变量
+        AlixPayOrder *order = [[AlixPayOrder alloc] init];
+        order.partner = partner;
+        order.seller = seller;
+        order.tradeNO = [self generateTradeNO]; //订单ID（由商家自行制定）
+        order.productName = self.product.subject; //商品标题
+        order.productDescription = self.product.body; //商品描述
+        order.amount = [NSString stringWithFormat:@"%.2f",self.product.price]; //商品价格
+        order.notifyURL =  @"http://www.xxx.com"; //回调URL
+        
+        //    order.extraParams = @{@"paizi", @"123"; @"cailiao", @"123"; @"size", @"123"; @"color", @"123"; @"count", @"123"};
+        
+        //应用注册scheme,在AlixPayDemo-Info.plist定义URL types,用于安全支付成功后重新唤起商户应用
+        NSString *appScheme = @"DoodleTee";
+        
+        //将商品信息拼接成字符串
+        NSString *orderSpec = [order description];
+        NSLog(@"orderSpec = %@",orderSpec);
+        
+        //获取私钥并将商户信息签名,外部商户可以根据情况存放私钥和签名,只需要遵循RSA签名规范,并将签名字符串base64编码和UrlEncode
+        id<DataSigner> signer = CreateRSADataSigner([[NSBundle mainBundle] objectForInfoDictionaryKey:@"RSA private key"]);
+        NSString *signedString = [signer signString:orderSpec];
+        
+        //将签名成功字符串格式化为订单字符串,请严格按照该格式
+        NSString *orderString = nil;
+        if (signedString != nil) {
+            orderString = [NSString stringWithFormat:@"%@&sign=\"%@\"&sign_type=\"%@\"",
+                           orderSpec, signedString, @"RSA"];
+            
+            //获取安全支付单例并调用安全支付接口
+            AlixPay * alixpay = [AlixPay shared];
+            int ret = [alixpay pay:orderString applicationScheme:appScheme];
+            
+            if (ret == kSPErrorAlipayClientNotInstalled) {
+                UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:@"提示"
+                                                                     message:@"您还没有安装支付宝快捷支付，请先安装。"
+                                                                    delegate:self
+                                                           cancelButtonTitle:@"确定"
+                                                           otherButtonTitles:nil];
+                [alertView setTag:123];
+                [alertView show];
+            }
+            else if (ret == kSPErrorSignError) {
+                NSLog(@"签名错误！");
+            }
+            
+        }
+    }
 }
+
+#pragma mark - private
+
+- (Product *)product
+{
+    if (_product) {
+        _product = [[Product alloc] init];
+    }
+    
+    return _product;
+}
+
+/*
+ *随机生成15位订单号,外部商户根据自己情况生成订单号
+ */
+- (NSString *)generateTradeNO
+{
+	const int N = 15;
+	
+	NSString *sourceString = @"0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+	__autoreleasing NSMutableString *result = [[NSMutableString alloc] init];
+	srand(time(0));
+	for (int i = 0; i < N; i++)
+	{
+		unsigned index = rand() % [sourceString length];
+		NSString *s = [sourceString substringWithRange:NSMakeRange(index, 1)];
+		[result appendString:s];
+	}
+	return result;
+}
+
+//检查订单信息完整性
+- (BOOL)checkOrderInfo
+{
+    UIAlertView *error = [[UIAlertView alloc] init];
+    error.title = @"信息错误";
+    [error addButtonWithTitle:@"确定"];
+    
+    NSCharacterSet *charSet = [NSCharacterSet whitespaceAndNewlineCharacterSet];
+    
+    if ([_payerField.text stringByTrimmingCharactersInSet:charSet].length < 1) {
+        error.message = @"请填写付款人";
+        [error show];
+        
+        return NO;
+    }
+    else if ([_consigneeField.text stringByTrimmingCharactersInSet:charSet].length < 1)
+    {
+        error.message = @"请填写收货人";
+        [error show];
+        
+        return NO;
+    }
+    else if ([_addressField.text stringByTrimmingCharactersInSet:charSet].length < 1)
+    {
+        error.message = @"请填写收货地址";
+        [error show];
+        
+        return NO;
+    }
+    else if ([_telField.text stringByTrimmingCharactersInSet:charSet].length < 1)
+    {
+        error.message = @"请填写电话号码";
+        [error show];
+        
+        return NO;
+    }
+    else if ([self isMobileNumber:[_telField.text stringByTrimmingCharactersInSet:charSet]])
+    {
+        error.message = @"请填写正确的电话号码";
+        [error show];
+        
+        return NO;
+    }
+    
+    return YES;
+}
+
+//电话号码匹配
+- (BOOL)isMobileNumber:(NSString *)mobileNum
+{
+    /**
+     * 手机号码
+     * 移动：134[0-8],135,136,137,138,139,150,151,157,158,159,182,187,188
+     * 联通：130,131,132,152,155,156,185,186
+     * 电信：133,1349,153,180,189
+     */
+    NSString * MOBILE = @"^1(3[0-9]|5[0-35-9]|8[025-9])\\d{8}$";
+    /**
+     10         * 中国移动：China Mobile
+     11         * 134[0-8],135,136,137,138,139,150,151,157,158,159,182,187,188
+     12         */
+    NSString * CM = @"^1(34[0-8]|(3[5-9]|5[017-9]|8[278])\\d)\\d{7}$";
+    /**
+     15         * 中国联通：China Unicom
+     16         * 130,131,132,152,155,156,185,186
+     17         */
+    NSString * CU = @"^1(3[0-2]|5[256]|8[56])\\d{8}$";
+    /**
+     20         * 中国电信：China Telecom
+     21         * 133,1349,153,180,189
+     22         */
+    NSString * CT = @"^1((33|53|8[09])[0-9]|349)\\d{7}$";
+    /**
+     25         * 大陆地区固话及小灵通
+     26         * 区号：010,020,021,022,023,024,025,027,028,029
+     27         * 号码：七位或八位
+     28         */
+    // NSString * PHS = @"^0(10|2[0-5789]|\\d{3})\\d{7,8}$";
+    
+    NSPredicate *regextestmobile = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", MOBILE];
+    NSPredicate *regextestcm = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", CM];
+    NSPredicate *regextestcu = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", CU];
+    NSPredicate *regextestct = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", CT];
+    
+    if (([regextestmobile evaluateWithObject:mobileNum] == YES)
+        || ([regextestcm evaluateWithObject:mobileNum] == YES)
+        || ([regextestct evaluateWithObject:mobileNum] == YES)
+        || ([regextestcu evaluateWithObject:mobileNum] == YES))
+    {
+        return YES;
+    }
+    else
+    {
+        return NO;
+    }
+}
+
+
 
 #pragma mark - public
 
@@ -225,6 +448,7 @@
 {
     _payMoney = money;
     _moneyLabel.text = money;
+    self.product.price = [money floatValue];
 }
 
 

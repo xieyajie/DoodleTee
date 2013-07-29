@@ -8,6 +8,25 @@
 
 #import <UIKit/UIKit.h>
 
+//
+//商品信息封装在Product中
+//
+@interface Product : NSObject{
+@private
+	float     _price;
+	NSString *_subject;
+	NSString *_body;
+	NSString *_orderId;
+}
+
+@property (nonatomic, assign) float price;
+@property (nonatomic, retain) NSString *subject;
+@property (nonatomic, retain) NSString *body;
+@property (nonatomic, retain) NSString *orderId;
+
+@end
+
+
 @interface XDPayMoneyViewController : UIViewController
 {
     IBOutlet UIView *_payMoneyView;
