@@ -7,16 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3A039E0317A70B020050691B /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A039D9C17A70B010050691B /* libcrypto.a */; };
 		3A039E0417A70B020050691B /* libalixpay.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A039D9E17A70B010050691B /* libalixpay.a */; };
-		3A039E0517A70B020050691B /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A039D9F17A70B010050691B /* libssl.a */; };
 		3A039E0717A70B020050691B /* DataVerifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A039DA417A70B010050691B /* DataVerifier.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		3A039E0B17A70B020050691B /* base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A039DF717A70B020050691B /* base64.m */; };
 		3A039E0C17A70B020050691B /* MD5DataSigner.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A039DFA17A70B020050691B /* MD5DataSigner.m */; };
 		3A039E0D17A70B020050691B /* NSDataEx.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A039DFC17A70B020050691B /* NSDataEx.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		3A039E0E17A70B020050691B /* openssl_wrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A039DFE17A70B020050691B /* openssl_wrapper.m */; };
+		3A039E0E17A70B020050691B /* openssl_wrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A039DFE17A70B020050691B /* openssl_wrapper.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		3A039E0F17A70B020050691B /* RSADataSigner.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A039E0017A70B020050691B /* RSADataSigner.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		3A039E1017A70B020050691B /* RSADataVerifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A039E0217A70B020050691B /* RSADataVerifier.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		3A039E5F17A71E7C0050691B /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A039E5D17A71E7C0050691B /* libcrypto.a */; };
+		3A039E6017A71E7C0050691B /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A039E5E17A71E7C0050691B /* libssl.a */; };
+		3A039E6117A71F280050691B /* DataSigner.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A039DA217A70B010050691B /* DataSigner.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		3A039E6217A71FB30050691B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AEA8B8017A70AB200DC976A /* main.m */; };
 		3A0BF981178312EC006BB126 /* share_sina@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A0BF980178312EC006BB126 /* share_sina@2x.png */; };
 		3A19C6C7175A3288001FC0D5 /* root_account_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A19C6C5175A3288001FC0D5 /* root_account_icon@2x.png */; };
 		3A19C6C8175A3288001FC0D5 /* root_shirt_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A19C6C6175A3288001FC0D5 /* root_shirt_icon@2x.png */; };
@@ -145,9 +147,7 @@
 		3A039D9917A70B010050691B /* AlixPay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlixPay.h; sourceTree = "<group>"; };
 		3A039D9A17A70B010050691B /* AlixPayOrder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlixPayOrder.h; sourceTree = "<group>"; };
 		3A039D9B17A70B010050691B /* AlixPayResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlixPayResult.h; sourceTree = "<group>"; };
-		3A039D9C17A70B010050691B /* libcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libcrypto.a; sourceTree = "<group>"; };
 		3A039D9E17A70B010050691B /* libalixpay.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libalixpay.a; sourceTree = "<group>"; };
-		3A039D9F17A70B010050691B /* libssl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libssl.a; sourceTree = "<group>"; };
 		3A039DA117A70B010050691B /* DataSigner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataSigner.h; sourceTree = "<group>"; };
 		3A039DA217A70B010050691B /* DataSigner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataSigner.m; sourceTree = "<group>"; };
 		3A039DA317A70B010050691B /* DataVerifier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataVerifier.h; sourceTree = "<group>"; };
@@ -240,6 +240,8 @@
 		3A039E5A17A71A6E0050691B /* x509.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = x509.h; sourceTree = "<group>"; };
 		3A039E5B17A71A6E0050691B /* x509_vfy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = x509_vfy.h; sourceTree = "<group>"; };
 		3A039E5C17A71A6E0050691B /* x509v3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = x509v3.h; sourceTree = "<group>"; };
+		3A039E5D17A71E7C0050691B /* libcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libcrypto.a; sourceTree = "<group>"; };
+		3A039E5E17A71E7C0050691B /* libssl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libssl.a; sourceTree = "<group>"; };
 		3A0BF980178312EC006BB126 /* share_sina@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "share_sina@2x.png"; sourceTree = "<group>"; };
 		3A19C6C5175A3288001FC0D5 /* root_account_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "root_account_icon@2x.png"; sourceTree = "<group>"; };
 		3A19C6C6175A3288001FC0D5 /* root_shirt_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "root_shirt_icon@2x.png"; sourceTree = "<group>"; };
@@ -400,9 +402,9 @@
 				3AEA8B6417A70A5D00DC976A /* ShareSDKiPhoneAppRecommendShareViewUI.framework in Frameworks */,
 				3AEA8B6617A70A5D00DC976A /* ShareSDKiPhoneDefaultShareViewUI.framework in Frameworks */,
 				3AEA8B6817A70A5D00DC976A /* ShareSDKiPhoneSimpleShareViewUI.framework in Frameworks */,
-				3A039E0317A70B020050691B /* libcrypto.a in Frameworks */,
 				3A039E0417A70B020050691B /* libalixpay.a in Frameworks */,
-				3A039E0517A70B020050691B /* libssl.a in Frameworks */,
+				3A039E5F17A71E7C0050691B /* libcrypto.a in Frameworks */,
+				3A039E6017A71E7C0050691B /* libssl.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -413,9 +415,7 @@
 			isa = PBXGroup;
 			children = (
 				3A039D9817A70B010050691B /* include */,
-				3A039D9C17A70B010050691B /* libcrypto.a */,
 				3A039D9D17A70B010050691B /* libs */,
-				3A039D9F17A70B010050691B /* libssl.a */,
 				3A039DA017A70B010050691B /* Utilities */,
 			);
 			path = alixPay;
@@ -434,6 +434,8 @@
 		3A039D9D17A70B010050691B /* libs */ = {
 			isa = PBXGroup;
 			children = (
+				3A039E5D17A71E7C0050691B /* libcrypto.a */,
+				3A039E5E17A71E7C0050691B /* libssl.a */,
 				3A039D9E17A70B010050691B /* libalixpay.a */,
 			);
 			path = libs;
@@ -1035,6 +1037,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3A039E6217A71FB30050691B /* main.m in Sources */,
+				3A039E6117A71F280050691B /* DataSigner.m in Sources */,
 				3AEA8B4417A70A5D00DC976A /* XDAccountInfoCell.m in Sources */,
 				3AEA8B4517A70A5D00DC976A /* XDAccountInfoViewController.m in Sources */,
 				3AEA8B4617A70A5D00DC976A /* XDAccountViewController.m in Sources */,
@@ -1157,7 +1161,10 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DoodleTee/DoodleTee-Prefix.pch";
-				HEADER_SEARCH_PATHS = "$(SRCROOT)/framework/**";
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/framework/**",
+					"$(SRCROOT)/DoodleTee/alixPay/Utilities",
+				);
 				INFOPLIST_FILE = "DoodleTee/DoodleTee-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				LIBRARY_SEARCH_PATHS = (
