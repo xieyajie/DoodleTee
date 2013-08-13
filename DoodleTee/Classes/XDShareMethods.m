@@ -7,6 +7,7 @@
 //
 
 #import "XDShareMethods.h"
+#import "Reachability.h"
 
 #import "LocalDefault.h"
 
@@ -21,6 +22,20 @@ static XDShareMethods *shareDefult = nil;
         shareDefult = [[XDShareMethods alloc] init];
     });
     return shareDefult;
+}
+
++ (BOOL)isConnectedToNetwork
+{
+	Reachability *r = [Reachability reachabilityWithHostName:@"www.baidu.com"];
+    switch ([r currentReachabilityStatus]) {
+        case NotReachable:
+			return NO;
+        case ReachableViaWWAN:
+			return YES;
+        case ReachableViaWiFi:
+			return YES;
+    }
+    return NO;
 }
 
 - (CGRect)effectViewFrameWithSuperView:(UIView *)view

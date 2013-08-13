@@ -12,6 +12,8 @@
 
 + (id)defaultShare;
 
++ (BOOL)isConnectedToNetwork;
+
 
 - (CGRect)effectViewFrameWithSuperView:(UIView *)view;
 
