@@ -60,6 +60,7 @@
 		3A6E1965175B0AE800806F8A /* font_3.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A6E1955175B0AE800806F8A /* font_3.png */; };
 		3A6E1966175B0AE800806F8A /* font_4.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A6E1956175B0AE800806F8A /* font_4.png */; };
 		3A6E1970175B11CA00806F8A /* stroke_2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A6E196F175B11CA00806F8A /* stroke_2@2x.png */; };
+		3A7204C017BB3265005949FD /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A7204BF17BB3265005949FD /* Reachability.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		3AB10002175486AC00B72E93 /* clothe_default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3AB10001175486AC00B72E93 /* clothe_default@2x.png */; };
 		3AB1000417548AF600B72E93 /* root_add@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3AB1000317548AF600B72E93 /* root_add@2x.png */; };
 		3AB1000E1754941D00B72E93 /* buttonBg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3AB1000D1754941D00B72E93 /* buttonBg@2x.png */; };
@@ -77,7 +78,6 @@
 		3AEA8B4417A70A5D00DC976A /* XDAccountInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AEA8AF617A70A5D00DC976A /* XDAccountInfoCell.m */; };
 		3AEA8B4517A70A5D00DC976A /* XDAccountInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AEA8AF817A70A5D00DC976A /* XDAccountInfoViewController.m */; };
 		3AEA8B4617A70A5D00DC976A /* XDAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AEA8AFA17A70A5D00DC976A /* XDAccountViewController.m */; };
-		3AEA8B4717A70A5D00DC976A /* XDAccountViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3AEA8AFB17A70A5D00DC976A /* XDAccountViewController.xib */; };
 		3AEA8B4817A70A5D00DC976A /* AKSegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AEA8AFF17A70A5D00DC976A /* AKSegmentedControl.m */; };
 		3AEA8B4917A70A5D00DC976A /* XDAttributeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AEA8B0217A70A5D00DC976A /* XDAttributeCell.m */; };
 		3AEA8B4A17A70A5D00DC976A /* XDCustomMadeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AEA8B0417A70A5D00DC976A /* XDCustomMadeViewController.m */; };
@@ -112,7 +112,6 @@
 		3AEA8B6717A70A5D00DC976A /* ShareSDKiPhoneSimpleShareViewUI.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 3AEA8B3717A70A5D00DC976A /* ShareSDKiPhoneSimpleShareViewUI.bundle */; };
 		3AEA8B6817A70A5D00DC976A /* ShareSDKiPhoneSimpleShareViewUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AEA8B3817A70A5D00DC976A /* ShareSDKiPhoneSimpleShareViewUI.framework */; };
 		3AEA8B6917A70A5D00DC976A /* XDShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AEA8B3A17A70A5D00DC976A /* XDShareViewController.m */; };
-		3AEA8B6A17A70A5D00DC976A /* XDShareViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3AEA8B3B17A70A5D00DC976A /* XDShareViewController.xib */; };
 		3AEA8B6B17A70A5D00DC976A /* XDAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AEA8B3D17A70A5D00DC976A /* XDAppDelegate.m */; };
 		3AEA8B6C17A70A5D00DC976A /* XDFinishShowViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AEA8B3F17A70A5D00DC976A /* XDFinishShowViewController.m */; };
 		3AEA8B6D17A70A5D00DC976A /* XDRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AEA8B4117A70A5D00DC976A /* XDRootViewController.m */; };
@@ -284,6 +283,8 @@
 		3A6E1955175B0AE800806F8A /* font_3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = font_3.png; sourceTree = "<group>"; };
 		3A6E1956175B0AE800806F8A /* font_4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = font_4.png; sourceTree = "<group>"; };
 		3A6E196F175B11CA00806F8A /* stroke_2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "stroke_2@2x.png"; sourceTree = "<group>"; };
+		3A7204BE17BB3265005949FD /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		3A7204BF17BB3265005949FD /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		3AB10001175486AC00B72E93 /* clothe_default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "clothe_default@2x.png"; sourceTree = "<group>"; };
 		3AB1000317548AF600B72E93 /* root_add@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "root_add@2x.png"; sourceTree = "<group>"; };
 		3AB1000D1754941D00B72E93 /* buttonBg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "buttonBg@2x.png"; sourceTree = "<group>"; };
@@ -305,7 +306,6 @@
 		3AEA8AF817A70A5D00DC976A /* XDAccountInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XDAccountInfoViewController.m; sourceTree = "<group>"; };
 		3AEA8AF917A70A5D00DC976A /* XDAccountViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDAccountViewController.h; sourceTree = "<group>"; };
 		3AEA8AFA17A70A5D00DC976A /* XDAccountViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XDAccountViewController.m; sourceTree = "<group>"; };
-		3AEA8AFB17A70A5D00DC976A /* XDAccountViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = XDAccountViewController.xib; sourceTree = "<group>"; };
 		3AEA8AFE17A70A5D00DC976A /* AKSegmentedControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKSegmentedControl.h; sourceTree = "<group>"; };
 		3AEA8AFF17A70A5D00DC976A /* AKSegmentedControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKSegmentedControl.m; sourceTree = "<group>"; };
 		3AEA8B0117A70A5D00DC976A /* XDAttributeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDAttributeCell.h; sourceTree = "<group>"; };
@@ -354,7 +354,6 @@
 		3AEA8B3817A70A5D00DC976A /* ShareSDKiPhoneSimpleShareViewUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ShareSDKiPhoneSimpleShareViewUI.framework; sourceTree = "<group>"; };
 		3AEA8B3917A70A5D00DC976A /* XDShareViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDShareViewController.h; sourceTree = "<group>"; };
 		3AEA8B3A17A70A5D00DC976A /* XDShareViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XDShareViewController.m; sourceTree = "<group>"; };
-		3AEA8B3B17A70A5D00DC976A /* XDShareViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = XDShareViewController.xib; sourceTree = "<group>"; };
 		3AEA8B3C17A70A5D00DC976A /* XDAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDAppDelegate.h; sourceTree = "<group>"; };
 		3AEA8B3D17A70A5D00DC976A /* XDAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XDAppDelegate.m; sourceTree = "<group>"; };
 		3AEA8B3E17A70A5D00DC976A /* XDFinishShowViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDFinishShowViewController.h; sourceTree = "<group>"; };
@@ -602,6 +601,24 @@
 			path = text;
 			sourceTree = "<group>";
 		};
+		3A7204B817BB30B6005949FD /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				3A7204BD17BB3265005949FD /* Reachability */,
+			);
+			name = Manager;
+			sourceTree = "<group>";
+		};
+		3A7204BD17BB3265005949FD /* Reachability */ = {
+			isa = PBXGroup;
+			children = (
+				3A7204BE17BB3265005949FD /* Reachability.h */,
+				3A7204BF17BB3265005949FD /* Reachability.m */,
+			);
+			name = Reachability;
+			path = Manager/Reachability;
+			sourceTree = "<group>";
+		};
 		3AB1FFAC17546F4200B72E93 = {
 			isa = PBXGroup;
 			children = (
@@ -708,6 +725,7 @@
 		3AEA8AF317A70A5D00DC976A /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				3A7204B817BB30B6005949FD /* Manager */,
 				3AEA8AF417A70A5D00DC976A /* Account */,
 				3AEA8AFC17A70A5D00DC976A /* CustomControl */,
 				3AEA8B0017A70A5D00DC976A /* CustomMade */,
@@ -735,7 +753,6 @@
 				3AEA8AF817A70A5D00DC976A /* XDAccountInfoViewController.m */,
 				3AEA8AF917A70A5D00DC976A /* XDAccountViewController.h */,
 				3AEA8AFA17A70A5D00DC976A /* XDAccountViewController.m */,
-				3AEA8AFB17A70A5D00DC976A /* XDAccountViewController.xib */,
 			);
 			path = Account;
 			sourceTree = "<group>";
@@ -841,7 +858,6 @@
 				3AEA8B2917A70A5D00DC976A /* ShareSDK_v2.2.4 */,
 				3AEA8B3917A70A5D00DC976A /* XDShareViewController.h */,
 				3AEA8B3A17A70A5D00DC976A /* XDShareViewController.m */,
-				3AEA8B3B17A70A5D00DC976A /* XDShareViewController.xib */,
 			);
 			path = Share;
 			sourceTree = "<group>";
@@ -1006,7 +1022,6 @@
 				3AE8AA3217845398005AC6AB /* check@2x.png in Resources */,
 				3AE8AA3317845398005AC6AB /* uncheck@2x.png in Resources */,
 				3AE299C61785BE8000CDB041 /* account_userDeaultImage@2x.png in Resources */,
-				3AEA8B4717A70A5D00DC976A /* XDAccountViewController.xib in Resources */,
 				3AEA8B4C17A70A5D00DC976A /* XDPayMoneyViewController.xib in Resources */,
 				3AEA8B4D17A70A5D00DC976A /* 02.acv in Resources */,
 				3AEA8B4E17A70A5D00DC976A /* 06.acv in Resources */,
@@ -1021,7 +1036,6 @@
 				3AEA8B6117A70A5D00DC976A /* Resource.bundle in Resources */,
 				3AEA8B6517A70A5D00DC976A /* ShareSDKiPhoneDefaultShareViewUI.bundle in Resources */,
 				3AEA8B6717A70A5D00DC976A /* ShareSDKiPhoneSimpleShareViewUI.bundle in Resources */,
-				3AEA8B6A17A70A5D00DC976A /* XDShareViewController.xib in Resources */,
 				3AEA8B7217A70A6E00DC976A /* Default-568h@2x.png in Resources */,
 				3AEA8B7317A70A6E00DC976A /* Default.png in Resources */,
 				3AEA8B7417A70A6E00DC976A /* Default@2x.png in Resources */,
@@ -1041,6 +1055,7 @@
 				3A039E6117A71F280050691B /* DataSigner.m in Sources */,
 				3AEA8B4417A70A5D00DC976A /* XDAccountInfoCell.m in Sources */,
 				3AEA8B4517A70A5D00DC976A /* XDAccountInfoViewController.m in Sources */,
+				3A7204C017BB3265005949FD /* Reachability.m in Sources */,
 				3AEA8B4617A70A5D00DC976A /* XDAccountViewController.m in Sources */,
 				3AEA8B4817A70A5D00DC976A /* AKSegmentedControl.m in Sources */,
 				3AEA8B4917A70A5D00DC976A /* XDAttributeCell.m in Sources */,
@@ -1162,7 +1177,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DoodleTee/DoodleTee-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
-					"$(SRCROOT)/framework/**",
+					"$(SRCROOT)/DoodleTee/framework/**",
 					"$(SRCROOT)/DoodleTee/alixPay/Utilities",
 				);
 				INFOPLIST_FILE = "DoodleTee/DoodleTee-Info.plist";

@@ -10,21 +10,24 @@
 
 @interface XDAccountViewController : UIViewController<UITextFieldDelegate>
 {
-    IBOutlet UIView *_mainView;
-    IBOutlet UILabel *_titleLable;
-    IBOutlet UIImageView *_bottomImageView;
+    UIImageView *_bgView;
+    UIView *_mainView;
+    UIView *_bottomView;
     
-    IBOutlet UITextField *_userNameField;
-    IBOutlet UITextField *_pasdField;
-    IBOutlet UIButton *_registerButton;
-    IBOutlet UIButton *_loginButton;
-    IBOutlet UIButton *_backButton;
+    UILabel *_titleLable;
+    UILabel *_nameLabel;
+    UILabel *_pswdLabel;
+    UITextField *_userNameField;
+    UITextField *_pasdField;
+    UIButton *_registerButton;
+    UIButton *_loginButton;
+    UIButton *_backButton;
 }
 
-- (IBAction)backAction:(id)sender;
+- (void)backAction:(id)sender;
 
-- (IBAction)registerAction:(id)sender;
+- (void)registerAction:(id)sender;
 
-- (IBAction)loginAction:(id)sender;
+- (void)loginAction:(id)sender;
 
 @end

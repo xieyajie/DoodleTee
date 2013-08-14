@@ -51,18 +51,18 @@
 
 @synthesize shareOptions = _shareOptions;
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+- (id)init
 {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    self = [super init];
     if (self) {
         // Custom initialization
     }
     return self;
 }
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil shareImage:(UIImage *)image
+- (id)initWithShareImage:(UIImage *)image
 {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    self = [super init];
     if (self) {
 //        _shareImage = [image retain];
         _shareImage = image;
@@ -77,6 +77,7 @@
 //    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self readInfoFromPlist];
     [self configurationShare];
+    [self layoutSubviews];
     
 }
 
@@ -92,8 +93,12 @@
 {
     NSDictionary *dic = [_dataSource objectAtIndex:indexPath.row];
     NSString *sn = [dic objectForKey:kShareKeySelector];
-    SEL method = NSSelectorFromString(sn);
-    [self performSelector:method];
+    if (sn != nil) {
+        SEL method = NSSelectorFromString(sn);
+        if (method && [self respondsToSelector:method]) {
+            [self performSelector:method];
+        }
+    }
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
@@ -126,6 +131,24 @@
     cell.textLabel.text = [infoDic objectForKey:kShareKeyName];
         
     return cell;
+}
+
+#pragma mark - layout views
+
+- (void)layoutSubviews
+{
+    _toolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 44)];
+    [self.view addSubview:_toolbar];
+    
+    UIBarButtonItem *flexibleSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+    UIBarButtonItem *cancelItem = [[UIBarButtonItem alloc] initWithTitle:@"取消" style:UIBarButtonItemStyleBordered target:self action:@selector(cancel:)];
+    UIBarButtonItem *titleItem = [[UIBarButtonItem alloc] initWithTitle:@"分享" style:UIBarButtonItemStylePlain target:nil action:nil];
+    [_toolbar setItems:[NSArray arrayWithObjects:flexibleSpace, titleItem, flexibleSpace, cancelItem, nil] animated:YES];
+    
+    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 44, self.view.frame.size.width, self.view.frame.size.height - 44) style:UITableViewStylePlain];
+    _tableView.delegate = self;
+    _tableView.dataSource = self;
+    [self.view addSubview:_tableView];
 }
 
 #pragma mark - 读取plist文件
@@ -199,7 +222,7 @@
 
 #pragma mark - public
 
-- (IBAction)cancel:(id)sender
+- (void)cancel:(id)sender
 {
     [self dismissViewControllerAnimated:YES completion:^(){}];
 }

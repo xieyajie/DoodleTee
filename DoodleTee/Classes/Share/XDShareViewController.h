@@ -10,14 +10,15 @@
 
 @interface XDShareViewController : UIViewController<UITableViewDataSource, UITableViewDelegate>
 {
+    UIToolbar *_toolbar;
     UITableView *_tableView;
 }
 
-@property (nonatomic, strong) IBOutlet UITableView *tableView;
+@property (nonatomic, strong) UITableView *tableView;
 
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil shareImage:(UIImage *)image;
+- (id)initWithShareImage:(UIImage *)image;
 
-- (IBAction)cancel:(id)sender;
+- (void)cancel:(id)sender;
 
 @end
