@@ -140,10 +140,12 @@
     NSIndexPath *tmpIndex = [[_selectionArray objectAtIndex:tag] objectForKey:title];
     cell.textLabel.text = text;
     if (tmpIndex.section == indexPath.section && tmpIndex.row == indexPath.row) {
-        cell.selected = YES;
+//        cell.selected = YES;
+        [tableView selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionNone];
     }
     else{
-        cell.selected = NO;
+//        cell.selected = NO;
+        [tableView deselectRowAtIndexPath:indexPath animated:YES];
     }
 
     return cell;
