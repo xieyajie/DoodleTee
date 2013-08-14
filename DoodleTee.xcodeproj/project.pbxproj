@@ -61,6 +61,7 @@
 		3A6E1966175B0AE800806F8A /* font_4.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A6E1956175B0AE800806F8A /* font_4.png */; };
 		3A6E1970175B11CA00806F8A /* stroke_2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A6E196F175B11CA00806F8A /* stroke_2@2x.png */; };
 		3A7204C017BB3265005949FD /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A7204BF17BB3265005949FD /* Reachability.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		3A7204C317BB5722005949FD /* settingSource.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3A7204C217BB5722005949FD /* settingSource.plist */; };
 		3AB10002175486AC00B72E93 /* clothe_default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3AB10001175486AC00B72E93 /* clothe_default@2x.png */; };
 		3AB1000417548AF600B72E93 /* root_add@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3AB1000317548AF600B72E93 /* root_add@2x.png */; };
 		3AB1000E1754941D00B72E93 /* buttonBg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3AB1000D1754941D00B72E93 /* buttonBg@2x.png */; };
@@ -98,7 +99,6 @@
 		3AEA8B5917A70A5D00DC976A /* XDTextPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AEA8B1F17A70A5D00DC976A /* XDTextPicker.m */; };
 		3AEA8B5A17A70A5D00DC976A /* XDEffectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AEA8B2117A70A5D00DC976A /* XDEffectViewController.m */; };
 		3AEA8B5B17A70A5D00DC976A /* XDSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AEA8B2517A70A5D00DC976A /* XDSettingViewController.m */; };
-		3AEA8B5C17A70A5D00DC976A /* XDSettingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3AEA8B2617A70A5D00DC976A /* XDSettingViewController.xib */; };
 		3AEA8B5D17A70A5D00DC976A /* share.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3AEA8B2817A70A5D00DC976A /* share.plist */; };
 		3AEA8B5E17A70A5D00DC976A /* SinaWeiboConnection.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AEA8B2B17A70A5D00DC976A /* SinaWeiboConnection.framework */; };
 		3AEA8B5F17A70A5D00DC976A /* AGCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AEA8B2D17A70A5D00DC976A /* AGCommon.framework */; };
@@ -285,6 +285,7 @@
 		3A6E196F175B11CA00806F8A /* stroke_2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "stroke_2@2x.png"; sourceTree = "<group>"; };
 		3A7204BE17BB3265005949FD /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		3A7204BF17BB3265005949FD /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
+		3A7204C217BB5722005949FD /* settingSource.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = settingSource.plist; sourceTree = "<group>"; };
 		3AB10001175486AC00B72E93 /* clothe_default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "clothe_default@2x.png"; sourceTree = "<group>"; };
 		3AB1000317548AF600B72E93 /* root_add@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "root_add@2x.png"; sourceTree = "<group>"; };
 		3AB1000D1754941D00B72E93 /* buttonBg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "buttonBg@2x.png"; sourceTree = "<group>"; };
@@ -339,7 +340,6 @@
 		3AEA8B2117A70A5D00DC976A /* XDEffectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XDEffectViewController.m; sourceTree = "<group>"; };
 		3AEA8B2417A70A5D00DC976A /* XDSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDSettingViewController.h; sourceTree = "<group>"; };
 		3AEA8B2517A70A5D00DC976A /* XDSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XDSettingViewController.m; sourceTree = "<group>"; };
-		3AEA8B2617A70A5D00DC976A /* XDSettingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = XDSettingViewController.xib; sourceTree = "<group>"; };
 		3AEA8B2817A70A5D00DC976A /* share.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = share.plist; sourceTree = "<group>"; };
 		3AEA8B2B17A70A5D00DC976A /* SinaWeiboConnection.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SinaWeiboConnection.framework; sourceTree = "<group>"; };
 		3AEA8B2D17A70A5D00DC976A /* AGCommon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AGCommon.framework; sourceTree = "<group>"; };
@@ -846,7 +846,7 @@
 			children = (
 				3AEA8B2417A70A5D00DC976A /* XDSettingViewController.h */,
 				3AEA8B2517A70A5D00DC976A /* XDSettingViewController.m */,
-				3AEA8B2617A70A5D00DC976A /* XDSettingViewController.xib */,
+				3A7204C217BB5722005949FD /* settingSource.plist */,
 			);
 			path = Setting;
 			sourceTree = "<group>";
@@ -991,6 +991,7 @@
 				3A19C6DA175A3288001FC0D5 /* root_effect_icon@2x.png in Resources */,
 				3A19C6DB175A3288001FC0D5 /* root_piazza_icon@2x.png in Resources */,
 				3A19C6DC175A3288001FC0D5 /* root_share_icon@2x.png in Resources */,
+				3A7204C317BB5722005949FD /* settingSource.plist in Resources */,
 				3AB180021759F15900D72F83 /* effect_image_icon@2x.png in Resources */,
 				3AB180031759F15900D72F83 /* effect_photograph_icon@2x.png in Resources */,
 				3A6E1936175B045100806F8A /* effect_camera_icon@2x.png in Resources */,
@@ -1030,7 +1031,6 @@
 				3AEA8B5117A70A5D00DC976A /* crossprocess.acv in Resources */,
 				3AEA8B5217A70A5D00DC976A /* purple-green.acv in Resources */,
 				3AEA8B5317A70A5D00DC976A /* yellow-red.acv in Resources */,
-				3AEA8B5C17A70A5D00DC976A /* XDSettingViewController.xib in Resources */,
 				3AEA8B5D17A70A5D00DC976A /* share.plist in Resources */,
 				3AEA8B6017A70A5D00DC976A /* ShareSDKLocalizable.strings in Resources */,
 				3AEA8B6117A70A5D00DC976A /* Resource.bundle in Resources */,

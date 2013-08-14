@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<array>
+		<dict>
+			<key>title</key>
+			<string>品牌</string>
+			<key>source</key>
+			<array>
+				<string>C.K.</string>
+				<string>Jack Jones</string>
+				<string>Armani</string>
+				<string>凡客诚品</string>
+			</array>
+		</dict>
+		<dict>
+			<key>title</key>
+			<string>材质</string>
+			<key>source</key>
+			<array>
+				<string>纯棉</string>
+				<string>亚麻</string>
+			</array>
+		</dict>
+		<dict>
+			<key>title</key>
+			<string>颜色</string>
+			<key>source</key>
+			<array>
+				<string>白色</string>
+				<string>黑色</string>
+				<string>灰色</string>
+				<string>绿色</string>
+				<string>红色</string>
+				<string>蓝色</string>
+			</array>
+		</dict>
+	</array>
+	<array>
+		<dict>
+			<key>title</key>
+			<string>尺码</string>
+			<key>source</key>
+			<array>
+				<string>XS</string>
+				<string>S</string>
+				<string>M</string>
+				<string>L</string>
+				<string>XL</string>
+				<string>XXL</string>
+			</array>
+		</dict>
+	</array>
+</array>
+</plist>

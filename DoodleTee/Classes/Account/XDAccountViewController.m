@@ -33,9 +33,6 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     [self layoutSubviews];
-    
-    
-    [_backButton setTitleColor:[UIColor blackColor] forState:UIControlStateHighlighted];
 }
 
 - (void)didReceiveMemoryWarning
@@ -52,7 +49,7 @@
     _bgView.image = [UIImage imageNamed:@"root_bg.png"];
     [self.view addSubview:_bgView];
     
-    _mainView = [[UIView alloc] initWithFrame:CGRectMake(20, 10, self.view.frame.size.width - 40, self.view.frame.size.height)];
+    _mainView = [[UIView alloc] initWithFrame:CGRectMake(20, 10, self.view.frame.size.width - 40, self.view.frame.size.height - 10)];
     _mainView.backgroundColor = [UIColor colorWithRed:220 / 255.0 green:220 / 255.0 blue:220 / 255.0 alpha:1.0];
     [self.view addSubview:_mainView];
     

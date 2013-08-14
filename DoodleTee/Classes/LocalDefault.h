@@ -45,9 +45,9 @@
 
 #define KSETTINGPLIST @"setting.plist"
 #define kSETTINGBRAND @"品牌"
-#define kSETTINGMATERIAL @"材料"
+#define kSETTINGMATERIAL @"材质"
 #define kSETTINGCOLOR @"颜色"
-#define kSETTINGSIZE @"尺寸"
+#define kSETTINGSIZE @"尺码"
 #define kSETTINGCOUNT @"数量"
 #define kSETTINGMONEY @"价格"
 

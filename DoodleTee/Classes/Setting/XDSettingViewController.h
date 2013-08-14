@@ -10,14 +10,14 @@
 
 @interface XDSettingViewController : UIViewController<UITableViewDataSource, UITableViewDelegate>
 {
-    IBOutlet UIView *_mainView;
-    IBOutlet UIImageView *_bottomImageView;
-    IBOutlet UIButton *_backButton;
-    IBOutlet UIButton *_overButton;
+    UIView *_mainView;
+    UIView *_bottomView;
+    UIButton *_backButton;
+    UIButton *_overButton;
 }
 
-- (IBAction)backAction:(id)sender;
+- (void)backAction:(id)sender;
 
-- (IBAction)overAction:(id)sender;
+- (void)overAction:(id)sender;
 
 @end
