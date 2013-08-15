@@ -28,7 +28,7 @@
 @end
 
 
-@interface XDPayMoneyViewController ()<UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate, AKSegmentedControlDelegate>
+@interface XDPayMoneyViewController ()<UITextFieldDelegate, AKSegmentedControlDelegate>
 {
     Product *_product;
 }

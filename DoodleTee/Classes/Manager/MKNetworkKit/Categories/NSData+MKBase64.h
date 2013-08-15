@@ -1,5 +1,5 @@
 //
-//  NSData+Base64.h
+//  NSData+MKNKBase64.h
 //  base64
 //
 //  Created by Matt Gallagher on 2009/06/03.
@@ -23,18 +23,18 @@
 
 #import <Foundation/Foundation.h>
 
-void *NewBase64Decode(
+void *mk_NewBase64Decode(
 	const char *inputBuffer,
 	size_t length,
 	size_t *outputLength);
 
-char *NewBase64Encode(
+char *mk_NewBase64Encode(
 	const void *inputBuffer,
 	size_t length,
 	bool separateLines,
 	size_t *outputLength);
 
-@interface NSData (Base64)
+@interface NSData (MKNKBase64)
 
 + (NSData *)dataFromBase64String:(NSString *)aString;
 - (NSString *)base64EncodedString;

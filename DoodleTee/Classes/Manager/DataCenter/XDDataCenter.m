@@ -26,10 +26,6 @@ static NSString *kOrderAddress = @"UserOrder.php?";//get
 //    NSMutableDictionary *_requestDic;
 }
 
-- (BOOL)isOfflineMode;
-
-- (void)cancelRequest:(NSString *)aKey;
-
 - (void)requestInfo:(NSString*)aPath andOriginKey:(NSString*)aOriginKey andCacheKey:(NSString*)aCacheKey andRequestKey:(NSString*)aRequestKey onComplete:(XDCompleteBlock)handleComplete onError:(XDErrorBlock)handleError;
 
 @end
@@ -237,15 +233,14 @@ static NSString *kOrderAddress = @"UserOrder.php?";//get
 //        }
 //    }
     
-    [op onCompletion: ^(MKNetworkOperation *operation){
-        
+    [op addCompletionHandler:^(MKNetworkOperation *operation){
         NSLog(@"Get post type Success");
         
         NSArray *resultArray;
         if (nil != aOriginKey)
         {
             NSDictionary *dic = [operation responseJSON];
-
+            
             [_infoCacheDic setValue: [dic objectForKey: aOriginKey] forKey: aCacheKey];
             
             resultArray = [dic objectForKey: aOriginKey];
@@ -258,14 +253,12 @@ static NSString *kOrderAddress = @"UserOrder.php?";//get
         }
         
         handleComplete(resultArray);
-    }
-             onError: ^(NSError *error){
-                 
-                 NSLog(@"Get post type Fail");
-                 
-                 handleError(error);
-             }];
-    
+    }errorHandler:^(MKNetworkOperation *operation, NSError *error){
+        NSLog(@"Get post type Fail");
+        
+        handleError(error);
+    }];
+     
     [_netEngine enqueueOperation: op];
 }
 

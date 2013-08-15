@@ -1,8 +1,8 @@
 //
-//  UIAlertView+MKNetworkKitAdditions.m
-//  MKNetworkKitDemo
+//  UIImageView+MKNetworkKitAdditions.h
+//  MKNetworkKit-iOS
 //
-//  Created by Mugunth Kumar (@mugunthkumar) on 11/11/11.
+//  Created by Mugunth Kumar (@mugunthkumar) on 18/01/13.
 //  Copyright (C) 2011-2020 by Steinlogic Consulting and Training Pte Ltd
 
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -22,20 +22,19 @@
 //  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
-#if TARGET_OS_IPHONE
-#import "UIAlertView+MKNetworkKitAdditions.h"
 
-@implementation UIAlertView (MKNetworkKitAdditions)
+#import <UIKit/UIKit.h>
 
-+(UIAlertView*) showWithError:(NSError*) networkError {
+extern const float kFromCacheAnimationDuration;
+extern const float kFreshLoadAnimationDuration;
 
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:[networkError localizedDescription]
-                                                    message:[networkError localizedRecoverySuggestion]
-                                                   delegate:nil
-                                          cancelButtonTitle:NSLocalizedString(@"Dismiss", @"")
-                                          otherButtonTitles:nil];
-    [alert show];
-    return alert;
-}
+@class MKNetworkEngine;
+@class MKNetworkOperation;
+
+@interface UIImageView (MKNetworkKitAdditions)
++(void) setDefaultEngine:(MKNetworkEngine*) engine;
+-(MKNetworkOperation*) setImageFromURL:(NSURL*) url;
+-(MKNetworkOperation*) setImageFromURL:(NSURL*) url placeHolderImage:(UIImage*) image;
+-(MKNetworkOperation*) setImageFromURL:(NSURL*) url placeHolderImage:(UIImage*) image animation:(BOOL) yesOrNo;
+-(MKNetworkOperation*) setImageFromURL:(NSURL*) url placeHolderImage:(UIImage*) image usingEngine:(MKNetworkEngine*) imageCacheEngine animation:(BOOL) yesOrNo;
 @end
-#endif
