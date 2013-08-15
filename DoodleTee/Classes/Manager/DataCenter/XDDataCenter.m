@@ -18,6 +18,9 @@ static NSString *kRegisterAddress = @"RegisterUser.php?";//get
 static NSString *kUploadImageAddress = @"UploadImage.php";//post
 static NSString *kOrderAddress = @"UserOrder.php?";//get
 
+#define kRequestRegisterKey @"Register"
+#define kRequestLoginKey @"Login"
+
 @interface XDDataCenter ()
 {
     MKNetworkEngine *_netEngine;
@@ -92,113 +95,16 @@ static NSString *kOrderAddress = @"UserOrder.php?";//get
     return result;
 }
 
-//- (NSArray*)getProductList:(NSUInteger)aProductType andPageNum:(NSUInteger)aPageNum onComplete:(XDCompleteBlock)handleComplete onError:(XDErrorBlock)handleError
-//{
-//    [self cancelRequest: kRequestProductListKey];
-//    
-//    NSString *productTypeStr = [NSString stringWithFormat: @"%u", aProductType];
-//    NSString *pageStr = [NSString stringWithFormat: @"%u", aPageNum];
-//    NSString *path = [[kProductListAddress stringByReplacingOccurrencesOfString: kProductTypePart withString: productTypeStr] stringByReplacingOccurrencesOfString: kPageNumPart withString: pageStr];
-//    NSString *key = [kProductListKey stringByAppendingFormat: @"%@-%@", productTypeStr, pageStr];
-//    
-//    if (![self isOfflineMode])
-//    {
-//        [self requestInfo: path andOriginKey: kProductListKey andCacheKey: key andRequestKey: kRequestProductListKey onComplete: handleComplete onError: handleError];
-//    }
-//    
-//    return [_infoCacheDic objectForKey: key];
-//}
-//
-//- (NSDictionary*)getPostDetail:(NSUInteger)aPostId onComplete:(void (^)(NSDictionary *))handleComplete onError:(XDErrorBlock)handleError
-//{
-//    [self cancelRequest: kDetailKey];
-//    
-//    NSString *postIdStr = [NSString stringWithFormat: @"%u", aPostId];
-//    NSString *path = [kPostDetailAddress stringByReplacingOccurrencesOfString: kPostIdPart withString: postIdStr];
-//    NSString *key = [NSString stringWithFormat: @"post-%@", postIdStr];
-//    
-//    if (![self isOfflineMode])
-//    {
-//        MKNetworkOperation *op= [_netEngine operationWithPath: path];
-//        
-//        NSMutableArray *array = [_requestDic objectForKey: kDetailKey];
-//        if (array == nil)
-//        {
-//            array = [[NSMutableArray alloc] init];
-//            [_requestDic setObject: array forKey: kDetailKey];
-//            [array addObject: op];
-//            [array release];
-//        }
-//        else{
-//            [array addObject: op];
-//        }
-//
-//        
-//        [op onCompletion: ^(MKNetworkOperation *operation){
-//            
-//            NSLog(@"Get post type Success");
-//            
-//            NSDictionary *resultArray;
-//            
-//            resultArray = [operation responseJSON];
-//            
-//            [_infoCacheDic setObject: resultArray forKey: key];
-//            
-//            handleComplete(resultArray);
-//        }
-//                 onError: ^(NSError *error){
-//                     
-//                     NSLog(@"Get post type Fail");
-//                     
-//                     handleError(error);
-//                 }];
-//        
-//        [_netEngine enqueueOperation: op];
-//    }
-//    
-//    return [_infoCacheDic objectForKey: key];
-//}
-
-//- (void)sendReply:(NSUInteger)aPostId andContent:(NSString*)aContent andParentID:(NSString*)aParentID onComplete:(XDCompleteBlock)handleComplete onError:(XDErrorBlock)handleError
-//{
-//    NSString *postIdStr = [NSString stringWithFormat: @"%u", aPostId];
-//    NSMutableDictionary *replyJson = [[NSMutableDictionary alloc] initWithObjectsAndKeys: postIdStr, kReplyIdKey, aContent, kReplyContentKey, nil];
-//    if (aParentID != nil && aParentID != @"") 
-//    {
-//        [replyJson setObject: aParentID forKey: kReplyParentIdKey];
-//    }
-//    
-//    if (![self isOfflineMode])
-//    {
-//        MKNetworkOperation *op = [_netEngine operationWithPath: kSubmitReplyAddress params: replyJson httpMethod: @"POST"];
-//        
-//        [op onCompletion: ^(MKNetworkOperation *operation){
-//            NSDictionary *json = [NSJSONSerialization JSONObjectWithData: operation.responseData options:kNilOptions error: nil];
-//            NSLog(@"Send reply Success： %@", json);
-//            
-//            handleComplete(nil);
-//        }
-//                 onError: ^(NSError *error){
-//                     
-//                     NSLog(@"Send reply Fail");
-//                     
-//                     handleError(error);
-//                 }];
-//        
-//        [_netEngine enqueueOperation: op];
-//    }
-//    
-//    [replyJson release];
-//}
-
 - (void)registerWithUserName:(NSString *)aUserName password:(NSString *)aPassword realName:(NSString *)aRealName tel:(NSString *)aTel address:(NSString *)aAddress complete:(XDCompleteBlock)handleComplete onError:(XDErrorBlock)handleError
 {
-    
+    NSString *path = [NSString stringWithFormat: @"%@UserName=%@&UserPWD=%@&Name=%@&Tel=%@&Address=%@", kRegisterAddress, aUserName, aPassword, aRealName, aTel, aAddress];
+    [self requestInfo: path andOriginKey:nil andCacheKey:nil andRequestKey:kRequestRegisterKey onComplete: handleComplete onError: handleError];
 }
 
 - (void)loginWithUserName:(NSString *)aUserName password:(NSString *)aPassword complete:(XDCompleteBlock)handleComplete onError:(XDErrorBlock)handleError
 {
-    
+    NSString *path = [NSString stringWithFormat: @"%@UserName=%@&UserPWD=%@", kLoginAddress, aUserName, aPassword];
+    [self requestInfo: path andOriginKey:nil andCacheKey:nil andRequestKey:kRequestLoginKey onComplete: handleComplete onError: handleError];
 }
 
 - (void)uploadImage:(UIImage *)aImage imageName:(NSString *)aImageName userName:(NSString *)aUserName complete:(XDCompleteBlock)handleComplete onError:(XDErrorBlock)handleError
@@ -208,7 +114,8 @@ static NSString *kOrderAddress = @"UserOrder.php?";//get
 
 - (void)orderWithUserName:(NSString *)aUserName colcor:(NSString *)aColor material:(NSString *)aMaterial size:(NSString *)aSize brand:(NSString *)aBrand count:(NSInteger)aCount money:(CGFloat)aMoney complete:(XDCompleteBlock)handleComplete onError:(XDErrorBlock)handleError
 {
-    
+    NSString *path = [NSString stringWithFormat: @"%@UserName=%@&Color=%@&Material=%@&Size=%@&Brand=%@&Number=%i&Money=%f", kOrderAddress, aUserName, aColor, aMaterial, aSize, aBrand, aCount, aMoney];
+    [self requestInfo: path andOriginKey:nil andCacheKey:nil andRequestKey:nil onComplete: handleComplete onError: handleError];
 }
 
 
@@ -236,23 +143,23 @@ static NSString *kOrderAddress = @"UserOrder.php?";//get
     [op addCompletionHandler:^(MKNetworkOperation *operation){
         NSLog(@"Get post type Success");
         
-        NSArray *resultArray;
+        id resultData;
         if (nil != aOriginKey)
         {
             NSDictionary *dic = [operation responseJSON];
             
-            [_infoCacheDic setValue: [dic objectForKey: aOriginKey] forKey: aCacheKey];
+//            [_infoCacheDic setValue: [dic objectForKey: aOriginKey] forKey: aCacheKey];
             
-            resultArray = [dic objectForKey: aOriginKey];
+            resultData = [dic objectForKey: aOriginKey];
         }
         else
         {
-            resultArray = [operation responseJSON];
+//            [_infoCacheDic setValue: resultData forKey: aCacheKey];
             
-            [_infoCacheDic setValue: resultArray forKey: aCacheKey];
+            resultData = [operation responseJSON];
         }
         
-        handleComplete(resultArray);
+        handleComplete(resultData);
     }errorHandler:^(MKNetworkOperation *operation, NSError *error){
         NSLog(@"Get post type Fail");
         
