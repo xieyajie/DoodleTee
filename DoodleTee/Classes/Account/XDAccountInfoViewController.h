@@ -16,6 +16,4 @@
 
 @property (nonatomic, strong) UIView *bottomView;
 
-- (void)backAction;
-
 @end

@@ -189,11 +189,6 @@
     _leftTableView.backgroundColor = [UIColor clearColor];
     [_mainView addSubview:_leftTableView];
     
-//    for (int i = 0; i < _selectionArray.count; i++)
-//    {
-//        [_leftTableView selectRowAtIndexPath: [_selectionArray objectAtIndex: i] animated: NO scrollPosition: UITableViewScrollPositionNone];
-//    }
-    
     UILabel *line = [[UILabel alloc] initWithFrame:CGRectMake(_mainView.frame.size.width / 2 - 1, 0, 1, _mainView.frame.size.height)];
     line.backgroundColor = [UIColor grayColor];
     [_mainView addSubview:line];
@@ -205,7 +200,6 @@
     _rightTableView.separatorColor = [UIColor grayColor];
     _rightTableView.backgroundColor = [UIColor clearColor];
     [_mainView addSubview: _rightTableView];
-//    [_rightTableView selectRowAtIndexPath: [NSIndexPath indexPathForRow:0 inSection:0] animated: NO scrollPosition: UITableViewScrollPositionNone];
     
     _bottomView = [[UIView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - 62.5, self.view.frame.size.width, 62.5)];
     UIImageView *bottomImgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"bottomBarBg.png"]];

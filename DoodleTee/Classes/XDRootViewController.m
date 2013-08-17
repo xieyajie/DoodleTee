@@ -287,8 +287,15 @@
 
 - (void)accountAction
 {
-    XDAccountViewController *accountViewController = [[XDAccountViewController alloc] init];
-    [self.navigationController presentViewController:accountViewController animated:YES completion:nil];
+    NSString *userName = [[NSUserDefaults standardUserDefaults] objectForKey:kUserDefaultsUserName];
+    if (userName && userName.length > 0) {
+        XDAccountInfoViewController *infoViewController = [[XDAccountInfoViewController alloc] init];
+        [self.navigationController presentViewController:infoViewController animated:YES completion:nil];
+    }
+    else{
+        XDAccountViewController *accountViewController = [[XDAccountViewController alloc] init];
+        [self.navigationController presentViewController:accountViewController animated:YES completion:nil];
+    }
 }
 
 - (void)addEffect

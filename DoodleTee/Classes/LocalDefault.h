@@ -40,6 +40,8 @@
 #define kEffectBottomMarginScale 131/637
 //end
 
+#define kUserDefaultsUserName @"userName"
+
 #define kNotificationFinishName @"finishedEffect"
 #define kNotificationLandSuccess @"landSuccess"
 

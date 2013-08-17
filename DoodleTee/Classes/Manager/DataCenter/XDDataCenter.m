@@ -6,6 +6,7 @@
 //
 //
 #import "XDDataCenter.h"
+#import "JSONKit.h"
 
 static NSString *kServerDataFileName = @"server_data.plist";
 
@@ -97,7 +98,11 @@ static NSString *kOrderAddress = @"UserOrder.php?";//get
 
 - (void)registerWithUserName:(NSString *)aUserName password:(NSString *)aPassword realName:(NSString *)aRealName tel:(NSString *)aTel address:(NSString *)aAddress complete:(XDCompleteBlock)handleComplete onError:(XDErrorBlock)handleError
 {
-    NSString *path = [NSString stringWithFormat: @"%@UserName=%@&UserPWD=%@&Name=%@&Tel=%@&Address=%@", kRegisterAddress, aUserName, aPassword, aRealName, aTel, aAddress];
+    NSString *realName = aRealName == nil ? @"" : aRealName;
+    NSString *tel = aTel == nil ? @"" : aTel;
+    NSString *address = aAddress == nil ? @"" : aAddress;
+    
+    NSString *path = [NSString stringWithFormat: @"%@UserName=%@&UserPWD=%@&Name=%@&Tel=%@&Address=%@", kRegisterAddress, aUserName, aPassword, realName, tel, address];
     [self requestInfo: path andOriginKey:nil andCacheKey:nil andRequestKey:kRequestRegisterKey onComplete: handleComplete onError: handleError];
 }
 
@@ -125,41 +130,54 @@ static NSString *kOrderAddress = @"UserOrder.php?";//get
 {
     MKNetworkOperation *op= [_netEngine operationWithPath: aPath];
     
-//    if (aRequestKey != nil)
-//    {
-//        NSMutableArray *array = [_requestDic objectForKey: aRequestKey];
-//        if (array == nil)
-//        {
-//            array = [[NSMutableArray alloc] init];
-//            [_requestDic setObject: array forKey: aRequestKey];
-//            [array addObject: op];
-//            [array release];
-//        }
-//        else{
-//            [array addObject: op];
-//        }
-//    }
-    
     [op addCompletionHandler:^(MKNetworkOperation *operation){
         NSLog(@"Get post type Success");
         
-        id resultData;
+        NSData *data = [operation responseData];
+        CFStringRef stringRef = CFStringCreateWithBytes(NULL, [data bytes], [data length], kCFStringEncodingGB_18030_2000, false);
+        NSString *string = [(NSString *)CFBridgingRelease(stringRef) stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+        CFRelease(stringRef);
+        
+        id result = nil;
         if (nil != aOriginKey)
         {
-            NSDictionary *dic = [operation responseJSON];
+            NSDictionary *dic = nil;
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_5_0
+            if (string != nil) {
+                dic = [NSJSONSerialization JSONObjectWithData:[string dataUsingEncoding:[string smallestEncoding]] options:NSJSONReadingMutableContainers error:nil];
+            }
+#else
+            NSData *data = [string dataUsingEncoding:[string smallestEncoding]];
+            dic = [data objectFromJSONData];
+#endif
             
-//            [_infoCacheDic setValue: [dic objectForKey: aOriginKey] forKey: aCacheKey];
+            result = [dic objectForKey: aOriginKey];
             
-            resultData = [dic objectForKey: aOriginKey];
+//            if (aCacheKey != nil && result && ([result isKindOfClass:[NSDictionary class]] || [result isKindOfClass:[NSArray class]])) {
+//                [_infoCacheDic setValue: [dic objectForKey: aOriginKey] forKey: aCacheKey];
+//            }
         }
         else
         {
-//            [_infoCacheDic setValue: resultData forKey: aCacheKey];
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_5_0
+            if (string != nil) {
+                result = [NSJSONSerialization JSONObjectWithData:[string dataUsingEncoding:[string smallestEncoding]] options:NSJSONReadingMutableContainers error:nil];
+                if (result == nil)
+                {
+                    result = string;
+                }
+            }
+#else
+            NSData *data = [string dataUsingEncoding:[string smallestEncoding]];
+            result = [data objectFromJSONData];
+#endif
             
-            resultData = [operation responseJSON];
+//            if (aCacheKey != nil && result && ([result isKindOfClass:[NSDictionary class]] || [result isKindOfClass:[NSArray class]])) {
+//                [_infoCacheDic setValue: result forKey: aCacheKey];
+//            }
         }
         
-        handleComplete(resultData);
+        handleComplete(result);
     }errorHandler:^(MKNetworkOperation *operation, NSError *error){
         NSLog(@"Get post type Fail");
         

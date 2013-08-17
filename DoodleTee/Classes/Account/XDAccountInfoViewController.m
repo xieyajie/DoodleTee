@@ -11,10 +11,11 @@
 #import "XDAccountInfoViewController.h"
 
 #import "XDAccountInfoCell.h"
+#import "AKSegmentedControl.h"
 
 #import "LocalDefault.h"
 
-@interface XDAccountInfoViewController ()<UITableViewDataSource, UITableViewDelegate>
+@interface XDAccountInfoViewController ()<UITableViewDataSource, UITableViewDelegate, AKSegmentedControlDelegate>
 {
     NSMutableArray *_headerViews;
     NSArray *_headerTitles;
@@ -227,6 +228,23 @@
      */
 }
 
+#pragma mark - AKSegmentedControl Delegate
+
+- (void)segmentedViewController:(AKSegmentedControl *)segmentedControl touchedAtIndex:(NSUInteger)index
+{
+    switch (index) {
+        case 0:
+            [self backAction:nil];
+            break;
+        case 1:
+            [self logoutAction:nil];
+            break;
+            
+        default:
+            break;
+    }
+}
+
 #pragma mark - button
 
 - (void)moreOrLessAction:(id)sender
@@ -281,12 +299,37 @@
 
 - (void)layoutBottomView
 {
-    UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, _bottomView.frame.size.width - 0, _bottomView.frame.size.height - 0)];
-    [button setTitle:@"返回" forState:UIControlStateNormal];
-    [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [button.titleLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Bold" size:15.0]];
-    [button addTarget:self action:@selector(backAction) forControlEvents:UIControlEventTouchUpInside];
-    [_bottomView addSubview:button];
+    AKSegmentedControl *segmentedControl = [[AKSegmentedControl alloc] initWithFrame:CGRectMake(14, 12, _bottomView.frame.size.width - 14 * 2, 35)];
+    [segmentedControl setSegmentedControlMode: AKSegmentedControlModeButton];
+    [segmentedControl setDelegate:self];
+    segmentedControl.backgroundColor = [UIColor clearColor];
+    [_bottomView addSubview:segmentedControl];
+    [segmentedControl setSeparatorImage:[UIImage imageNamed:@"segmented_separator.png"]];
+    
+    CGFloat width = segmentedControl.frame.size.width / 2;
+    UIImage *buttonBackgroundImagePressedLeft = [UIImage imageNamed:@"effect_segmented_pressed_left.png"];
+    UIImage *buttonBackgroundImagePressedRight = [UIImage imageNamed:@"effect_segmented_pressed_right.png"];
+    
+    // 返回
+    UIButton *buttonBack = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, width, segmentedControl.frame.size.height)];
+    buttonBack.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
+    buttonBack.contentEdgeInsets = UIEdgeInsetsMake(0, 12, 0, 13);
+    [buttonBack setTitle:@"返回" forState:UIControlStateNormal];
+    [buttonBack setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [buttonBack.titleLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Bold" size:15.0]];
+    [buttonBack setTitleEdgeInsets:UIEdgeInsetsMake(0.0, 10.0, 0.0, 0.0)];
+    [buttonBack setBackgroundImage:buttonBackgroundImagePressedLeft forState:UIControlStateHighlighted];
+    
+    //注销
+    UIButton *buttonLogout = [[UIButton alloc] initWithFrame:CGRectMake(buttonBack.frame.origin.x + buttonBack.frame.size.width, 0, width, segmentedControl.frame.size.height)];
+    buttonLogout.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
+    buttonLogout.contentEdgeInsets = UIEdgeInsetsMake(0, 12, 0, 13);
+    [buttonLogout setTitle:@"注销" forState:UIControlStateNormal];
+    [buttonLogout setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [buttonLogout.titleLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Bold" size:15.0]];
+    [buttonLogout setTitleEdgeInsets:UIEdgeInsetsMake(0.0, 10.0, 0.0, 0.0)];
+    [buttonLogout setBackgroundImage:buttonBackgroundImagePressedRight forState:UIControlStateHighlighted];
+    [segmentedControl setButtonsArray:@[buttonBack, buttonLogout]];
 }
 
 - (void)headerViewWithTitle:(NSString *)title section:(NSInteger)section
@@ -327,9 +370,15 @@
     [_tableView endUpdates];
 }
 
-- (void)backAction
+- (void)backAction:(id)sender
 {
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)logoutAction:(id)sender
+{
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:kUserDefaultsUserName];
+    [self backAction:sender];
 }
 
 

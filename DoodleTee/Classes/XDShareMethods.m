@@ -24,19 +24,19 @@ static XDShareMethods *shareDefult = nil;
     return shareDefult;
 }
 
-+ (BOOL)isConnectedToNetwork
-{
-	Reachability *r = [Reachability reachabilityWithHostName:@"www.baidu.com"];
-    switch ([r currentReachabilityStatus]) {
-        case NotReachable:
-			return NO;
-        case ReachableViaWWAN:
-			return YES;
-        case ReachableViaWiFi:
-			return YES;
-    }
-    return NO;
-}
+//+ (BOOL)isConnectedToNetwork
+//{
+//	Reachability *r = [Reachability reachabilityWithHostName:@"www.baidu.com"];
+//    switch ([r currentReachabilityStatus]) {
+//        case NotReachable:
+//			return NO;
+//        case ReachableViaWWAN:
+//			return YES;
+//        case ReachableViaWiFi:
+//			return YES;
+//    }
+//    return NO;
+//}
 
 - (CGRect)effectViewFrameWithSuperView:(UIView *)view
 {

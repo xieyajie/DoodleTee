@@ -25,7 +25,7 @@
 
 @interface XDCustomMadeViewController ()<AKSegmentedControlDelegate, UITableViewDelegate, UITableViewDataSource>
 {
-    NSDictionary *_attributeDic;
+    NSMutableDictionary *_attributeDic;
     NSArray *_titleArray;
     UIImage *_clothImage;
     
@@ -34,7 +34,7 @@
     UIButton *_subButton;
 }
 
-@property (nonatomic, strong) NSDictionary *attributeDic;
+@property (nonatomic, strong) NSMutableDictionary *attributeDic;
 
 @end
 
@@ -65,6 +65,7 @@
         _moneyLabel.text = @"20 元";
         
         _titleArray = [[NSArray alloc] initWithObjects:kSETTINGBRAND, kSETTINGMATERIAL, kSETTINGSIZE, kSETTINGCOLOR, nil];
+        _attributeDic = [NSMutableDictionary dictionary];
         
         _clothImage = image;
     }
@@ -203,8 +204,10 @@
 - (void)configurationAttribute
 {
     NSString *plistPath = [NSHomeDirectory() stringByAppendingPathComponent: KSETTINGPLIST];
-    NSDictionary *settingDic = [[NSDictionary alloc] initWithContentsOfFile: plistPath];
-    self.attributeDic = settingDic;
+    NSMutableArray *settings = [[NSMutableArray alloc] initWithContentsOfFile: plistPath];
+    for (NSMutableDictionary *dic in settings) {
+        [self.attributeDic setValuesForKeysWithDictionary:dic];
+    }
 }
 
 - (UITableViewCell *)configurationImageCell

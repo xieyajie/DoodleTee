@@ -11,6 +11,8 @@
 #import "XDAccountViewController.h"
 #import "AKSegmentedControl.h"
 
+#import "MBProgressHUD.h"
+#import "XDDataCenter.h"
 #import "LocalDefault.h"
 
 @interface XDAccountViewController ()
@@ -33,12 +35,25 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     [self layoutSubviews];
+    
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeybord:)];
+    [self.view addGestureRecognizer:tap];
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - 
+
+- (void)hideKeybord:(UITapGestureRecognizer *)tapGesture
+{
+    if (tapGesture.state == UIGestureRecognizerStateEnded) {
+        [_userNameField resignFirstResponder];
+        [_pasdField resignFirstResponder];
+    }
 }
 
 #pragma mark - private
@@ -124,9 +139,16 @@
 
 - (BOOL)checkAccountInfo
 {
-    if ([_userNameField.text isEqualToString:@""] || [_pasdField.text isEqualToString:@""]) {
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"警告" message:@"用户名或密码不能为空" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
+    UIAlertView *alertView = nil;
+    if (_userNameField.text.length <= 0) {
+        alertView = [[UIAlertView alloc] initWithTitle:@"警告" message:@"用户名不能为空" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
         [alertView show];        
+        return NO;
+    }
+    else if (_pasdField.text.length < 6)
+    {
+        alertView = [[UIAlertView alloc] initWithTitle:@"警告" message:@"密码不能小于6位" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
+        [alertView show];
         return NO;
     }
     
@@ -143,18 +165,43 @@
 - (void)registerAction:(id)sender
 {
     if ([self checkAccountInfo]) {
-        //
+        [_userNameField resignFirstResponder];
+        [_pasdField resignFirstResponder];
+        
+        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        [[XDDataCenter sharedCenter] registerWithUserName:_userNameField.text password:_pasdField.text realName:nil tel:nil address:nil complete:^(id result){
+            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+            if (result) {
+                [[NSUserDefaults standardUserDefaults] setObject:_userNameField.text forKey:kUserDefaultsUserName];
+                [self dismissViewControllerAnimated: YES completion:^{}];
+            }
+        }onError:^(NSError *error){
+            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+        }];
     }
 }
 
 - (void)loginAction:(id)sender
 {
-//    if ([self checkAccountInfo]) {
-//        //
-//    }
-    [self dismissViewControllerAnimated: NO completion: ^{
-        [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationLandSuccess object:nil];
-    }];
+    if ([self checkAccountInfo]) {
+        [_userNameField resignFirstResponder];
+        [_pasdField resignFirstResponder];
+        
+        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        [[XDDataCenter sharedCenter] loginWithUserName:_userNameField.text password:_pasdField.text complete:^(id result){
+            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+            if (result) {
+                [[NSUserDefaults standardUserDefaults] setObject:_userNameField.text forKey:kUserDefaultsUserName];
+                [self dismissViewControllerAnimated: YES completion:^{}];
+            }
+        }onError:^(NSError *error){
+            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+        }];
+    }
+    
+//    [self dismissViewControllerAnimated: NO completion: ^{
+//        [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationLandSuccess object:nil];
+//    }];
 }
 
 @end
