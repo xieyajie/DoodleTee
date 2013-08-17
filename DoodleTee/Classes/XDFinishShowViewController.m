@@ -9,9 +9,11 @@
 #import <QuartzCore/QuartzCore.h>
 
 #import "XDFinishShowViewController.h"
+#import "XDAccountViewController.h"
 
 #import "AKSegmentedControl.h"
 
+#import "XDDataCenter.h"
 #import "XDShareMethods.h"
 
 #import "LocalDefault.h"
@@ -176,6 +178,25 @@
 
 - (void)doneAction
 {
+    //?????
+//    NSString *userName = [[NSUserDefaults standardUserDefaults] objectForKey:kUserDefaultsUserName];
+//    if (userName == nil && userName.length == 0) {
+//        XDAccountViewController *accountViewController = [[XDAccountViewController alloc] init];
+//        [self.navigationController presentViewController:accountViewController animated:YES completion:nil];
+//    }
+//    else{
+//        NSString *imgName = [NSString stringWithFormat:@"%@_%@.png", userName, @""];
+//        
+//        [[XDDataCenter sharedCenter] uploadImage:self.clothImage imageName:imgName userName:userName complete:^(id result){
+//            if (result) {
+//                //
+//            }
+//        }onError:^(NSError *error){
+//            
+//        }];
+//    }
+    
+    
     [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationFinishName object:self.clothImage];
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
