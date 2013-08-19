@@ -114,7 +114,23 @@ static NSString *kOrderAddress = @"UserOrder.php?";//get
 
 - (void)uploadImageWithPath:(NSString *)aPath userName:(NSString *)aUserName complete:(XDCompleteBlock)handleComplete onError:(XDErrorBlock)handleError
 {
+    MKNetworkOperation *op = [_netEngine operationWithPath:kUploadImageAddress params:[NSDictionary dictionaryWithObjectsAndKeys: aUserName, @"UserName", nil] httpMethod:@"POST"];
     
+    [op addFile:aPath forKey:@"img"];
+    
+    // setFreezable uploads your images after connection is restored!
+    [op setFreezable:YES];
+    
+    [op addCompletionHandler:^(MKNetworkOperation* completedOperation) {
+        NSString *responseString = [completedOperation responseString];
+        NSLog(@"server response: %@",responseString);
+        handleComplete(responseString);
+    } errorHandler:^(MKNetworkOperation *errorOp, NSError* error){
+        NSLog(@"Upload file error: %@", error);
+        handleError(error);
+    }];
+    
+    [_netEngine enqueueOperation: op];
 }
 
 - (void)orderWithUserName:(NSString *)aUserName colcor:(NSString *)aColor material:(NSString *)aMaterial size:(NSString *)aSize brand:(NSString *)aBrand count:(NSInteger)aCount money:(CGFloat)aMoney complete:(XDCompleteBlock)handleComplete onError:(XDErrorBlock)handleError

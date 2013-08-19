@@ -225,13 +225,14 @@
     //上传图片到服务器
     NSString *imgPath = [self saveImage:self.clothImage imageName:imgName userName:userName];
     [[XDDataCenter sharedCenter] uploadImageWithPath:imgPath userName:userName complete:^(id result){
-        if (result) {
-            //
-            [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationFinishName object:self.clothImage];
-            [self.navigationController popToRootViewControllerAnimated:YES];
+        if (result && [result isKindOfClass:[NSString class]]) {
+            NSLog(@"server response: %@",result);
         }
-    }onError:^(NSError *error){
         
+//        [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationFinishName object:self.clothImage];
+//        [self.navigationController popToRootViewControllerAnimated:YES];
+    }onError:^(NSError *error){
+        NSLog(@"Upload file error: %@", error);
     }];
 }
 
