@@ -41,6 +41,10 @@
 #error MKNetworkKit is ARC only. Either turn on ARC for the project or use -fobjc-arc flag
 #endif
 
+//xieyajie add 2013-08-19
+#define IS_CH_SYMBOL(chr) ((int)(chr)>127)
+//end
+
 OSStatus extractIdentityAndTrust(CFDataRef inPKCS12Data,
                                  SecIdentityRef *outIdentity,
                                  SecTrustRef *outTrust,
@@ -609,6 +613,28 @@ OSStatus extractIdentityAndTrust(CFDataRef inPKCS12Data,
   [self.downloadStreams addObject:outputStream];
 }
 
+//xieyajie add 2013-08-17
+- (BOOL)isHaveChinese:(NSString *)string
+{
+//    for (int i = 0; i < [string length]; i++) {
+//        unichar ch = [string characterAtIndex:i];
+//        if(IS_CH_SYMBOL(ch)== 1)
+//        {
+//            return YES;
+//        }
+//    }
+//    
+//    return NO;
+    
+    const char *cString = [string UTF8String];
+    if (strlen(cString) == [string length]) {
+        return NO;
+    }
+    return YES;
+}
+
+//end
+
 - (id)initWithURLString:(NSString *)aURLString
                  params:(NSDictionary *)params
              httpMethod:(NSString *)method
@@ -635,8 +661,17 @@ OSStatus extractIdentityAndTrust(CFDataRef inPKCS12Data,
     if(params)
       self.fieldsToBePosted = [params mutableCopy];
     
-    self.stringEncoding = NSUTF8StringEncoding; // use a delegate to get these values later
-    
+      //xieyajie edit 2013-08-19
+    if ([self isHaveChinese:aURLString]) {
+        self.stringEncoding = CFStringConvertEncodingToNSStringEncoding(kCFStringEncodingGB_18030_2000);
+    }
+    else{
+        self.stringEncoding = NSUTF8StringEncoding; // use a delegate to get these values later
+    }
+      
+//    self.stringEncoding = NSUTF8StringEncoding; // use a delegate to get these values later
+    //end
+      
     if(!method) method = @"GET";
     
     if ([method isEqualToString:@"GET"])
@@ -648,7 +683,7 @@ OSStatus extractIdentityAndTrust(CFDataRef inPKCS12Data,
       finalURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@?%@", aURLString,
                                        [self.fieldsToBePosted urlEncodedKeyValueString]]];
     } else {
-      finalURL = [NSURL URLWithString:aURLString];
+      finalURL = [NSURL URLWithString:[aURLString stringByAddingPercentEscapesUsingEncoding: self.stringEncoding]];
     }
     
     if(finalURL == nil) {

@@ -77,6 +77,7 @@
     [self configurationMainView:_payMoneyView];
     
     _moneyLabel.backgroundColor = [UIColor clearColor];
+    _moneyLabel.text = [NSString stringWithFormat:@"%.2f 元", [[_productInfo objectForKey:kSETTINGMONEY] floatValue]];
     
     _payerField.backgroundColor = [UIColor colorWithRed:194 / 255.0 green:194 / 255.0 blue:194 / 255.0 alpha:1.0];
     _consigneeField.backgroundColor = [UIColor colorWithRed:194 / 255.0 green:194 / 255.0 blue:194 / 255.0 alpha:1.0];
@@ -472,7 +473,7 @@
 - (void)setProductInfo:(NSDictionary *)aInfo
 {
     _productInfo = aInfo;
-    _moneyLabel.text = [NSString stringWithFormat:@"%.2f", [[aInfo objectForKey:kSETTINGMONEY] floatValue]];
+    _moneyLabel.text = [NSString stringWithFormat:@"%.2f 元", [[aInfo objectForKey:kSETTINGMONEY] floatValue]];
     self.product.price = [[aInfo objectForKey:kSETTINGMONEY] floatValue];
 }
 
