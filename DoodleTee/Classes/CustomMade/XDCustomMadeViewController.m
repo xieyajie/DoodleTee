@@ -21,8 +21,6 @@
 #define kRowCount 5
 #define kRowMoney 6
 
-#define kUnitPrice 20
-
 @interface XDCustomMadeViewController ()<AKSegmentedControlDelegate, UITableViewDelegate, UITableViewDataSource>
 {
     NSMutableDictionary *_attributeDic;
@@ -300,7 +298,7 @@
         _subButton.enabled = YES;
     }
     _countField.text = [NSString stringWithFormat:@"%i", count];
-    _moneyLabel.text = [NSString stringWithFormat:@"%i 元", (count * kUnitPrice)];
+    _moneyLabel.text = [NSString stringWithFormat:@"%.2f 元", (count * kUnitPrice)];
 }
 
 - (void)addCount:(id)sender
@@ -309,7 +307,7 @@
     
     NSInteger count = [_countField.text integerValue];
     _countField.text = [NSString stringWithFormat:@"%i", ++count];
-    _moneyLabel.text = [NSString stringWithFormat:@"%i 元", (count * kUnitPrice)];
+    _moneyLabel.text = [NSString stringWithFormat:@"%.2f 元", (count * kUnitPrice)];
 }
 
 #pragma mark - private
@@ -354,8 +352,11 @@
 
 - (void)doneAction
 {
+    [self.attributeDic setObject:[NSNumber numberWithInteger:[_countField.text integerValue]] forKey:kSETTINGCOUNT];
+    [self.attributeDic setObject:[NSNumber numberWithFloat:([_countField.text integerValue] *kUnitPrice)] forKey:kSETTINGMONEY];
+    
     XDPayMoneyViewController *payViewController = [[XDPayMoneyViewController alloc] initWithNibName:@"XDPayMoneyViewController" bundle:nil];
-    payViewController.payMoney = _moneyLabel.text;
+    payViewController.productInfo = self.attributeDic;
     [self.navigationController pushViewController:payViewController animated:YES];
 }
 

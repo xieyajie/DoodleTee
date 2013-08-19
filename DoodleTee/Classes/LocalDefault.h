@@ -40,12 +40,19 @@
 #define kEffectBottomMarginScale 131/637
 //end
 
+//用户名
 #define kUserDefaultsUserName @"userName"
 
+//本地沙盒中图片路径
 #define kLocalImagePath @"Documents/custom/"
 
+//通知名称
 #define kNotificationFinishName @"finishedEffect"
 #define kNotificationLandSuccess @"landSuccess"
+
+
+//其他
+#define kUnitPrice 20.0
 
 #define KSETTINGPLIST @"setting.plist"
 #define kSETTINGBRAND @"品牌"

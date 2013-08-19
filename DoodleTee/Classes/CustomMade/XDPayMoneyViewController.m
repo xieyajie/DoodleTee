@@ -9,15 +9,15 @@
 #import <QuartzCore/QuartzCore.h>
 
 #import "XDPayMoneyViewController.h"
-
 #import "AKSegmentedControl.h"
-
-#import "LocalDefault.h"
 
 #import "AlixPayOrder.h"
 #import "AlixPayResult.h"
 #import "AlixPay.h"
 #import "DataSigner.h"
+
+#import "XDDataCenter.h"
+#import "LocalDefault.h"
 
 @implementation Product
 @synthesize price = _price;
@@ -43,7 +43,7 @@
 
 @synthesize payMoneyView = _payMoneyView;
 
-@synthesize payMoney = _payMoney;
+@synthesize productInfo = _productInfo;
 
 @synthesize product = _product;
 
@@ -77,7 +77,6 @@
     [self configurationMainView:_payMoneyView];
     
     _moneyLabel.backgroundColor = [UIColor clearColor];
-    _moneyLabel.text = self.payMoney;
     
     _payerField.backgroundColor = [UIColor colorWithRed:194 / 255.0 green:194 / 255.0 blue:194 / 255.0 alpha:1.0];
     _consigneeField.backgroundColor = [UIColor colorWithRed:194 / 255.0 green:194 / 255.0 blue:194 / 255.0 alpha:1.0];
@@ -238,78 +237,15 @@
 - (void)doneAction
 {
     if ([self checkOrderInfo]) {
-        /*
-         *商户的唯一的parnter和seller。
-         *本demo将parnter和seller信息存于（AlixPayDemo-Info.plist）中,外部商户可以考虑存于服务端或本地其他地方。
-         *签约后，支付宝会为每个商户分配一个唯一的 parnter 和 seller。
-         */
-        //如果partner和seller数据存于其他位置,请改写下面两行代码
-        NSString *partner = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"Partner"];
-        NSString *seller = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"Seller"];
-        
-        //partner和seller获取失败,提示
-        if ([partner length] == 0 || [seller length] == 0)
-        {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示"
-                                                            message:@"缺少partner或者seller。"
-                                                           delegate:self
-                                                  cancelButtonTitle:@"确定"
-                                                  otherButtonTitles:nil];
-            [alert show];
-            return;
-        }
-        
-        /*
-         *生成订单信息及签名
-         *由于demo的局限性，本demo中的公私钥存放在AlixPayDemo-Info.plist中,外部商户可以存放在服务端或本地其他地方。
-         */
-        //将商品信息赋予AlixPayOrder的成员变量
-        AlixPayOrder *order = [[AlixPayOrder alloc] init];
-        order.partner = partner;
-        order.seller = seller;
-        order.tradeNO = [self generateTradeNO]; //订单ID（由商家自行制定）
-        order.productName = self.product.subject; //商品标题
-        order.productDescription = self.product.body; //商品描述
-        order.amount = [NSString stringWithFormat:@"%.2f",self.product.price]; //商品价格
-        order.notifyURL =  @"http://www.xxx.com"; //回调URL
-        
-        //    order.extraParams = @{@"paizi", @"123"; @"cailiao", @"123"; @"size", @"123"; @"color", @"123"; @"count", @"123"};
-        
-        //应用注册scheme,在AlixPayDemo-Info.plist定义URL types,用于安全支付成功后重新唤起商户应用
-        NSString *appScheme = @"DoodleTee";
-        
-        //将商品信息拼接成字符串
-        NSString *orderSpec = [order description];
-        NSLog(@"orderSpec = %@",orderSpec);
-        
-        //获取私钥并将商户信息签名,外部商户可以根据情况存放私钥和签名,只需要遵循RSA签名规范,并将签名字符串base64编码和UrlEncode
-        id<DataSigner> signer = CreateRSADataSigner([[NSBundle mainBundle] objectForInfoDictionaryKey:@"RSA private key"]);
-        NSString *signedString = [signer signString:orderSpec];
-        
-        //将签名成功字符串格式化为订单字符串,请严格按照该格式
-        NSString *orderString = nil;
-        if (signedString != nil) {
-            orderString = [NSString stringWithFormat:@"%@&sign=\"%@\"&sign_type=\"%@\"",
-                           orderSpec, signedString, @"RSA"];
-            
-            //获取安全支付单例并调用安全支付接口
-            AlixPay * alixpay = [AlixPay shared];
-            int ret = [alixpay pay:orderString applicationScheme:appScheme];
-            
-            if (ret == kSPErrorAlipayClientNotInstalled) {
-                UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:@"提示"
-                                                                     message:@"您还没有安装支付宝快捷支付，请先安装。"
-                                                                    delegate:self
-                                                           cancelButtonTitle:@"确定"
-                                                           otherButtonTitles:nil];
-                [alertView setTag:123];
-                [alertView show];
+        //上传订单
+        NSString *userName = [[NSUserDefaults standardUserDefaults] objectForKey:kUserDefaultsUserName];
+        [[XDDataCenter sharedCenter] orderWithUserName:userName colcor:[_productInfo objectForKey:kSETTINGCOLOR] material:[_productInfo objectForKey:kSETTINGMATERIAL] size:[_productInfo objectForKey:kSETTINGSIZE] brand:[_productInfo objectForKey:kSETTINGBRAND] count:[[_productInfo objectForKey:kSETTINGCOUNT] integerValue] money:[[_productInfo objectForKey:kSETTINGMONEY] floatValue] complete:^(id result){
+            if (result) {
+                //
             }
-            else if (ret == kSPErrorSignError) {
-                NSLog(@"签名错误！");
-            }
+        }onError:^(NSError *error){
             
-        }
+        }];
     }
 }
 
@@ -379,9 +315,16 @@
         
         return NO;
     }
-    else if ([self isMobileNumber:[_telField.text stringByTrimmingCharactersInSet:charSet]])
+    else if (![self isMobileNumber:[_telField.text stringByTrimmingCharactersInSet:charSet]])
     {
         error.message = @"请填写正确的电话号码";
+        [error show];
+        
+        return NO;
+    }
+    else if (_paymentCreditCard.selected == NO && _paymentAlipay.selected == NO)
+    {
+        error.message = @"请选择支付方式";
         [error show];
         
         return NO;
@@ -440,15 +383,97 @@
     }
 }
 
+//上传订单
+- (void)uploadOrder
+{
+    
+}
+
+//选择支付宝
+- (void)alixPayDone
+{
+    /*
+     *商户的唯一的parnter和seller。
+     *本demo将parnter和seller信息存于（AlixPayDemo-Info.plist）中,外部商户可以考虑存于服务端或本地其他地方。
+     *签约后，支付宝会为每个商户分配一个唯一的 parnter 和 seller。
+     */
+    //如果partner和seller数据存于其他位置,请改写下面两行代码
+    NSString *partner = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"Partner"];
+    NSString *seller = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"Seller"];
+    
+    //partner和seller获取失败,提示
+    if ([partner length] == 0 || [seller length] == 0)
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示"
+                                                        message:@"缺少partner或者seller。"
+                                                       delegate:self
+                                              cancelButtonTitle:@"确定"
+                                              otherButtonTitles:nil];
+        [alert show];
+        return;
+    }
+    
+    /*
+     *生成订单信息及签名
+     *由于demo的局限性，本demo中的公私钥存放在AlixPayDemo-Info.plist中,外部商户可以存放在服务端或本地其他地方。
+     */
+    //将商品信息赋予AlixPayOrder的成员变量
+    AlixPayOrder *order = [[AlixPayOrder alloc] init];
+    order.partner = partner;
+    order.seller = seller;
+    order.tradeNO = [self generateTradeNO]; //订单ID（由商家自行制定）
+    order.productName = self.product.subject; //商品标题
+    order.productDescription = self.product.body; //商品描述
+    order.amount = [NSString stringWithFormat:@"%.2f",self.product.price]; //商品价格
+    order.notifyURL =  @"http://www.xxx.com"; //回调URL
+    
+    //    order.extraParams = @{@"paizi", @"123"; @"cailiao", @"123"; @"size", @"123"; @"color", @"123"; @"count", @"123"};
+    
+    //应用注册scheme,在AlixPayDemo-Info.plist定义URL types,用于安全支付成功后重新唤起商户应用
+    NSString *appScheme = @"DoodleTee";
+    
+    //将商品信息拼接成字符串
+    NSString *orderSpec = [order description];
+    NSLog(@"orderSpec = %@",orderSpec);
+    
+    //获取私钥并将商户信息签名,外部商户可以根据情况存放私钥和签名,只需要遵循RSA签名规范,并将签名字符串base64编码和UrlEncode
+    id<DataSigner> signer = CreateRSADataSigner([[NSBundle mainBundle] objectForInfoDictionaryKey:@"RSA private key"]);
+    NSString *signedString = [signer signString:orderSpec];
+    
+    //将签名成功字符串格式化为订单字符串,请严格按照该格式
+    NSString *orderString = nil;
+    if (signedString != nil) {
+        orderString = [NSString stringWithFormat:@"%@&sign=\"%@\"&sign_type=\"%@\"",
+                       orderSpec, signedString, @"RSA"];
+        
+        //获取安全支付单例并调用安全支付接口
+        AlixPay * alixpay = [AlixPay shared];
+        int ret = [alixpay pay:orderString applicationScheme:appScheme];
+        
+        if (ret == kSPErrorAlipayClientNotInstalled) {
+            UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:@"提示"
+                                                                 message:@"您还没有安装支付宝快捷支付，请先安装。"
+                                                                delegate:self
+                                                       cancelButtonTitle:@"确定"
+                                                       otherButtonTitles:nil];
+            [alertView setTag:123];
+            [alertView show];
+        }
+        else if (ret == kSPErrorSignError) {
+            NSLog(@"签名错误！");
+        }
+        
+    }
+}
 
 
 #pragma mark - public
 
-- (void)setPayMoney:(NSString *)money
+- (void)setProductInfo:(NSDictionary *)aInfo
 {
-    _payMoney = money;
-    _moneyLabel.text = money;
-    self.product.price = [money floatValue];
+    _productInfo = aInfo;
+    _moneyLabel.text = [NSString stringWithFormat:@"%.2f", [[aInfo objectForKey:kSETTINGMONEY] floatValue]];
+    self.product.price = [[aInfo objectForKey:kSETTINGMONEY] floatValue];
 }
 
 

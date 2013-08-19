@@ -47,7 +47,7 @@
     UIView *_bottomView;
 }
 
-@property (nonatomic, strong, setter = setPayMoney:) NSString *payMoney;
+@property (nonatomic, strong) NSDictionary *productInfo;
 
 - (IBAction)consigneeCheck:(id)sender;
 

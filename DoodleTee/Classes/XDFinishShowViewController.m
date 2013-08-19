@@ -10,11 +10,11 @@
 
 #import "XDFinishShowViewController.h"
 #import "XDAccountViewController.h"
-
 #import "AKSegmentedControl.h"
 
 #import "XDDataCenter.h"
 #import "XDShareMethods.h"
+#import "MBProgressHUD.h"
 
 #import "LocalDefault.h"
 
@@ -212,8 +212,8 @@
     
     if (result) {
         //将图片存到本地相册
-        UIImageWriteToSavedPhotosAlbum(image, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
-        return imgName;
+//        UIImageWriteToSavedPhotosAlbum(image, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
+//        return imgName;
     }
     
     return imgName;
@@ -221,17 +221,20 @@
 
 - (void)uploadImage:(UIImage *)image userName:(NSString *)userName
 {
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     NSString *imgName = [NSString stringWithFormat:@"%@_%@.png", userName, [_dateFormatter stringFromDate:[NSDate date]]];
     //上传图片到服务器
     NSString *imgPath = [self saveImage:self.clothImage imageName:imgName userName:userName];
     [[XDDataCenter sharedCenter] uploadImageWithPath:imgPath userName:userName complete:^(id result){
+        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
         if (result && [result isKindOfClass:[NSString class]]) {
             NSLog(@"server response: %@",result);
         }
         
-//        [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationFinishName object:self.clothImage];
-//        [self.navigationController popToRootViewControllerAnimated:YES];
+        [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationFinishName object:self.clothImage];
+        [self.navigationController popToRootViewControllerAnimated:YES];
     }onError:^(NSError *error){
+        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
         NSLog(@"Upload file error: %@", error);
     }];
 }

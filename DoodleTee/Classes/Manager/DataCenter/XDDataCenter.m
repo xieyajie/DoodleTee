@@ -135,7 +135,7 @@ static NSString *kOrderAddress = @"UserOrder.php?";//get
 
 - (void)orderWithUserName:(NSString *)aUserName colcor:(NSString *)aColor material:(NSString *)aMaterial size:(NSString *)aSize brand:(NSString *)aBrand count:(NSInteger)aCount money:(CGFloat)aMoney complete:(XDCompleteBlock)handleComplete onError:(XDErrorBlock)handleError
 {
-    NSString *path = [NSString stringWithFormat: @"%@UserName=%@&Color=%@&Material=%@&Size=%@&Brand=%@&Number=%i&Money=%f", kOrderAddress, aUserName, aColor, aMaterial, aSize, aBrand, aCount, aMoney];
+    NSString *path = [NSString stringWithFormat: @"%@UserName=%@&Color=%@&Material=%@&Size=%@&Brand=%@&Number=%i&Money=%.2f", kOrderAddress, aUserName, aColor, aMaterial, aSize, aBrand, aCount, aMoney];
     [self requestInfo: path andOriginKey:nil andCacheKey:nil andRequestKey:nil onComplete: handleComplete onError: handleError];
 }
 
