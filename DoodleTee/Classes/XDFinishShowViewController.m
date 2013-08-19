@@ -24,6 +24,8 @@
     UIView *_bottomView;
     
     UIImage *_clothImage;
+    
+    NSDateFormatter *_dateFormatter;
 }
 
 @property (nonatomic, strong) UIImage *clothImage;
@@ -48,6 +50,9 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    _dateFormatter = [[NSDateFormatter alloc] init ];
+    _dateFormatter.dateFormat = @"yyyy-MM-dd-HH-mm-ss";
+    
     UIImageView *bgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
     bgView.image = [UIImage imageNamed:@"root_bg.png"];
     [self.view addSubview:bgView];
@@ -68,6 +73,25 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - imagePicker delegate
+
+- (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo
+{
+    NSString *info;
+    if (error != NULL)
+    {
+        info = @"图片保存失败";
+        
+    }
+    else  // No errors
+    {   info = @"图片保存成功";
+    }
+    
+    UIAlertView *errorAlert = [[UIAlertView alloc] initWithTitle: info message: nil delegate:self cancelButtonTitle: @"确定" otherButtonTitles:nil, nil];
+    
+    [errorAlert show];
 }
 
 #pragma mark - AKSegmentedControl Delegate
@@ -171,6 +195,46 @@
     [self.view addSubview:_bottomView];
 }
 
+- (NSString *)saveImage:(UIImage *)image imageName:(NSString *)imgName userName:(NSString *)userName
+{
+    //将图片存到本地沙盒内
+    NSString *tmpPath = [NSString stringWithFormat:@"%@%@/", kLocalImagePath, userName];
+    NSString *savePath = [NSHomeDirectory() stringByAppendingPathComponent: tmpPath];
+    NSString *imgPath = [NSString stringWithFormat:@"%@/%@", savePath, imgName];
+    NSFileManager *fileManage = [NSFileManager defaultManager];
+    if (![fileManage fileExistsAtPath: savePath])
+    {
+        [fileManage createDirectoryAtPath: savePath withIntermediateDirectories: YES attributes:nil error:nil];
+    }
+    
+    NSData *imgData = [NSData dataWithData:UIImagePNGRepresentation(image)];
+    BOOL result = [imgData writeToFile:imgPath atomically:YES];
+    
+    if (result) {
+        //将图片存到本地相册
+        UIImageWriteToSavedPhotosAlbum(image, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
+        return imgName;
+    }
+    
+    return imgName;
+}
+
+- (void)uploadImage:(UIImage *)image userName:(NSString *)userName
+{
+    NSString *imgName = [NSString stringWithFormat:@"%@_%@.png", userName, [_dateFormatter stringFromDate:[NSDate date]]];
+    //上传图片到服务器
+    NSString *imgPath = [self saveImage:self.clothImage imageName:imgName userName:userName];
+    [[XDDataCenter sharedCenter] uploadImageWithPath:imgPath userName:userName complete:^(id result){
+        if (result) {
+            //
+            [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationFinishName object:self.clothImage];
+            [self.navigationController popToRootViewControllerAnimated:YES];
+        }
+    }onError:^(NSError *error){
+        
+    }];
+}
+
 - (void)undoAction
 {
     [self.navigationController popViewControllerAnimated:YES];
@@ -178,27 +242,16 @@
 
 - (void)doneAction
 {
-    //?????
-//    NSString *userName = [[NSUserDefaults standardUserDefaults] objectForKey:kUserDefaultsUserName];
-//    if (userName == nil && userName.length == 0) {
-//        XDAccountViewController *accountViewController = [[XDAccountViewController alloc] init];
-//        [self.navigationController presentViewController:accountViewController animated:YES completion:nil];
-//    }
-//    else{
-//        NSString *imgName = [NSString stringWithFormat:@"%@_%@.png", userName, @""];
-//        
-//        [[XDDataCenter sharedCenter] uploadImage:self.clothImage imageName:imgName userName:userName complete:^(id result){
-//            if (result) {
-//                //
-//            }
-//        }onError:^(NSError *error){
-//            
-//        }];
-//    }
-    
-    
-    [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationFinishName object:self.clothImage];
-    [self.navigationController popToRootViewControllerAnimated:YES];
+    //判断是否登录
+    NSString *userName = [[NSUserDefaults standardUserDefaults] objectForKey:kUserDefaultsUserName];
+    //未登录
+    if (userName == nil && userName.length == 0) {
+        XDAccountViewController *accountViewController = [[XDAccountViewController alloc] init];
+        [self.navigationController presentViewController:accountViewController animated:YES completion:nil];
+    }
+    else{//登陆
+        [self uploadImage:self.clothImage userName:userName];
+    }
 }
 
 @end

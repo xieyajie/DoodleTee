@@ -42,6 +42,8 @@
 
 #define kUserDefaultsUserName @"userName"
 
+#define kLocalImagePath @"Documents/custom/"
+
 #define kNotificationFinishName @"finishedEffect"
 #define kNotificationLandSuccess @"landSuccess"
 

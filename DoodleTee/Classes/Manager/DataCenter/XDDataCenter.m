@@ -112,7 +112,7 @@ static NSString *kOrderAddress = @"UserOrder.php?";//get
     [self requestInfo: path andOriginKey:nil andCacheKey:nil andRequestKey:kRequestLoginKey onComplete: handleComplete onError: handleError];
 }
 
-- (void)uploadImage:(UIImage *)aImage imageName:(NSString *)aImageName userName:(NSString *)aUserName complete:(XDCompleteBlock)handleComplete onError:(XDErrorBlock)handleError
+- (void)uploadImageWithPath:(NSString *)aPath userName:(NSString *)aUserName complete:(XDCompleteBlock)handleComplete onError:(XDErrorBlock)handleError
 {
     
 }
