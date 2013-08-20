@@ -319,7 +319,6 @@
 {
     XDShareViewController *shareViewController = [[XDShareViewController alloc] initWithShareImage:_clotheView.image];
     [XDShareMethods presentViewController:shareViewController animated:YES formViewController:self.navigationController completion:nil];
-//    [self.navigationController presentViewController:shareViewController animated:YES completion:^(){}];
      NSLog(@"share");
 }
 
