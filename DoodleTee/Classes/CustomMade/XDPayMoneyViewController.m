@@ -10,6 +10,7 @@
 
 #import "XDPayMoneyViewController.h"
 #import "AKSegmentedControl.h"
+#import "MBProgressHUD.h"
 
 #import "AlixPayOrder.h"
 #import "AlixPayResult.h"
@@ -238,14 +239,19 @@
 - (void)doneAction
 {
     if ([self checkOrderInfo]) {
+        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         //上传订单
         NSString *userName = [[NSUserDefaults standardUserDefaults] objectForKey:kUserDefaultsUserName];
         [[XDDataCenter sharedCenter] orderWithUserName:userName colcor:[_productInfo objectForKey:kSETTINGCOLOR] material:[_productInfo objectForKey:kSETTINGMATERIAL] size:[_productInfo objectForKey:kSETTINGSIZE] brand:[_productInfo objectForKey:kSETTINGBRAND] count:[[_productInfo objectForKey:kSETTINGCOUNT] integerValue] money:[[_productInfo objectForKey:kSETTINGMONEY] floatValue] complete:^(id result){
+            [MBProgressHUD hideHUDForView:self.view animated:YES];
             if (result) {
                 //
             }
         }onError:^(NSError *error){
+            [MBProgressHUD hideHUDForView:self.view animated:YES];
             
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"错误" message:@"上传订单失败，请重新操作" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+            [alert show];
         }];
     }
 }
@@ -457,7 +463,6 @@
         else if (ret == kSPErrorSignError) {
             NSLog(@"签名错误！");
         }
-        
     }
 }
 

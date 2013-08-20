@@ -45,18 +45,26 @@ static XDShareMethods *shareDefult = nil;
 
 - (UIImage *)composeImage:(UIImage *)subImage toImage:(UIImage *)superImage finishToView:(UIView *)view
 {
-    int width = superImage.size.width;
-    int height = superImage.size.height;
+//    int width = superImage.size.width;
+//    int height = superImage.size.height;
+//    
+//    CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
+//    //create a graphic context with CGBitmapContextCreate
+//    CGContextRef context = CGBitmapContextCreate(NULL, width, height, 8, 4 * width, colorSpace, kCGImageAlphaPremultipliedFirst);
+//    CGContextDrawImage(context, CGRectMake(0, 0, width, height), superImage.CGImage);
+//    CGContextDrawImage(context, [self effectViewFrameWithSuperView:view], [subImage CGImage]);
+//    CGImageRef imageMasked = CGBitmapContextCreateImage(context);
+//    CGContextRelease(context);
+//    CGColorSpaceRelease(colorSpace);
+//    return [UIImage imageWithCGImage:imageMasked];
     
-    CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
-    //create a graphic context with CGBitmapContextCreate
-    CGContextRef context = CGBitmapContextCreate(NULL, width, height, 8, 4 * width, colorSpace, kCGImageAlphaPremultipliedFirst);
-    CGContextDrawImage(context, CGRectMake(0, 0, width, height), superImage.CGImage);
-    CGContextDrawImage(context, [self effectViewFrameWithSuperView:view], [subImage CGImage]);
-    CGImageRef imageMasked = CGBitmapContextCreateImage(context);
-    CGContextRelease(context);
-    CGColorSpaceRelease(colorSpace);
-    return [UIImage imageWithCGImage:imageMasked];
+    CGSize superSize = superImage.size;
+    UIGraphicsBeginImageContext(superSize);
+    [superImage drawInRect:CGRectMake(0, 0, superSize.width, superSize.height)];
+    [subImage drawInRect:[self effectViewFrameWithSuperView:view]];
+    __autoreleasing UIImage *finish = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return finish;
 }
 
 @end
