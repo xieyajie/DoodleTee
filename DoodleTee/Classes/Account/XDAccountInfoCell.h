@@ -20,7 +20,7 @@
 @property (nonatomic, strong) UILabel *achieveLabel;
 @property (nonatomic, strong) UILabel *balanceLabel;
 
-- (void)cellForBasicInfo;
+- (void)cellForHeaderView;
 
 - (void)cellForLineChart;
 

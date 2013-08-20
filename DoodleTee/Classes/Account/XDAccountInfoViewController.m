@@ -9,14 +9,16 @@
 #import <QuartzCore/QuartzCore.h>
 
 #import "XDAccountInfoViewController.h"
-
+#import "XDAccountInfoHeaderView.h"
 #import "XDAccountInfoCell.h"
 #import "AKSegmentedControl.h"
 
 #import "XDShareMethods.h"
 #import "LocalDefault.h"
 
-@interface XDAccountInfoViewController ()<UITableViewDataSource, UITableViewDelegate, AKSegmentedControlDelegate>
+#define kMoreButtonTag 100
+
+@interface XDAccountInfoViewController ()<UITableViewDataSource, UITableViewDelegate, AKSegmentedControlDelegate, XDAccountInfoHeaderViewDelegate>
 {
     NSMutableArray *_headerViews;
     NSArray *_headerTitles;
@@ -73,7 +75,7 @@
     
     _bottomView.layer.shadowColor = [[UIColor blackColor] CGColor];
     _bottomView.layer.shadowOpacity = 1.0;
-    _bottomView.layer.shadowRadius = 8.0;
+    _bottomView.layer.shadowRadius = 5.0;
     _bottomView.layer.shadowOffset = CGSizeMake(0.0f, 0.0f);
     [self.view bringSubviewToFront:_bottomView];
 }
@@ -111,20 +113,33 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.section == 0) {
-        static NSString *BasicCellIdentifier = @"BasicCell";
-        XDAccountInfoCell *cell = (XDAccountInfoCell *)[tableView dequeueReusableCellWithIdentifier:BasicCellIdentifier];
+        static NSString *HeaderCellIdentifier = @"HeaderCell";
+        XDAccountInfoCell *headerCell = (XDAccountInfoCell *)[tableView dequeueReusableCellWithIdentifier:HeaderCellIdentifier];
         
-        if (nil == cell) {
-            cell = [[XDAccountInfoCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:BasicCellIdentifier];
-            [cell cellForBasicInfo];
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        if (nil == headerCell) {
+            headerCell = [[XDAccountInfoCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:HeaderCellIdentifier];
+            [headerCell cellForHeaderView];
+            headerCell.selectionStyle = UITableViewCellSelectionStyleNone;
         }
-        cell.imageView.image = [UIImage imageNamed:@"account_userDeaultImage.png"];
-        cell.nameLabel.text = @"123";
-        cell.achieveLabel.text = @"456";
-        cell.balanceLabel.text = @"789";
+        headerCell.imageView.image = [UIImage imageNamed:@"account_userDeaultImage.png"];
+        headerCell.nameLabel.text = [[NSUserDefaults standardUserDefaults] objectForKey:kUserDefaultsUserName];
+        headerCell.achieveLabel.text = @"暂无";
+        headerCell.balanceLabel.text = @"暂无";
         
-        return cell;
+        return headerCell;
+    }
+    else if (indexPath.section == 1){
+        static NSString *DynamicCellIdentifier = @"DynamicCell";
+        XDAccountInfoCell *dynamicCell = (XDAccountInfoCell *)[tableView dequeueReusableCellWithIdentifier:DynamicCellIdentifier];
+        
+        if (nil == dynamicCell) {
+            dynamicCell = [[XDAccountInfoCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:DynamicCellIdentifier];
+            [dynamicCell cellForLineChart];
+            dynamicCell.selectionStyle = UITableViewCellSelectionStyleNone;
+        }
+        dynamicCell.textLabel.text = @"暂无动态";
+        
+        return dynamicCell;
     }
     
     static NSString *CellIdentifier = @"Cell";
@@ -135,7 +150,7 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
-    cell.textLabel.text = @"abc";
+    cell.textLabel.text = @"暂无信息";
     
     return cell;
 }
@@ -246,28 +261,26 @@
     }
 }
 
-#pragma mark - button
+#pragma mark - XDAccountInfoHeaderViewDelegate
 
-- (void)moreOrLessAction:(id)sender
+- (void)headerView:(XDAccountInfoHeaderView *)headerView showMoreInfo:(BOOL)open
 {
-    UIButton *button = (UIButton *)sender;
-    button.selected = !button.selected;
-    if (button.selected) {
-        [_selectedSections addObject:[NSNumber numberWithInteger:button.tag]];
+    NSInteger section = headerView.section;
+    if (open) {
+        [_selectedSections addObject:[NSNumber numberWithInteger:section]];
     }
     else
     {
         for (NSNumber *n in _selectedSections) {
-            if ([n integerValue] == button.tag) {
+            if ([n integerValue] == section) {
                 [_selectedSections removeObject:n];
                 break;
             }
         }
     }
     
-    [self showSection:button.tag isMore:button
-     .selected];
-//    switch (button.tag) {
+    [self showSection:section isMore:open];
+//    switch (section) {
 //        case 2:
 //            //
 //            break;
@@ -335,24 +348,10 @@
 
 - (void)headerViewWithTitle:(NSString *)title section:(NSInteger)section
 {
-    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, _tableView.frame.size.height, 30)];
-    headerView.backgroundColor = [UIColor clearColor];
-    
-    UILabel *colorLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, _tableView.frame.size.width - 20, 30)];
-    colorLabel.backgroundColor = [UIColor colorWithRed:194 / 255.0 green:194 / 255.0 blue:194 / 255.0 alpha:1.0];
-    [headerView addSubview:colorLabel];
-    
-    UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 5, 200, 20)];
-    titleLabel.text = title;
-    titleLabel.backgroundColor = [UIColor clearColor];
-    [headerView addSubview:titleLabel];
-    
-    UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(_tableView.frame.size.width - 10 - 25, 5, 20, 20)];
-    button.tag = section;
-    [button setImage:[UIImage imageNamed:@"uncheck.png"] forState:UIControlStateNormal];
-    [button setImage:[UIImage imageNamed:@"check.png"] forState:UIControlStateSelected];
-    [button addTarget:self action:@selector(moreOrLessAction:) forControlEvents:UIControlEventTouchUpInside];
-    [headerView addSubview:button];
+    XDAccountInfoHeaderView *headerView = [[XDAccountInfoHeaderView alloc] initWithFrame:CGRectMake(0, 0, _tableView.frame.size.width, 30)];
+    headerView.delegate = self;
+    headerView.title = title;
+    headerView.section = section;
     
     [_headerViews addObject:headerView];
 }

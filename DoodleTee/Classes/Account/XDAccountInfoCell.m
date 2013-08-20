@@ -64,7 +64,7 @@
 
 #pragma mark - public
 
-- (void)cellForBasicInfo
+- (void)cellForHeaderView
 {
     UILabel *name = [[UILabel alloc] initWithFrame:CGRectMake(85, 15, 65, 20)];
     name.font = [UIFont systemFontOfSize:16];

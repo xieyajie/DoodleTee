@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3A00DDCA17C36D7800CB1771 /* XDAccountInfoHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A00DDC617C36C4200CB1771 /* XDAccountInfoHeaderView.m */; };
 		3A039E0417A70B020050691B /* libalixpay.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A039D9E17A70B010050691B /* libalixpay.a */; };
 		3A039E0717A70B020050691B /* DataVerifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A039DA417A70B010050691B /* DataVerifier.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		3A039E0B17A70B020050691B /* base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A039DF717A70B020050691B /* base64.m */; };
@@ -160,6 +161,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3A00DDC517C36C4200CB1771 /* XDAccountInfoHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XDAccountInfoHeaderView.h; sourceTree = "<group>"; };
+		3A00DDC617C36C4200CB1771 /* XDAccountInfoHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XDAccountInfoHeaderView.m; sourceTree = "<group>"; };
 		3A039D9917A70B010050691B /* AlixPay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlixPay.h; sourceTree = "<group>"; };
 		3A039D9A17A70B010050691B /* AlixPayOrder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlixPayOrder.h; sourceTree = "<group>"; };
 		3A039D9B17A70B010050691B /* AlixPayResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlixPayResult.h; sourceTree = "<group>"; };
@@ -884,6 +887,8 @@
 				3AEA8AF817A70A5D00DC976A /* XDAccountInfoViewController.m */,
 				3AEA8AF917A70A5D00DC976A /* XDAccountViewController.h */,
 				3AEA8AFA17A70A5D00DC976A /* XDAccountViewController.m */,
+				3A00DDC517C36C4200CB1771 /* XDAccountInfoHeaderView.h */,
+				3A00DDC617C36C4200CB1771 /* XDAccountInfoHeaderView.m */,
 			);
 			path = Account;
 			sourceTree = "<group>";
@@ -1184,6 +1189,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3A00DDCA17C36D7800CB1771 /* XDAccountInfoHeaderView.m in Sources */,
 				3A039E6217A71FB30050691B /* main.m in Sources */,
 				3A039E6117A71F280050691B /* DataSigner.m in Sources */,
 				3AEA8B4417A70A5D00DC976A /* XDAccountInfoCell.m in Sources */,
