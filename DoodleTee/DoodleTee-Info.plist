@@ -14,6 +14,7 @@
 		<dict>
 			<key>CFBundleIconFiles</key>
 			<array>
+				<string>icon114</string>
 				<string>图标(57x57).png</string>
 				<string>图标(114x114).png</string>
 				<string>icon(114x114).png</string>
@@ -35,27 +36,6 @@
 	<string>1.0</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
-	<key>CFBundleVersion</key>
-	<string>1.0</string>
-	<key>LSRequiresIPhoneOS</key>
-	<true/>
-	<key>Partner</key>
-	<string>2088011485123579</string>
-	<key>RSA private key</key>
-	<string>MIICdgIBADANBgkqhkiG9w0BAQEFAASCAmAwggJcAgEAAoGBAISiSBlMFdjvrMxGboN3/mZ7oRJUQqPVKjPwam4O2DBOO3u3K0VS43ci52uqIvT+sKg48HEeYNufLhmqumyd0UP+n3IRmFxraZmjwKBuvqwjNqkZiuTVGvYDfz3uvjfur2HdOh8vW4ht61NU5+iSb1nRBpOzedjVhEkkCDWlYOZvAgMBAAECgYB34caRNvg4UMo7CR4yrm6/atc3nflt4+p1b8SDHd/CKbQSKolt63G16VKLOgjGsL40DuMlG3QojkQ45twB+NN/9tTP+DFsJ6N+r45U7pvq8FIrV+6ZYgexpnDBPP3aoXv8ne97wsPD9rZVVIvSm8P2m5ZDs/unAhcwsa93FrGwYQJBAMzphED+vrpBftlbeBq9J7lw3X/y5DXMdsIEF/1HC3mAgt1UCE/72HyBiXxEp/shUkOQycfwCTDi8HCQuk2XoLsCQQCls54ivahNME5Kwy2hkWxMDUcSBbu25f/2xkK8Ryt+F32C2IMLJV3+Mg5BQJmr7yHQKoIDvhulQqechsb7BZ/dAkAucYb+TD7ibFHZ5fd06AaG62Poyh6bavpHwzHEwEODiHMgwxkXN9e7cIi+17jTHJxOoBR78pXCtM0WVldDmuhdAkA8Yo+vY2RQ9NijQCuB5KgNsw0CUVqOFZVJDglF6b28zryrkVF4H174gq9VMkCOOrAc11DYIlCa0gaY8TjUQ8F1AkEAuCXyfsxQf9ttar2lCsGzNve8OP+n2vfp0TZDeCt02TZf7O04hC5CNp7JQXJ/wnkzJTmQpPSAjKOojhJpADlpOA==</string>
-	<key>RSA public key</key>
-	<string>MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCEokgZTBXY76zMRm6Dd/5me6ESVEKj1Soz8GpuDtgwTjt7tytFUuN3IudrqiL0/rCoOPBxHmDbny4ZqrpsndFD/p9yEZhca2mZo8Cgbr6sIzapGYrk1Rr2A3897r437q9h3TofL1uIbetTVOfokm9Z0QaTs3nY1YRJJAg1pWDmbwIDAQAB</string>
-	<key>Seller</key>
-	<string>2088011485123579</string>
-	<key>UIRequiredDeviceCapabilities</key>
-	<array>
-		<string>armv7</string>
-	</array>
-	<key>UISupportedInterfaceOrientations</key>
-	<array>
-		<string>UIInterfaceOrientationPortrait</string>
-		<string>UIInterfaceOrientationPortraitUpsideDown</string>
-	</array>
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
@@ -66,6 +46,27 @@
 				<string>DoodleTee</string>
 			</array>
 		</dict>
+	</array>
+	<key>CFBundleVersion</key>
+	<string>1.0</string>
+	<key>LSRequiresIPhoneOS</key>
+	<true/>
+	<key>Partner</key>
+	<string>2088011485123579</string>
+	<key>RSA private key</key>
+	<string>MIICdgIBADANBgkqhkiG9w0BAQEFAASCAmAwggJcAgEAAoGBAITNQ3HRvZkaxmtUb77v08KlnYJeWYR715jZVYyoXZCQZjb4uHffs21+lba0/BYPYDERzn4XNB9u8s29utYlOWzVgXHEeTEODaziHPlCQUGIsvaD1OaXq+U6vDhAz6AhBrGxp58gCvFZi+CDqqVo5Cmhi6Xu9kJ8cWEQxv7kEitFAgMBAAECgYA9L6F6aGtVhjuTKeUOcMr9LHcEoNnXq4Nq/f9nfg8V0yH1A+Vh/aRat27dLkfTFiR4lz6vY5t1PBYMavURQzdQXkpfbThgRSgjyz+KOxvN5OijLA5osqmvKAtNrS6LfQIM1J/tb2fjwkRyc4AWwSYvOnhDQv5M/crZ3wvuItKCpQJBAMURlbr/fhsUZlA+XsqalBqNDuCgUPOC1rNxRwFFQr+EA4/zaATccPWI3DOzsjB8DaMeNG34Y7fhGGhZag8HUg8CQQCsg8kmpo/G5FflYJINLmWYwU9c201sUc38brbhRxfFHddwuRtPzaDAL2/IZKxQnvorLg3Qkm8rDLrk9tnL0jFrAkEAnE/hcy0aysH4kaeXKp9H4HOInHWtICnkwPqV9pUIZ75/0Nuh41EzLB69gykCquCLNJpNvfiqp/ycjpB1xqvo0wJARCoCReJUNwssa7afntOxUw02tYL1cZJVKKP6YML9cmZbJPAPCZY/KRDVQ0H8EBLw2DTnQn1JraHnCuc6oV1ZJwJABIl92UCreiqoMd/+WQExWe2DACAGUq/pe0Ks7PK4LFDw27JR2yNlMKDQnCLLoUMJVbgphm83kh/Gnik5h63boQ==</string>
+	<key>RSA public key</key>
+	<string>MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCEzUNx0b2ZGsZrVG++79PCpZ2CXlmEe9eY2VWMqF2QkGY2+Lh337NtfpW2tPwWD2AxEc5+FzQfbvLNvbrWJTls1YFxxHkxDg2s4hz5QkFBiLL2g9Tml6vlOrw4QM+gIQaxsaefIArxWYvgg6qlaOQpoYul7vZCfHFhEMb+5BIrRQIDAQAB</string>
+	<key>Seller</key>
+	<string>2088011485123579</string>
+	<key>UIRequiredDeviceCapabilities</key>
+	<array>
+		<string>armv7</string>
+	</array>
+	<key>UISupportedInterfaceOrientations</key>
+	<array>
+		<string>UIInterfaceOrientationPortrait</string>
+		<string>UIInterfaceOrientationPortraitUpsideDown</string>
 	</array>
 </dict>
 </plist>

@@ -14,6 +14,13 @@
 
 + (BOOL)isConnectedToNetwork;
 
+//当前版本
++ (CGFloat)currentVersion;
+
++ (void)presentViewController:(UIViewController *)viewControllerToPresent animated: (BOOL)flag formViewController:(UIViewController *)fromViewController completion:(void (^)(void))completion;
+
++ (void)dismissViewController:(UIViewController *)viewController animated: (BOOL)flag completion: (void (^)(void))completion;
+
 
 - (CGRect)effectViewFrameWithSuperView:(UIView *)view;
 

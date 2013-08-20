@@ -38,6 +38,41 @@ static XDShareMethods *shareDefult = nil;
 //    return NO;
 //}
 
++ (CGFloat)currentVersion
+{
+    return [[[UIDevice currentDevice] systemVersion] floatValue];
+}
+
++ (void)presentViewController:(UIViewController *)viewControllerToPresent animated: (BOOL)flag formViewController:(UIViewController *)fromViewController completion:(void (^)(void))completion
+{
+    if ([XDShareMethods currentVersion] >= 5.0) {
+        [fromViewController presentViewController:viewControllerToPresent animated:flag completion:completion];
+    }
+    else{
+        if (completion != nil) {
+            completion();
+        }
+        
+        [fromViewController presentModalViewController:viewControllerToPresent animated:flag];
+    }
+}
+
++ (void)dismissViewController:(UIViewController *)viewController animated:(BOOL)flag completion: (void (^)(void))completion
+{
+    if ([XDShareMethods currentVersion] >= 5.0)
+    {
+        [viewController dismissViewControllerAnimated:flag completion:completion];
+    }
+    else{
+        if (completion != nil) {
+            completion();
+        }
+        [viewController dismissModalViewControllerAnimated:flag];
+    }
+}
+
+#pragma mark - 合并图片
+
 - (CGRect)effectViewFrameWithSuperView:(UIView *)view
 {
     return CGRectMake(view.frame.size.width * kEffectLeftMarginScale, view.frame.size.height * kEffectTopMarginScale, view.frame.size.width * kEffectWidthScale, view.frame.size.height * kEffectHeightScale);

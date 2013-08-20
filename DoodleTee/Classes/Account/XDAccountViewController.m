@@ -10,8 +10,9 @@
 
 #import "XDAccountViewController.h"
 #import "AKSegmentedControl.h"
-
 #import "MBProgressHUD.h"
+
+#import "XDShareMethods.h"
 #import "XDDataCenter.h"
 #import "LocalDefault.h"
 
@@ -35,7 +36,7 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     [self layoutSubviews];
-    
+     
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeybord:)];
     [self.view addGestureRecognizer:tap];
 }
@@ -81,6 +82,7 @@
     
     _userNameField = [[UITextField alloc] initWithFrame:CGRectMake(80, 65, 181, 30)];
     _userNameField.borderStyle = UITextBorderStyleNone;
+    _userNameField.placeholder = @"用户名";
     _userNameField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
     _userNameField.backgroundColor = [UIColor colorWithRed:194 / 255.0 green:194 / 255.0 blue:194 / 255.0 alpha:1.0];
     [_mainView addSubview:_userNameField];
@@ -92,6 +94,7 @@
     
     _pasdField = [[UITextField alloc] initWithFrame:CGRectMake(80, 125, 181, 30)];
     _pasdField.borderStyle = UITextBorderStyleNone;
+    _pasdField.placeholder = @"密码";
     _pasdField.secureTextEntry = YES;
     _pasdField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
     _pasdField.backgroundColor = [UIColor colorWithRed:194 / 255.0 green:194 / 255.0 blue:194 / 255.0 alpha:1.0];
@@ -159,7 +162,8 @@
 
 - (void)backAction:(id)sender
 {
-    [self dismissViewControllerAnimated: YES completion: nil];
+    [XDShareMethods dismissViewController:self animated:YES completion:nil];
+//    [self dismissViewControllerAnimated: YES completion: nil];
 }
 
 - (void)registerAction:(id)sender
@@ -173,7 +177,8 @@
             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
             if (result) {
                 [[NSUserDefaults standardUserDefaults] setObject:_userNameField.text forKey:kUserDefaultsUserName];
-                [self dismissViewControllerAnimated: YES completion:^{}];
+                [XDShareMethods dismissViewController:self animated:YES completion:nil];
+//                [self dismissViewControllerAnimated: YES completion:^{}];
             }
         }onError:^(NSError *error){
             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
@@ -188,11 +193,13 @@
         [_pasdField resignFirstResponder];
         
         [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        __block NSString *userName = _userNameField.text;
         [[XDDataCenter sharedCenter] loginWithUserName:_userNameField.text password:_pasdField.text complete:^(id result){
             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
             if (result) {
-                [[NSUserDefaults standardUserDefaults] setObject:_userNameField.text forKey:kUserDefaultsUserName];
-                [self dismissViewControllerAnimated: YES completion:^{}];
+                [[NSUserDefaults standardUserDefaults] setObject:userName forKey:kUserDefaultsUserName];
+                [XDShareMethods dismissViewController:self animated:YES completion:nil];
+//                [self dismissViewControllerAnimated: YES completion:^{}];
             }
         }onError:^(NSError *error){
             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];

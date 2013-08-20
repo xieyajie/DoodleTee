@@ -13,6 +13,7 @@
 #import "XDAccountInfoCell.h"
 #import "AKSegmentedControl.h"
 
+#import "XDShareMethods.h"
 #import "LocalDefault.h"
 
 @interface XDAccountInfoViewController ()<UITableViewDataSource, UITableViewDelegate, AKSegmentedControlDelegate>
@@ -372,7 +373,8 @@
 
 - (void)backAction:(id)sender
 {
-    [self dismissViewControllerAnimated:YES completion:nil];
+    [XDShareMethods dismissViewController:self animated:YES completion:nil];
+//    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)logoutAction:(id)sender

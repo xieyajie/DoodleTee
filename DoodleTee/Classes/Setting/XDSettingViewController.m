@@ -10,6 +10,7 @@
 #import "XDSettingViewController.h"
 #import "AKSegmentedControl.h"
 
+#import "XDShareMethods.h"
 #import "LocalDefault.h"
 
 #define kTagLeftView 0
@@ -299,7 +300,8 @@
 
 - (void)backAction:(id)sender
 {
-    [self dismissViewControllerAnimated: YES completion: nil];
+    [XDShareMethods dismissViewController:self animated:YES completion:nil];
+//    [self dismissViewControllerAnimated: YES completion: nil];
 }
 
 - (void)overAction:(id)sender

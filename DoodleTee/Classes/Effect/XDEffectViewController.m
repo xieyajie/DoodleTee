@@ -7,20 +7,17 @@
 //
 
 #import <AVFoundation/AVFoundation.h>
-
 #import <QuartzCore/QuartzCore.h>
 
 #import "XDEffectViewController.h"
-
 #import "XDFinishShowViewController.h"
-
 #import "AKSegmentedControl.h"
 
 #import "XDImagePicker.h"
-
 #import "XDDrawPicker.h"
-
 #import "XDTextPicker.h"
+
+#import "XDShareMethods.h"
 
 #define kTagTopSegmentedControl 0
 #define kTagNormalBottomSegmentedControl 1
@@ -220,7 +217,7 @@ typedef enum{
     UIImage *image = [info objectForKey:@"UIImagePickerControllerOriginalImage"];//获取图片
     if (picker.sourceType == UIImagePickerControllerSourceTypePhotoLibrary)
     {
-        [self dismissViewControllerAnimated:YES completion:^{
+        [XDShareMethods dismissViewController:self animated:YES completion:^{
             if (_imageTypeSelectedIndex == -1) {
                 _imageTypeSelectedIndex = 0;
             }
@@ -228,6 +225,15 @@ typedef enum{
             [self imageEffectWithType:_imageTypeSelectedIndex];
             [self hideNormalBottomSegmentedControl];
         }];//关闭模态视图控制器
+        
+//        [self dismissViewControllerAnimated:YES completion:^{
+//            if (_imageTypeSelectedIndex == -1) {
+//                _imageTypeSelectedIndex = 0;
+//            }
+//            self.imagePicker.image = image;
+//            [self imageEffectWithType:_imageTypeSelectedIndex];
+//            [self hideNormalBottomSegmentedControl];
+//        }];
     }
 }
 
@@ -632,7 +638,8 @@ typedef enum{
     self.imagePicker.isStatic = YES;
     self.imagePickerController.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;//打开相册
     self.imagePickerController.allowsEditing = NO;//禁止对图片进行编辑
-    [self.navigationController presentViewController:self.imagePickerController animated:YES completion:nil];//打开模态视图控制器选择图像
+    [XDShareMethods presentViewController:self.imagePickerController animated:YES formViewController:self.navigationController completion:nil];//打开模态视图控制器选择图像
+//    [self.navigationController presentViewController:self.imagePickerController animated:YES completion:nil];
 }
 
 //相机

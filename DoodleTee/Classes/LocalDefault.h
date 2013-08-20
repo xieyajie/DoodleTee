@@ -50,6 +50,7 @@
 
 //本地沙盒中图片路径
 #define kLocalImagePath @"Documents/custom/"
+#define kLocalInfoPath @"Documents/commonInfo.plist"
 
 //通知名称
 #define kNotificationFinishName @"finishedEffect"
@@ -72,5 +73,11 @@
 #define kACCOUNTDESIGN @"设计历史"
 #define kACCOUNTBUY @"购买历史"
 #define kACCOUNTSELL @"销售历史"
+
+//订单 常用信息
+#define kORDERCONSIGNEE @"consignee"
+#define kORDERTEL @"tel"
+#define kORDERADDRESS @"address"
+#define kORDERPAYMENT @"payment"
 
 #endif

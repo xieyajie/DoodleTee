@@ -9,19 +9,14 @@
 #import <QuartzCore/QuartzCore.h>
 
 #import "XDRootViewController.h"
-
 #import "XDEffectViewController.h"
-
 #import "XDSettingViewController.h"
-
 #import "XDAccountViewController.h"
-
 #import "XDAccountInfoViewController.h"
-
 #import "XDShareViewController.h"
-
 #import "XDCustomMadeViewController.h"
 
+#import "XDShareMethods.h"
 #import "LocalDefault.h"
 
 #define kTagTopView 0
@@ -162,7 +157,8 @@
 - (void)successOfLanding:(NSNotification *)aNotification
 {
     XDAccountInfoViewController *infoViewController = [[XDAccountInfoViewController alloc] init];
-    [self.navigationController presentViewController:infoViewController animated:YES completion:nil];
+    [XDShareMethods presentViewController:infoViewController animated:YES formViewController:self.navigationController completion:nil];
+//    [self.navigationController presentViewController:infoViewController animated:YES completion:nil];
 }
 
 #pragma mark - 页面排版
@@ -282,7 +278,8 @@
 - (void)settingAction
 {
     XDSettingViewController *settingViewController = [[XDSettingViewController alloc] init];
-    [self.navigationController presentViewController:settingViewController animated:YES completion:nil];
+    [XDShareMethods presentViewController:settingViewController animated:YES formViewController:self.navigationController completion:nil];
+//    [self.navigationController presentViewController:settingViewController animated:YES completion:nil];
 }
 
 - (void)accountAction
@@ -290,11 +287,13 @@
     NSString *userName = [[NSUserDefaults standardUserDefaults] objectForKey:kUserDefaultsUserName];
     if (userName && userName.length > 0) {
         XDAccountInfoViewController *infoViewController = [[XDAccountInfoViewController alloc] init];
-        [self.navigationController presentViewController:infoViewController animated:YES completion:nil];
+        [XDShareMethods presentViewController:infoViewController animated:YES formViewController:self.navigationController completion:nil];
+//        [self.navigationController presentViewController:infoViewController animated:YES completion:nil];
     }
     else{
         XDAccountViewController *accountViewController = [[XDAccountViewController alloc] init];
-        [self.navigationController presentViewController:accountViewController animated:YES completion:nil];
+        [XDShareMethods presentViewController:accountViewController animated:YES formViewController:self.navigationController completion:nil];
+//        [self.navigationController presentViewController:accountViewController animated:YES completion:nil];
     }
 }
 
@@ -319,7 +318,8 @@
 - (void)shareAction
 {
     XDShareViewController *shareViewController = [[XDShareViewController alloc] initWithShareImage:_clotheView.image];
-    [self.navigationController presentViewController:shareViewController animated:YES completion:^(){}];
+    [XDShareMethods presentViewController:shareViewController animated:YES formViewController:self.navigationController completion:nil];
+//    [self.navigationController presentViewController:shareViewController animated:YES completion:^(){}];
      NSLog(@"share");
 }
 

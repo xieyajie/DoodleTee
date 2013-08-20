@@ -249,9 +249,9 @@
     //判断是否登录
     NSString *userName = [[NSUserDefaults standardUserDefaults] objectForKey:kUserDefaultsUserName];
     //未登录
-    if (userName == nil && userName.length == 0) {
+    if (userName == nil || userName.length == 0) {
         XDAccountViewController *accountViewController = [[XDAccountViewController alloc] init];
-        [self.navigationController presentViewController:accountViewController animated:YES completion:nil];
+        [XDShareMethods presentViewController:accountViewController animated:YES formViewController:self.navigationController completion:nil];
     }
     else{//登陆
         [self uploadImage:self.clothImage userName:userName];

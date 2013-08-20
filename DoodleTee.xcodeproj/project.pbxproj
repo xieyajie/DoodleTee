@@ -77,6 +77,8 @@
 		3A6E1966175B0AE800806F8A /* font_4.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A6E1956175B0AE800806F8A /* font_4.png */; };
 		3A6E1970175B11CA00806F8A /* stroke_2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A6E196F175B11CA00806F8A /* stroke_2@2x.png */; };
 		3A7204C317BB5722005949FD /* settingSource.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3A7204C217BB5722005949FD /* settingSource.plist */; };
+		3A94862517C30F82009D8DC0 /* icon57.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A94862317C30F82009D8DC0 /* icon57.png */; };
+		3A94862617C30F82009D8DC0 /* icon114.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A94862417C30F82009D8DC0 /* icon114.png */; };
 		3A992BA917C1C8860011CA49 /* XDShareMethods.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A992BA817C1C8860011CA49 /* XDShareMethods.m */; };
 		3AB10002175486AC00B72E93 /* clothe_default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3AB10001175486AC00B72E93 /* clothe_default@2x.png */; };
 		3AB1000417548AF600B72E93 /* root_add@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3AB1000317548AF600B72E93 /* root_add@2x.png */; };
@@ -136,8 +138,6 @@
 		3AEA8B7217A70A6E00DC976A /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3AEA8B6F17A70A6E00DC976A /* Default-568h@2x.png */; };
 		3AEA8B7317A70A6E00DC976A /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 3AEA8B7017A70A6E00DC976A /* Default.png */; };
 		3AEA8B7417A70A6E00DC976A /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3AEA8B7117A70A6E00DC976A /* Default@2x.png */; };
-		3AEA8B7717A70A8000DC976A /* icon57.png in Resources */ = {isa = PBXBuildFile; fileRef = 3AEA8B7517A70A8000DC976A /* icon57.png */; };
-		3AEA8B7817A70A8000DC976A /* icon114.png in Resources */ = {isa = PBXBuildFile; fileRef = 3AEA8B7617A70A8000DC976A /* icon114.png */; };
 		3AFAD8A9175CDC4D00E7A4DB /* setting_cellSelectBackground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3AFAD8A7175CDC4D00E7A4DB /* setting_cellSelectBackground@2x.png */; };
 		3AFAD8AA175CDC4D00E7A4DB /* setting_unchoiceBox@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3AFAD8A8175CDC4D00E7A4DB /* setting_unchoiceBox@2x.png */; };
 /* End PBXBuildFile section */
@@ -330,6 +330,8 @@
 		3A6E1956175B0AE800806F8A /* font_4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = font_4.png; sourceTree = "<group>"; };
 		3A6E196F175B11CA00806F8A /* stroke_2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "stroke_2@2x.png"; sourceTree = "<group>"; };
 		3A7204C217BB5722005949FD /* settingSource.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = settingSource.plist; sourceTree = "<group>"; };
+		3A94862317C30F82009D8DC0 /* icon57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon57.png; sourceTree = "<group>"; };
+		3A94862417C30F82009D8DC0 /* icon114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon114.png; sourceTree = "<group>"; };
 		3A992BA717C1C8860011CA49 /* XDShareMethods.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDShareMethods.h; sourceTree = "<group>"; };
 		3A992BA817C1C8860011CA49 /* XDShareMethods.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XDShareMethods.m; sourceTree = "<group>"; };
 		3AB10001175486AC00B72E93 /* clothe_default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "clothe_default@2x.png"; sourceTree = "<group>"; };
@@ -412,8 +414,6 @@
 		3AEA8B6F17A70A6E00DC976A /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = SOURCE_ROOT; };
 		3AEA8B7017A70A6E00DC976A /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = SOURCE_ROOT; };
 		3AEA8B7117A70A6E00DC976A /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = SOURCE_ROOT; };
-		3AEA8B7517A70A8000DC976A /* icon57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon57.png; sourceTree = SOURCE_ROOT; };
-		3AEA8B7617A70A8000DC976A /* icon114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon114.png; sourceTree = SOURCE_ROOT; };
 		3AEA8B7E17A70AB200DC976A /* DoodleTee-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "DoodleTee-Info.plist"; sourceTree = "<group>"; };
 		3AEA8B7F17A70AB200DC976A /* DoodleTee-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "DoodleTee-Prefix.pch"; sourceTree = "<group>"; };
 		3AEA8B8017A70AB200DC976A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -785,13 +785,13 @@
 		3AB1FFC217546F4200B72E93 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				3A94862317C30F82009D8DC0 /* icon57.png */,
+				3A94862417C30F82009D8DC0 /* icon114.png */,
 				3A039D9717A70B010050691B /* alixPay */,
 				3AEA8B8117A70ACE00DC976A /* LocalDefault.h */,
 				3AEA8B7E17A70AB200DC976A /* DoodleTee-Info.plist */,
 				3AEA8B7F17A70AB200DC976A /* DoodleTee-Prefix.pch */,
 				3AEA8B8017A70AB200DC976A /* main.m */,
-				3AEA8B7517A70A8000DC976A /* icon57.png */,
-				3AEA8B7617A70A8000DC976A /* icon114.png */,
 				3AEA8B6F17A70A6E00DC976A /* Default-568h@2x.png */,
 				3AEA8B7017A70A6E00DC976A /* Default.png */,
 				3AEA8B7117A70A6E00DC976A /* Default@2x.png */,
@@ -1111,6 +1111,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3AB1FFC617546F4200B72E93 /* InfoPlist.strings in Resources */,
+				3A94862517C30F82009D8DC0 /* icon57.png in Resources */,
 				3AB10002175486AC00B72E93 /* clothe_default@2x.png in Resources */,
 				3AB1000417548AF600B72E93 /* root_add@2x.png in Resources */,
 				3AB1000E1754941D00B72E93 /* buttonBg@2x.png in Resources */,
@@ -1170,10 +1171,9 @@
 				3AEA8B6717A70A5D00DC976A /* ShareSDKiPhoneSimpleShareViewUI.bundle in Resources */,
 				3AEA8B7217A70A6E00DC976A /* Default-568h@2x.png in Resources */,
 				3AEA8B7317A70A6E00DC976A /* Default.png in Resources */,
+				3A94862617C30F82009D8DC0 /* icon114.png in Resources */,
 				3AEA8B7417A70A6E00DC976A /* Default@2x.png in Resources */,
-				3AEA8B7717A70A8000DC976A /* icon57.png in Resources */,
 				3A42290D17BF4C9300D0A884 /* CHANGELOG.md in Resources */,
-				3AEA8B7817A70A8000DC976A /* icon114.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1323,7 +1323,7 @@
 				GCC_PREFIX_HEADER = "DoodleTee/DoodleTee-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
 					"$(SRCROOT)/DoodleTee/framework/**",
-					"$(SRCROOT)/DoodleTee/alixPay/Utilities",
+					"$(SRCROOT)/DoodleTee/alixPay/Utilities/**",
 				);
 				INFOPLIST_FILE = "DoodleTee/DoodleTee-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;

@@ -115,8 +115,22 @@
 
 #pragma mark - UITextField delegate
 
+- (BOOL)textFieldShouldEndEditing:(UITextField *)textField
+{
+    if (textField == _consigneeField) {
+        [self configurationInfoWithConsignee:_consigneeField.text];
+    }
+    
+    [textField resignFirstResponder];
+    return YES;
+}
+
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
+    if (textField == _consigneeField) {
+        [self configurationInfoWithConsignee:_consigneeField.text];
+    }
+    
     [textField resignFirstResponder];
     return YES;
 }
@@ -240,15 +254,21 @@
 {
     if ([self checkOrderInfo]) {
         [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        
+        //存储常用收货人信息
+        [self saveConsigneeInfo];
+        //存储常用支付方法信息
+        [self savePaymentInfo];
+        
         //上传订单
         NSString *userName = [[NSUserDefaults standardUserDefaults] objectForKey:kUserDefaultsUserName];
         [[XDDataCenter sharedCenter] orderWithUserName:userName colcor:[_productInfo objectForKey:kSETTINGCOLOR] material:[_productInfo objectForKey:kSETTINGMATERIAL] size:[_productInfo objectForKey:kSETTINGSIZE] brand:[_productInfo objectForKey:kSETTINGBRAND] count:[[_productInfo objectForKey:kSETTINGCOUNT] integerValue] money:[[_productInfo objectForKey:kSETTINGMONEY] floatValue] complete:^(id result){
-            [MBProgressHUD hideHUDForView:self.view animated:YES];
+            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
             if (result) {
                 //
             }
         }onError:^(NSError *error){
-            [MBProgressHUD hideHUDForView:self.view animated:YES];
+            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
             
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"错误" message:@"上传订单失败，请重新操作" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
             [alert show];
@@ -265,6 +285,48 @@
     }
     
     return _product;
+}
+
+//根据收货人获取默认常用信息
+- (void)configurationInfoWithConsignee:(NSString *)aName
+{
+    if (aName && aName.length > 0) {
+        NSString *userName = [[NSUserDefaults standardUserDefaults] objectForKey:kUserDefaultsUserName];
+        NSMutableDictionary *consigneeInfo = nil;
+        //从本地沙盒内获取信息
+        NSString *savePath = [NSHomeDirectory() stringByAppendingPathComponent: kLocalInfoPath];
+        NSFileManager *fileManage = [NSFileManager defaultManager];
+        if ([fileManage fileExistsAtPath: savePath])
+        {
+            NSMutableDictionary *infoDic = [[NSMutableDictionary alloc] initWithContentsOfFile:savePath];
+            if (infoDic != nil) {
+                NSMutableDictionary *userInfo = [infoDic objectForKey:userName];
+                if (userInfo != nil) {
+                    consigneeInfo = [userInfo objectForKey:_consigneeField.text];
+                }
+                
+            }
+        }
+        
+        if (consigneeInfo != nil && [consigneeInfo count] > 0) {
+            if ([_telField.text length] == 0 && [_addressField.text length] == 0) {
+                _telField.text = [consigneeInfo objectForKey:kORDERTEL];
+                _addressField.text = [consigneeInfo objectForKey:kORDERADDRESS];
+            }
+            if (_paymentCreditCard.selected == NO && _paymentAlipay.selected == NO)
+            {
+                NSString *payStr = [consigneeInfo objectForKey:kORDERPAYMENT];
+                if ([payStr isEqualToString:_paymentCreditCard.titleLabel.text]) {
+                    _paymentCreditCard.selected = YES;
+                    _paymentAlipay.selected = NO;
+                }
+                else{
+                    _paymentCreditCard.selected = NO;
+                    _paymentAlipay.selected = YES;
+                }
+            }
+        }
+    }
 }
 
 /*
@@ -387,6 +449,75 @@
     else
     {
         return NO;
+    }
+}
+
+//存储常用收货人信息
+- (void)saveConsigneeInfo
+{
+    if (_consigneeCheckButton.selected) {
+        NSString *userName = [[NSUserDefaults standardUserDefaults] objectForKey:kUserDefaultsUserName];
+        //将信息存到本地沙盒内
+        NSString *savePath = [NSHomeDirectory() stringByAppendingPathComponent: kLocalInfoPath];
+        NSFileManager *fileManage = [NSFileManager defaultManager];
+        if (![fileManage fileExistsAtPath: savePath])
+        {
+            [fileManage createFileAtPath:savePath contents:nil attributes:nil];
+        }
+        NSMutableDictionary *infoDic = [[NSMutableDictionary alloc] initWithContentsOfFile:savePath];
+        if (infoDic == nil) {
+            infoDic = [NSMutableDictionary dictionary];
+        }
+        NSMutableDictionary *userInfo = [infoDic objectForKey:userName];
+        if (userInfo == nil) {
+            userInfo = [NSMutableDictionary dictionary];
+        }
+        NSMutableDictionary *consigneeInfo = [userInfo objectForKey:_consigneeField.text];
+        if (consigneeInfo == nil) {
+            consigneeInfo = [NSMutableDictionary dictionary];
+        }
+        
+        [consigneeInfo setObject:_consigneeField.text forKey:kORDERCONSIGNEE];
+        [consigneeInfo setObject:_telField.text forKey:kORDERTEL];
+        [consigneeInfo setObject:_addressField.text forKey:kORDERADDRESS];
+        
+        [userInfo setObject:consigneeInfo forKey:_consigneeField.text];
+        [infoDic setObject:userInfo forKey:userName];
+        [infoDic writeToFile:savePath atomically:YES];
+    }
+}
+
+//存储常用支付方法信息
+- (void)savePaymentInfo
+{
+    if (_paymentCheckButton.selected) {
+        NSString *userName = [[NSUserDefaults standardUserDefaults] objectForKey:kUserDefaultsUserName];
+        //将信息存到本地沙盒内
+        NSString *savePath = [NSHomeDirectory() stringByAppendingPathComponent: kLocalInfoPath];
+        NSFileManager *fileManage = [NSFileManager defaultManager];
+        if (![fileManage fileExistsAtPath: savePath])
+        {
+            [fileManage createFileAtPath:savePath contents:nil attributes:nil];
+        }
+        NSMutableDictionary *infoDic = [[NSMutableDictionary alloc] initWithContentsOfFile:savePath];
+        if (infoDic == nil) {
+            infoDic = [NSMutableDictionary dictionary];
+        }
+        NSMutableDictionary *userInfo = [infoDic objectForKey:userName];
+        if (userInfo == nil) {
+            userInfo = [NSMutableDictionary dictionary];
+        }
+        NSMutableDictionary *consigneeInfo = [userInfo objectForKey:_consigneeField.text];
+        if (consigneeInfo == nil) {
+            consigneeInfo = [NSMutableDictionary dictionary];
+        }
+        
+        NSString *payStr = _paymentCreditCard.selected ? _paymentCreditCard.titleLabel.text : _paymentAlipay.titleLabel.text;
+        [consigneeInfo setObject:payStr forKey:kORDERPAYMENT];
+        
+        [userInfo setObject:consigneeInfo forKey:_consigneeField.text];
+        [infoDic setObject:userInfo forKey:userName];
+        [infoDic writeToFile:savePath atomically:YES];
     }
 }
 
