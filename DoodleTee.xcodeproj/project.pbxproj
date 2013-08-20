@@ -1274,6 +1274,10 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/DoodleTee/framework/**",
+					"$(SRCROOT)/DoodleTee/alixPay/Utilities/**",
+				);
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
@@ -1297,6 +1301,10 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/DoodleTee/framework/**",
+					"$(SRCROOT)/DoodleTee/alixPay/Utilities/**",
+				);
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PROVISIONING_PROFILE = "";
@@ -1323,7 +1331,7 @@
 				GCC_PREFIX_HEADER = "DoodleTee/DoodleTee-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
 					"$(SRCROOT)/DoodleTee/framework/**",
-					"$(SRCROOT)/DoodleTee/alixPay/Utilities/**",
+					"$(SRCROOT)/DoodleTee/alixPay/Utilities",
 				);
 				INFOPLIST_FILE = "DoodleTee/DoodleTee-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
@@ -1358,7 +1366,10 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DoodleTee/DoodleTee-Prefix.pch";
-				HEADER_SEARCH_PATHS = "$(SRCROOT)/framework/**";
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/DoodleTee/framework/**",
+					"$(SRCROOT)/DoodleTee/alixPay/Utilities",
+				);
 				INFOPLIST_FILE = "DoodleTee/DoodleTee-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				LIBRARY_SEARCH_PATHS = (

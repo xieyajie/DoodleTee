@@ -151,7 +151,7 @@ static NSString *kOrderAddress = @"UserOrder.php?";//get
         
         NSData *data = [operation responseData];
         CFStringRef stringRef = CFStringCreateWithBytes(NULL, [data bytes], [data length], kCFStringEncodingGB_18030_2000, false);
-        NSString *string = [(NSString *)CFBridgingRelease(stringRef) stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+        NSString *string = [(__bridge NSString *)stringRef stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
         CFRelease(stringRef);
         
         id result = nil;
