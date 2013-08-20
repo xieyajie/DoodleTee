@@ -9,6 +9,11 @@
 #ifndef DoodleTee_LocalDefault_h
 #define DoodleTee_LocalDefault_h
 
+//支付宝相关
+#define kPartnerId @"2088011485123579"
+#define kSellerId @"2088011485123579"
+//end
+
 #if !defined __IPHONE_OS_VERSION_MIN_REQUIRED >= __IPHONE_5_0
 # define KTextAlignmentLeft UITextAlignmentLeft
 # define KTextAlignmentCenter UITextAlignmentCenter

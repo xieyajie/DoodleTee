@@ -384,12 +384,6 @@
     }
 }
 
-//上传订单
-- (void)uploadOrder
-{
-    
-}
-
 //选择支付宝
 - (void)alixPayDone
 {
