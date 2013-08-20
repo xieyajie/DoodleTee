@@ -104,7 +104,6 @@
 		3AEA8B4917A70A5D00DC976A /* XDAttributeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AEA8B0217A70A5D00DC976A /* XDAttributeCell.m */; };
 		3AEA8B4A17A70A5D00DC976A /* XDCustomMadeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AEA8B0417A70A5D00DC976A /* XDCustomMadeViewController.m */; };
 		3AEA8B4B17A70A5D00DC976A /* XDPayMoneyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AEA8B0617A70A5D00DC976A /* XDPayMoneyViewController.m */; };
-		3AEA8B4C17A70A5D00DC976A /* XDPayMoneyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3AEA8B0717A70A5D00DC976A /* XDPayMoneyViewController.xib */; };
 		3AEA8B4D17A70A5D00DC976A /* 02.acv in Resources */ = {isa = PBXBuildFile; fileRef = 3AEA8B0B17A70A5D00DC976A /* 02.acv */; };
 		3AEA8B4E17A70A5D00DC976A /* 06.acv in Resources */ = {isa = PBXBuildFile; fileRef = 3AEA8B0C17A70A5D00DC976A /* 06.acv */; };
 		3AEA8B4F17A70A5D00DC976A /* 17.acv in Resources */ = {isa = PBXBuildFile; fileRef = 3AEA8B0D17A70A5D00DC976A /* 17.acv */; };
@@ -369,7 +368,6 @@
 		3AEA8B0417A70A5D00DC976A /* XDCustomMadeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XDCustomMadeViewController.m; sourceTree = "<group>"; };
 		3AEA8B0517A70A5D00DC976A /* XDPayMoneyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDPayMoneyViewController.h; sourceTree = "<group>"; };
 		3AEA8B0617A70A5D00DC976A /* XDPayMoneyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XDPayMoneyViewController.m; sourceTree = "<group>"; };
-		3AEA8B0717A70A5D00DC976A /* XDPayMoneyViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = XDPayMoneyViewController.xib; sourceTree = "<group>"; };
 		3AEA8B0B17A70A5D00DC976A /* 02.acv */ = {isa = PBXFileReference; lastKnownFileType = file; path = 02.acv; sourceTree = "<group>"; };
 		3AEA8B0C17A70A5D00DC976A /* 06.acv */ = {isa = PBXFileReference; lastKnownFileType = file; path = 06.acv; sourceTree = "<group>"; };
 		3AEA8B0D17A70A5D00DC976A /* 17.acv */ = {isa = PBXFileReference; lastKnownFileType = file; path = 17.acv; sourceTree = "<group>"; };
@@ -919,7 +917,6 @@
 				3AEA8B0417A70A5D00DC976A /* XDCustomMadeViewController.m */,
 				3AEA8B0517A70A5D00DC976A /* XDPayMoneyViewController.h */,
 				3AEA8B0617A70A5D00DC976A /* XDPayMoneyViewController.m */,
-				3AEA8B0717A70A5D00DC976A /* XDPayMoneyViewController.xib */,
 			);
 			path = CustomMade;
 			sourceTree = "<group>";
@@ -1160,7 +1157,6 @@
 				3AE8AA3217845398005AC6AB /* check@2x.png in Resources */,
 				3AE8AA3317845398005AC6AB /* uncheck@2x.png in Resources */,
 				3AE299C61785BE8000CDB041 /* account_userDeaultImage@2x.png in Resources */,
-				3AEA8B4C17A70A5D00DC976A /* XDPayMoneyViewController.xib in Resources */,
 				3AEA8B4D17A70A5D00DC976A /* 02.acv in Resources */,
 				3AEA8B4E17A70A5D00DC976A /* 06.acv in Resources */,
 				3AEA8B4F17A70A5D00DC976A /* 17.acv in Resources */,
@@ -1266,8 +1262,8 @@
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Martin Yin (E66NLL8383)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Martin Yin (E66NLL8383)";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -1285,8 +1281,8 @@
 					"$(SRCROOT)/DoodleTee/alixPay/Utilities/**",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
-				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				PROVISIONING_PROFILE = "BBD603E2-2698-4818-B31F-38F3A2851314";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "BBD603E2-2698-4818-B31F-38F3A2851314";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -1300,8 +1296,8 @@
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Martin Yin (E66NLL8383)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Martin Yin (E66NLL8383)";
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
@@ -1313,8 +1309,8 @@
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
-				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				PROVISIONING_PROFILE = "BBD603E2-2698-4818-B31F-38F3A2851314";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "BBD603E2-2698-4818-B31F-38F3A2851314";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -1323,8 +1319,8 @@
 		3AB1FFDC17546F4200B72E93 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Martin Yin (E66NLL8383)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Martin Yin (E66NLL8383)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/DoodleTee/Classes/Share/ShareSDK_v2.2.4/Connection\"",
@@ -1351,8 +1347,8 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				PROVISIONING_PROFILE = "BBD603E2-2698-4818-B31F-38F3A2851314";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "BBD603E2-2698-4818-B31F-38F3A2851314";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1360,8 +1356,8 @@
 		3AB1FFDD17546F4200B72E93 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Martin Yin (E66NLL8383)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Martin Yin (E66NLL8383)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/DoodleTee/Classes/Share/ShareSDK_v2.2.4/Connection\"",
@@ -1388,8 +1384,8 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				PROVISIONING_PROFILE = "BBD603E2-2698-4818-B31F-38F3A2851314";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "BBD603E2-2698-4818-B31F-38F3A2851314";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

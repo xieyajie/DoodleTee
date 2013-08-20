@@ -201,8 +201,10 @@
 
 - (void)configurationAttribute
 {
+    NSString *userName = [[NSUserDefaults standardUserDefaults] objectForKey:kUserDefaultsUserName];
     NSString *plistPath = [NSHomeDirectory() stringByAppendingPathComponent: KSETTINGPLIST];
-    NSMutableArray *settings = [[NSMutableArray alloc] initWithContentsOfFile: plistPath];
+    NSMutableDictionary *settingsDic = [[NSMutableDictionary alloc] initWithContentsOfFile: plistPath];
+    NSMutableArray *settings = [settingsDic objectForKey:userName];
     for (NSMutableDictionary *dic in settings) {
         [self.attributeDic setValuesForKeysWithDictionary:dic];
     }

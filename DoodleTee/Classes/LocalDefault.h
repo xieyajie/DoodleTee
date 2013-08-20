@@ -46,6 +46,7 @@
 //end
 
 //用户名
+#define kUserDefault @"default"
 #define kUserDefaultsUserName @"userName"
 
 //本地沙盒中图片路径
@@ -60,7 +61,7 @@
 //其他
 #define kUnitPrice 20.0
 
-#define KSETTINGPLIST @"setting.plist"
+#define KSETTINGPLIST @"Documents/setting.plist"
 #define kSETTINGBRAND @"品牌"
 #define kSETTINGMATERIAL @"材质"
 #define kSETTINGCOLOR @"颜色"

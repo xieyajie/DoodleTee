@@ -254,6 +254,17 @@
 
 - (void)configurationSettingSelected
 {
+    NSString *key = nil;
+    //判断是否登录
+    NSString *userName = [[NSUserDefaults standardUserDefaults] objectForKey:kUserDefaultsUserName];
+    //未登录
+    if (userName == nil || userName.length == 0) {
+        key = kUserDefault;
+    }
+    else{
+        key = userName;
+    }
+    
     NSString *plistPath = [NSHomeDirectory() stringByAppendingPathComponent: KSETTINGPLIST];
     NSFileManager *fileManage = [NSFileManager defaultManager];
     if (![fileManage fileExistsAtPath: plistPath])
@@ -261,7 +272,15 @@
         [fileManage createFileAtPath: plistPath contents: nil attributes: nil];
     }
     
-    NSMutableArray *array = [[NSMutableArray alloc] initWithContentsOfFile: plistPath];
+    NSMutableArray *array = nil;
+    NSMutableDictionary *setDic = [[NSMutableDictionary alloc] initWithContentsOfFile:plistPath];
+    if (setDic == nil) {
+        setDic = [NSMutableDictionary dictionary];
+    }
+    else{
+        array = [setDic objectForKey:key];
+    }
+    
     if (array == nil || [array count] == 0) {
         _selectionArray = [NSMutableArray arrayWithObjects:[NSMutableDictionary dictionaryWithObjectsAndKeys:[NSIndexPath indexPathForRow:0 inSection:0], kSETTINGBRAND, [NSIndexPath indexPathForRow:0 inSection:1], kSETTINGMATERIAL, [NSIndexPath indexPathForRow:0 inSection:2], kSETTINGCOLOR, nil], [NSMutableDictionary dictionaryWithObjectsAndKeys:[NSIndexPath indexPathForRow:0 inSection:0], kSETTINGSIZE, nil], nil];
     }
@@ -306,6 +325,17 @@
 
 - (void)overAction:(id)sender
 {
+    NSString *key = nil;
+    //判断是否登录
+    NSString *userName = [[NSUserDefaults standardUserDefaults] objectForKey:kUserDefaultsUserName];
+    //未登录
+    if (userName == nil || userName.length == 0) {
+        key = kUserDefault;
+    }
+    else{
+        key = userName;
+    }
+    
     //存储数据
     NSString *plistPath = [NSHomeDirectory() stringByAppendingPathComponent: KSETTINGPLIST];
     NSFileManager *fileManage = [NSFileManager defaultManager];
@@ -313,8 +343,12 @@
     {
         [fileManage createFileAtPath: plistPath contents: nil attributes: nil];
     }
+    NSMutableDictionary *setDic = [[NSMutableDictionary alloc] initWithContentsOfFile:plistPath];
+    if (setDic == nil) {
+        setDic = [NSMutableDictionary dictionary];
+    }
     
-    NSMutableArray *settings = [[NSMutableArray alloc] initWithContentsOfFile: plistPath];
+    NSMutableArray *settings = [setDic objectForKey:key];
     if (settings == nil)
     {
         settings = [[NSMutableArray alloc] init];
@@ -335,7 +369,8 @@
         [settings addObject:dic];
     }
     
-    [settings writeToFile: plistPath atomically: YES];
+    [setDic setObject:settings forKey:key];
+    [setDic writeToFile: plistPath atomically: YES];
     
     [self backAction:sender];
 }

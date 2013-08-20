@@ -175,6 +175,7 @@
         [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         [[XDDataCenter sharedCenter] registerWithUserName:_userNameField.text password:_pasdField.text realName:nil tel:nil address:nil complete:^(id result){
             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+            
             if (result) {
                 [[NSUserDefaults standardUserDefaults] setObject:_userNameField.text forKey:kUserDefaultsUserName];
                 [XDShareMethods dismissViewController:self animated:YES completion:nil];
