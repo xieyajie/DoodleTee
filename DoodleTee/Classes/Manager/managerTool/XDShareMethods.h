@@ -12,7 +12,7 @@
 
 + (id)defaultShare;
 
-+ (BOOL)isConnectedToNetwork;
+//+ (BOOL)isConnectedToNetwork;
 
 //当前版本
 + (CGFloat)currentVersion;

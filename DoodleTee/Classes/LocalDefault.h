@@ -57,6 +57,10 @@
 #define kNotificationFinishName @"finishedEffect"
 #define kNotificationLandSuccess @"landSuccess"
 
+//接口返回字段
+#define kREQUESTRESULTCODE @"code"
+#define kREQUESTRESULTINFO @"info"
+
 
 //其他
 #define kUnitPrice 20.0

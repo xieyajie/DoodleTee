@@ -176,13 +176,22 @@
         [[XDDataCenter sharedCenter] registerWithUserName:_userNameField.text password:_pasdField.text realName:nil tel:nil address:nil complete:^(id result){
             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
             
-            if (result) {
-                [[NSUserDefaults standardUserDefaults] setObject:_userNameField.text forKey:kUserDefaultsUserName];
-                [XDShareMethods dismissViewController:self animated:YES completion:nil];
-//                [self dismissViewControllerAnimated: YES completion:^{}];
+            if (result && [result isKindOfClass:[NSDictionary class]]) {
+                NSInteger code = [result objectForKey:kREQUESTRESULTCODE];
+                if (code > 0)
+                {
+                    [[NSUserDefaults standardUserDefaults] setObject:_userNameField.text forKey:kUserDefaultsUserName];
+                    [XDShareMethods dismissViewController:self animated:YES completion:nil];
+                }
+                else{
+                    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"错误" message:@"注册失败，请重新操作" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
+                    [alertView show];
+                }
             }
         }onError:^(NSError *error){
             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"错误" message:@"注册失败，请重新操作" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
+            [alertView show];
         }];
     }
 }
@@ -197,13 +206,21 @@
         __block NSString *userName = _userNameField.text;
         [[XDDataCenter sharedCenter] loginWithUserName:_userNameField.text password:_pasdField.text complete:^(id result){
             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-            if (result) {
-                [[NSUserDefaults standardUserDefaults] setObject:userName forKey:kUserDefaultsUserName];
-                [XDShareMethods dismissViewController:self animated:YES completion:nil];
-//                [self dismissViewControllerAnimated: YES completion:^{}];
+            if (result && [result isKindOfClass:[NSDictionary class]]) {
+                NSInteger code = [result objectForKey:kREQUESTRESULTCODE];
+                if (code > 0) {
+                    [[NSUserDefaults standardUserDefaults] setObject:userName forKey:kUserDefaultsUserName];
+                    [XDShareMethods dismissViewController:self animated:YES completion:nil];
+                }
+                else{
+                    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"错误" message:@"登录失败，请重新登录" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
+                    [alertView show];
+                }
             }
         }onError:^(NSError *error){
             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"错误" message:@"登录失败，请重新登录" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
+            [alertView show];
         }];
     }
     

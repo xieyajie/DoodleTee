@@ -122,9 +122,28 @@ static NSString *kOrderAddress = @"UserOrder.php?";//get
     [op setFreezable:YES];
     
     [op addCompletionHandler:^(MKNetworkOperation* completedOperation) {
-        NSString *responseString = [completedOperation responseString];
-        NSLog(@"server response: %@",responseString);
-        handleComplete(responseString);
+        NSData *data = [completedOperation responseData];
+        CFStringRef stringRef = CFStringCreateWithBytes(NULL, [data bytes], [data length], kCFStringEncodingGB_18030_2000, false);
+        NSString *string = [(__bridge NSString *)stringRef stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+        CFRelease(stringRef);
+        
+        id result = nil;
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_5_0
+        if (string != nil) {
+            result = [NSJSONSerialization JSONObjectWithData:[string dataUsingEncoding:[string smallestEncoding]] options:NSJSONReadingMutableContainers error:nil];
+            if (result == nil)
+            {
+                result = string;
+            }
+        }
+#else
+        NSData *data = [string dataUsingEncoding:[string smallestEncoding]];
+        result = [data objectFromJSONData];
+#endif
+        
+//        NSString *responseString = [completedOperation responseString];
+//        NSLog(@"server response: %@",responseString);
+        handleComplete(result);
     } errorHandler:^(MKNetworkOperation *errorOp, NSError* error){
         NSLog(@"Upload file error: %@", error);
         handleError(error);

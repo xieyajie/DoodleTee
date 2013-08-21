@@ -77,6 +77,7 @@
 		3A6E1965175B0AE800806F8A /* font_3.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A6E1955175B0AE800806F8A /* font_3.png */; };
 		3A6E1966175B0AE800806F8A /* font_4.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A6E1956175B0AE800806F8A /* font_4.png */; };
 		3A6E1970175B11CA00806F8A /* stroke_2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A6E196F175B11CA00806F8A /* stroke_2@2x.png */; };
+		3A70409C17C4491C00FB0F39 /* XDPayMoneyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A70409B17C4491C00FB0F39 /* XDPayMoneyViewController.xib */; };
 		3A7204C317BB5722005949FD /* settingSource.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3A7204C217BB5722005949FD /* settingSource.plist */; };
 		3A94862517C30F82009D8DC0 /* icon57.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A94862317C30F82009D8DC0 /* icon57.png */; };
 		3A94862617C30F82009D8DC0 /* icon114.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A94862417C30F82009D8DC0 /* icon114.png */; };
@@ -331,6 +332,7 @@
 		3A6E1955175B0AE800806F8A /* font_3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = font_3.png; sourceTree = "<group>"; };
 		3A6E1956175B0AE800806F8A /* font_4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = font_4.png; sourceTree = "<group>"; };
 		3A6E196F175B11CA00806F8A /* stroke_2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "stroke_2@2x.png"; sourceTree = "<group>"; };
+		3A70409B17C4491C00FB0F39 /* XDPayMoneyViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = XDPayMoneyViewController.xib; sourceTree = "<group>"; };
 		3A7204C217BB5722005949FD /* settingSource.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = settingSource.plist; sourceTree = "<group>"; };
 		3A94862317C30F82009D8DC0 /* icon57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon57.png; sourceTree = "<group>"; };
 		3A94862417C30F82009D8DC0 /* icon114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon114.png; sourceTree = "<group>"; };
@@ -911,6 +913,7 @@
 		3AEA8B0017A70A5D00DC976A /* CustomMade */ = {
 			isa = PBXGroup;
 			children = (
+				3A70409B17C4491C00FB0F39 /* XDPayMoneyViewController.xib */,
 				3AEA8B0117A70A5D00DC976A /* XDAttributeCell.h */,
 				3AEA8B0217A70A5D00DC976A /* XDAttributeCell.m */,
 				3AEA8B0317A70A5D00DC976A /* XDCustomMadeViewController.h */,
@@ -1138,6 +1141,7 @@
 				3A6E1958175B0AE800806F8A /* stroke_1@2x.png in Resources */,
 				3A6E195A175B0AE800806F8A /* stroke_3@2x.png in Resources */,
 				3A6E195B175B0AE800806F8A /* stroke_4@2x.png in Resources */,
+				3A70409C17C4491C00FB0F39 /* XDPayMoneyViewController.xib in Resources */,
 				3A6E195C175B0AE800806F8A /* effect.png in Resources */,
 				3A6E195D175B0AE800806F8A /* effect_0@2x.png in Resources */,
 				3A6E195E175B0AE800806F8A /* effect_1@2x.png in Resources */,
@@ -1262,8 +1266,8 @@
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Martin Yin (E66NLL8383)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Martin Yin (E66NLL8383)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Tixa Internet(Beijing) Technology Co., Ltd.";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Tixa Internet(Beijing) Technology Co., Ltd.";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -1281,8 +1285,8 @@
 					"$(SRCROOT)/DoodleTee/alixPay/Utilities/**",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
-				PROVISIONING_PROFILE = "BBD603E2-2698-4818-B31F-38F3A2851314";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "BBD603E2-2698-4818-B31F-38F3A2851314";
+				PROVISIONING_PROFILE = "C5F82489-9F46-4F5A-8836-25DC3BBC3830";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "C5F82489-9F46-4F5A-8836-25DC3BBC3830";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -1296,8 +1300,8 @@
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Martin Yin (E66NLL8383)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Martin Yin (E66NLL8383)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Tixa Internet(Beijing) Technology Co., Ltd.";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Tixa Internet(Beijing) Technology Co., Ltd.";
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
@@ -1309,8 +1313,8 @@
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
-				PROVISIONING_PROFILE = "BBD603E2-2698-4818-B31F-38F3A2851314";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "BBD603E2-2698-4818-B31F-38F3A2851314";
+				PROVISIONING_PROFILE = "C5F82489-9F46-4F5A-8836-25DC3BBC3830";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "C5F82489-9F46-4F5A-8836-25DC3BBC3830";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -1319,8 +1323,8 @@
 		3AB1FFDC17546F4200B72E93 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer: Martin Yin (E66NLL8383)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Martin Yin (E66NLL8383)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Tixa Internet(Beijing) Technology Co., Ltd.";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Tixa Internet(Beijing) Technology Co., Ltd.";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/DoodleTee/Classes/Share/ShareSDK_v2.2.4/Connection\"",
@@ -1347,8 +1351,8 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "BBD603E2-2698-4818-B31F-38F3A2851314";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "BBD603E2-2698-4818-B31F-38F3A2851314";
+				PROVISIONING_PROFILE = "C5F82489-9F46-4F5A-8836-25DC3BBC3830";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "C5F82489-9F46-4F5A-8836-25DC3BBC3830";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1356,8 +1360,8 @@
 		3AB1FFDD17546F4200B72E93 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer: Martin Yin (E66NLL8383)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Martin Yin (E66NLL8383)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Tixa Internet(Beijing) Technology Co., Ltd.";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Tixa Internet(Beijing) Technology Co., Ltd.";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/DoodleTee/Classes/Share/ShareSDK_v2.2.4/Connection\"",
@@ -1384,8 +1388,8 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "BBD603E2-2698-4818-B31F-38F3A2851314";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "BBD603E2-2698-4818-B31F-38F3A2851314";
+				PROVISIONING_PROFILE = "C5F82489-9F46-4F5A-8836-25DC3BBC3830";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "C5F82489-9F46-4F5A-8836-25DC3BBC3830";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

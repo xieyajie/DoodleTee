@@ -264,8 +264,16 @@
         NSString *userName = [[NSUserDefaults standardUserDefaults] objectForKey:kUserDefaultsUserName];
         [[XDDataCenter sharedCenter] orderWithUserName:userName colcor:[_productInfo objectForKey:kSETTINGCOLOR] material:[_productInfo objectForKey:kSETTINGMATERIAL] size:[_productInfo objectForKey:kSETTINGSIZE] brand:[_productInfo objectForKey:kSETTINGBRAND] count:[[_productInfo objectForKey:kSETTINGCOUNT] integerValue] money:[[_productInfo objectForKey:kSETTINGMONEY] floatValue] complete:^(id result){
             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-            if (result) {
-                [self alixPayDone];
+            if (result && [result isKindOfClass:[NSDictionary class]]) {
+                NSInteger code = [result objectForKey:kREQUESTRESULTCODE];
+                if (code > 0)
+                {
+                    [self alixPayDone];
+                }
+                else{
+                    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"错误" message:@"订单提交失败，请重新操作" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
+                    [alertView show];
+                }
             }
         }onError:^(NSError *error){
             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
@@ -280,7 +288,7 @@
 
 - (Product *)product
 {
-    if (_product) {
+    if (_product == nil) {
         _product = [[Product alloc] init];
     }
     
