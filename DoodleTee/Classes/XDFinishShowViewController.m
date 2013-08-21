@@ -216,7 +216,7 @@
 //        return imgName;
     }
     
-    return imgName;
+    return imgPath;
 }
 
 - (void)uploadImage:(UIImage *)image userName:(NSString *)userName
