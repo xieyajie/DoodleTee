@@ -115,8 +115,9 @@ static NSString *kOrderAddress = @"UserOrder.php?";//get
 - (void)uploadImageWithPath:(NSString *)aPath userName:(NSString *)aUserName complete:(XDCompleteBlock)handleComplete onError:(XDErrorBlock)handleError
 {
     MKNetworkOperation *op = [_netEngine operationWithPath:kUploadImageAddress params:[NSDictionary dictionaryWithObjectsAndKeys: aUserName, @"UserName", nil] httpMethod:@"POST"];
+    [op addHeader:@"Content-Type" withValue:@"multipart/form-data"];
     
-    [op addFile:aPath forKey:@"img" mimeType:@"png"];
+    [op addFile:aPath forKey:@"file" mimeType:@"image/png"];
     
     // setFreezable uploads your images after connection is restored!
     [op setFreezable:YES];
@@ -157,7 +158,7 @@ static NSString *kOrderAddress = @"UserOrder.php?";//get
     MKNetworkOperation *op = [_netEngine operationWithPath:kUploadImageAddress params:[NSDictionary dictionaryWithObjectsAndKeys: aUserName, @"UserName", nil] httpMethod:@"POST"];
     [op addHeader:@"Content-Type" withValue:@"multipart/form-data"];
     
-    [op addData:aData forKey:@"image" mimeType:@"image/png" fileName:aImageName];
+    [op addData:aData forKey:@"file" mimeType:@"image/png" fileName:aImageName];
     
     // setFreezable uploads your images after connection is restored!
     [op setFreezable:YES];
