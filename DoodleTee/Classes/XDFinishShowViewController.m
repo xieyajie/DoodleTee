@@ -210,10 +210,14 @@
     NSData *imgData = [NSData dataWithData:UIImagePNGRepresentation(image)];
     BOOL result = [imgData writeToFile:imgPath atomically:YES];
     
-    if (result) {
+    if (!result) {
         //将图片存到本地相册
 //        UIImageWriteToSavedPhotosAlbum(image, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
 //        return imgName;
+        imgPath = nil;
+        
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"错误" message:@"上传图片失败，请重新操作" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+        [alert show];
     }
     
     return imgPath;
@@ -223,20 +227,37 @@
 {
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     NSString *imgName = [NSString stringWithFormat:@"%@_%@.png", userName, [_dateFormatter stringFromDate:[NSDate date]]];
-    //上传图片到服务器
+    //保存图片到本地沙盒
     NSString *imgPath = [self saveImage:self.clothImage imageName:imgName userName:userName];
-    [[XDDataCenter sharedCenter] uploadImageWithPath:imgPath userName:userName complete:^(id result){
-        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-        if (result && [result isKindOfClass:[NSString class]]) {
-            NSLog(@"server response: %@",result);
-        }
-        
-        [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationFinishName object:self.clothImage];
-        [self.navigationController popToRootViewControllerAnimated:YES];
-    }onError:^(NSError *error){
-        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-        NSLog(@"Upload file error: %@", error);
-    }];
+    
+    //上传图片到服务器
+    if (imgPath && imgPath.length > 0) {
+        [[XDDataCenter sharedCenter] uploadImageWithPath:imgPath userName:userName complete:^(id result){
+            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+            if (result && [result isKindOfClass:[NSString class]]) {
+                NSLog(@"server response: %@",result);
+            }
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationFinishName object:self.clothImage];
+            [self.navigationController popToRootViewControllerAnimated:YES];
+        }onError:^(NSError *error){
+            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+            NSLog(@"Upload file error: %@", error);
+        }];
+    }
+    
+//    [[XDDataCenter sharedCenter] uploadImageWithData:UIImagePNGRepresentation(image) imageName:imgName userName:userName complete:^(id result){
+//        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+//        if (result && [result isKindOfClass:[NSDictionary class]]) {
+//            NSLog(@"server response: %@",result);
+//        }
+//        
+//        [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationFinishName object:self.clothImage];
+//        [self.navigationController popToRootViewControllerAnimated:YES];
+//    }onError:^(NSError *error){
+//        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+//        NSLog(@"Upload file error: %@", error);
+//    }];
 }
 
 - (void)undoAction

@@ -685,6 +685,7 @@ OSStatus extractIdentityAndTrust(CFDataRef inPKCS12Data,
     } else {
       finalURL = [NSURL URLWithString:[aURLString stringByAddingPercentEscapesUsingEncoding: self.stringEncoding]];
     }
+      self.stringEncoding = NSUTF8StringEncoding;
     
     if(finalURL == nil) {
       
@@ -900,6 +901,7 @@ OSStatus extractIdentityAndTrust(CFDataRef inPKCS12Data,
   if(([self.filesToBePosted count] > 0) || ([self.dataToBePosted count] > 0)) {
     [self.request setValue:[NSString stringWithFormat:@"multipart/form-data; charset=%@; boundary=%@", charset, boundary]
         forHTTPHeaderField:@"Content-Type"];
+//      [self.request setValue:[NSString stringWithFormat:@"multipart/form-data;boundary=%@", boundary] forHTTPHeaderField:@"Content-Type"];
     
     [self.request setValue:[NSString stringWithFormat:@"%lu", (unsigned long) [body length]] forHTTPHeaderField:@"Content-Length"];
   }

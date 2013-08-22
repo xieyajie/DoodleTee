@@ -25,6 +25,8 @@ typedef MKNKErrorBlock XDErrorBlock;
 
 - (void)uploadImageWithPath:(NSString *)aPath userName:(NSString *)aUserName complete:(XDCompleteBlock)handleComplete onError:(XDErrorBlock)handleError;
 
+- (void)uploadImageWithData:(NSData *)aData imageName:(NSString *)aImageName userName:(NSString *)aUserName complete:(XDCompleteBlock)handleComplete onError:(XDErrorBlock)handleError;
+
 - (void)orderWithUserName:(NSString *)aUserName colcor:(NSString *)aColor material:(NSString *)aMaterial size:(NSString *)aSize brand:(NSString *)aBrand count:(NSInteger)aCount money:(CGFloat)aMoney complete:(XDCompleteBlock)handleComplete onError:(XDErrorBlock)handleError;
 
 @end

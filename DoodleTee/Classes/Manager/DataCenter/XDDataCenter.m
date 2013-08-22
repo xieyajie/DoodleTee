@@ -116,7 +116,7 @@ static NSString *kOrderAddress = @"UserOrder.php?";//get
 {
     MKNetworkOperation *op = [_netEngine operationWithPath:kUploadImageAddress params:[NSDictionary dictionaryWithObjectsAndKeys: aUserName, @"UserName", nil] httpMethod:@"POST"];
     
-    [op addFile:aPath forKey:@"img"];
+    [op addFile:aPath forKey:@"img" mimeType:@"png"];
     
     // setFreezable uploads your images after connection is restored!
     [op setFreezable:YES];
@@ -143,6 +143,47 @@ static NSString *kOrderAddress = @"UserOrder.php?";//get
         
 //        NSString *responseString = [completedOperation responseString];
 //        NSLog(@"server response: %@",responseString);
+        handleComplete(result);
+    } errorHandler:^(MKNetworkOperation *errorOp, NSError* error){
+        NSLog(@"Upload file error: %@", error);
+        handleError(error);
+    }];
+    
+    [_netEngine enqueueOperation: op];
+}
+
+- (void)uploadImageWithData:(NSData *)aData imageName:(NSString *)aImageName userName:(NSString *)aUserName complete:(XDCompleteBlock)handleComplete onError:(XDErrorBlock)handleError
+{
+    MKNetworkOperation *op = [_netEngine operationWithPath:kUploadImageAddress params:[NSDictionary dictionaryWithObjectsAndKeys: aUserName, @"UserName", nil] httpMethod:@"POST"];
+    [op addHeader:@"Content-Type" withValue:@"multipart/form-data"];
+    
+    [op addData:aData forKey:@"image" mimeType:@"image/png" fileName:aImageName];
+    
+    // setFreezable uploads your images after connection is restored!
+    [op setFreezable:YES];
+    
+    [op addCompletionHandler:^(MKNetworkOperation* completedOperation) {
+        NSData *data = [completedOperation responseData];
+        CFStringRef stringRef = CFStringCreateWithBytes(NULL, [data bytes], [data length], kCFStringEncodingGB_18030_2000, false);
+        NSString *string = [(__bridge NSString *)stringRef stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+        CFRelease(stringRef);
+        
+        id result = nil;
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_5_0
+        if (string != nil) {
+            result = [NSJSONSerialization JSONObjectWithData:[string dataUsingEncoding:[string smallestEncoding]] options:NSJSONReadingMutableContainers error:nil];
+            if (result == nil)
+            {
+                result = string;
+            }
+        }
+#else
+        NSData *data = [string dataUsingEncoding:[string smallestEncoding]];
+        result = [data objectFromJSONData];
+#endif
+        
+        //        NSString *responseString = [completedOperation responseString];
+        //        NSLog(@"server response: %@",responseString);
         handleComplete(result);
     } errorHandler:^(MKNetworkOperation *errorOp, NSError* error){
         NSLog(@"Upload file error: %@", error);
