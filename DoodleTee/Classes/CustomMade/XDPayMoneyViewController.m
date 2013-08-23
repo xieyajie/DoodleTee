@@ -135,6 +135,16 @@
     return YES;
 }
 
+#pragma mark - UIAlertView delegate
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (alertView.tag == 123)
+    {
+        NSString * URLString = @"http://itunes.apple.com/cn/app/id535715926?mt=8";
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:URLString]];
+    }
+}
+
 #pragma mark - AKSegmentedControl delegate
 
 - (void)segmentedViewController:(AKSegmentedControl *)segmentedControl touchedAtIndex:(NSUInteger)index
@@ -613,6 +623,8 @@
     _productInfo = aInfo;
     _moneyLabel.text = [NSString stringWithFormat:@"%.2f 元", [[aInfo objectForKey:kSETTINGMONEY] floatValue]];
     self.product.price = [[aInfo objectForKey:kSETTINGMONEY] floatValue];
+    self.product.subject = @"自制T恤";
+    self.product.body = @"暂无介绍";
 }
 
 
