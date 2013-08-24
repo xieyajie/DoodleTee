@@ -10,7 +10,7 @@
 
 #import "XDTextPicker.h"
 
-#define FONT_SIZE 20
+#define FONT_SIZE 40
 
 @interface XDTextPicker ()<UITextViewDelegate>
 
@@ -68,18 +68,18 @@
             break;
         case XDTextTypeClearBgSkyBlueFont:
             bgColor = [UIColor clearColor];
-            fontColor = [UIColor blueColor];
+            fontColor = [UIColor colorWithRed:0 / 255.0 green:170 / 255.0 blue:220 / 255.0 alpha:1.0];
             break;
         case XDTextTypeClearBgRedFont:
             bgColor = [UIColor clearColor];
-            fontColor = [UIColor purpleColor];
+            fontColor = [UIColor colorWithRed:255 / 255.0 green:0 / 255.0 blue:115 / 255.0 alpha:1.0];
             break;
         case XDTextTypeBlackBgWhiteFont:
             bgColor = [UIColor blackColor];
             fontColor = [UIColor whiteColor];
             break;
         case XDTextTypeSkyBlueBgWhiteFont:
-            bgColor = [UIColor blueColor];
+            bgColor = [UIColor colorWithRed:0 / 255.0 green:170 / 255.0 blue:220 / 255.0 alpha:1.0];
             fontColor = [UIColor whiteColor];
             break;
             
