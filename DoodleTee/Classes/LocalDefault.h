@@ -36,13 +36,16 @@
 #define kBottomHeight 62.5
 
 //start 编辑区域边框
-#define kEffectWidthScale 254/616
-#define kEffectHeightScale 336/637
+#define kEffectTempWidth 254.0
+#define kEffectTempHeight 336.0
 
-#define kEffectLeftMarginScale 184/616
-#define kEffectRightMarginScale 178/616
-#define kEffectTopMarginScale 170/637
-#define kEffectBottomMarginScale 131/637
+#define kEffectWidthScale 254.0/616.0
+#define kEffectHeightScale 336.0/637.0
+
+#define kEffectLeftMarginScale 184.0/616.0
+#define kEffectRightMarginScale 178.0/616.0
+#define kEffectTopMarginScale 170.0/637.0
+#define kEffectBottomMarginScale 131.0/637.0
 //end
 
 //用户名

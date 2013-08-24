@@ -18,6 +18,7 @@
 #import "XDTextPicker.h"
 
 #import "XDShareMethods.h"
+#import "LocalDefault.h"
 
 #define kTagTopSegmentedControl 0
 #define kTagNormalBottomSegmentedControl 1
@@ -523,10 +524,13 @@ typedef enum{
 
 - (void)layoutEffectView
 {
-    _effectView = [[UIView alloc] initWithFrame:CGRectMake((self.view.frame.size.width - 200) / 2, 120, 200, 250)];
+    CGFloat scale = kEffectTempWidth / kEffectTempHeight;
+    CGFloat height = self.view.frame.size.height - 120 - _bottomView.frame.size.height - 20;
+    CGFloat width = height * scale;
+    _effectView = [[UIView alloc] initWithFrame:CGRectMake((self.view.frame.size.width - width) / 2, 120, width, height)];
     _effectView.backgroundColor = [UIColor clearColor];
-    _effectView.layer.borderWidth = 1;
-    _effectView.layer.borderColor = [[UIColor blackColor] CGColor];
+    _effectView.layer.borderWidth = 0.5;
+    _effectView.layer.borderColor = [[UIColor colorWithPatternImage:[UIImage imageNamed:@"effect_border.png"]] CGColor];
 }
 
 - (void)layoutBackgroundViewForSelectedType:(NSInteger)index

@@ -42,6 +42,7 @@
 		3A42290F17BF4C9300D0A884 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 3A42290C17BF4C9300D0A884 /* README.md */; };
 		3A42291617BF4F3E00D0A884 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A42291517BF4F3E00D0A884 /* MBProgressHUD.m */; };
 		3A45727B177AB45400453B7B /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A45727A177AB45400453B7B /* QuartzCore.framework */; };
+		3A4AFD1D17C8A17A00ACC62E /* effect_border@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A4AFD1C17C8A17A00ACC62E /* effect_border@2x.png */; };
 		3A5CDE3817BC618D00B05931 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A5CDE3717BC618D00B05931 /* CFNetwork.framework */; };
 		3A5CDE3A17BC619500B05931 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A5CDE3917BC619500B05931 /* Security.framework */; };
 		3A5CDE3C17BC61F800B05931 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A5CDE3B17BC61F800B05931 /* ImageIO.framework */; };
@@ -286,6 +287,7 @@
 		3A42291417BF4F3E00D0A884 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		3A42291517BF4F3E00D0A884 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		3A45727A177AB45400453B7B /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		3A4AFD1C17C8A17A00ACC62E /* effect_border@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "effect_border@2x.png"; sourceTree = "<group>"; };
 		3A5CDE3717BC618D00B05931 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		3A5CDE3917BC619500B05931 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		3A5CDE3B17BC61F800B05931 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
@@ -808,6 +810,7 @@
 		3AB1FFFC1754850500B72E93 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				3A4AFD1C17C8A17A00ACC62E /* effect_border@2x.png */,
 				3AE299C51785BE8000CDB041 /* account_userDeaultImage@2x.png */,
 				3AE8AA3017845398005AC6AB /* check@2x.png */,
 				3AE8AA3117845398005AC6AB /* uncheck@2x.png */,
@@ -1158,6 +1161,7 @@
 				3AFAD8AA175CDC4D00E7A4DB /* setting_unchoiceBox@2x.png in Resources */,
 				3A29C12B177FE5AC00CD53D7 /* root_bg@2x.png in Resources */,
 				3A0BF981178312EC006BB126 /* share_sina@2x.png in Resources */,
+				3A4AFD1D17C8A17A00ACC62E /* effect_border@2x.png in Resources */,
 				3AE8AA3217845398005AC6AB /* check@2x.png in Resources */,
 				3AE8AA3317845398005AC6AB /* uncheck@2x.png in Resources */,
 				3AE299C61785BE8000CDB041 /* account_userDeaultImage@2x.png in Resources */,
