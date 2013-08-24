@@ -31,6 +31,8 @@
     UIButton *_buttonEffect;
     
     UIImageView *_clotheView;
+    
+    UITapGestureRecognizer *_tapGesture;
 }
 
 @end
@@ -87,7 +89,11 @@
     _addButton.hidden = YES;
     [self.view addSubview:_addButton];
     
-    [self piazzaAction];
+    _addButton.hidden = NO;
+    _buttonShare.enabled = NO;
+    [_buttonShare setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+    _buttonEffect.enabled = NO;
+    [_buttonEffect setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
     
     if ([self respondsToSelector:@selector(finishedEffectWithImage:)]) {
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(finishedEffectWithImage:) name:kNotificationFinishName object:nil];
@@ -152,6 +158,11 @@
     
     UIImage *image = (UIImage *)[aNotification object];
     _clotheView.image = image;
+    
+    if (_tapGesture == nil) {
+        _tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(addEffect)];
+        [self.view addGestureRecognizer:_tapGesture];
+    }
 }
 
 - (void)successOfLanding:(NSNotification *)aNotification
@@ -288,17 +299,22 @@
     if (userName && userName.length > 0) {
         XDAccountInfoViewController *infoViewController = [[XDAccountInfoViewController alloc] init];
         [XDShareMethods presentViewController:infoViewController animated:YES formViewController:self.navigationController completion:nil];
-//        [self.navigationController presentViewController:infoViewController animated:YES completion:nil];
     }
     else{
         XDAccountViewController *accountViewController = [[XDAccountViewController alloc] init];
         [XDShareMethods presentViewController:accountViewController animated:YES formViewController:self.navigationController completion:nil];
-//        [self.navigationController presentViewController:accountViewController animated:YES completion:nil];
     }
 }
 
 - (void)addEffect
 {
+    _addButton.hidden = NO;
+    _buttonShare.enabled = NO;
+    [_buttonShare setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+    _buttonEffect.enabled = NO;
+    [_buttonEffect setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+    _clotheView.image = [UIImage imageNamed:@"clothe_default.png"];
+    
     XDEffectViewController *effectViewController = [[XDEffectViewController alloc] init];
     [self.navigationController pushViewController:effectViewController animated:YES];}
 
@@ -306,13 +322,13 @@
 {
      NSLog(@"piazza");
     
-    _addButton.hidden = NO;
-    _buttonShare.enabled = NO;
-    [_buttonShare setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
-    _buttonEffect.enabled = NO;
-    [_buttonEffect setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
-    
-    _clotheView.image = [UIImage imageNamed:@"clothe_default.png"];
+//    _addButton.hidden = NO;
+//    _buttonShare.enabled = NO;
+//    [_buttonShare setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+//    _buttonEffect.enabled = NO;
+//    [_buttonEffect setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+//    
+//    _clotheView.image = [UIImage imageNamed:@"clothe_default.png"];
 }
 
 - (void)shareAction
