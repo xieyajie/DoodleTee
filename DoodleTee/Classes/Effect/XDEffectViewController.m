@@ -537,9 +537,10 @@ typedef enum{
 - (void)layoutEffectView
 {
     CGFloat scale = kEffectTempWidth / kEffectTempHeight;
-    CGFloat height = self.view.frame.size.height - 120 - _bottomView.frame.size.height - 20;
-    CGFloat width = height * scale;
+    int height = self.view.frame.size.height - 120 - _bottomView.frame.size.height - 20;
+    int width = height * scale;
     _effectView = [[UIView alloc] initWithFrame:CGRectMake((self.view.frame.size.width - width) / 2, 120, width, height)];
+//    _effectView = [[UIView alloc] initWithFrame:CGRectMake((self.view.frame.size.width - 200) / 2, 120, 200, 250)];
     _effectView.backgroundColor = [UIColor clearColor];
     _effectView.layer.borderWidth = 1.0f;
     _effectView.layer.borderColor = [[UIColor colorWithPatternImage:[UIImage imageNamed:@"effect_border.png"]] CGColor];
