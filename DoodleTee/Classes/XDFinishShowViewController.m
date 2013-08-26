@@ -194,31 +194,13 @@
     [self.view addSubview:_bottomView];
 }
 
-- (NSString *)saveImage:(UIImage *)image imageName:(NSString *)imgName userName:(NSString *)userName
+- (NSString *)saveImage:(UIImage *)image imageName:(NSString *)imgName
 {
-    //将图片存到本地沙盒内
-    NSString *tmpPath = [NSString stringWithFormat:@"%@%@/", kLocalImagePath, userName];
-    NSString *savePath = [NSHomeDirectory() stringByAppendingPathComponent: tmpPath];
-    NSString *imgPath = [NSString stringWithFormat:@"%@/%@", savePath, imgName];
-    NSFileManager *fileManage = [NSFileManager defaultManager];
-    if (![fileManage fileExistsAtPath: savePath])
-    {
-        [fileManage createDirectoryAtPath: savePath withIntermediateDirectories: YES attributes:nil error:nil];
-    }
-    
-    NSData *imgData = [NSData dataWithData:UIImagePNGRepresentation(image)];
-    BOOL result = [imgData writeToFile:imgPath atomically:YES];
-    
-    if (!result) {
-        //将图片存到本地相册
-//        UIImageWriteToSavedPhotosAlbum(image, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
-//        return imgName;
-        imgPath = nil;
-        
+    NSString *imgPath = [XDShareMethods saveCustomImage:image imageName:imgName];
+    if (imgPath == nil) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"错误" message:@"上传图片失败，请重新操作" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
         [alert show];
     }
-    
     return imgPath;
 }
 
@@ -227,7 +209,7 @@
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     NSString *imgName = [NSString stringWithFormat:@"%@_%@.png", userName, [_dateFormatter stringFromDate:[NSDate date]]];
     //保存图片到本地沙盒
-    NSString *imgPath = [self saveImage:self.clothImage imageName:imgName userName:userName];
+    NSString *imgPath = [self saveImage:self.clothImage imageName:imgName];
     
     //上传图片到服务器
     if (imgPath && imgPath.length > 0) {

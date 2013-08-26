@@ -9,6 +9,8 @@
 #import "XDShareViewController.h"
 
 #import <ShareSDK/ShareSDK.h>
+#import "XDShareMethods.h"
+#import "LocalDefault.h"
 
 #define kSharePlistName @"share"
 
@@ -189,7 +191,7 @@
                              result:^(ShareType type, SSPublishContentState state, id<ISSStatusInfo> statusInfo, id<ICMErrorInfo> error, BOOL end) {
                                  if (state == SSPublishContentStateSuccess)
                                  {
-                                     NSLog(@"发表成功");
+                                     [self getUserInfoWithType:type];
                                  }
                                  else if (state == SSPublishContentStateFail)
                                  {
@@ -221,6 +223,23 @@
 //}
 
 #pragma mark - public
+
+- (void)getUserInfoWithType:(ShareType)shareType
+{
+    [ShareSDK getUserInfoWithType:shareType
+                      authOptions:nil
+                           result:^(BOOL result, id<ISSUserInfo> userInfo, id<ICMErrorInfo> error) {
+                               if (result)
+                               {
+                                   NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:userInfo.icon]];
+                                   [XDShareMethods saveSinaIconToLocal:data];
+                               }
+                               else
+                               {
+                                   NSLog(@"失败");
+                               }
+                           }];
+}
 
 - (void)cancel:(id)sender
 {

@@ -11,11 +11,13 @@
 @interface XDAccountInfoCell : UITableViewCell
 {
     //for basic info
+    UIImageView *_headerView;
     UILabel *_nameLabel;
     UILabel *_achieveLabel;
     UILabel *_balanceLabel;
 }
 
+@property (nonatomic, strong) UIImageView *headerView;
 @property (nonatomic, strong) UILabel *nameLabel;
 @property (nonatomic, strong) UILabel *achieveLabel;
 @property (nonatomic, strong) UILabel *balanceLabel;

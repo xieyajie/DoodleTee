@@ -10,6 +10,7 @@
 
 @implementation XDAccountInfoCell
 
+@synthesize headerView = _headerView;
 @synthesize nameLabel = _nameLabel;
 @synthesize achieveLabel = _achieveLabel;
 @synthesize balanceLabel = _balanceLabel;
@@ -66,6 +67,11 @@
 
 - (void)cellForHeaderView
 {
+    _headerView = [[UIImageView alloc] initWithFrame:CGRectMake(15, 20, 60, 60)];
+    _headerView.layer.borderColor = [UIColor lightGrayColor].CGColor;
+    _headerView.layer.borderWidth = 1.0f;
+    [self.contentView addSubview:_headerView];
+    
     UILabel *name = [[UILabel alloc] initWithFrame:CGRectMake(85, 15, 65, 20)];
     name.font = [UIFont systemFontOfSize:16];
     name.backgroundColor = [UIColor clearColor];

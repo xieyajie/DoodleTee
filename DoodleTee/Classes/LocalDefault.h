@@ -53,7 +53,8 @@
 #define kUserDefaultsUserName @"userName"
 
 //本地沙盒中图片路径
-#define kLocalImagePath @"Documents/custom/"
+#define kLocalDocuments @"Documents/"
+#define kLocalCustomPath @"/CustomImage/"
 #define kLocalInfoPath @"Documents/commonInfo.plist"
 
 //通知名称

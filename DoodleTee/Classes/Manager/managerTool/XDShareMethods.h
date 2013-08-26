@@ -26,4 +26,13 @@
 
 - (UIImage *)composeImage:(UIImage *)subImage toImage:(UIImage *)superImage finishToView:(UIView *)view;
 
+
+//保存自绘制的图片到本地
++ (NSString *)saveCustomImage:(UIImage *)image imageName:(NSString *)imgName;
+
+//保存微博头像到本地
++ (BOOL)saveSinaIconToLocal:(NSData *)imageData;
+//获取微博头像
++ (UIImage *)getSinaIconFromLocal;
+
 @end

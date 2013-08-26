@@ -23,6 +23,8 @@
     NSMutableArray *_headerViews;
     NSArray *_headerTitles;
     NSMutableArray *_selectedSections;
+    
+    UIImage *_headerImage;
 }
 
 @end
@@ -44,6 +46,11 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    _headerImage = [XDShareMethods getSinaIconFromLocal];
+    if (_headerImage == nil) {
+        _headerImage = [UIImage imageNamed:@"account_userDeaultImage.png"]; 
+    }
 
     UIImageView *bgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
     bgView.image = [UIImage imageNamed:@"root_bg.png"];
@@ -121,7 +128,7 @@
             [headerCell cellForHeaderView];
             headerCell.selectionStyle = UITableViewCellSelectionStyleNone;
         }
-        headerCell.imageView.image = [UIImage imageNamed:@"account_userDeaultImage.png"];
+        headerCell.headerView.image = _headerImage;
         headerCell.nameLabel.text = [[NSUserDefaults standardUserDefaults] objectForKey:kUserDefaultsUserName];
         headerCell.achieveLabel.text = @"暂无";
         headerCell.balanceLabel.text = @"暂无";
