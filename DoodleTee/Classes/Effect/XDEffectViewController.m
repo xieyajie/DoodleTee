@@ -525,7 +525,7 @@ typedef enum{
     CGFloat width = height * scale;
     _effectView = [[UIView alloc] initWithFrame:CGRectMake((self.view.frame.size.width - width) / 2, 120, width, height)];
     _effectView.backgroundColor = [UIColor clearColor];
-    _effectView.layer.borderWidth = 0.5;
+    _effectView.layer.borderWidth = 1.0f;
     _effectView.layer.borderColor = [[UIColor colorWithPatternImage:[UIImage imageNamed:@"effect_border.png"]] CGColor];
 }
 
