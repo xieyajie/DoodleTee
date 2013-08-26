@@ -166,29 +166,28 @@
     CGFloat width = segmentedControl.frame.size.width / 2;
     [segmentedControl setSeparatorImage:[UIImage imageNamed:@"segmented_separator.png"]];
     
+    UIImage *buttonBackgroundImagePressedLeft = [[UIImage imageNamed:@"effect_segmented_pressed_left.png"] stretchableImageWithLeftCapWidth:15 topCapHeight:10];
+    UIImage *buttonBackgroundImagePressedRight = [[UIImage imageNamed:@"effect_segmented_pressed_right.png"] stretchableImageWithLeftCapWidth:15 topCapHeight:1];
+    
     //重来
     UIButton *buttonUndo = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, width, segmentedControl.frame.size.height)];
-    buttonUndo.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+    buttonUndo.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
     buttonUndo.contentEdgeInsets = UIEdgeInsetsMake(0, 12, 0, 13);
     [buttonUndo setTitle:@"重来" forState:UIControlStateNormal];
     [buttonUndo setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [buttonUndo.titleLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Bold" size:15.0]];
     [buttonUndo setTitleEdgeInsets:UIEdgeInsetsMake(0.0, 10.0, 0.0, 0.0)];
-    
-    UIImage *buttonUndoNormal = [UIImage imageNamed:@"effect_image_icon.png"];
-    [buttonUndo setImage:buttonUndoNormal forState:UIControlStateNormal];
+    [buttonUndo setBackgroundImage:buttonBackgroundImagePressedLeft forState:UIControlStateHighlighted];
     
     //完成
     UIButton *buttonDone = [[UIButton alloc] initWithFrame:CGRectMake(buttonUndo.frame.origin.x + buttonUndo.frame.size.width, 0, width, segmentedControl.frame.size.height)];
-    buttonDone.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+    buttonDone.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
     buttonDone.contentEdgeInsets = UIEdgeInsetsMake(0, 12, 0, 13);
     [buttonDone setTitle:@"完成" forState:UIControlStateNormal];
     [buttonDone setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [buttonDone.titleLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Bold" size:15.0]];
     [buttonDone setTitleEdgeInsets:UIEdgeInsetsMake(0.0, 10.0, 0.0, 0.0)];
-    
-    UIImage *buttonDoneNormal = [UIImage imageNamed:@"effect_image_icon.png"];
-    [buttonDone setImage:buttonDoneNormal forState:UIControlStateNormal];
+    [buttonDone setBackgroundImage:buttonBackgroundImagePressedRight forState:UIControlStateHighlighted];
     
     [segmentedControl setButtonsArray:@[buttonUndo, buttonDone]];
     

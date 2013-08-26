@@ -47,8 +47,8 @@
     [self addSubview:_titleLabel];
     
     _button = [[UIButton alloc] initWithFrame:CGRectMake(self.frame.size.width - 10 - 25, 5, 20, 20)];
-    [_button setImage:[UIImage imageNamed:@"uncheck.png"] forState:UIControlStateNormal];
-    [_button setImage:[UIImage imageNamed:@"check.png"] forState:UIControlStateSelected];
+    [_button setImage:[UIImage imageNamed:@"pull_up.png"] forState:UIControlStateNormal];
+    [_button setImage:[UIImage imageNamed:@"pull_down.png"] forState:UIControlStateSelected];
     [_button addTarget:self action:@selector(moreOrLessAction:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:_button];
     
