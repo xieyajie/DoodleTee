@@ -40,6 +40,7 @@ typedef enum{
     
     AKSegmentedControl *_normalSegmentedControl;    //默认情况下底部选项卡
     AKSegmentedControl *_actionSegmentedControl;   //选择某种选项后出现的底部选项卡
+    UIButton *_buttonUndo;  //选择某种选项后出现的底部选项卡左侧按钮
     
     UIScrollView *_clothBgView;   ///背景（衣服图片）
     UIScrollView *_effectTypeShowView; //编辑样式展示
@@ -110,6 +111,10 @@ typedef enum{
     
     [[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(keyboardWillShow:) name: UIKeyboardWillShowNotification object: nil];
     [[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(keyboardWillHide:) name: UIKeyboardWillHideNotification object: nil];
+    
+    if ([self respondsToSelector:@selector(setActionBottomViewUndoButtonForBack:)]) {
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setActionBottomViewUndoButtonForBack:) name:kNotificationSetButton object:nil];
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -179,6 +184,17 @@ typedef enum{
 {
     [_clothBgView scrollRectToVisible:CGRectMake(0, 0, self.view.frame.size.width, _clothBgView.frame.size.height) animated:YES];
     _clothBgView.scrollEnabled = NO;
+}
+
+- (void)setActionBottomViewUndoButtonForBack:(NSNotification *)aNotification
+{
+    BOOL isBack = [[aNotification object] boolValue];
+    if (isBack) {
+        [_buttonUndo setTitle:@"返回" forState:UIControlStateNormal];
+    }
+    else{
+        [_buttonUndo setTitle:@"重来" forState:UIControlStateNormal];
+    }
 }
 
 #pragma mark - UIGestureRecognizer action
@@ -472,23 +488,23 @@ typedef enum{
     UIImage *buttonBackgroundImagePressedLeft = [[UIImage imageNamed:@"effect_segmented_pressed_left.png"] stretchableImageWithLeftCapWidth:15 topCapHeight:10];
     UIImage *buttonBackgroundImagePressedRight = [[UIImage imageNamed:@"effect_segmented_pressed_right.png"] stretchableImageWithLeftCapWidth:15 topCapHeight:10];
     
-    //重来
-    UIButton *buttonUndo = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, width, _normalSegmentedControl.frame.size.height)];
-    buttonUndo.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
-    [buttonUndo setTitle:@"重来" forState:UIControlStateNormal];
-    [buttonUndo setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [buttonUndo.titleLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Bold" size:15.0]];
-    [buttonUndo setBackgroundImage:buttonBackgroundImagePressedLeft forState:UIControlStateHighlighted];
+    // 重来/返回
+    _buttonUndo = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, width, _normalSegmentedControl.frame.size.height)];
+    _buttonUndo.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
+    [_buttonUndo setTitle:@"返回" forState:UIControlStateNormal];
+    [_buttonUndo setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [_buttonUndo.titleLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Bold" size:15.0]];
+    [_buttonUndo setBackgroundImage:buttonBackgroundImagePressedLeft forState:UIControlStateHighlighted];
     
     //提交订单
-    UIButton *buttonDone = [[UIButton alloc] initWithFrame:CGRectMake(buttonUndo.frame.origin.x + buttonUndo.frame.size.width, 0, width, _normalSegmentedControl.frame.size.height)];
+    UIButton *buttonDone = [[UIButton alloc] initWithFrame:CGRectMake(_buttonUndo.frame.origin.x + _buttonUndo.frame.size.width, 0, width, _normalSegmentedControl.frame.size.height)];
     buttonDone.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
     [buttonDone setTitle:@"完成" forState:UIControlStateNormal];
     [buttonDone.titleLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Bold" size:15.0]];
     [buttonDone setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [buttonDone setBackgroundImage:buttonBackgroundImagePressedRight forState:UIControlStateHighlighted];
     
-    [_actionSegmentedControl setButtonsArray:@[buttonUndo, buttonDone]];
+    [_actionSegmentedControl setButtonsArray:@[_buttonUndo, buttonDone]];
 }
 
 - (void)layoutClothBackground
@@ -668,6 +684,11 @@ typedef enum{
 //重来
 - (void)clearAction
 {
+    if ([_buttonUndo.titleLabel.text isEqualToString:@"返回"]) {
+        [self backAction];
+        return;
+    }
+    
     switch (_currentEffectType) {
         case XDEffectTypeImage:
             _imageTypeSelectedIndex = -1;
@@ -684,6 +705,8 @@ typedef enum{
         default:
             break;
     }
+    
+    [_buttonUndo setTitle:@"返回" forState:UIControlStateNormal];
 }
 
 //完成
@@ -766,9 +789,11 @@ typedef enum{
             [_effectView addSubview:self.drawPicker.effectView];
             break;
         case XDEffectTypeText:
+        {
             [_effectView addSubview:self.textPicker.effectView];
             [self.view addGestureRecognizer:_tapGesture];
             break;
+        }
             
         default:
             break;

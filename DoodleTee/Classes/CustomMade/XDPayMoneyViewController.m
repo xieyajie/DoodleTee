@@ -275,7 +275,7 @@
         [[XDDataCenter sharedCenter] orderWithUserName:userName colcor:[_productInfo objectForKey:kSETTINGCOLOR] material:[_productInfo objectForKey:kSETTINGMATERIAL] size:[_productInfo objectForKey:kSETTINGSIZE] brand:[_productInfo objectForKey:kSETTINGBRAND] count:[[_productInfo objectForKey:kSETTINGCOUNT] integerValue] money:[[_productInfo objectForKey:kSETTINGMONEY] floatValue] complete:^(id result){
             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
             if (result && [result isKindOfClass:[NSDictionary class]]) {
-                NSInteger code = [result objectForKey:kREQUESTRESULTCODE];
+                NSInteger code = [[result objectForKey:kREQUESTRESULTCODE] integerValue];
                 if (code > 0)
                 {
                     [self alixPayDone];

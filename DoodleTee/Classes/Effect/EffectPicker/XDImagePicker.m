@@ -13,6 +13,7 @@
 #import "XDImagePicker.h"
 
 #import "ImageUtil.h"
+#import "LocalDefault.h"
 
 #import "ColorMatrix.h"
 
@@ -64,6 +65,7 @@
 {
     _image = aImage;
     _staticPicture = [[GPUImagePicture alloc] initWithImage:aImage smoothlyScaleOutput:NO];
+    [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationSetButton object:[NSNumber numberWithBool:NO]];
 }
 
 - (UIImage *)image
@@ -148,6 +150,7 @@
                                                [_stillCamera stopCameraCapture];
                                                [self removeAllTargets];
                                                _staticPicture = [[GPUImagePicture alloc] initWithImage:image smoothlyScaleOutput:YES];
+                                               [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationSetButton object:[NSNumber numberWithBool:NO]];
                                            }
                                        });
                                    }];
