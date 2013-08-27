@@ -46,10 +46,10 @@
         _effectView = [[GPUImageView alloc] initWithFrame:CGRectMake(0, 0, size.width, size.height)];
         _effectView.fillMode = kGPUImageFillModePreserveAspectRatioAndFill;
         
-        _stillCamera = [[GPUImageStillCamera alloc] initWithSessionPreset:AVCaptureSessionPresetPhoto cameraPosition:AVCaptureDevicePositionBack];
+        _stillCamera = [[GPUImageStillCamera alloc] initWithSessionPreset:AVCaptureSessionPreset640x480 cameraPosition:AVCaptureDevicePositionBack];
         _stillCamera.outputImageOrientation = UIInterfaceOrientationPortrait;
         
-        _cropFilter = [[GPUImageCropFilter alloc] initWithCropRegion:CGRectMake(0.0f, 0.0f, 1.0f, 0.75f)];
+        _cropFilter = [[GPUImageCropFilter alloc] initWithCropRegion:CGRectMake(0.0f, 0.0f, 1.0f, 1.0f)];
         
 //        _activityView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
 //        _activityView.frame = CGRectMake(0, 0, 100, 100);
@@ -63,7 +63,27 @@
 - (void)setImage:(UIImage *)aImage
 {
     _image = aImage;
-    _staticPicture = [[GPUImagePicture alloc] initWithImage:aImage smoothlyScaleOutput:NO];
+    if (self.isStatic) {
+        CGFloat viewScale = _effectView.frame.size.width / _effectView.frame.size.height;
+        CGFloat imageScale = aImage.size.width / aImage.size.height;
+        CGFloat width;
+        CGFloat height;
+        if (imageScale > viewScale) {
+            height = aImage.size.height;
+            width = height * viewScale;
+        }
+        else{
+            width = aImage.size.width;
+            height = width / imageScale;
+        }
+        
+        CGRect cropRect = CGRectMake(0, 0, width, height);
+        CGImageRef tmp = CGImageCreateWithImageInRect([aImage CGImage], cropRect);
+        _image = [UIImage imageWithCGImage:tmp scale:_image.scale orientation:_image.imageOrientation];
+        CGImageRelease(tmp);
+    }
+    
+    _staticPicture = [[GPUImagePicture alloc] initWithImage:_image smoothlyScaleOutput:NO];
 }
 
 - (UIImage *)image
@@ -122,6 +142,8 @@
     
     if (self.isStatic) {
         _effectView.tag = kTagEffectViewOpen;
+//        [_staticPicture addTarget:_cropFilter];
+//        [_cropFilter addTarget:_filter];
         [_staticPicture addTarget:_filter];
         [_filter addTarget:_effectView];
         [_staticPicture processImage];

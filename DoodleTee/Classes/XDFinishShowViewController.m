@@ -23,6 +23,7 @@
     AKSegmentedControl *_topSegmentControl;
     UIView *_bottomView;
     
+    UIImage *_effectImage;
     UIImage *_clothImage;
     
     NSDateFormatter *_dateFormatter;
@@ -42,6 +43,7 @@
     if (self) {
         // Custom initialization
         _clothImage = image;
+        _effectImage = image;
     }
     return self;
 }
@@ -256,7 +258,7 @@
         [XDShareMethods presentViewController:accountViewController animated:YES formViewController:self.navigationController completion:nil];
     }
     else{//登陆
-        [self uploadImage:self.clothImage userName:userName];
+        [self uploadImage:_effectImage userName:userName];
     }
 }
 
