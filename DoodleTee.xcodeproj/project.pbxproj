@@ -56,6 +56,7 @@
 		3A5CDE5C17BC623B00B05931 /* MKNetworkEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A5CDE4E17BC623B00B05931 /* MKNetworkEngine.m */; };
 		3A5CDE5D17BC623B00B05931 /* MKNetworkOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A5CDE5117BC623B00B05931 /* MKNetworkOperation.m */; };
 		3A5CDE5E17BC623B00B05931 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A5CDE5417BC623B00B05931 /* Reachability.m */; };
+		3A664F1A17CC44790097E404 /* XDAccountViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A664F1917CC44790097E404 /* XDAccountViewController.xib */; };
 		3A6AEA0417CADB280035CA10 /* effect_back_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A6AEA0017CADB280035CA10 /* effect_back_icon@2x.png */; };
 		3A6AEA0517CADB280035CA10 /* effect_backSelected_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A6AEA0117CADB280035CA10 /* effect_backSelected_icon@2x.png */; };
 		3A6AEA0617CADB280035CA10 /* pull_down.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A6AEA0217CADB280035CA10 /* pull_down.png */; };
@@ -315,6 +316,7 @@
 		3A5CDE5117BC623B00B05931 /* MKNetworkOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKNetworkOperation.m; sourceTree = "<group>"; };
 		3A5CDE5317BC623B00B05931 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		3A5CDE5417BC623B00B05931 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
+		3A664F1917CC44790097E404 /* XDAccountViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = XDAccountViewController.xib; sourceTree = "<group>"; };
 		3A6AEA0017CADB280035CA10 /* effect_back_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "effect_back_icon@2x.png"; sourceTree = "<group>"; };
 		3A6AEA0117CADB280035CA10 /* effect_backSelected_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "effect_backSelected_icon@2x.png"; sourceTree = "<group>"; };
 		3A6AEA0217CADB280035CA10 /* pull_down.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pull_down.png; sourceTree = "<group>"; };
@@ -894,6 +896,7 @@
 		3AEA8AF417A70A5D00DC976A /* Account */ = {
 			isa = PBXGroup;
 			children = (
+				3A664F1917CC44790097E404 /* XDAccountViewController.xib */,
 				3AEA8AF517A70A5D00DC976A /* XDAccountInfoCell.h */,
 				3AEA8AF617A70A5D00DC976A /* XDAccountInfoCell.m */,
 				3AEA8AF717A70A5D00DC976A /* XDAccountInfoViewController.h */,
@@ -1185,6 +1188,7 @@
 				3AEA8B5217A70A5D00DC976A /* purple-green.acv in Resources */,
 				3AEA8B5317A70A5D00DC976A /* yellow-red.acv in Resources */,
 				3AEA8B5D17A70A5D00DC976A /* share.plist in Resources */,
+				3A664F1A17CC44790097E404 /* XDAccountViewController.xib in Resources */,
 				3AEA8B6017A70A5D00DC976A /* ShareSDKLocalizable.strings in Resources */,
 				3A42290F17BF4C9300D0A884 /* README.md in Resources */,
 				3AEA8B6117A70A5D00DC976A /* Resource.bundle in Resources */,
