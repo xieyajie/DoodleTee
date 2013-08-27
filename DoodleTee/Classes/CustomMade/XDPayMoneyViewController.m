@@ -345,7 +345,8 @@
         NSString *userName = [[NSUserDefaults standardUserDefaults] objectForKey:kUserDefaultsUserName];
         NSMutableDictionary *consigneeInfo = nil;
         //从本地沙盒内获取信息
-        NSString *savePath = [NSHomeDirectory() stringByAppendingPathComponent: kLocalInfoPath];
+        NSString *tmp = [NSString stringWithFormat:@"%@/%@/%@", kLocalDocuments, userName, kLocalInfoPlistName];
+        NSString *savePath = [NSHomeDirectory() stringByAppendingPathComponent: tmp];
         NSFileManager *fileManage = [NSFileManager defaultManager];
         if ([fileManage fileExistsAtPath: savePath])
         {
@@ -509,7 +510,8 @@
     if (_consigneeCheckButton.selected) {
         NSString *userName = [[NSUserDefaults standardUserDefaults] objectForKey:kUserDefaultsUserName];
         //将信息存到本地沙盒内
-        NSString *savePath = [NSHomeDirectory() stringByAppendingPathComponent: kLocalInfoPath];
+        NSString *tmp = [NSString stringWithFormat:@"%@/%@/%@", kLocalDocuments, userName, kLocalInfoPlistName];
+        NSString *savePath = [NSHomeDirectory() stringByAppendingPathComponent: tmp];
         NSFileManager *fileManage = [NSFileManager defaultManager];
         if (![fileManage fileExistsAtPath: savePath])
         {
@@ -544,7 +546,8 @@
     if (_paymentCheckButton.selected) {
         NSString *userName = [[NSUserDefaults standardUserDefaults] objectForKey:kUserDefaultsUserName];
         //将信息存到本地沙盒内
-        NSString *savePath = [NSHomeDirectory() stringByAppendingPathComponent: kLocalInfoPath];
+        NSString *tmp = [NSString stringWithFormat:@"%@/%@/%@", kLocalDocuments, userName, kLocalInfoPlistName];
+        NSString *savePath = [NSHomeDirectory() stringByAppendingPathComponent: tmp];
         NSFileManager *fileManage = [NSFileManager defaultManager];
         if (![fileManage fileExistsAtPath: savePath])
         {

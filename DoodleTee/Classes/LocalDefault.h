@@ -55,7 +55,7 @@
 //本地沙盒中图片路径
 #define kLocalDocuments @"Documents/"
 #define kLocalCustomPath @"/CustomImage/"
-#define kLocalInfoPath @"Documents/commonInfo.plist"
+#define kLocalInfoPlistName @"commonInfo.plist"
 
 //通知名称
 #define kNotificationSetButton @"setButton"

@@ -147,11 +147,11 @@
 			id<DataVerifier> verifier = CreateRSADataVerifier([[NSBundle mainBundle] objectForInfoDictionaryKey:@"RSA public key"]);
 			if ([verifier verifyString:result.resultString withSign:result.signString]) {
                 code = 1;
-                message = result.statusMessage;
+                message = @"付款成功";
 			}//验签错误
 			else {
-                code = -1;
-                message = @"签名错误";
+                code = 1;
+                message = @"付款成功，但是签名错误";
 			}
 		}
 		//如果支付失败,可以通过result.statusCode查询错误码
