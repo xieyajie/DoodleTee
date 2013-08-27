@@ -16,13 +16,25 @@
 #define kTagLeftView 0
 #define kTagRightView 1
 
+#define kSourceData @"data_source"
+#define kLeftView @"leftView"
+#define kRightView @"rightView"
+#define kSettingTitle @"title"
+#define kSettingSource @"source"
+
+#define kSourceImage @"image_source"
+#define kImageIcon @"icon"
+#define kImageClothe @"cloth_image"
+
 @interface XDSettingViewController ()<AKSegmentedControlDelegate>
 {
     UITableView *_leftTableView;
     UITableView *_rightTableView;
     
-    NSArray *_dataSource;
-    NSMutableArray *_selectionArray;
+    NSDictionary *_dataSource;
+    NSDictionary *_imageSource;
+    NSMutableDictionary *_selectionDictionary;
+    NSMutableDictionary *_selectionindexPaths;
 }
 
 @end
@@ -34,8 +46,10 @@
     self = [super init];
     if (self) {
         // Custom initializationi
-        _dataSource = [NSArray array];
-        _selectionArray = [NSMutableArray arrayWithObjects:[NSMutableDictionary dictionary], [NSMutableDictionary dictionary], nil];
+        _dataSource = [NSDictionary dictionary];
+        _imageSource = [NSDictionary dictionary];
+        _selectionDictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:[NSMutableDictionary dictionary], kLeftView, [NSMutableDictionary dictionary], kRightView, nil];
+        _selectionindexPaths = [NSMutableDictionary dictionaryWithObjectsAndKeys:[NSMutableDictionary dictionary], kLeftView, [NSMutableDictionary dictionary], kRightView, nil];
     }
     return self;
 }
@@ -68,36 +82,39 @@
     label.textColor = [UIColor blackColor];
     [headerView addSubview: label];
     
-    NSInteger tag = tableView.tag == kTagLeftView ? 0 : 1;
-    label.text = [[[_dataSource objectAtIndex:tag] objectAtIndex:section] objectForKey:@"title"];
+    NSString *key = tableView.tag == kTagLeftView ? kLeftView : kRightView;
+    label.text = [[[_dataSource objectForKey:key] objectAtIndex:section] objectForKey:kSettingTitle];
     
     return headerView;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSInteger tag = tableView.tag == kTagLeftView ? 0 : 1;
-    NSString *key = [[[_dataSource objectAtIndex:tag] objectAtIndex:indexPath.section] objectForKey:@"title"];
+    NSString *key = tableView.tag == kTagLeftView ? kLeftView : kRightView;
+    NSString *title = [[[_dataSource objectForKey:key] objectAtIndex:indexPath.section] objectForKey:kSettingTitle];
     
-    NSIndexPath *oldIndex = [[_selectionArray objectAtIndex:tag] objectForKey:key];
+    NSIndexPath *oldIndex = [[_selectionindexPaths objectForKey:key] objectForKey:title];
     if (oldIndex.section == indexPath.section && oldIndex.row != indexPath.row)
     {
         [tableView deselectRowAtIndexPath:oldIndex animated:YES];
+        
+        NSArray *array = [[[_dataSource objectForKey:key] objectAtIndex:indexPath.section] objectForKey:kSettingSource];
+        [[_selectionDictionary objectForKey:key] setObject:[array objectAtIndex:indexPath.row] forKey:title];
+        [[_selectionindexPaths objectForKey:key] setObject:indexPath forKey:title];
     }
-    [[_selectionArray objectAtIndex:tag] setObject:indexPath forKey:key];
 }
 
 #pragma mark - UITableViewDataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    NSInteger tag = tableView.tag == kTagLeftView ? 0 : 1;
-    return [[_dataSource objectAtIndex:tag] count];
+    NSString *key = tableView.tag == kTagLeftView ? kLeftView : kRightView;
+    return [[_dataSource objectForKey:key] count];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    NSInteger tag = tableView.tag == kTagLeftView ? 0 : 1;
-    return [[[[_dataSource objectAtIndex:tag] objectAtIndex:section] objectForKey:@"source"] count];
+    NSString *key = tableView.tag == kTagLeftView ? kLeftView : kRightView;
+    return [[[[_dataSource objectForKey:key] objectAtIndex:section] objectForKey:kSettingSource] count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -123,29 +140,29 @@
         UIView *selectedBackgroundView = [[UIView alloc] init];
         selectedBackgroundView.backgroundColor = [UIColor colorWithPatternImage: [UIImage imageNamed: @"setting_cellSelectBackground"]];
         cell.selectedBackgroundView = selectedBackgroundView;
-        
-        if (CellIdentifier == cellIdentifier)
-        {
-            cell.imageView.image = nil;
-        }
-        else if (CheckCellIdentifier == cellIdentifier)
-        {
-            cell.imageView.image = [UIImage imageNamed: @"setting_unchoiceBox.png"];
-        }
     }
     
-    NSInteger tag = tableView.tag == kTagLeftView ? 0 : 1;
-    NSMutableDictionary *dic = [[_dataSource objectAtIndex:tag] objectAtIndex:indexPath.section];
-    NSString *title = [dic objectForKey:@"title"];
-    NSString *text = [[dic objectForKey:@"source"] objectAtIndex:indexPath.row];
-    NSIndexPath *tmpIndex = [[_selectionArray objectAtIndex:tag] objectForKey:title];
+    NSString *key = tableView.tag == kTagLeftView ? kLeftView : kRightView;
+    NSMutableDictionary *dic = [[_dataSource objectForKey:key] objectAtIndex:indexPath.section];
+    NSString *title = [dic objectForKey:kSettingTitle];
+    NSString *text = [[dic objectForKey:kSettingSource] objectAtIndex:indexPath.row];
+    
+    if ([CellIdentifier isEqualToString:cellIdentifier])
+    {
+        cell.imageView.image = nil;
+    }
+    else if ([CheckCellIdentifier isEqualToString:cellIdentifier])
+    {
+        NSDictionary *imageDic = [_imageSource objectForKey:text];
+        cell.imageView.image = [UIImage imageNamed: [imageDic objectForKey:kImageIcon]];
+    }
+    
+    NSIndexPath *setIndex = [[_selectionindexPaths objectForKey:key] objectForKey:title];
     cell.textLabel.text = text;
-    if (tmpIndex.section == indexPath.section && tmpIndex.row == indexPath.row) {
-//        cell.selected = YES;
+    if (setIndex.section == indexPath.section && setIndex.row == indexPath.row) {
         [tableView selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionNone];
     }
     else{
-//        cell.selected = NO;
         [tableView deselectRowAtIndexPath:indexPath animated:YES];
     }
 
@@ -249,7 +266,9 @@
 - (void)getSettingSource
 {
     NSString *filePath = [[NSBundle mainBundle] pathForResource:@"settingSource" ofType:@"plist"];
-    _dataSource = [[NSArray alloc] initWithContentsOfFile:filePath];
+    NSDictionary *dataDic = [NSDictionary dictionaryWithContentsOfFile:filePath];
+    _dataSource = [dataDic objectForKey:kSourceData];
+    _imageSource = [dataDic objectForKey:kSourceImage];
 }
 
 - (void)configurationSettingSelected
@@ -272,45 +291,53 @@
         [fileManage createFileAtPath: plistPath contents: nil attributes: nil];
     }
     
-    NSMutableArray *array = nil;
+    NSMutableDictionary *dictionary = nil;
     NSMutableDictionary *setDic = [[NSMutableDictionary alloc] initWithContentsOfFile:plistPath];
     if (setDic == nil) {
         setDic = [NSMutableDictionary dictionary];
     }
     else{
-        array = [setDic objectForKey:key];
+        dictionary = [setDic objectForKey:key];
     }
     
-    if (array == nil || [array count] == 0) {
-        _selectionArray = [NSMutableArray arrayWithObjects:[NSMutableDictionary dictionaryWithObjectsAndKeys:[NSIndexPath indexPathForRow:0 inSection:0], kSETTINGBRAND, [NSIndexPath indexPathForRow:0 inSection:1], kSETTINGMATERIAL, [NSIndexPath indexPathForRow:0 inSection:2], kSETTINGCOLOR, nil], [NSMutableDictionary dictionaryWithObjectsAndKeys:[NSIndexPath indexPathForRow:0 inSection:0], kSETTINGSIZE, nil], nil];
+    NSInteger section = 0;
+    if (dictionary == nil || [dictionary count] == 0) {
+        _selectionDictionary = [NSMutableDictionary dictionary];
+        _selectionindexPaths = [NSMutableDictionary dictionary];
+        
+        for (NSString *dataKey in _dataSource) {
+            NSArray *dataArray = [_dataSource objectForKey:dataKey];
+            NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+            NSMutableDictionary *indexDic = [NSMutableDictionary dictionary];
+            
+            for (NSDictionary *dataDic in dataArray) {
+                NSString *key = [dataDic objectForKey:kSettingTitle];
+                NSString *info = [[dataDic objectForKey:kSettingSource] objectAtIndex:0];
+                [dic setObject:info forKey:key];
+                [indexDic setObject:[NSIndexPath indexPathForRow:0 inSection:section] forKey:key];
+                section++;
+            }
+            [_selectionDictionary setObject:dic forKey:dataKey];
+            [_selectionindexPaths setObject:indexDic forKey:dataKey];
+            section = 0;
+        }
     }
     else{
-        NSMutableDictionary *dic1 = [array objectAtIndex:0];
-        for (int i = 0; i < [[_dataSource objectAtIndex:0] count]; i++) {
-            NSMutableDictionary *item = [[_dataSource objectAtIndex:0] objectAtIndex:i];
-            NSString *key = [item objectForKey:@"title"];
-            NSString *set1 = [dic1 objectForKey:key];
-            for (int j = 0; j < [[item objectForKey:@"source"] count]; j++) {
-                NSString *str = [[item objectForKey:@"source"] objectAtIndex:j];
-                if ([str isEqualToString:set1]) {
-                    [[_selectionArray objectAtIndex:0] setObject:[NSIndexPath indexPathForRow:j inSection:i] forKey:key];
-                    break;
+        for (NSString *dataKey in _dataSource) {
+            NSArray *dataArray = [_dataSource objectForKey:dataKey];
+            for (NSDictionary *dic in dataArray) {
+                NSString *key = [dic objectForKey:kSettingTitle];
+                NSString *setInfo = [dictionary objectForKey:key];
+                [[_selectionDictionary objectForKey:dataKey] setObject:setInfo forKey:key];
+                
+                NSInteger row = [[dic objectForKey:kSettingSource] indexOfObject:setInfo];
+                if (row < 0) {
+                    row = 0;
                 }
+                [[_selectionindexPaths objectForKey:dataKey] setObject:[NSIndexPath indexPathForRow:row inSection:section] forKey:key];
+                section++;
             }
-        }
-        
-        NSMutableDictionary *dic2 = [array objectAtIndex:1];
-        for (int k = 0; k < [[_dataSource objectAtIndex:1] count]; k++) {
-            NSMutableDictionary *item = [[_dataSource objectAtIndex:1] objectAtIndex:k];
-            NSString *key = [item objectForKey:@"title"];
-            NSString *set1 = [dic2 objectForKey:key];
-            for (int g = 0; g < [[item objectForKey:@"source"] count]; g++) {
-                NSString *str = [[item objectForKey:@"source"] objectAtIndex:g];
-                if ([str isEqualToString:set1]) {
-                    [[_selectionArray objectAtIndex:1] setObject:[NSIndexPath indexPathForRow:g inSection:k] forKey:key];
-                    break;
-                }
-            }
+            section = 0;
         }
     }
 }
@@ -320,7 +347,6 @@
 - (void)backAction:(id)sender
 {
     [XDShareMethods dismissViewController:self animated:YES completion:nil];
-//    [self dismissViewControllerAnimated: YES completion: nil];
 }
 
 - (void)overAction:(id)sender
@@ -348,27 +374,22 @@
         setDic = [NSMutableDictionary dictionary];
     }
     
-    NSMutableArray *settings = [setDic objectForKey:key];
+    NSMutableDictionary *settings = [setDic objectForKey:key];
     if (settings == nil)
     {
-        settings = [[NSMutableArray alloc] init];
+        settings = [[NSMutableDictionary alloc] init];
     }
     
     [settings removeAllObjects];
-    for (int i = 0; i < [_selectionArray count]; i++) {
-        NSMutableDictionary *dic = [NSMutableDictionary dictionary];
-        NSMutableDictionary *sdic = [_selectionArray objectAtIndex:i];
-        NSMutableArray *data = [_dataSource objectAtIndex:i];
-        for (int j = 0; j < [sdic count]; j++) {
-            NSMutableDictionary *item = [data objectAtIndex:j];
-            NSString *key = [item objectForKey:@"title"];
-            NSInteger row = [[sdic objectForKey:key] row];
-            [dic setObject:[[item objectForKey:@"source"] objectAtIndex:row] forKey:key];
-        }
-        
-        [settings addObject:dic];
-    }
     
+    for (NSString *dicKey in _selectionDictionary) {
+        NSMutableDictionary *sdic = [_selectionDictionary objectForKey:dicKey];
+        for (NSString *sKey in sdic) {
+            NSString *sInfo = [sdic objectForKey:sKey];
+            [settings setObject:sInfo forKey:key];
+        }
+    }
+        
     [setDic setObject:settings forKey:key];
     [setDic writeToFile: plistPath atomically: YES];
     

@@ -37,6 +37,21 @@
 		3A3F1C36178126F300A64C93 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A3F1C35178126F300A64C93 /* SystemConfiguration.framework */; };
 		3A3F1C3A1781271000A64C93 /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A3F1C391781271000A64C93 /* libicucore.dylib */; };
 		3A3F1C3C1781271D00A64C93 /* libz.1.2.5.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A3F1C3B1781271D00A64C93 /* libz.1.2.5.dylib */; };
+		3A4102D717CCE72C004A855B /* cloth_icon_back.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A4102C817CCE72C004A855B /* cloth_icon_back.png */; };
+		3A4102D817CCE72C004A855B /* cloth_icon_blue.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A4102C917CCE72C004A855B /* cloth_icon_blue.png */; };
+		3A4102D917CCE72C004A855B /* cloth_icon_flax.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A4102CA17CCE72C004A855B /* cloth_icon_flax.png */; };
+		3A4102DA17CCE72C004A855B /* cloth_icon_green.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A4102CB17CCE72C004A855B /* cloth_icon_green.png */; };
+		3A4102DB17CCE72C004A855B /* cloth_icon_red.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A4102CC17CCE72C004A855B /* cloth_icon_red.png */; };
+		3A4102DC17CCE72C004A855B /* cloth_icon_white.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A4102CD17CCE72C004A855B /* cloth_icon_white.png */; };
+		3A4102DD17CCE72C004A855B /* cloth_icon_yellow.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A4102CE17CCE72C004A855B /* cloth_icon_yellow.png */; };
+		3A4102DE17CCE72C004A855B /* cloth_image_black.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A4102CF17CCE72C004A855B /* cloth_image_black.png */; };
+		3A4102DF17CCE72C004A855B /* cloth_image_blue.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A4102D017CCE72C004A855B /* cloth_image_blue.png */; };
+		3A4102E017CCE72C004A855B /* cloth_image_flax.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A4102D117CCE72C004A855B /* cloth_image_flax.png */; };
+		3A4102E117CCE72C004A855B /* cloth_image_green.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A4102D217CCE72C004A855B /* cloth_image_green.png */; };
+		3A4102E217CCE72C004A855B /* cloth_image_red.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A4102D317CCE72C004A855B /* cloth_image_red.png */; };
+		3A4102E317CCE72C004A855B /* cloth_image_white.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A4102D417CCE72C004A855B /* cloth_image_white.png */; };
+		3A4102E417CCE72C004A855B /* cloth_image_yellow.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A4102D517CCE72C004A855B /* cloth_image_yellow.png */; };
+		3A4102E517CCE72C004A855B /* Thumbs.db in Resources */ = {isa = PBXBuildFile; fileRef = 3A4102D617CCE72C004A855B /* Thumbs.db */; };
 		3A42290D17BF4C9300D0A884 /* CHANGELOG.md in Resources */ = {isa = PBXBuildFile; fileRef = 3A42290917BF4C9300D0A884 /* CHANGELOG.md */; };
 		3A42290E17BF4C9300D0A884 /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A42290B17BF4C9300D0A884 /* JSONKit.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		3A42290F17BF4C9300D0A884 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 3A42290C17BF4C9300D0A884 /* README.md */; };
@@ -284,6 +299,21 @@
 		3A3F1C391781271000A64C93 /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
 		3A3F1C3B1781271D00A64C93 /* libz.1.2.5.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.2.5.dylib; path = usr/lib/libz.1.2.5.dylib; sourceTree = SDKROOT; };
 		3A3F1C411781273E00A64C93 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		3A4102C817CCE72C004A855B /* cloth_icon_back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cloth_icon_back.png; sourceTree = "<group>"; };
+		3A4102C917CCE72C004A855B /* cloth_icon_blue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cloth_icon_blue.png; sourceTree = "<group>"; };
+		3A4102CA17CCE72C004A855B /* cloth_icon_flax.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cloth_icon_flax.png; sourceTree = "<group>"; };
+		3A4102CB17CCE72C004A855B /* cloth_icon_green.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cloth_icon_green.png; sourceTree = "<group>"; };
+		3A4102CC17CCE72C004A855B /* cloth_icon_red.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cloth_icon_red.png; sourceTree = "<group>"; };
+		3A4102CD17CCE72C004A855B /* cloth_icon_white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cloth_icon_white.png; sourceTree = "<group>"; };
+		3A4102CE17CCE72C004A855B /* cloth_icon_yellow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cloth_icon_yellow.png; sourceTree = "<group>"; };
+		3A4102CF17CCE72C004A855B /* cloth_image_black.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cloth_image_black.png; sourceTree = "<group>"; };
+		3A4102D017CCE72C004A855B /* cloth_image_blue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cloth_image_blue.png; sourceTree = "<group>"; };
+		3A4102D117CCE72C004A855B /* cloth_image_flax.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cloth_image_flax.png; sourceTree = "<group>"; };
+		3A4102D217CCE72C004A855B /* cloth_image_green.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cloth_image_green.png; sourceTree = "<group>"; };
+		3A4102D317CCE72C004A855B /* cloth_image_red.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cloth_image_red.png; sourceTree = "<group>"; };
+		3A4102D417CCE72C004A855B /* cloth_image_white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cloth_image_white.png; sourceTree = "<group>"; };
+		3A4102D517CCE72C004A855B /* cloth_image_yellow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cloth_image_yellow.png; sourceTree = "<group>"; };
+		3A4102D617CCE72C004A855B /* Thumbs.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = Thumbs.db; sourceTree = "<group>"; };
 		3A42290917BF4C9300D0A884 /* CHANGELOG.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CHANGELOG.md; sourceTree = "<group>"; };
 		3A42290A17BF4C9300D0A884 /* JSONKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONKit.h; sourceTree = "<group>"; };
 		3A42290B17BF4C9300D0A884 /* JSONKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONKit.m; sourceTree = "<group>"; };
@@ -618,6 +648,28 @@
 			path = openssl;
 			sourceTree = "<group>";
 		};
+		3A4102C717CCE72C004A855B /* clothe_image */ = {
+			isa = PBXGroup;
+			children = (
+				3A4102C817CCE72C004A855B /* cloth_icon_back.png */,
+				3A4102C917CCE72C004A855B /* cloth_icon_blue.png */,
+				3A4102CA17CCE72C004A855B /* cloth_icon_flax.png */,
+				3A4102CB17CCE72C004A855B /* cloth_icon_green.png */,
+				3A4102CC17CCE72C004A855B /* cloth_icon_red.png */,
+				3A4102CD17CCE72C004A855B /* cloth_icon_white.png */,
+				3A4102CE17CCE72C004A855B /* cloth_icon_yellow.png */,
+				3A4102CF17CCE72C004A855B /* cloth_image_black.png */,
+				3A4102D017CCE72C004A855B /* cloth_image_blue.png */,
+				3A4102D117CCE72C004A855B /* cloth_image_flax.png */,
+				3A4102D217CCE72C004A855B /* cloth_image_green.png */,
+				3A4102D317CCE72C004A855B /* cloth_image_red.png */,
+				3A4102D417CCE72C004A855B /* cloth_image_white.png */,
+				3A4102D517CCE72C004A855B /* cloth_image_yellow.png */,
+				3A4102D617CCE72C004A855B /* Thumbs.db */,
+			);
+			path = clothe_image;
+			sourceTree = "<group>";
+		};
 		3A42290817BF4C9300D0A884 /* JSONKit */ = {
 			isa = PBXGroup;
 			children = (
@@ -818,6 +870,7 @@
 		3AB1FFFC1754850500B72E93 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				3A4102C717CCE72C004A855B /* clothe_image */,
 				3A6AEA0017CADB280035CA10 /* effect_back_icon@2x.png */,
 				3A6AEA0117CADB280035CA10 /* effect_backSelected_icon@2x.png */,
 				3A6AEA0217CADB280035CA10 /* pull_down.png */,
@@ -1199,6 +1252,21 @@
 				3A94862617C30F82009D8DC0 /* icon114.png in Resources */,
 				3AEA8B7417A70A6E00DC976A /* Default@2x.png in Resources */,
 				3A42290D17BF4C9300D0A884 /* CHANGELOG.md in Resources */,
+				3A4102D717CCE72C004A855B /* cloth_icon_back.png in Resources */,
+				3A4102D817CCE72C004A855B /* cloth_icon_blue.png in Resources */,
+				3A4102D917CCE72C004A855B /* cloth_icon_flax.png in Resources */,
+				3A4102DA17CCE72C004A855B /* cloth_icon_green.png in Resources */,
+				3A4102DB17CCE72C004A855B /* cloth_icon_red.png in Resources */,
+				3A4102DC17CCE72C004A855B /* cloth_icon_white.png in Resources */,
+				3A4102DD17CCE72C004A855B /* cloth_icon_yellow.png in Resources */,
+				3A4102DE17CCE72C004A855B /* cloth_image_black.png in Resources */,
+				3A4102DF17CCE72C004A855B /* cloth_image_blue.png in Resources */,
+				3A4102E017CCE72C004A855B /* cloth_image_flax.png in Resources */,
+				3A4102E117CCE72C004A855B /* cloth_image_green.png in Resources */,
+				3A4102E217CCE72C004A855B /* cloth_image_red.png in Resources */,
+				3A4102E317CCE72C004A855B /* cloth_image_white.png in Resources */,
+				3A4102E417CCE72C004A855B /* cloth_image_yellow.png in Resources */,
+				3A4102E517CCE72C004A855B /* Thumbs.db in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1286,8 +1354,8 @@
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Tixa Internet(Beijing) Technology Co., Ltd.";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Tixa Internet(Beijing) Technology Co., Ltd.";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Martin Yin (E66NLL8383)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Martin Yin (E66NLL8383)";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -1305,8 +1373,8 @@
 					"$(SRCROOT)/DoodleTee/alixPay/Utilities/**",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
-				PROVISIONING_PROFILE = "C5F82489-9F46-4F5A-8836-25DC3BBC3830";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "C5F82489-9F46-4F5A-8836-25DC3BBC3830";
+				PROVISIONING_PROFILE = "BBD603E2-2698-4818-B31F-38F3A2851314";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "BBD603E2-2698-4818-B31F-38F3A2851314";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -1320,8 +1388,8 @@
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Tixa Internet(Beijing) Technology Co., Ltd.";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Tixa Internet(Beijing) Technology Co., Ltd.";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Martin Yin (E66NLL8383)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Martin Yin (E66NLL8383)";
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
@@ -1333,8 +1401,8 @@
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
-				PROVISIONING_PROFILE = "C5F82489-9F46-4F5A-8836-25DC3BBC3830";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "C5F82489-9F46-4F5A-8836-25DC3BBC3830";
+				PROVISIONING_PROFILE = "BBD603E2-2698-4818-B31F-38F3A2851314";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "BBD603E2-2698-4818-B31F-38F3A2851314";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -1343,8 +1411,8 @@
 		3AB1FFDC17546F4200B72E93 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Tixa Internet(Beijing) Technology Co., Ltd.";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Tixa Internet(Beijing) Technology Co., Ltd.";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Martin Yin (E66NLL8383)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Martin Yin (E66NLL8383)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/DoodleTee/Classes/Share/ShareSDK_v2.2.4/Connection\"",
@@ -1371,8 +1439,8 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "C5F82489-9F46-4F5A-8836-25DC3BBC3830";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "C5F82489-9F46-4F5A-8836-25DC3BBC3830";
+				PROVISIONING_PROFILE = "BBD603E2-2698-4818-B31F-38F3A2851314";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "BBD603E2-2698-4818-B31F-38F3A2851314";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1380,8 +1448,8 @@
 		3AB1FFDD17546F4200B72E93 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Tixa Internet(Beijing) Technology Co., Ltd.";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Tixa Internet(Beijing) Technology Co., Ltd.";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Martin Yin (E66NLL8383)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Martin Yin (E66NLL8383)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/DoodleTee/Classes/Share/ShareSDK_v2.2.4/Connection\"",
@@ -1408,8 +1476,8 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "C5F82489-9F46-4F5A-8836-25DC3BBC3830";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "C5F82489-9F46-4F5A-8836-25DC3BBC3830";
+				PROVISIONING_PROFILE = "BBD603E2-2698-4818-B31F-38F3A2851314";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "BBD603E2-2698-4818-B31F-38F3A2851314";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
