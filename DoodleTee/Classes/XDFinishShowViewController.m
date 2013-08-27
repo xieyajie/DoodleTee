@@ -211,7 +211,7 @@
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     NSString *imgName = [NSString stringWithFormat:@"%@_%@.png", userName, [_dateFormatter stringFromDate:[NSDate date]]];
     //保存图片到本地沙盒
-    NSString *imgPath = [self saveImage:self.clothImage imageName:imgName];
+    NSString *imgPath = [self saveImage:image imageName:imgName];
     
     //上传图片到服务器
     if (imgPath && imgPath.length > 0) {
@@ -225,7 +225,9 @@
             [self.navigationController popToRootViewControllerAnimated:YES];
         }onError:^(NSError *error){
             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-            NSLog(@"Upload file error: %@", error);
+            
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"错误" message:error.localizedDescription delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+            [alert show];
         }];
     }
     

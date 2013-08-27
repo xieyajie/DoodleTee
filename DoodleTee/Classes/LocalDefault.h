@@ -61,6 +61,7 @@
 #define kNotificationSetButton @"setButton"
 #define kNotificationFinishName @"finishedEffect"
 #define kNotificationLandSuccess @"landSuccess"
+#define kNotificationPayRecall @"payRecall"
 
 //接口返回字段
 #define kREQUESTRESULTCODE @"code"

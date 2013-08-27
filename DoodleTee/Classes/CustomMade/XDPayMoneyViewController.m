@@ -20,6 +20,10 @@
 #import "XDDataCenter.h"
 #import "LocalDefault.h"
 
+#define kErrorAlipayClientNotInstalledTag 98
+#define kPayFailTag 99
+#define kPaySuccessTag 100
+
 @implementation Product
 @synthesize price = _price;
 @synthesize subject = _subject;
@@ -105,6 +109,10 @@
     
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyboard:)];
     [self.view addGestureRecognizer:tap];
+    
+    if ([self respondsToSelector:@selector(payResult:)]) {
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(payResult:) name:kNotificationPayRecall object:nil];
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -138,10 +146,14 @@
 #pragma mark - UIAlertView delegate
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-    if (alertView.tag == 123)
+    if (alertView.tag == kErrorAlipayClientNotInstalledTag)
     {
         NSString * URLString = @"http://itunes.apple.com/cn/app/id535715926?mt=8";
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:URLString]];
+    }
+    else if(alertView.tag == kPaySuccessTag)
+    {
+        [self.navigationController popToRootViewControllerAnimated:YES];
     }
 }
 
@@ -162,7 +174,28 @@
     }
 }
 
-#pragma mark - tap
+#pragma mark - NSNotification
+
+- (void)payResult:(NSNotification *)notification
+{
+    if ([[notification object] isKindOfClass:[NSDictionary class]]) {
+        NSDictionary *obj = (NSDictionary *)[notification object];
+        NSInteger code = [[obj objectForKey:kREQUESTRESULTCODE] integerValue];
+        NSString *message = [obj objectForKey:kREQUESTRESULTINFO];
+        
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:message delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+        
+        if (code > 0) {
+            alert.tag = kPaySuccessTag;
+        }
+        else{
+            alert.tag = kPayFailTag;
+        }
+        [alert show];
+    }
+}
+
+#pragma mark - GestureRecognizer tap
 
 - (void)hideKeyboard:(UITapGestureRecognizer *)tap
 {
@@ -575,7 +608,7 @@
     order.productName = self.product.subject; //商品标题
     order.productDescription = self.product.body; //商品描述
     order.amount = [NSString stringWithFormat:@"%.2f",self.product.price]; //商品价格
-    order.notifyURL =  @"http://www.xxx.com"; //回调URL
+    order.notifyURL =  @"http://www.doodletee.org"; //回调URL
     
     //    order.extraParams = @{@"paizi", @"123"; @"cailiao", @"123"; @"size", @"123"; @"color", @"123"; @"count", @"123"};
     
@@ -606,7 +639,7 @@
                                                                 delegate:self
                                                        cancelButtonTitle:@"确定"
                                                        otherButtonTitles:nil];
-            [alertView setTag:123];
+            [alertView setTag:kErrorAlipayClientNotInstalledTag];
             [alertView show];
         }
         else if (ret == kSPErrorSignError) {
@@ -622,7 +655,8 @@
 {
     _productInfo = aInfo;
     _moneyLabel.text = [NSString stringWithFormat:@"%.2f 元", [[aInfo objectForKey:kSETTINGMONEY] floatValue]];
-    self.product.price = [[aInfo objectForKey:kSETTINGMONEY] floatValue];
+//    self.product.price = [[aInfo objectForKey:kSETTINGMONEY] floatValue];
+    self.product.price = 0.01;
     self.product.subject = @"自制T恤";
     self.product.body = @"暂无介绍";
 }
