@@ -82,7 +82,6 @@
 		3A6E1965175B0AE800806F8A /* font_3.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A6E1955175B0AE800806F8A /* font_3.png */; };
 		3A6E1966175B0AE800806F8A /* font_4.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A6E1956175B0AE800806F8A /* font_4.png */; };
 		3A6E1970175B11CA00806F8A /* stroke_2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A6E196F175B11CA00806F8A /* stroke_2@2x.png */; };
-		3A70409C17C4491C00FB0F39 /* XDPayMoneyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A70409B17C4491C00FB0F39 /* XDPayMoneyViewController.xib */; };
 		3A7204C317BB5722005949FD /* settingSource.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3A7204C217BB5722005949FD /* settingSource.plist */; };
 		3A94862517C30F82009D8DC0 /* icon57.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A94862317C30F82009D8DC0 /* icon57.png */; };
 		3A94862617C30F82009D8DC0 /* icon114.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A94862417C30F82009D8DC0 /* icon114.png */; };
@@ -342,7 +341,6 @@
 		3A6E1955175B0AE800806F8A /* font_3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = font_3.png; sourceTree = "<group>"; };
 		3A6E1956175B0AE800806F8A /* font_4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = font_4.png; sourceTree = "<group>"; };
 		3A6E196F175B11CA00806F8A /* stroke_2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "stroke_2@2x.png"; sourceTree = "<group>"; };
-		3A70409B17C4491C00FB0F39 /* XDPayMoneyViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = XDPayMoneyViewController.xib; sourceTree = "<group>"; };
 		3A7204C217BB5722005949FD /* settingSource.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = settingSource.plist; sourceTree = "<group>"; };
 		3A94862317C30F82009D8DC0 /* icon57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon57.png; sourceTree = "<group>"; };
 		3A94862417C30F82009D8DC0 /* icon114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon114.png; sourceTree = "<group>"; };
@@ -928,7 +926,6 @@
 		3AEA8B0017A70A5D00DC976A /* CustomMade */ = {
 			isa = PBXGroup;
 			children = (
-				3A70409B17C4491C00FB0F39 /* XDPayMoneyViewController.xib */,
 				3AEA8B0117A70A5D00DC976A /* XDAttributeCell.h */,
 				3AEA8B0217A70A5D00DC976A /* XDAttributeCell.m */,
 				3AEA8B0317A70A5D00DC976A /* XDCustomMadeViewController.h */,
@@ -1157,7 +1154,6 @@
 				3A6E1958175B0AE800806F8A /* stroke_1@2x.png in Resources */,
 				3A6E195A175B0AE800806F8A /* stroke_3@2x.png in Resources */,
 				3A6E195B175B0AE800806F8A /* stroke_4@2x.png in Resources */,
-				3A70409C17C4491C00FB0F39 /* XDPayMoneyViewController.xib in Resources */,
 				3A6E195C175B0AE800806F8A /* effect.png in Resources */,
 				3A6E195D175B0AE800806F8A /* effect_0@2x.png in Resources */,
 				3A6E195E175B0AE800806F8A /* effect_1@2x.png in Resources */,

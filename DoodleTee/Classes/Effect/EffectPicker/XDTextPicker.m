@@ -9,6 +9,7 @@
 #import <QuartzCore/QuartzCore.h>
 
 #import "XDTextPicker.h"
+#import "LocalDefault.h"
 
 #define FONT_SIZE 40
 
@@ -28,6 +29,7 @@
     if (self) {
         // Custom initialization
         _effectView = [[UITextView alloc] initWithFrame:CGRectMake(0, 0, size.width, size.height)];
+        _effectView.delegate = self;
         _effectView.backgroundColor = [UIColor clearColor];
         _effectView.font = [UIFont systemFontOfSize:FONT_SIZE];
     }
@@ -36,16 +38,22 @@
 
 #pragma mark - UITextViewDelegate
 
-- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text;
+- (void)textViewDidEndEditing:(UITextView *)textView
 {
-    if ([text isEqualToString: @"\n"])
-    {
-        [_effectView resignFirstResponder];
-        return NO;
-    }
-    
-    return YES;
+    BOOL isBack = textView.text.length > 0 ? NO : YES;
+    [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationSetButton object:[NSNumber numberWithBool:isBack]];
 }
+
+//- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text;
+//{
+//    if ([text isEqualToString: @"\n"])
+//    {
+//        [_effectView resignFirstResponder];
+//        return NO;
+//    }
+//    
+//    return YES;
+//}
 
 #pragma mark - private
 

@@ -58,6 +58,7 @@
 #define kLocalInfoPath @"Documents/commonInfo.plist"
 
 //通知名称
+#define kNotificationSetButton @"setButton"
 #define kNotificationFinishName @"finishedEffect"
 #define kNotificationLandSuccess @"landSuccess"
 

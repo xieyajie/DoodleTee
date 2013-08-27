@@ -13,6 +13,7 @@
 #import "XDImagePicker.h"
 
 #import "ImageUtil.h"
+#import "LocalDefault.h"
 
 #import "ColorMatrix.h"
 
@@ -63,6 +64,7 @@
 - (void)setImage:(UIImage *)aImage
 {
     _image = aImage;
+<<<<<<< HEAD
     if (self.isStatic) {
         CGFloat viewScale = _effectView.frame.size.width / _effectView.frame.size.height;
         CGFloat imageScale = aImage.size.width / aImage.size.height;
@@ -84,6 +86,10 @@
     }
     
     _staticPicture = [[GPUImagePicture alloc] initWithImage:_image smoothlyScaleOutput:NO];
+=======
+    _staticPicture = [[GPUImagePicture alloc] initWithImage:aImage smoothlyScaleOutput:NO];
+    [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationSetButton object:[NSNumber numberWithBool:NO]];
+>>>>>>> 6d34cc1484455637009731374176f8f5dd751767
 }
 
 - (UIImage *)image
@@ -170,6 +176,7 @@
                                                [_stillCamera stopCameraCapture];
                                                [self removeAllTargets];
                                                _staticPicture = [[GPUImagePicture alloc] initWithImage:image smoothlyScaleOutput:YES];
+                                               [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationSetButton object:[NSNumber numberWithBool:NO]];
                                            }
                                        });
                                    }];

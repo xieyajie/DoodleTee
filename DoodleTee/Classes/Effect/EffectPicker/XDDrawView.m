@@ -11,6 +11,7 @@
 #import "XDDrawPicker.h"
 
 #import "UIColor_Random.h"
+#import "LocalDefault.h"
 
 @interface XDDrawView()
 {
@@ -26,6 +27,8 @@
     CGFloat _lastDrowCycleRadius;
     
     BOOL _needClear;
+    
+    BOOL _tmpBool;
 }
 
 @property (nonatomic, strong) UIColor *drawColor;
@@ -110,12 +113,18 @@
 {
     self.clipsToBounds = YES;
     _needClear = YES;
+    _tmpBool = NO;
 }
 
 #pragma mark - touch methods
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
+    if(!_tmpBool){
+        [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationSetButton object:[NSNumber numberWithBool:NO]];
+        _tmpBool = YES;
+    }
+    
     UITouch *touch = [touches anyObject];
     _beginTouch = [touch locationInView:self];
     
@@ -249,8 +258,10 @@
 
 - (void)clear
 {
+    [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationSetButton object:[NSNumber numberWithBool:YES]];
     self.image = nil;
     _needClear = YES;
+    _tmpBool = NO;
     
     [self setNeedsDisplay];
 }
