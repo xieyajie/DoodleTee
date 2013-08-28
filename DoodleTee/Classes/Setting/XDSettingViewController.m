@@ -16,16 +16,6 @@
 #define kTagLeftView 0
 #define kTagRightView 1
 
-#define kSourceData @"data_source"
-#define kLeftView @"leftView"
-#define kRightView @"rightView"
-#define kSettingTitle @"title"
-#define kSettingSource @"source"
-
-#define kSourceImage @"image_source"
-#define kImageIcon @"icon"
-#define kImageClothe @"cloth_image"
-
 @interface XDSettingViewController ()<AKSegmentedControlDelegate>
 {
     UITableView *_leftTableView;
@@ -41,6 +31,8 @@
 
 @implementation XDSettingViewController
 
+@synthesize currentClotheImageName = _currentClotheImageName;
+
 - (id)init
 {
     self = [super init];
@@ -48,8 +40,9 @@
         // Custom initializationi
         _dataSource = [NSDictionary dictionary];
         _imageSource = [NSDictionary dictionary];
-        _selectionDictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:[NSMutableDictionary dictionary], kLeftView, [NSMutableDictionary dictionary], kRightView, nil];
-        _selectionindexPaths = [NSMutableDictionary dictionaryWithObjectsAndKeys:[NSMutableDictionary dictionary], kLeftView, [NSMutableDictionary dictionary], kRightView, nil];
+        _selectionDictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:[NSMutableDictionary dictionary], kSettingLeftView, [NSMutableDictionary dictionary], kSettingRightView, nil];
+        _selectionindexPaths = [NSMutableDictionary dictionaryWithObjectsAndKeys:[NSMutableDictionary dictionary], kSettingLeftView, [NSMutableDictionary dictionary], kSettingRightView, nil];
+        _currentClotheImageName = nil;
     }
     return self;
 }
@@ -82,23 +75,23 @@
     label.textColor = [UIColor blackColor];
     [headerView addSubview: label];
     
-    NSString *key = tableView.tag == kTagLeftView ? kLeftView : kRightView;
-    label.text = [[[_dataSource objectForKey:key] objectAtIndex:section] objectForKey:kSettingTitle];
+    NSString *key = tableView.tag == kTagLeftView ? kSettingLeftView : kSettingRightView;
+    label.text = [[[_dataSource objectForKey:key] objectAtIndex:section] objectForKey:kSettingDataTitle];
     
     return headerView;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSString *key = tableView.tag == kTagLeftView ? kLeftView : kRightView;
-    NSString *title = [[[_dataSource objectForKey:key] objectAtIndex:indexPath.section] objectForKey:kSettingTitle];
+    NSString *key = tableView.tag == kTagLeftView ? kSettingLeftView : kSettingRightView;
+    NSString *title = [[[_dataSource objectForKey:key] objectAtIndex:indexPath.section] objectForKey:kSettingDataTitle];
     
     NSIndexPath *oldIndex = [[_selectionindexPaths objectForKey:key] objectForKey:title];
     if (oldIndex.section == indexPath.section && oldIndex.row != indexPath.row)
     {
         [tableView deselectRowAtIndexPath:oldIndex animated:YES];
         
-        NSArray *array = [[[_dataSource objectForKey:key] objectAtIndex:indexPath.section] objectForKey:kSettingSource];
+        NSArray *array = [[[_dataSource objectForKey:key] objectAtIndex:indexPath.section] objectForKey:kSettingDataSource];
         [[_selectionDictionary objectForKey:key] setObject:[array objectAtIndex:indexPath.row] forKey:title];
         [[_selectionindexPaths objectForKey:key] setObject:indexPath forKey:title];
     }
@@ -107,14 +100,14 @@
 #pragma mark - UITableViewDataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    NSString *key = tableView.tag == kTagLeftView ? kLeftView : kRightView;
+    NSString *key = tableView.tag == kTagLeftView ? kSettingLeftView : kSettingRightView;
     return [[_dataSource objectForKey:key] count];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    NSString *key = tableView.tag == kTagLeftView ? kLeftView : kRightView;
-    return [[[[_dataSource objectForKey:key] objectAtIndex:section] objectForKey:kSettingSource] count];
+    NSString *key = tableView.tag == kTagLeftView ? kSettingLeftView : kSettingRightView;
+    return [[[[_dataSource objectForKey:key] objectAtIndex:section] objectForKey:kSettingDataSource] count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -142,10 +135,10 @@
         cell.selectedBackgroundView = selectedBackgroundView;
     }
     
-    NSString *key = tableView.tag == kTagLeftView ? kLeftView : kRightView;
+    NSString *key = tableView.tag == kTagLeftView ? kSettingLeftView : kSettingRightView;
     NSMutableDictionary *dic = [[_dataSource objectForKey:key] objectAtIndex:indexPath.section];
-    NSString *title = [dic objectForKey:kSettingTitle];
-    NSString *text = [[dic objectForKey:kSettingSource] objectAtIndex:indexPath.row];
+    NSString *title = [dic objectForKey:kSettingDataTitle];
+    NSString *text = [[dic objectForKey:kSettingDataSource] objectAtIndex:indexPath.row];
     
     if ([CellIdentifier isEqualToString:cellIdentifier])
     {
@@ -154,7 +147,7 @@
     else if ([CheckCellIdentifier isEqualToString:cellIdentifier])
     {
         NSDictionary *imageDic = [_imageSource objectForKey:text];
-        cell.imageView.image = [UIImage imageNamed: [imageDic objectForKey:kImageIcon]];
+        cell.imageView.image = [UIImage imageNamed: [imageDic objectForKey:kSettingImageIcon]];
     }
     
     NSIndexPath *setIndex = [[_selectionindexPaths objectForKey:key] objectForKey:title];
@@ -267,8 +260,8 @@
 {
     NSString *filePath = [[NSBundle mainBundle] pathForResource:@"settingSource" ofType:@"plist"];
     NSDictionary *dataDic = [NSDictionary dictionaryWithContentsOfFile:filePath];
-    _dataSource = [dataDic objectForKey:kSourceData];
-    _imageSource = [dataDic objectForKey:kSourceImage];
+    _dataSource = [dataDic objectForKey:kSettingSourceData];
+    _imageSource = [dataDic objectForKey:kSettingSourceImage];
 }
 
 - (void)configurationSettingSelected
@@ -300,6 +293,16 @@
         dictionary = [setDic objectForKey:key];
     }
     
+    NSString *color = nil;
+    if (_currentClotheImageName != nil && _currentClotheImageName.length > 0) {
+        for (NSString *colorKey in _imageSource) {
+            NSDictionary *imageDic = [_imageSource objectForKey:colorKey];
+            if ([_currentClotheImageName isEqualToString:[imageDic objectForKey:kSettingImageClothe]]) {
+                color = colorKey;
+            }
+        }
+    }
+    
     NSInteger section = 0;
     if (dictionary == nil || [dictionary count] == 0) {
         _selectionDictionary = [NSMutableDictionary dictionary];
@@ -311,10 +314,23 @@
             NSMutableDictionary *indexDic = [NSMutableDictionary dictionary];
             
             for (NSDictionary *dataDic in dataArray) {
-                NSString *key = [dataDic objectForKey:kSettingTitle];
-                NSString *info = [[dataDic objectForKey:kSettingSource] objectAtIndex:0];
+                NSInteger row = 0;
+                NSString *key = [dataDic objectForKey:kSettingDataTitle];
+                NSString *info = [[dataDic objectForKey:kSettingDataSource] objectAtIndex:row];
+                
+                if (color != nil && [key isEqualToString:kSETTINGCOLOR]) {
+                    if (![color isEqualToString:info]) {
+                        info = color;
+                    }
+                    
+                    NSInteger row = [[dataDic objectForKey:kSettingDataSource] indexOfObject:info];
+                    if (row < 0) {
+                        row = 0;
+                    }
+                }
+                
                 [dic setObject:info forKey:key];
-                [indexDic setObject:[NSIndexPath indexPathForRow:0 inSection:section] forKey:key];
+                [indexDic setObject:[NSIndexPath indexPathForRow:row inSection:section] forKey:key];
                 section++;
             }
             [_selectionDictionary setObject:dic forKey:dataKey];
@@ -326,11 +342,17 @@
         for (NSString *dataKey in _dataSource) {
             NSArray *dataArray = [_dataSource objectForKey:dataKey];
             for (NSDictionary *dic in dataArray) {
-                NSString *key = [dic objectForKey:kSettingTitle];
+                NSString *key = [dic objectForKey:kSettingDataTitle];
                 NSString *setInfo = [dictionary objectForKey:key];
+                
+                if (color != nil && [key isEqualToString:kSETTINGCOLOR]) {
+                    if (![color isEqualToString:setInfo]) {
+                        setInfo = color;
+                    }
+                }
                 [[_selectionDictionary objectForKey:dataKey] setObject:setInfo forKey:key];
                 
-                NSInteger row = [[dic objectForKey:kSettingSource] indexOfObject:setInfo];
+                NSInteger row = [[dic objectForKey:kSettingDataSource] indexOfObject:setInfo];
                 if (row < 0) {
                     row = 0;
                 }
@@ -380,14 +402,27 @@
         settings = [[NSMutableDictionary alloc] init];
     }
     
-    [settings removeAllObjects];
-    
+    NSString *imgName = nil;
     for (NSString *dicKey in _selectionDictionary) {
         NSMutableDictionary *sdic = [_selectionDictionary objectForKey:dicKey];
         for (NSString *sKey in sdic) {
             NSString *sInfo = [sdic objectForKey:sKey];
-            [settings setObject:sInfo forKey:key];
+            [settings setObject:sInfo forKey:sKey];
+            
+            if ([sKey isEqualToString:kSETTINGCOLOR]) {
+                imgName = [[_imageSource objectForKey:sInfo] objectForKey:kSettingImageClothe];
+            }
         }
+    }
+    
+    if(imgName == nil || imgName.length == 0)
+    {
+        imgName = @"clothe_default.png";
+    }
+    NSString *oldImgName = [settings objectForKey:kSettingImageClothe];
+    if (![oldImgName isEqualToString:imgName]) {
+        [settings setObject:imgName forKey:kSettingImageClothe];
+        [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationChangeClotheImage object:imgName];
     }
         
     [setDic setObject:settings forKey:key];

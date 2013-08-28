@@ -31,13 +31,18 @@
     UIButton *_buttonEffect;
     
     UIImageView *_clotheView;
+    NSString *_clotheImageName;
     
     UITapGestureRecognizer *_tapGesture;
 }
 
+@property (nonatomic, strong) UIImageView *effectImgView;
+
 @end
 
 @implementation XDRootViewController
+
+@synthesize effectImgView = _effectImgView;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -75,8 +80,10 @@
     _bottomView.layer.shadowRadius = 10.0;
     _bottomView.layer.shadowOffset = CGSizeMake(0.0f, 0.0f);
     
+    _clotheImageName = [XDShareMethods clotheImageName];
+    
     _clotheView = [[UIImageView alloc] init];
-    UIImage *image = [UIImage imageNamed:@"clothe_default.png"];
+    UIImage *image = [XDShareMethods clotheImage];
     _clotheView.frame = [self viewFrameForImage:image];
     _clotheView.image = image;
     [self.view addSubview:_clotheView];
@@ -102,12 +109,29 @@
     if ([self respondsToSelector:@selector(successOfLanding:)]) {
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(successOfLanding:) name:kNotificationLandSuccess object:nil];
     }
+    
+    if ([self respondsToSelector:@selector(changeClotheImage:)]) {
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeClotheImage:) name:kNotificationChangeClotheImage object:nil];
+    }
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - get
+
+- (UIImageView *)effectImgView
+{
+    if (_effectImgView == nil) {
+        _effectImgView = [[UIImageView alloc] init];
+        _effectImgView.backgroundColor = [UIColor clearColor];
+        [_clotheView addSubview:_effectImgView];
+    }
+    
+    return _effectImgView;
 }
 
 #pragma mark - AKSegmentedControl Delegate
@@ -157,7 +181,8 @@
     [_buttonEffect setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     
     UIImage *image = (UIImage *)[aNotification object];
-    _clotheView.image = image;
+    self.effectImgView.image = image;
+    self.effectImgView.frame = [[XDShareMethods defaultShare] effectViewFrameWithSuperView:_clotheView];
     
     if (_tapGesture == nil) {
         _tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(addEffect)];
@@ -169,7 +194,15 @@
 {
     XDAccountInfoViewController *infoViewController = [[XDAccountInfoViewController alloc] init];
     [XDShareMethods presentViewController:infoViewController animated:YES formViewController:self.navigationController completion:nil];
-//    [self.navigationController presentViewController:infoViewController animated:YES completion:nil];
+}
+
+- (void)changeClotheImage:(NSNotification *)aNotification
+{
+    _clotheImageName = (NSString *)[aNotification object];
+    UIImage *image = [UIImage imageNamed:_clotheImageName];
+    _clotheView.frame = [self viewFrameForImage:image];
+    _clotheView.image = image;
+    self.effectImgView.frame = [[XDShareMethods defaultShare] effectViewFrameWithSuperView:_clotheView];
 }
 
 #pragma mark - 页面排版
@@ -289,8 +322,8 @@
 - (void)settingAction
 {
     XDSettingViewController *settingViewController = [[XDSettingViewController alloc] init];
+    settingViewController.currentClotheImageName = _clotheImageName;
     [XDShareMethods presentViewController:settingViewController animated:YES formViewController:self.navigationController completion:nil];
-//    [self.navigationController presentViewController:settingViewController animated:YES completion:nil];
 }
 
 - (void)accountAction
@@ -313,7 +346,6 @@
     [_buttonShare setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
     _buttonEffect.enabled = NO;
     [_buttonEffect setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
-    _clotheView.image = [UIImage imageNamed:@"clothe_default.png"];
     
     XDEffectViewController *effectViewController = [[XDEffectViewController alloc] init];
     [self.navigationController pushViewController:effectViewController animated:YES];}
@@ -321,21 +353,12 @@
 - (void)piazzaAction
 {
      NSLog(@"piazza");
-    
-//    _addButton.hidden = NO;
-//    _buttonShare.enabled = NO;
-//    [_buttonShare setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
-//    _buttonEffect.enabled = NO;
-//    [_buttonEffect setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
-//    
-//    _clotheView.image = [UIImage imageNamed:@"clothe_default.png"];
 }
 
 - (void)shareAction
 {
     XDShareViewController *shareViewController = [[XDShareViewController alloc] initWithShareImage:_clotheView.image];
     [XDShareMethods presentViewController:shareViewController animated:YES formViewController:self.navigationController completion:nil];
-     NSLog(@"share");
 }
 
 - (void)effectAction
@@ -344,9 +367,10 @@
     NSFileManager *fileManage = [NSFileManager defaultManager];
     if ([fileManage fileExistsAtPath: plistPath])
     {
-        XDCustomMadeViewController *customViewController = [[XDCustomMadeViewController alloc] initWithClothImage:_clotheView.image];
+        UIImageView *tmpView = _clotheView;
+        UIImage *finishImage = [[XDShareMethods defaultShare] composeImage:self.effectImgView.image toImage:_clotheView.image finishToView:tmpView];
+        XDCustomMadeViewController *customViewController = [[XDCustomMadeViewController alloc] initWithClothImage:finishImage];
         [self.navigationController pushViewController:customViewController animated:YES];
-        NSLog(@"effect");
     }
     else{
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"请先选择底衫" message:@"" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];

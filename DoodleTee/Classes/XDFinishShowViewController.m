@@ -61,7 +61,7 @@
     
     
     UIImageView *clotheView = [[UIImageView alloc] init];
-    UIImage *image = [UIImage imageNamed:@"clothe_default.png"];
+    UIImage *image = [XDShareMethods clotheImage];
     clotheView.frame = [self frameForImage:image addToView:self.view];
     clotheView.image = [[XDShareMethods defaultShare] composeImage:_clothImage toImage:image finishToView:clotheView];
     self.clothImage = clotheView.image;
@@ -221,7 +221,7 @@
                 NSLog(@"server response: %@",result);
             }
             
-            [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationFinishName object:self.clothImage];
+            [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationFinishName object:_effectImage];
             [self.navigationController popToRootViewControllerAnimated:YES];
         }onError:^(NSError *error){
             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];

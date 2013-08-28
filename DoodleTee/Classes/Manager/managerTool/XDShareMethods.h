@@ -21,9 +21,15 @@
 
 + (void)dismissViewController:(UIViewController *)viewController animated: (BOOL)flag completion: (void (^)(void))completion;
 
+//获取底衫图片名称
++ (NSString *)clotheImageName;
 
+//获取底衫图片
++ (UIImage *)clotheImage;
+
+//绘制的图片在底衫上的显示位置
 - (CGRect)effectViewFrameWithSuperView:(UIView *)view;
-
+//合并图片
 - (UIImage *)composeImage:(UIImage *)subImage toImage:(UIImage *)superImage finishToView:(UIView *)view;
 
 

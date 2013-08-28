@@ -204,9 +204,9 @@
     NSString *userName = [[NSUserDefaults standardUserDefaults] objectForKey:kUserDefaultsUserName];
     NSString *plistPath = [NSHomeDirectory() stringByAppendingPathComponent: KSETTINGPLIST];
     NSMutableDictionary *settingsDic = [[NSMutableDictionary alloc] initWithContentsOfFile: plistPath];
-    NSMutableArray *settings = [settingsDic objectForKey:userName];
-    for (NSMutableDictionary *dic in settings) {
-        [self.attributeDic setValuesForKeysWithDictionary:dic];
+    NSMutableDictionary *settings = [settingsDic objectForKey:userName];
+    for (NSString *key in settings) {
+        [self.attributeDic setObject:[settings objectForKey:key] forKey:key];
     }
 }
 

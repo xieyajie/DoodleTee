@@ -62,10 +62,22 @@
 #define kNotificationFinishName @"finishedEffect"
 #define kNotificationLandSuccess @"landSuccess"
 #define kNotificationPayRecall @"payRecall"
+#define kNotificationChangeClotheImage @"changeClotheImage"
 
 //接口返回字段
 #define kREQUESTRESULTCODE @"code"
 #define kREQUESTRESULTINFO @"info"
+
+//设置页面字段
+#define kSettingSourceData @"data_source"
+#define kSettingLeftView @"leftView"
+#define kSettingRightView @"rightView"
+#define kSettingDataTitle @"title"
+#define kSettingDataSource @"source"
+
+#define kSettingSourceImage @"image_source"
+#define kSettingImageIcon @"icon"
+#define kSettingImageClothe @"cloth_image"
 
 
 //其他

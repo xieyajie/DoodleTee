@@ -71,6 +71,84 @@ static XDShareMethods *shareDefult = nil;
     }
 }
 
+//获取底衫图片名称
++ (NSString *)clotheImageName
+{
+    NSString *key = nil;
+    NSString *userName = [[NSUserDefaults standardUserDefaults] objectForKey:kUserDefaultsUserName];
+    //未登录
+    if (userName == nil || userName.length == 0) {
+        key = kUserDefault;
+    }
+    else{
+        key = userName;
+    }
+    
+    NSString *plistPath = [NSHomeDirectory() stringByAppendingPathComponent: KSETTINGPLIST];
+    NSFileManager *fileManage = [NSFileManager defaultManager];
+    if (![fileManage fileExistsAtPath: plistPath])
+    {
+        return @"clothe_default.png";
+    }
+    
+    NSMutableDictionary *setDic = [[NSMutableDictionary alloc] initWithContentsOfFile:plistPath];
+    if (setDic == nil) {
+        return @"clothe_default.png";
+    }
+    
+    NSMutableDictionary *settings = [setDic objectForKey:key];
+    if (settings == nil)
+    {
+        return @"clothe_default.png";
+    }
+    
+    NSString *imageName = [settings objectForKey:kSettingImageClothe];
+    if (imageName == nil || imageName.length == 0) {
+        return @"clothe_default.png";
+    }
+    
+    return imageName;
+}
+
+//获取底衫图片
++ (UIImage *)clotheImage
+{
+    NSString *key = nil;
+    NSString *userName = [[NSUserDefaults standardUserDefaults] objectForKey:kUserDefaultsUserName];
+    //未登录
+    if (userName == nil || userName.length == 0) {
+        key = kUserDefault;
+    }
+    else{
+        key = userName;
+    }
+    
+    NSString *plistPath = [NSHomeDirectory() stringByAppendingPathComponent: KSETTINGPLIST];
+    NSFileManager *fileManage = [NSFileManager defaultManager];
+    if (![fileManage fileExistsAtPath: plistPath])
+    {
+        return [UIImage imageNamed:@"clothe_default.png"];
+    }
+    
+    NSMutableDictionary *setDic = [[NSMutableDictionary alloc] initWithContentsOfFile:plistPath];
+    if (setDic == nil) {
+        return [UIImage imageNamed:@"clothe_default.png"];
+    }
+    
+    NSMutableDictionary *settings = [setDic objectForKey:key];
+    if (settings == nil)
+    {
+        return [UIImage imageNamed:@"clothe_default.png"];
+    }
+    
+    NSString *imageName = [settings objectForKey:kSettingImageClothe];
+    if (imageName == nil || imageName.length == 0) {
+        return [UIImage imageNamed:@"clothe_default.png"];
+    }
+    
+    return [UIImage imageNamed:imageName];
+}
+
 #pragma mark - 合并图片
 
 - (CGRect)effectViewFrameWithSuperView:(UIView *)view

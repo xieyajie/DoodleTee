@@ -518,7 +518,7 @@ typedef enum{
     UIImageView *cloth = [[UIImageView alloc] initWithFrame:CGRectMake(0, 20, _clothBgView.frame.size.width * 1.5, _clothBgView.frame.size.height * 1.5)];
     cloth.center = _clothBgView.center;
     cloth.contentMode = UIViewContentModeScaleAspectFill;
-    cloth.image = [UIImage imageNamed:@"clothe_default.png"];
+    cloth.image = [XDShareMethods clotheImage];
     [_clothBgView addSubview:cloth];
 }
 

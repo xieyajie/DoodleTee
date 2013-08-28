@@ -16,6 +16,8 @@
     UIButton *_overButton;
 }
 
+@property (nonatomic, strong) NSString *currentClotheImageName;
+
 - (void)backAction:(id)sender;
 
 - (void)overAction:(id)sender;
