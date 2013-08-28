@@ -21,8 +21,9 @@
     UITableView *_leftTableView;
     UITableView *_rightTableView;
     
-    NSDictionary *_dataSource;
+    NSMutableDictionary *_dataSource;
     NSDictionary *_imageSource;
+    NSDictionary *_colorSource;
     NSMutableDictionary *_selectionDictionary;
     NSMutableDictionary *_selectionindexPaths;
 }
@@ -38,10 +39,12 @@
     self = [super init];
     if (self) {
         // Custom initializationi
-        _dataSource = [NSDictionary dictionary];
+        _dataSource = [NSMutableDictionary dictionary];
         _imageSource = [NSDictionary dictionary];
+        _colorSource = [NSDictionary dictionary];
         _selectionDictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:[NSMutableDictionary dictionary], kSettingLeftView, [NSMutableDictionary dictionary], kSettingRightView, nil];
         _selectionindexPaths = [NSMutableDictionary dictionaryWithObjectsAndKeys:[NSMutableDictionary dictionary], kSettingLeftView, [NSMutableDictionary dictionary], kSettingRightView, nil];
+        
         _currentClotheImageName = nil;
     }
     return self;
@@ -84,16 +87,35 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSString *key = tableView.tag == kTagLeftView ? kSettingLeftView : kSettingRightView;
-    NSString *title = [[[_dataSource objectForKey:key] objectAtIndex:indexPath.section] objectForKey:kSettingDataTitle];
+    NSMutableDictionary *dic = [[_dataSource objectForKey:key] objectAtIndex:indexPath.section];
+    NSArray *array = [dic objectForKey:kSettingDataSource];
+    NSString *title = [dic objectForKey:kSettingDataTitle];
     
     NSIndexPath *oldIndex = [[_selectionindexPaths objectForKey:key] objectForKey:title];
     if (oldIndex.section == indexPath.section && oldIndex.row != indexPath.row)
     {
         [tableView deselectRowAtIndexPath:oldIndex animated:YES];
         
-        NSArray *array = [[[_dataSource objectForKey:key] objectAtIndex:indexPath.section] objectForKey:kSettingDataSource];
         [[_selectionDictionary objectForKey:key] setObject:[array objectAtIndex:indexPath.row] forKey:title];
         [[_selectionindexPaths objectForKey:key] setObject:indexPath forKey:title];
+    }
+    
+    if ([title isEqualToString:kSETTINGMATERIAL]) {
+        NSString *oldTitle = [[[[_dataSource objectForKey:key] objectAtIndex:oldIndex.section] objectForKey:kSettingDataSource] objectAtIndex:oldIndex.row];
+        if (![oldTitle isEqualToString:title]) {
+            NSInteger colorSection = [[[_selectionindexPaths objectForKey:key] objectForKey:kSETTINGCOLOR] section];
+            NSMutableDictionary *colorDic = [[_dataSource objectForKey:key] objectAtIndex:colorSection];
+            [colorDic setObject:[_colorSource objectForKey:[array objectAtIndex:indexPath.row]] forKey:kSettingDataSource];
+            
+//            [_leftTableView reloadData];
+            
+            [[_selectionDictionary objectForKey:key] setObject:[[colorDic objectForKey:kSettingDataSource] objectAtIndex:0] forKey:title];
+            [[_selectionindexPaths objectForKey:key] setObject:[NSIndexPath indexPathForRow:0 inSection:colorSection] forKey:title];
+            
+            [_leftTableView beginUpdates];
+            [_leftTableView reloadSections:[NSIndexSet indexSetWithIndex:colorSection] withRowAnimation:UITableViewRowAnimationNone];
+            [_leftTableView endUpdates];
+        }
     }
 }
 
@@ -259,9 +281,10 @@
 - (void)getSettingSource
 {
     NSString *filePath = [[NSBundle mainBundle] pathForResource:@"settingSource" ofType:@"plist"];
-    NSDictionary *dataDic = [NSDictionary dictionaryWithContentsOfFile:filePath];
+    NSMutableDictionary *dataDic = [NSMutableDictionary dictionaryWithContentsOfFile:filePath];
     _dataSource = [dataDic objectForKey:kSettingSourceData];
     _imageSource = [dataDic objectForKey:kSettingSourceImage];
+    _colorSource = [dataDic objectForKey:kSettingSourceColor];
 }
 
 - (void)configurationSettingSelected
@@ -299,6 +322,7 @@
             NSDictionary *imageDic = [_imageSource objectForKey:colorKey];
             if ([_currentClotheImageName isEqualToString:[imageDic objectForKey:kSettingImageClothe]]) {
                 color = colorKey;
+                break;
             }
         }
     }
@@ -339,14 +363,24 @@
         }
     }
     else{
+        NSString *tmpColorkey = nil;
+        
         for (NSString *dataKey in _dataSource) {
-            NSArray *dataArray = [_dataSource objectForKey:dataKey];
-            for (NSDictionary *dic in dataArray) {
+            NSMutableArray *dataArray = [_dataSource objectForKey:dataKey];
+            for (NSMutableDictionary *dic in dataArray) {
                 NSString *key = [dic objectForKey:kSettingDataTitle];
                 NSString *setInfo = [dictionary objectForKey:key];
                 
+                if ([key isEqualToString:kSETTINGMATERIAL]) {
+                    tmpColorkey = setInfo;
+                }
+                
                 if (color != nil && [key isEqualToString:kSETTINGCOLOR]) {
-                    if (![color isEqualToString:setInfo]) {
+                    if (tmpColorkey != nil && [tmpColorkey length] > 0) {
+                        [dic setObject:[_colorSource objectForKey:tmpColorkey] forKey:kSettingDataSource];
+                    }
+                    
+                    if (color != nil && ![color isEqualToString:setInfo]) {
                         setInfo = color;
                     }
                 }

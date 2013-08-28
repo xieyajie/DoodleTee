@@ -79,6 +79,8 @@
 #define kSettingImageIcon @"icon"
 #define kSettingImageClothe @"cloth_image"
 
+#define kSettingSourceColor @"color_source"
+
 
 //其他
 #define kUnitPrice 20.0
