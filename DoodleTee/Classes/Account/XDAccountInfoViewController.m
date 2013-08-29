@@ -25,6 +25,8 @@
     NSMutableArray *_selectedSections;
     
     UIImage *_headerImage;
+    
+    NSMutableDictionary *_dataSource;
 }
 
 @end
@@ -36,6 +38,7 @@
     self = [super init];
     if (self) {
         // Custom initialization
+        _dataSource = [NSMutableDictionary dictionaryWithObjectsAndKeys:[NSDictionary dictionary], kACCOUNTCONSIGNEE, [NSDictionary dictionary], kACCOUNTPAY, [NSArray array], kACCOUNTDESIGN, [NSArray array], kACCOUNTDESIGN, [NSArray array], kACCOUNTSELL, nil];
         _headerViews = [[NSMutableArray alloc] init];
         _headerTitles = [[NSArray alloc] initWithObjects:kACCOUNTCONSIGNEE, kACCOUNTPAY, kACCOUNTDESIGN, kACCOUNTBUY, kACCOUNTSELL, nil];
         _selectedSections = [[NSMutableArray alloc] init];
@@ -46,6 +49,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    [self getLocalDataSource];
+    [self requestDataSource];
     
     _headerImage = [XDShareMethods getSinaIconFromLocal];
     if (_headerImage == nil) {
@@ -98,7 +104,7 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     // Return the number of sections.
-    return 7;
+    return [_dataSource count] + 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -110,7 +116,12 @@
     else{
         for (NSNumber *n in _selectedSections) {
             if ([n integerValue] == section) {
-                return 1;
+                XDAccountInfoHeaderView *headView = [_headerViews objectAtIndex:(section - 2)];
+                NSInteger count = [[_dataSource objectForKey:headView.title] count];
+                if (count == 0) {
+                    count = 1;
+                }
+                return count;
             }
         }
         return 0;
@@ -161,45 +172,6 @@
     
     return cell;
 }
-
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
 
 #pragma mark - Table view delegate
 
@@ -307,6 +279,31 @@
 //        default:
 //            break;
 //    }
+}
+
+#pragma mark - data source
+
+- (void)getLocalDataSource
+{
+    NSFileManager *fileManage = [NSFileManager defaultManager];
+    NSString *userName = [[NSUserDefaults standardUserDefaults] objectForKey:kUserDefaultsUserName];
+    
+    //获取常用联系人信息
+    NSString *consigneeTmp = [NSString stringWithFormat:@"%@/%@/%@", kLocalDocuments, userName, kLocalInfoPlistName];
+    NSString *consigneePath = [NSHomeDirectory() stringByAppendingPathComponent: consigneeTmp];
+    if ([fileManage fileExistsAtPath: consigneePath])
+    {
+        NSMutableDictionary *consigneeDic = [NSArray arrayWithContentsOfFile:consigneePath];
+        NSString *payment = [consigneeDic objectForKey:kORDERPAYMENT];
+        [_dataSource setObject:[NSDictionary dictionaryWithObjectsAndKeys:payment, kORDERPAYMENT, nil] forKey:kACCOUNTPAY];
+        [consigneeDic removeObjectForKey:kORDERPAYMENT];
+        [_dataSource setObject:consigneeDic forKey:kACCOUNTCONSIGNEE];
+    }
+}
+
+- (void)requestDataSource
+{
+    
 }
 
 #pragma mark - private

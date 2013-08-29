@@ -62,7 +62,6 @@
         _moneyLabel.backgroundColor = [UIColor clearColor];
         _moneyLabel.text = @"20 元";
         
-        _titleArray = [[NSArray alloc] initWithObjects:kSETTINGBRAND, kSETTINGMATERIAL, kSETTINGSIZE, kSETTINGCOLOR, nil];
         _attributeDic = [NSMutableDictionary dictionary];
         
         _clothImage = image;
@@ -148,7 +147,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 7;
+    return self.attributeDic.count + 3;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -206,8 +205,12 @@
     NSMutableDictionary *settingsDic = [[NSMutableDictionary alloc] initWithContentsOfFile: plistPath];
     NSMutableDictionary *settings = [settingsDic objectForKey:userName];
     for (NSString *key in settings) {
-        [self.attributeDic setObject:[settings objectForKey:key] forKey:key];
+        if (![key isEqualToString:kSettingImageClothe]) {
+            [self.attributeDic setObject:[settings objectForKey:key] forKey:key];
+        }
     }
+    
+    _titleArray = [self.attributeDic allKeys];
 }
 
 - (UITableViewCell *)configurationImageCell
