@@ -81,6 +81,11 @@
 
 #define kSettingSourceColor @"color_source"
 
+//用户信息字段
+#define kAccountInfo @"info"
+
+#define kAccountConsigneTitle @"title"
+
 
 //其他
 #define kUnitPrice 20.0

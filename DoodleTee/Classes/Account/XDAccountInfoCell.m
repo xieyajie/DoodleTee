@@ -7,6 +7,7 @@
 //
 
 #import "XDAccountInfoCell.h"
+#import "LocalDefault.h"
 
 @implementation XDAccountInfoCell
 
@@ -14,6 +15,9 @@
 @synthesize nameLabel = _nameLabel;
 @synthesize achieveLabel = _achieveLabel;
 @synthesize balanceLabel = _balanceLabel;
+
+@synthesize consigneTitleLabel = _consigneTitleLabel;
+@synthesize consigneInfoLabel = _consigneInfoLabel;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -101,6 +105,23 @@
 - (void)cellForLineChart
 {
     
+}
+
+- (void)cellForConsigne
+{
+    _consigneTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, 0, 80, 40)];
+    _consigneTitleLabel.font = [UIFont boldSystemFontOfSize:16.0];
+    _consigneTitleLabel.backgroundColor = [UIColor clearColor];
+    [self.contentView addSubview:_consigneTitleLabel];
+    
+    _consigneInfoLabel = [[UILabel alloc] initWithFrame:CGRectMake(95, 0, kViewWidth - 30 - 80, 40)];
+    _consigneInfoLabel.font = [UIFont systemFontOfSize:15];
+    _consigneInfoLabel.backgroundColor = [UIColor clearColor];
+    [self.contentView addSubview:_consigneInfoLabel];
+    
+    UIView *line = [[UIView alloc] initWithFrame:CGRectMake(10, 40, kViewWidth - 30, 1)];
+    line.backgroundColor = [UIColor lightGrayColor];
+    [self.contentView addSubview:line];
 }
 
 @end

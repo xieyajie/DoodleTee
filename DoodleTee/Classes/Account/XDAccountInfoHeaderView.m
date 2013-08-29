@@ -12,7 +12,7 @@
 
 @synthesize delegate = _delegate;
 
-@synthesize title;
+@synthesize title = _title;
 @synthesize section = _section;
 
 - (id)initWithFrame:(CGRect)frame
@@ -82,6 +82,7 @@
 
 - (void)setTitle:(NSString *)string
 {
+    _title = string;
     _titleLabel.text = string;
 }
 

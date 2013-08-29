@@ -180,6 +180,7 @@ static XDShareMethods *shareDefult = nil;
     return finish;
 }
 
+#pragma mark - 图片相关
 
 //保存自绘制的图片到本地
 + (NSString *)saveCustomImage:(UIImage *)image imageName:(NSString *)imgName
@@ -245,6 +246,26 @@ static XDShareMethods *shareDefult = nil;
     }
 
     return nil;
+}
+
+#pragma mark - other
+
+- (NSDictionary *)localEnToChDictionary
+{
+    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"EnglishAndChinese" ofType:@"plist"];
+   return [NSDictionary dictionaryWithContentsOfFile:filePath];
+
+}
+
+//根据英文获取对应中文
+- (NSString *)chineseForString:(NSString *)eStr
+{
+    NSDictionary *dic = [self localEnToChDictionary];
+    NSString *str = [dic objectForKey:eStr];
+    if (str == nil) {
+        str = eStr;
+    }
+    return str;
 }
 
 @end

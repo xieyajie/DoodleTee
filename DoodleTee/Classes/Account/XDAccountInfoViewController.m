@@ -50,6 +50,8 @@
 {
     [super viewDidLoad];
     
+    [self layoutHeaderViews];
+    
     [self getLocalDataSource];
     [self requestDataSource];
     
@@ -79,7 +81,6 @@
     CGFloat y = _titleLabel.frame.origin.y + _titleLabel.frame.size.height;
     CGRect rect = CGRectMake(_titleLabel.frame.origin.x, y, _titleLabel.frame.size.width, _bottomView.frame.origin.y - y);
     _tableView = [[UITableView alloc] initWithFrame:rect style:UITableViewStylePlain];
-    [self layoutHeaderViews];
     _tableView.backgroundColor = [UIColor colorWithRed:220 / 255.0 green:220 / 255.0 blue:220 / 255.0 alpha:1.0];
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     _tableView.delegate = self;
@@ -159,18 +160,45 @@
         
         return dynamicCell;
     }
-    
-    static NSString *CellIdentifier = @"Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    
-    // Configure the cell...
-    if (nil == cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    else if (indexPath.section == 2 || indexPath.section == 3)
+    {
+        static NSString *ConsigneeCellIdentifier = @"ConsigneeCell";
+        XDAccountInfoCell *consigneeCell = (XDAccountInfoCell *)[tableView dequeueReusableCellWithIdentifier:ConsigneeCellIdentifier];
+        
+        if (nil == consigneeCell) {
+            consigneeCell = [[XDAccountInfoCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ConsigneeCellIdentifier];
+            [consigneeCell cellForConsigne];
+            consigneeCell.selectionStyle = UITableViewCellSelectionStyleNone;
+        }
+        
+        NSString *key = [_headerTitles objectAtIndex:(indexPath.section - 2)];
+        NSDictionary *dic = [[_dataSource objectForKey:key] objectForKey:[NSNumber numberWithInteger:indexPath.row]];
+        if (dic && [dic count] > 0) {
+            XDShareMethods *tool = [XDShareMethods defaultShare];
+            consigneeCell.consigneTitleLabel.text = [NSString stringWithFormat:@"%@:", [tool chineseForString:[dic objectForKey:kAccountConsigneTitle]]];
+            consigneeCell.consigneInfoLabel.text = [tool chineseForString:[dic objectForKey:kAccountInfo]];
+        }
+        else{
+            consigneeCell.consigneInfoLabel.text = @"";
+            consigneeCell.consigneTitleLabel.text = @"";
+            consigneeCell.textLabel.text = @"暂无信息";
+        }
+        
+        return consigneeCell;
     }
-    cell.textLabel.text = @"暂无信息";
-    
-    return cell;
+    else{
+        static NSString *CellIdentifier = @"Cell";
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        
+        // Configure the cell...
+        if (nil == cell) {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        }
+        cell.textLabel.text = @"暂无信息";
+        
+        return cell;
+    }
 }
 
 #pragma mark - Table view delegate
@@ -293,11 +321,28 @@
     NSString *consigneePath = [NSHomeDirectory() stringByAppendingPathComponent: consigneeTmp];
     if ([fileManage fileExistsAtPath: consigneePath])
     {
-        NSMutableDictionary *consigneeDic = [NSArray arrayWithContentsOfFile:consigneePath];
-        NSString *payment = [consigneeDic objectForKey:kORDERPAYMENT];
-        [_dataSource setObject:[NSDictionary dictionaryWithObjectsAndKeys:payment, kORDERPAYMENT, nil] forKey:kACCOUNTPAY];
-        [consigneeDic removeObjectForKey:kORDERPAYMENT];
-        [_dataSource setObject:consigneeDic forKey:kACCOUNTCONSIGNEE];
+        NSMutableDictionary *consigneeDic = [[NSMutableDictionary dictionaryWithContentsOfFile:consigneePath] objectForKey:userName];
+        if ([consigneeDic count] != 0) {
+            NSMutableDictionary *consigneeInfo = [NSMutableDictionary dictionaryWithDictionary:[consigneeDic objectForKey:[[consigneeDic allKeys] objectAtIndex:0]]];
+            
+            NSMutableDictionary *dic1 = [NSMutableDictionary dictionary];
+            NSMutableDictionary *dic2 = [NSMutableDictionary dictionary];
+            NSInteger count = 0;
+            for (NSString *key in consigneeInfo) {
+                NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:[consigneeInfo objectForKey:key], kAccountInfo, key, kAccountConsigneTitle, nil];
+                
+                if ([key isEqualToString:kORDERPAYMENT]) {
+                    [dic1 setObject:dic forKey:[NSNumber numberWithInteger:0]];
+                    continue;
+                }
+                
+                [dic2 setObject:dic forKey:[NSNumber numberWithInteger:count]];
+                count++;
+            }
+            
+            [_dataSource setObject:dic1 forKey:kACCOUNTPAY];
+            [_dataSource setObject:dic2 forKey:kACCOUNTCONSIGNEE];
+        }
     }
 }
 
@@ -310,7 +355,7 @@
 
 - (void)layoutHeaderViews
 {
-    for (int i = 2; i < 7; i++) {
+    for (int i = 2; i < [_dataSource count] + 2; i++) {
         [self headerViewWithTitle:[_headerTitles objectAtIndex:(i - 2)] section:i];
     }
 }
@@ -352,7 +397,7 @@
 
 - (void)headerViewWithTitle:(NSString *)title section:(NSInteger)section
 {
-    XDAccountInfoHeaderView *headerView = [[XDAccountInfoHeaderView alloc] initWithFrame:CGRectMake(0, 0, _tableView.frame.size.width, 30)];
+    XDAccountInfoHeaderView *headerView = [[XDAccountInfoHeaderView alloc] initWithFrame:CGRectMake(0, 0, kViewWidth, 30)];
     headerView.delegate = self;
     headerView.title = title;
     headerView.section = section;
@@ -362,15 +407,8 @@
 
 - (void)showSection:(NSInteger)section isMore:(BOOL)isMore
 {
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:section];
-    
     [_tableView beginUpdates];
-    if (isMore) {
-        [_tableView insertRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath, nil] withRowAnimation:UITableViewRowAnimationTop];
-    }
-    else{
-        [_tableView deleteRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath, nil] withRowAnimation:UITableViewRowAnimationTop];
-    }
+    [_tableView reloadSections:[NSIndexSet indexSetWithIndex:section] withRowAnimation:UITableViewRowAnimationNone];
     [_tableView endUpdates];
 }
 

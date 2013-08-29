@@ -41,4 +41,7 @@
 //获取微博头像
 + (UIImage *)getSinaIconFromLocal;
 
+//根据英文获取对应中文
+- (NSString *)chineseForString:(NSString *)eStr;
+
 @end
