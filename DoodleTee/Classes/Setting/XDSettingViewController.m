@@ -109,7 +109,7 @@
             
 //            [_leftTableView reloadData];
             
-            [[_selectionDictionary objectForKey:key] setObject:[[colorDic objectForKey:kSettingDataSource] objectAtIndex:0] forKey:title];
+            [[_selectionDictionary objectForKey:key] setObject:[[colorDic objectForKey:kSettingDataSource] objectAtIndex:0] forKey:kSETTINGCOLOR];
             [[_selectionindexPaths objectForKey:key] setObject:[NSIndexPath indexPathForRow:0 inSection:colorSection] forKey:title];
             
             [_leftTableView beginUpdates];
