@@ -369,12 +369,10 @@
             {
                 NSString *payStr = [consigneeInfo objectForKey:kORDERPAYMENT];
                 if ([payStr isEqualToString:_paymentCreditCard.titleLabel.text]) {
-                    _paymentCreditCard.selected = YES;
-                    _paymentAlipay.selected = NO;
+                    [self creditCardSelect:nil];
                 }
                 else{
-                    _paymentCreditCard.selected = NO;
-                    _paymentAlipay.selected = YES;
+                    [self alipaySelecte:nil];
                 }
             }
         }

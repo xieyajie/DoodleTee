@@ -38,7 +38,7 @@
     self = [super init];
     if (self) {
         // Custom initialization
-        _dataSource = [NSMutableDictionary dictionaryWithObjectsAndKeys:[NSDictionary dictionary], kACCOUNTCONSIGNEE, [NSDictionary dictionary], kACCOUNTPAY, [NSArray array], kACCOUNTDESIGN, [NSArray array], kACCOUNTDESIGN, [NSArray array], kACCOUNTSELL, nil];
+        _dataSource = [NSMutableDictionary dictionaryWithObjectsAndKeys:[NSMutableArray array], kACCOUNTCONSIGNEE, [NSMutableArray array], kACCOUNTPAY, [NSArray array], kACCOUNTDESIGN, [NSArray array], kACCOUNTDESIGN, [NSArray array], kACCOUNTSELL, nil];
         _headerViews = [[NSMutableArray alloc] init];
         _headerTitles = [[NSArray alloc] initWithObjects:kACCOUNTCONSIGNEE, kACCOUNTPAY, kACCOUNTDESIGN, kACCOUNTBUY, kACCOUNTSELL, nil];
         _selectedSections = [[NSMutableArray alloc] init];
@@ -172,7 +172,7 @@
         }
         
         NSString *key = [_headerTitles objectAtIndex:(indexPath.section - 2)];
-        NSDictionary *dic = [[_dataSource objectForKey:key] objectForKey:[NSNumber numberWithInteger:indexPath.row]];
+        NSDictionary *dic = [[_dataSource objectForKey:key] objectAtIndex:indexPath.row];
         if (dic && [dic count] > 0) {
             XDShareMethods *tool = [XDShareMethods defaultShare];
             consigneeCell.consigneTitleLabel.text = [NSString stringWithFormat:@"%@:", [tool chineseForString:[dic objectForKey:kAccountConsigneTitle]]];
@@ -325,23 +325,21 @@
         if ([consigneeDic count] != 0) {
             NSMutableDictionary *consigneeInfo = [NSMutableDictionary dictionaryWithDictionary:[consigneeDic objectForKey:[[consigneeDic allKeys] objectAtIndex:0]]];
             
-            NSMutableDictionary *dic1 = [NSMutableDictionary dictionary];
-            NSMutableDictionary *dic2 = [NSMutableDictionary dictionary];
-            NSInteger count = 0;
+            NSMutableArray *array1 = [NSMutableArray array];
+            NSMutableArray *array2 = [NSMutableArray array];
             for (NSString *key in consigneeInfo) {
                 NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:[consigneeInfo objectForKey:key], kAccountInfo, key, kAccountConsigneTitle, nil];
                 
                 if ([key isEqualToString:kORDERPAYMENT]) {
-                    [dic1 setObject:dic forKey:[NSNumber numberWithInteger:0]];
+                    [array1 addObject:dic];
                     continue;
                 }
                 
-                [dic2 setObject:dic forKey:[NSNumber numberWithInteger:count]];
-                count++;
+                [array2 addObject:dic];
             }
             
-            [_dataSource setObject:dic1 forKey:kACCOUNTPAY];
-            [_dataSource setObject:dic2 forKey:kACCOUNTCONSIGNEE];
+            [_dataSource setObject:array1 forKey:kACCOUNTPAY];
+            [_dataSource setObject:array2 forKey:kACCOUNTCONSIGNEE];
         }
     }
 }
