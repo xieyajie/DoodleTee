@@ -9,6 +9,7 @@
 #import <QuartzCore/QuartzCore.h>
 
 #import "XDRootViewController.h"
+#import "XDPiazzaViewController.h"
 #import "XDEffectViewController.h"
 #import "XDSettingViewController.h"
 #import "XDAccountViewController.h"
@@ -18,9 +19,6 @@
 
 #import "XDShareMethods.h"
 #import "LocalDefault.h"
-
-#define kTagTopView 0
-#define kTagBottomView 1
 
 @interface XDRootViewController ()
 {
@@ -236,7 +234,6 @@
     [buttonSettings setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [buttonSettings.titleLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Bold" size:15.0]];
     [buttonSettings setTitleEdgeInsets:UIEdgeInsetsMake(0.0, 10.0, 0.0, 0.0)];
-    
     [buttonSettings setBackgroundImage:buttonBackgroundImagePressedLeft forState:UIControlStateHighlighted];
     
     UIImage *buttonSettingsImageNormal = [UIImage imageNamed:@"root_account_icon.png"];
@@ -250,7 +247,6 @@
     [buttonAccount setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [buttonAccount.titleLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Bold" size:15.0]];
     [buttonAccount setTitleEdgeInsets:UIEdgeInsetsMake(0.0, 10.0, 0.0, 0.0)];
-    
     [buttonAccount setBackgroundImage:buttonBackgroundImagePressedRight forState:UIControlStateHighlighted];
     
     UIImage *buttonSocialImageNormal = [UIImage imageNamed:@"root_shirt_icon.png"];
@@ -348,11 +344,13 @@
     [_buttonEffect setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
     
     XDEffectViewController *effectViewController = [[XDEffectViewController alloc] init];
-    [self.navigationController pushViewController:effectViewController animated:YES];}
+    [self.navigationController pushViewController:effectViewController animated:YES];
+}
 
 - (void)piazzaAction
 {
-     NSLog(@"piazza");
+    XDPiazzaViewController *piazzaVC = [[XDPiazzaViewController alloc] init];
+    [self.navigationController pushViewController:piazzaVC animated:YES];
 }
 
 - (void)shareAction

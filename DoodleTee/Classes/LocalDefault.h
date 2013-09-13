@@ -35,6 +35,10 @@
 
 #define kBottomHeight 62.5
 
+//view tag
+#define kTagTopView 0
+#define kTagBottomView 1
+
 //start 编辑区域边框
 #define kEffectTempWidth 254.0
 #define kEffectTempHeight 336.0
@@ -109,5 +113,8 @@
 #define kORDERTEL @"tel"
 #define kORDERADDRESS @"address"
 #define kORDERPAYMENT @"payment"
+
+//广场
+#define kPIAZZA_CELL_HEIGHT 420.0
 
 #endif
