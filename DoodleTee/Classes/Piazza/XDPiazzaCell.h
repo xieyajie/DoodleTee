@@ -14,9 +14,9 @@
     UIView *_bottomView;
     
     UILabel *_sellLabel;
-    UILabel *_buyerLabel;
-    UILabel *_commentLabel;
-    UILabel *_praiseLabel;
+    UIButton *_buyerBt;
+    UIButton *_commentBt;
+    UIButton *_praiseBt;
     
     CGSize _cellSize;
 }
@@ -25,7 +25,7 @@
 @property (nonatomic, strong) UILabel *nameLabel;
 @property (nonatomic, strong) UIImageView *imageView;
 @property (nonatomic) NSInteger sellCount;
-@property (nonatomic) NSInteger buyerCount;
+@property (nonatomic) CGFloat buyerCount;
 @property (nonatomic) NSInteger commentCount;
 @property (nonatomic) NSInteger praiseCount;
 

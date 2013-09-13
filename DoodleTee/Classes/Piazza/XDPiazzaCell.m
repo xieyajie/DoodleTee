@@ -47,22 +47,27 @@
     [self.contentView addSubview:_topView];
     
     _headerView = [[UIImageView alloc] initWithFrame:CGRectMake(5, 5, 40, 40)];
-    _headerView.backgroundColor = [UIColor whiteColor];
+    _headerView.backgroundColor = [UIColor clearColor];
     [_topView addSubview:_headerView];
     
     _nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(_headerView.frame.origin.x + _headerView.frame.size.width + 10, 0, 100, _topView.frame.size.height)];
     _nameLabel.numberOfLines = 0;
     _nameLabel.minimumFontSize = 13.0;
-    _nameLabel.backgroundColor = [UIColor redColor];
+    _nameLabel.textColor = [UIColor whiteColor];
+    _nameLabel.font = [UIFont boldSystemFontOfSize:15.0];
+    _nameLabel.backgroundColor = [UIColor clearColor];
     [_topView addSubview:_nameLabel];
     
     _sellLabel = [[UILabel alloc] initWithFrame:CGRectMake(_nameLabel.frame.origin.x + _nameLabel.frame.size.width + 5, 0, _topView.frame.size.width - (_nameLabel.frame.origin.x + _nameLabel.frame.size.width + 10), _topView.frame.size.height)];
     _sellLabel.textAlignment = KTextAlignmentRight;
-    _sellLabel.backgroundColor = [UIColor yellowColor];
+    _sellLabel.backgroundColor = [UIColor clearColor];
+    _sellLabel.textColor = [UIColor whiteColor];
+    _sellLabel.font = [UIFont systemFontOfSize:14.0];
     [_topView addSubview:_sellLabel];
     
     _imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, _topView.frame.origin.y + _topView.frame.size.height + 5, _cellSize.width, 300)];
-    _imageView.backgroundColor = [UIColor redColor];
+    _imageView.contentMode = UIViewContentModeScaleAspectFit;
+    _imageView.backgroundColor = [UIColor clearColor];
     [self.contentView addSubview:_imageView];
     
     _bottomView = [[UIView alloc] initWithFrame:CGRectMake(10, _imageView.frame.origin.y + _imageView.frame.size.height + 5, _cellSize.width  - 20, 40.0)];
@@ -70,17 +75,20 @@
     [self.contentView addSubview:_bottomView];
     
     CGFloat width = (_bottomView.frame.size.width - 4 * 5) / 3;
-    _buyerLabel = [[UILabel alloc] initWithFrame:CGRectMake(5, 0, width, _bottomView.frame.size.height)];
-    _buyerLabel.textAlignment = KTextAlignmentCenter;
-    [_bottomView addSubview:_buyerLabel];
+    _buyerBt = [[UIButton alloc] initWithFrame:CGRectMake(5, 0, width, _bottomView.frame.size.height)];
+    _buyerBt.titleLabel.textAlignment = KTextAlignmentCenter;
+    _buyerBt.titleLabel.font = [UIFont systemFontOfSize:14.0];
+    [_bottomView addSubview:_buyerBt];
     
-    _commentLabel = [[UILabel alloc] initWithFrame:CGRectMake(width + 5 * 2, 0, width, _bottomView.frame.size.height)];
-    _commentLabel.textAlignment = KTextAlignmentCenter;
-    [_commentLabel addSubview:_buyerLabel];
+    _commentBt = [[UIButton alloc] initWithFrame:CGRectMake(width + 5 * 2, 0, width, _bottomView.frame.size.height)];
+    _commentBt.titleLabel.textAlignment = KTextAlignmentCenter;
+    _commentBt.titleLabel.font = [UIFont systemFontOfSize:14.0];
+    [_bottomView addSubview:_commentBt];
     
-    _praiseLabel = [[UILabel alloc] initWithFrame:CGRectMake((width + 5) * 2 + 5, 0, width, _bottomView.frame.size.height)];
-    _praiseLabel.textAlignment = KTextAlignmentCenter;
-    [_praiseLabel addSubview:_buyerLabel];
+    _praiseBt = [[UIButton alloc] initWithFrame:CGRectMake((width + 5) * 2 + 5, 0, width, _bottomView.frame.size.height)];
+    _praiseBt.titleLabel.textAlignment = KTextAlignmentCenter;
+    _praiseBt.titleLabel.font = [UIFont systemFontOfSize:14.0];
+    [_bottomView addSubview:_praiseBt];
 }
 
 #pragma mark - set
@@ -89,13 +97,21 @@
 {
     if (_sellCount != count) {
         _sellCount = count;
+        if (count < 1000) {
+            _sellLabel.text = [NSString stringWithFormat:@"卖出 %i件", count];
+        }
+        else
+        {
+            _sellLabel.text = [NSString stringWithFormat:@"卖出 %ik+件", (count / 1000)];
+        }
     }
 }
 
-- (void)setBuyerCount:(NSInteger)count
+- (void)setBuyerCount:(CGFloat)count
 {
     if (_buyerCount != count) {
         _buyerCount = count;
+        [_buyerBt setTitle:[NSString stringWithFormat:@"￥%.1f 购买", count] forState:UIControlStateNormal];
     }
 }
 
@@ -103,6 +119,13 @@
 {
     if (_commentCount != count) {
         _commentCount = count;
+        if (count < 1000) {
+            [_commentBt setTitle:[NSString stringWithFormat:@"评论 %i", count] forState:UIControlStateNormal];
+        }
+        else
+        {
+            [_commentBt setTitle:[NSString stringWithFormat:@"评论 %ik+", (count / 1000)] forState:UIControlStateNormal];
+        }
     }
 }
 
@@ -110,6 +133,13 @@
 {
     if (_praiseCount != count) {
         _praiseCount = count;
+        if (count < 1000) {
+            [_praiseBt setTitle:[NSString stringWithFormat:@"赞 %i", count] forState:UIControlStateNormal];
+        }
+        else
+        {
+            [_praiseBt setTitle:[NSString stringWithFormat:@"赞 %ik+", (count / 1000)] forState:UIControlStateNormal];
+        }
     }
 }
 

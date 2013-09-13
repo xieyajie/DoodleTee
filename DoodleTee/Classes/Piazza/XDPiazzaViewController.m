@@ -87,6 +87,15 @@
         cell.backgroundColor = [UIColor clearColor];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
+    
+    cell.headerView.image = [UIImage imageNamed:@"account_userDeaultImage.png"];
+    cell.nameLabel.text = @"123";
+    cell.sellCount = 10000;
+    cell.imageView.image = [UIImage imageNamed:@"clothe_default.png"];
+    cell.buyerCount = 20;
+    cell.commentCount = 5000;
+    cell.praiseCount = 1000;
+    
     return cell;
 }
 
@@ -164,6 +173,7 @@
     [buttonHot.titleLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Bold" size:15.0]];
     buttonHot.titleLabel.textAlignment = KTextAlignmentCenter;
     [buttonHot setTitleEdgeInsets:UIEdgeInsetsMake(0.0, 10.0, 0.0, 0.0)];
+    [buttonHot setBackgroundImage:buttonBackgroundImagePressedLeft forState:UIControlStateHighlighted];
     [buttonHot setBackgroundImage:buttonBackgroundImagePressedLeft forState:UIControlStateSelected];
     
     //我的历史
@@ -175,6 +185,7 @@
     [buttonHistory.titleLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Bold" size:15.0]];
     buttonHistory.titleLabel.textAlignment = KTextAlignmentCenter;
     [buttonHistory setTitleEdgeInsets:UIEdgeInsetsMake(0.0, 10.0, 0.0, 0.0)];
+    [buttonHistory setBackgroundImage:buttonBackgroundImagePressedRight forState:UIControlStateHighlighted];
     [buttonHistory setBackgroundImage:buttonBackgroundImagePressedRight forState:UIControlStateSelected];
     
     [_topSegmentedControl setButtonsArray:@[buttonHot, buttonHistory]];
@@ -258,12 +269,12 @@
 
 - (void)hotAction
 {
-    
+    [_tableView reloadData];
 }
 
 - (void)historyAction
 {
-    
+    [_tableView reloadData];
 }
 
 - (void)messageAction
