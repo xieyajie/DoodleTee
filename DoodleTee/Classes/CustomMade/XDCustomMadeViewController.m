@@ -65,6 +65,8 @@
         _attributeDic = [NSMutableDictionary dictionary];
         
         _clothImage = image;
+        
+        [self configurationAttribute];
     }
     return self;
 }
@@ -73,7 +75,6 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    [self configurationAttribute];
     
     UIImageView *bgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
     bgView.image = [UIImage imageNamed:@"root_bg.png"];
@@ -107,13 +108,6 @@
     _bottomView.layer.shadowRadius = 10.0;
     _bottomView.layer.shadowOffset = CGSizeMake(0.0f, 0.0f);
     [self.view bringSubviewToFront:_bottomView];
-}
-
-- (void)loadView
-{
-    [super loadView];
-    
-    NSLog(@"%@", _tableView);
 }
 
 - (void)didReceiveMemoryWarning

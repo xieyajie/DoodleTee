@@ -10,9 +10,12 @@
 
 #import "XDPiazzaCell.h"
 #import "AKSegmentedControl.h"
+#import "XDCustomMadeViewController.h"
+
+#import "MBProgressHUD.h"
 #import "LocalDefault.h"
 
-@interface XDPiazzaViewController ()<UITableViewDelegate, UITableViewDataSource, AKSegmentedControlDelegate>
+@interface XDPiazzaViewController ()<UITableViewDelegate, UITableViewDataSource, AKSegmentedControlDelegate, XDPiazzaCellDelegate>
 {
     UIView *_topView;
     AKSegmentedControl *_topSegmentedControl;
@@ -84,10 +87,12 @@
     // Configure the cell...
     if (cell == nil) {
         cell = [[XDPiazzaCell alloc] initWithStyle:UITableViewCellStyleDefault size:CGSizeMake(_tableView.frame.size.width, kPIAZZA_CELL_HEIGHT) reuseIdentifier:CellIdentifier];
+        cell.delegate = self;
         cell.backgroundColor = [UIColor clearColor];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     
+    cell.indexPath = indexPath;
     cell.headerView.image = [UIImage imageNamed:@"account_userDeaultImage.png"];
     cell.nameLabel.text = @"123";
     cell.sellCount = 10000;
@@ -108,7 +113,10 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
+    XDPiazzaCell *cell = (XDPiazzaCell *)[tableView cellForRowAtIndexPath:indexPath];
+    if ([self respondsToSelector:@selector(piazzaCell:tapBuyAtIndexPath:)]) {
+        [self piazzaCell:cell tapBuyAtIndexPath:indexPath];
+    }
 }
 
 #pragma mark - AKSegmentedControl Delegate
@@ -133,16 +141,43 @@
     {
         switch (index) {
             case 0:
-                [self messageAction];
+                [self effectAction];
                 break;
             case 1:
-                [self effectAction];
+                [self messageAction];
                 break;
                 
             default:
                 break;
         }
     }
+}
+
+#pragma mark - XDPiazzaCell delegate
+
+- (void)piazzaCell:(XDPiazzaCell *)piazzaCell tapBuyAtIndexPath:(NSIndexPath *)indexPath
+{
+    UIImage *image = [UIImage imageNamed:@"clothe_default.png"];
+    XDCustomMadeViewController *customViewController = [[XDCustomMadeViewController alloc] initWithClothImage:image];
+    [self.navigationController pushViewController:customViewController animated:YES];
+}
+
+- (void)piazzaCell:(XDPiazzaCell *)piazzaCell tapCommentAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+}
+
+- (void)piazzaCell:(XDPiazzaCell *)piazzaCell tapPraiseAtIndexPath:(NSIndexPath *)indexPath
+{
+    MBProgressHUD *hud = [[MBProgressHUD alloc] initWithView:piazzaCell];
+    hud.labelFont = [UIFont boldSystemFontOfSize:20.0];
+    hud.labelText = @"赞 + 1";
+    [piazzaCell addSubview:hud];
+    [hud show:NO];
+    [hud hide:YES afterDelay:1.0f];
+    
+    //赞+1
+    //??????
 }
 
 #pragma mark - layout subviews
@@ -209,26 +244,27 @@
     UIImage *buttonBackgroundImagePressedLeft = [UIImage imageNamed:@"effect_segmented_pressed_left.png"];
     UIImage *buttonBackgroundImagePressedRight = [UIImage imageNamed:@"effect_segmented_pressed_right.png"];
     
-    //消息
-    UIButton *buttonBack = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, width, segmentedControl.frame.size.height)];
-    buttonBack.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
-    buttonBack.contentEdgeInsets = UIEdgeInsetsMake(0, 12, 0, 13);
-    [buttonBack setTitle:@"消息" forState:UIControlStateNormal];
-    [buttonBack setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [buttonBack.titleLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Bold" size:15.0]];
-    [buttonBack setTitleEdgeInsets:UIEdgeInsetsMake(0.0, 10.0, 0.0, 0.0)];
-    [buttonBack setBackgroundImage:buttonBackgroundImagePressedLeft forState:UIControlStateHighlighted];
-    
     //设计
-    UIButton *buttonDone = [[UIButton alloc] initWithFrame:CGRectMake(buttonBack.frame.origin.x + buttonBack.frame.size.width, 0, width, segmentedControl.frame.size.height)];
-    buttonDone.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
-    buttonDone.contentEdgeInsets = UIEdgeInsetsMake(0, 12, 0, 13);
-    [buttonDone setTitle:@"设计" forState:UIControlStateNormal];
-    [buttonDone setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [buttonDone.titleLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Bold" size:15.0]];
-    [buttonDone setTitleEdgeInsets:UIEdgeInsetsMake(0.0, 10.0, 0.0, 0.0)];
-    [buttonDone setBackgroundImage:buttonBackgroundImagePressedRight forState:UIControlStateHighlighted];
-    [segmentedControl setButtonsArray:@[buttonBack, buttonDone]];
+    UIButton *buttonEffect = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, width, segmentedControl.frame.size.height)];
+    buttonEffect.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
+    buttonEffect.contentEdgeInsets = UIEdgeInsetsMake(0, 12, 0, 13);
+    [buttonEffect setTitle:@"设计" forState:UIControlStateNormal];
+    [buttonEffect setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [buttonEffect.titleLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Bold" size:15.0]];
+    [buttonEffect setTitleEdgeInsets:UIEdgeInsetsMake(0.0, 10.0, 0.0, 0.0)];
+    [buttonEffect setBackgroundImage:buttonBackgroundImagePressedLeft forState:UIControlStateHighlighted];
+    
+    //消息
+    UIButton *buttonMsg = [[UIButton alloc] initWithFrame:CGRectMake(buttonEffect.frame.origin.x + buttonEffect.frame.size.width, 0, width, segmentedControl.frame.size.height)];
+    buttonMsg.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
+    buttonMsg.contentEdgeInsets = UIEdgeInsetsMake(0, 12, 0, 13);
+    [buttonMsg setTitle:@"消息" forState:UIControlStateNormal];
+    [buttonMsg setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [buttonMsg.titleLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Bold" size:15.0]];
+    [buttonMsg setTitleEdgeInsets:UIEdgeInsetsMake(0.0, 10.0, 0.0, 0.0)];
+    [buttonMsg setBackgroundImage:buttonBackgroundImagePressedRight forState:UIControlStateHighlighted];
+    
+    [segmentedControl setButtonsArray:@[buttonEffect, buttonMsg]];
 }
 
 - (void)layoutSubviews
@@ -260,7 +296,7 @@
     _tableView.dataSource = self;
     _tableView.backgroundColor = [UIColor whiteColor];
     _tableView.separatorColor = [UIColor grayColor];
-    _tableView.alpha = 0.6;
+    _tableView.alpha = 0.5;
     _tableView.showsVerticalScrollIndicator = NO;
     [self.view addSubview:_tableView];
 }
@@ -269,12 +305,16 @@
 
 - (void)hotAction
 {
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [_tableView reloadData];
+    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
 }
 
 - (void)historyAction
 {
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [_tableView reloadData];
+    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
 }
 
 - (void)messageAction
@@ -284,7 +324,7 @@
 
 - (void)effectAction
 {
-    
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 

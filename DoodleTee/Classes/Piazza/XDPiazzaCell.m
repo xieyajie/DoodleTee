@@ -11,6 +11,9 @@
 
 @implementation XDPiazzaCell
 
+@synthesize delegate = _delegate;
+@synthesize indexPath = _indexPath;
+
 @synthesize headerView = _headerView;
 @synthesize nameLabel = _nameLabel;
 @synthesize imageView = _imageView;
@@ -65,12 +68,12 @@
     _sellLabel.font = [UIFont systemFontOfSize:14.0];
     [_topView addSubview:_sellLabel];
     
-    _imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, _topView.frame.origin.y + _topView.frame.size.height + 5, _cellSize.width, 300)];
+    _imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, _topView.frame.origin.y + _topView.frame.size.height + 10, _cellSize.width, 290)];
     _imageView.contentMode = UIViewContentModeScaleAspectFit;
     _imageView.backgroundColor = [UIColor clearColor];
     [self.contentView addSubview:_imageView];
     
-    _bottomView = [[UIView alloc] initWithFrame:CGRectMake(10, _imageView.frame.origin.y + _imageView.frame.size.height + 5, _cellSize.width  - 20, 40.0)];
+    _bottomView = [[UIView alloc] initWithFrame:CGRectMake(10, _imageView.frame.origin.y + _imageView.frame.size.height + 10, _cellSize.width  - 20, 40.0)];
     _bottomView.backgroundColor = [UIColor grayColor];
     [self.contentView addSubview:_bottomView];
     
@@ -78,16 +81,19 @@
     _buyerBt = [[UIButton alloc] initWithFrame:CGRectMake(5, 0, width, _bottomView.frame.size.height)];
     _buyerBt.titleLabel.textAlignment = KTextAlignmentCenter;
     _buyerBt.titleLabel.font = [UIFont systemFontOfSize:14.0];
+    [_buyerBt addTarget:self action:@selector(buyAction:) forControlEvents:UIControlEventTouchUpInside];
     [_bottomView addSubview:_buyerBt];
     
     _commentBt = [[UIButton alloc] initWithFrame:CGRectMake(width + 5 * 2, 0, width, _bottomView.frame.size.height)];
     _commentBt.titleLabel.textAlignment = KTextAlignmentCenter;
     _commentBt.titleLabel.font = [UIFont systemFontOfSize:14.0];
+    [_commentBt addTarget:self action:@selector(commentAction:) forControlEvents:UIControlEventTouchUpInside];
     [_bottomView addSubview:_commentBt];
     
     _praiseBt = [[UIButton alloc] initWithFrame:CGRectMake((width + 5) * 2 + 5, 0, width, _bottomView.frame.size.height)];
     _praiseBt.titleLabel.textAlignment = KTextAlignmentCenter;
     _praiseBt.titleLabel.font = [UIFont systemFontOfSize:14.0];
+    [_praiseBt addTarget:self action:@selector(praiseAction:) forControlEvents:UIControlEventTouchUpInside];
     [_bottomView addSubview:_praiseBt];
 }
 
@@ -140,6 +146,29 @@
         {
             [_praiseBt setTitle:[NSString stringWithFormat:@"赞 %ik+", (count / 1000)] forState:UIControlStateNormal];
         }
+    }
+}
+
+#pragma mark - button action
+
+- (void)buyAction:(id)sender
+{
+    if (_delegate && [_delegate respondsToSelector:@selector(piazzaCell:tapBuyAtIndexPath:)]) {
+        [_delegate piazzaCell:self tapBuyAtIndexPath:self.indexPath];
+    }
+}
+
+- (void)commentAction:(id)sender
+{
+    if (_delegate && [_delegate respondsToSelector:@selector(piazzaCell:tapCommentAtIndexPath:)]) {
+        [_delegate piazzaCell:self tapCommentAtIndexPath:self.indexPath];
+    }
+}
+
+- (void)praiseAction:(id)sender
+{
+    if (_delegate && [_delegate respondsToSelector:@selector(piazzaCell:tapPraiseAtIndexPath:)]) {
+        [_delegate piazzaCell:self tapPraiseAtIndexPath:self.indexPath];
     }
 }
 
