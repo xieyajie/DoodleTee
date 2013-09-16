@@ -8,6 +8,7 @@
 
 #import "XDPiazzaViewController.h"
 
+#import <QuartzCore/QuartzCore.h>
 #import "XDPiazzaCell.h"
 #import "AKSegmentedControl.h"
 #import "XDCustomMadeViewController.h"

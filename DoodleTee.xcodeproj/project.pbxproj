@@ -1400,7 +1400,7 @@
 					"$(SRCROOT)/DoodleTee/framework/**",
 					"$(SRCROOT)/DoodleTee/alixPay/Utilities/**",
 				);
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PROVISIONING_PROFILE = "C5F82489-9F46-4F5A-8836-25DC3BBC3830";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "C5F82489-9F46-4F5A-8836-25DC3BBC3830";
 				SDKROOT = iphoneos;
@@ -1427,7 +1427,7 @@
 					"$(SRCROOT)/DoodleTee/framework/**",
 					"$(SRCROOT)/DoodleTee/alixPay/Utilities/**",
 				);
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PROVISIONING_PROFILE = "C5F82489-9F46-4F5A-8836-25DC3BBC3830";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "C5F82489-9F46-4F5A-8836-25DC3BBC3830";
@@ -1456,7 +1456,7 @@
 					"$(SRCROOT)/DoodleTee/alixPay/Utilities",
 				);
 				INFOPLIST_FILE = "DoodleTee/DoodleTee-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/DoodleTee/alixPay\"",
@@ -1493,7 +1493,7 @@
 					"$(SRCROOT)/DoodleTee/alixPay/Utilities",
 				);
 				INFOPLIST_FILE = "DoodleTee/DoodleTee-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/DoodleTee/alixPay\"",

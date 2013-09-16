@@ -16,7 +16,7 @@
 
 @synthesize headerView = _headerView;
 @synthesize nameLabel = _nameLabel;
-@synthesize imageView = _imageView;
+@synthesize imageView = _subImageView;
 
 @synthesize sellCount = _sellCount;
 @synthesize buyerCount = _buyerCount;
@@ -68,12 +68,12 @@
     _sellLabel.font = [UIFont systemFontOfSize:14.0];
     [_topView addSubview:_sellLabel];
     
-    _imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, _topView.frame.origin.y + _topView.frame.size.height + 10, _cellSize.width, 290)];
-    _imageView.contentMode = UIViewContentModeScaleAspectFit;
-    _imageView.backgroundColor = [UIColor clearColor];
-    [self.contentView addSubview:_imageView];
+    _subImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, _topView.frame.origin.y + _topView.frame.size.height + 10, _cellSize.width, 290)];
+    _subImageView.contentMode = UIViewContentModeScaleAspectFit;
+    _subImageView.backgroundColor = [UIColor clearColor];
+    [self.contentView addSubview:_subImageView];
     
-    _bottomView = [[UIView alloc] initWithFrame:CGRectMake(10, _imageView.frame.origin.y + _imageView.frame.size.height + 10, _cellSize.width  - 20, 40.0)];
+    _bottomView = [[UIView alloc] initWithFrame:CGRectMake(10, _subImageView.frame.origin.y + _subImageView.frame.size.height + 10, _cellSize.width  - 20, 40.0)];
     _bottomView.backgroundColor = [UIColor grayColor];
     [self.contentView addSubview:_bottomView];
     
