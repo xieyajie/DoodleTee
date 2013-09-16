@@ -46,7 +46,7 @@
 
 @synthesize attributeDic = _attributeDic;
 
-- (id)initWithClothImage:(UIImage *)image
+- (id)init
 {
     self = [super init];
     if (self) {
@@ -63,10 +63,29 @@
         _moneyLabel.text = @"20 元";
         
         _attributeDic = [NSMutableDictionary dictionary];
-        
+    }
+    return self;
+}
+
+- (id)initWithClothImage:(UIImage *)image
+{
+    self = [self init];
+    if (self) {
+        // Custom initialization
         _clothImage = image;
         
         [self configurationAttribute];
+    }
+    return self;
+}
+
+- (id)initWithClothInfo:(NSDictionary *)dic
+{
+    self = [self init];
+    if (self) {
+        // Custom initialization
+        _attributeDic = [NSMutableDictionary dictionaryWithDictionary:dic];
+        _titleArray = [_attributeDic allKeys];
     }
     return self;
 }

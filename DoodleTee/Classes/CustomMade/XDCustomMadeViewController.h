@@ -18,6 +18,8 @@
 
 - (id)initWithClothImage:(UIImage *)image;
 
+- (id)initWithClothInfo:(NSDictionary *)dic;
+
 - (void)backAction;
 
 - (void)doneAction;

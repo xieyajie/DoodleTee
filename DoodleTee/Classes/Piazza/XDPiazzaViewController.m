@@ -12,6 +12,8 @@
 #import "XDPiazzaCell.h"
 #import "AKSegmentedControl.h"
 #import "XDCustomMadeViewController.h"
+#import "XDCommentViewController.h"
+#import "XDNewCommentViewController.h"
 
 #import "MBProgressHUD.h"
 #import "LocalDefault.h"
@@ -160,14 +162,21 @@
 
 - (void)piazzaCell:(XDPiazzaCell *)piazzaCell tapBuyAtIndexPath:(NSIndexPath *)indexPath
 {
-    UIImage *image = [UIImage imageNamed:@"clothe_default.png"];
-    XDCustomMadeViewController *customViewController = [[XDCustomMadeViewController alloc] initWithClothImage:image];
+    XDCustomMadeViewController *customViewController = [[XDCustomMadeViewController alloc] initWithClothInfo:nil];
     [self.navigationController pushViewController:customViewController animated:YES];
 }
 
 - (void)piazzaCell:(XDPiazzaCell *)piazzaCell tapCommentAtIndexPath:(NSIndexPath *)indexPath
 {
-    
+    NSInteger count = 1;
+    if (count == 0) {
+        XDNewCommentViewController *newCommentVC = [[XDNewCommentViewController alloc] init];
+        [self.navigationController pushViewController:newCommentVC animated:YES];
+    }
+    else{
+        XDCommentViewController *commentVC = [[XDCommentViewController alloc] init];
+        [self.navigationController pushViewController:commentVC animated:YES];
+    }
 }
 
 - (void)piazzaCell:(XDPiazzaCell *)piazzaCell tapPraiseAtIndexPath:(NSIndexPath *)indexPath
@@ -298,7 +307,8 @@
     _tableView.delegate = self;
     _tableView.dataSource = self;
     _tableView.backgroundColor = [UIColor whiteColor];
-    _tableView.separatorColor = [UIColor grayColor];
+    _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+//    _tableView.separatorColor = [UIColor grayColor];
     _tableView.alpha = 0.5;
     _tableView.showsVerticalScrollIndicator = NO;
     [self.view addSubview:_tableView];

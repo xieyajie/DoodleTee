@@ -57,7 +57,7 @@
     _nameLabel.numberOfLines = 0;
     _nameLabel.minimumFontSize = 13.0;
     _nameLabel.textColor = [UIColor whiteColor];
-    _nameLabel.font = [UIFont boldSystemFontOfSize:15.0];
+    _nameLabel.font = [UIFont boldSystemFontOfSize:16.0];
     _nameLabel.backgroundColor = [UIColor clearColor];
     [_topView addSubview:_nameLabel];
     
@@ -95,6 +95,10 @@
     _praiseBt.titleLabel.font = [UIFont systemFontOfSize:14.0];
     [_praiseBt addTarget:self action:@selector(praiseAction:) forControlEvents:UIControlEventTouchUpInside];
     [_bottomView addSubview:_praiseBt];
+    
+    UIView *line = [[UIView alloc] initWithFrame:CGRectMake(0, _bottomView.frame.origin.y + _bottomView.frame.size.height + 10, _cellSize.width, 2)];
+    line.backgroundColor = [UIColor grayColor];
+    [self.contentView addSubview:line];
 }
 
 #pragma mark - set
