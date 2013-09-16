@@ -6,21 +6,23 @@
 //  Copyright (c) 2013年 XD. All rights reserved.
 //
 
+#import <QuartzCore/QuartzCore.h>
 #import "XDMessageViewController.h"
 
-#import <QuartzCore/QuartzCore.h>
+#import "LocalDefault.h"
 
 @interface XDMessageViewController ()
-
-@property (nonatomic, weak) IBOutlet UIView *topView;
+{
+    UILabel *_topLabel;
+}
 
 @end
 
 @implementation XDMessageViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+- (id)init
 {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    self = [super init];
     if (self)
     {
         // Custom initialization
@@ -33,11 +35,20 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    self.topView.layer.shadowColor = [[UIColor blackColor] CGColor];
-    self.topView.layer.shadowOpacity = 0.6f;
-    self.topView.layer.shadowOffset = CGSizeMake(0.0f, 5.0f);
+    UIImageView *bgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
+    bgView.image = [UIImage imageNamed:@"root_bg.png"];
+    [self.view addSubview:bgView];
     
-    
+    _topLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 31)];
+    _topLabel.font = [UIFont systemFontOfSize:18];
+    _topLabel.backgroundColor = [UIColor colorWithRed:143 / 255.0 green:143 / 255.0 blue:143 / 255.0 alpha:1.0];
+    _topLabel.textAlignment = KTextAlignmentCenter;
+    _topLabel.text = @"我的消息";
+    _topLabel.layer.shadowColor = [[UIColor blackColor] CGColor];
+    _topLabel.layer.shadowOpacity = 5.0;
+    _topLabel.layer.shadowRadius = 10.0;
+    _topLabel.layer.shadowOffset = CGSizeMake(0.0f, 0.0f);
+    [self.view addSubview:_topLabel];
 }
 
 - (void)didReceiveMemoryWarning

@@ -38,7 +38,6 @@
 		3A42291617BF4F3E00D0A884 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A42291517BF4F3E00D0A884 /* MBProgressHUD.m */; };
 		3A45727B177AB45400453B7B /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A45727A177AB45400453B7B /* QuartzCore.framework */; };
 		3A5BF48017E6B0CF002F0E97 /* XDMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A5BF47E17E6B0CF002F0E97 /* XDMessageViewController.m */; };
-		3A5BF48117E6B0CF002F0E97 /* XDMessageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A5BF47F17E6B0CF002F0E97 /* XDMessageViewController.xib */; };
 		3A5BF48417E6B0E9002F0E97 /* XDCommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A5BF48317E6B0E9002F0E97 /* XDCommentViewController.m */; };
 		3A5BF48717E6B10A002F0E97 /* XDNewCommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A5BF48617E6B10A002F0E97 /* XDNewCommentViewController.m */; };
 		3A5BF48A17E6B4D1002F0E97 /* XDPiazzaCommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A5BF48917E6B4D1002F0E97 /* XDPiazzaCommentCell.m */; };
@@ -314,7 +313,6 @@
 		3A45727A177AB45400453B7B /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		3A5BF47D17E6B0CF002F0E97 /* XDMessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDMessageViewController.h; sourceTree = "<group>"; };
 		3A5BF47E17E6B0CF002F0E97 /* XDMessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XDMessageViewController.m; sourceTree = "<group>"; };
-		3A5BF47F17E6B0CF002F0E97 /* XDMessageViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = XDMessageViewController.xib; sourceTree = "<group>"; };
 		3A5BF48217E6B0E9002F0E97 /* XDCommentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDCommentViewController.h; sourceTree = "<group>"; };
 		3A5BF48317E6B0E9002F0E97 /* XDCommentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XDCommentViewController.m; sourceTree = "<group>"; };
 		3A5BF48517E6B10A002F0E97 /* XDNewCommentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDNewCommentViewController.h; sourceTree = "<group>"; };
@@ -725,7 +723,6 @@
 			children = (
 				3A5BF47D17E6B0CF002F0E97 /* XDMessageViewController.h */,
 				3A5BF47E17E6B0CF002F0E97 /* XDMessageViewController.m */,
-				3A5BF47F17E6B0CF002F0E97 /* XDMessageViewController.xib */,
 			);
 			path = Message;
 			sourceTree = "<group>";
@@ -1285,7 +1282,6 @@
 				3A63C2D817CF889600976B8B /* cloth_image_black@2x.png in Resources */,
 				3A63C2D917CF889600976B8B /* cloth_image_blue@2x.png in Resources */,
 				3A63C2DA17CF889600976B8B /* cloth_image_flax@2x.png in Resources */,
-				3A5BF48117E6B0CF002F0E97 /* XDMessageViewController.xib in Resources */,
 				3A63C2DB17CF889600976B8B /* cloth_image_green@2x.png in Resources */,
 				3A63C2DC17CF889600976B8B /* cloth_image_red@2x.png in Resources */,
 				3A63C2DD17CF889600976B8B /* cloth_image_white@2x.png in Resources */,

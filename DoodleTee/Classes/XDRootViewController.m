@@ -349,8 +349,17 @@
 
 - (void)piazzaAction
 {
-    XDPiazzaViewController *piazzaVC = [[XDPiazzaViewController alloc] init];
-    [self.navigationController pushViewController:piazzaVC animated:YES];
+    //判断是否登录
+    NSString *userName = [[NSUserDefaults standardUserDefaults] objectForKey:kUserDefaultsUserName];
+    //未登录
+    if (userName == nil || userName.length == 0) {
+        XDAccountViewController *accountViewController = [[XDAccountViewController alloc] init];
+        [XDShareMethods presentViewController:accountViewController animated:YES formViewController:self.navigationController completion:nil];
+    }
+    else{//登陆
+        XDPiazzaViewController *piazzaVC = [[XDPiazzaViewController alloc] init];
+        [self.navigationController pushViewController:piazzaVC animated:YES];
+    }
 }
 
 - (void)shareAction

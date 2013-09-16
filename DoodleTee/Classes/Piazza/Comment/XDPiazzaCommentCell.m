@@ -83,7 +83,6 @@
     
     _mainView.frame = CGRectMake(10, 10, _customViewSize.width, self.frame.size.height);
     _dateLabel.frame = CGRectMake(_mainView.frame.size.width - 5 - 100, 0, 100, 20);
-    _contentView.frame = CGRectMake(10, _headerView.frame.origin.y + _headerView.frame.size.height + 10, _mainView.frame.size.width - 20, _mainView.frame.size.height - 5 - (_headerView.frame.origin.y + _headerView.frame.size.height + 10));
-}
+    _contentView.frame = CGRectMake(10, _headerView.frame.origin.y + _headerView.frame.size.height + 10, _mainView.frame.size.width - 20, _mainView.frame.size.height - 5 - (_headerView.frame.origin.y + _headerView.frame.size.height + 10));}
 
 @end
