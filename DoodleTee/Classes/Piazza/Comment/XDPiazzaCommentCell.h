@@ -18,6 +18,6 @@
 @property (nonatomic, strong) UIImageView *headerView;
 @property (nonatomic, strong) UILabel *nameLabel;
 @property (nonatomic, strong) UILabel *dateLabel;
-@property (nonatomic, strong) UITextView *contentView;
+@property (nonatomic, strong) UITextView *contentTextView;
 
 @end

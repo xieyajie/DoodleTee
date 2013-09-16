@@ -8,6 +8,7 @@
 
 #import "XDNewCommentViewController.h"
 
+#import <QuartzCore/QuartzCore.h>
 #import "MBProgressHUD.h"
 #import "LocalDefault.h"
 

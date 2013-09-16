@@ -18,7 +18,7 @@
 @synthesize headerView = _headerView;
 @synthesize nameLabel = _nameLabel;
 @synthesize dateLabel = _dateLabel;
-@synthesize contentView = _contentView;
+@synthesize contentTextView = _contentTextView;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -69,10 +69,10 @@
     _dateLabel.textAlignment = KTextAlignmentRight;
     [_mainView addSubview:_dateLabel];
 
-    _contentView = [[UITextView alloc] initWithFrame:CGRectMake(10, _headerView.frame.origin.y + _headerView.frame.size.height + 10, _mainView.frame.size.width - 20, _mainView.frame.size.height - 5 - (_headerView.frame.origin.y + _headerView.frame.size.height + 10))];
-    _contentView.font = [UIFont systemFontOfSize:15.0];
-    _contentView.userInteractionEnabled = NO;
-    [_mainView addSubview:_contentView];
+    _contentTextView = [[UITextView alloc] initWithFrame:CGRectMake(10, _headerView.frame.origin.y + _headerView.frame.size.height + 10, _mainView.frame.size.width - 20, _mainView.frame.size.height - 5 - (_headerView.frame.origin.y + _headerView.frame.size.height + 10))];
+    _contentTextView.font = [UIFont systemFontOfSize:15.0];
+    _contentTextView.userInteractionEnabled = NO;
+    [_mainView addSubview:_contentTextView];
 }
 
 #pragma mark - set
@@ -83,6 +83,6 @@
     
     _mainView.frame = CGRectMake(10, 10, _customViewSize.width, self.frame.size.height);
     _dateLabel.frame = CGRectMake(_mainView.frame.size.width - 5 - 100, 0, 100, 20);
-    _contentView.frame = CGRectMake(10, _headerView.frame.origin.y + _headerView.frame.size.height + 10, _mainView.frame.size.width - 20, _mainView.frame.size.height - 5 - (_headerView.frame.origin.y + _headerView.frame.size.height + 10));}
+    _contentTextView.frame = CGRectMake(10, _headerView.frame.origin.y + _headerView.frame.size.height + 10, _mainView.frame.size.width - 20, _mainView.frame.size.height - 5 - (_headerView.frame.origin.y + _headerView.frame.size.height + 10));}
 
 @end

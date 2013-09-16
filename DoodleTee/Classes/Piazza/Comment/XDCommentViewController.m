@@ -8,6 +8,7 @@
 
 #import "XDCommentViewController.h"
 
+#import <QuartzCore/QuartzCore.h>
 #import "XDNewCommentViewController.h"
 #import "XDCustomMadeViewController.h"
 #import "XDPiazzaCommentCell.h"
@@ -111,7 +112,6 @@
     _tableView = [[UITableView alloc] initWithFrame:CGRectMake(10, _topLabel.frame.origin.y + _topLabel.frame.size.height, self.view.frame.size.width - 20, self.view.frame.size.height - (_topLabel.frame.origin.y + _topLabel.frame.size.height) - _operateView.frame.size.height - _bottomView.frame.size.height) style:UITableViewStylePlain];
     _tableView.delegate = self;
     _tableView.dataSource = self;
-    _tableView.backgroundColor = [UIColor redColor];
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     _tableView.showsVerticalScrollIndicator = NO;
     [self.view addSubview:_tableView];
@@ -145,14 +145,14 @@
     // Configure the cell...
     if (cell == nil) {
         cell = [[XDPiazzaCommentCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-        cell.backgroundColor = [UIColor clearColor];
+        cell.backgroundColor = [UIColor redColor];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
 
     cell.headerView.image = [UIImage imageNamed:@"account_userDeaultImage.png"];
     cell.nameLabel.text = @"123";
     cell.dateLabel.text = @"2013/09/13";
-    cell.contentView.text = @"这件设计的不错";
+    cell.contentTextView.text = @"这件设计的不错";
     
     return cell;
 }
