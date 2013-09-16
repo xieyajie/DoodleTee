@@ -16,6 +16,8 @@
 #import "MBProgressHUD.h"
 #import "LocalDefault.h"
 
+#import "XDMessageViewController.h"
+
 @interface XDPiazzaViewController ()<UITableViewDelegate, UITableViewDataSource, AKSegmentedControlDelegate, XDPiazzaCellDelegate>
 {
     UIView *_topView;
@@ -320,7 +322,8 @@
 
 - (void)messageAction
 {
-    
+    XDMessageViewController *messageVC = [[XDMessageViewController alloc] init];
+    [self.navigationController pushViewController: messageVC animated: YES];
 }
 
 - (void)effectAction

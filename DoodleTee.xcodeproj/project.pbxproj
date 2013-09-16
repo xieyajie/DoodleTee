@@ -165,6 +165,8 @@
 		3AEA8B7217A70A6E00DC976A /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3AEA8B6F17A70A6E00DC976A /* Default-568h@2x.png */; };
 		3AEA8B7317A70A6E00DC976A /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 3AEA8B7017A70A6E00DC976A /* Default.png */; };
 		3AEA8B7417A70A6E00DC976A /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3AEA8B7117A70A6E00DC976A /* Default@2x.png */; };
+		94A46B3717E695E500BDEF9D /* XDMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94A46B3517E695E400BDEF9D /* XDMessageViewController.m */; };
+		94A46B3817E695E500BDEF9D /* XDMessageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 94A46B3617E695E400BDEF9D /* XDMessageViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -473,6 +475,9 @@
 		3AEA8B7F17A70AB200DC976A /* DoodleTee-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "DoodleTee-Prefix.pch"; sourceTree = "<group>"; };
 		3AEA8B8017A70AB200DC976A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		3AEA8B8117A70ACE00DC976A /* LocalDefault.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = LocalDefault.h; path = Classes/LocalDefault.h; sourceTree = "<group>"; };
+		94A46B3417E695E400BDEF9D /* XDMessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDMessageViewController.h; sourceTree = "<group>"; };
+		94A46B3517E695E400BDEF9D /* XDMessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XDMessageViewController.m; sourceTree = "<group>"; };
+		94A46B3617E695E400BDEF9D /* XDMessageViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = XDMessageViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -665,6 +670,9 @@
 				3A22D0CA17E2B296004C72D1 /* XDPiazzaViewController.m */,
 				3A22D0CC17E2B39D004C72D1 /* XDPiazzaCell.h */,
 				3A22D0CD17E2B39D004C72D1 /* XDPiazzaCell.m */,
+				94A46B3417E695E400BDEF9D /* XDMessageViewController.h */,
+				94A46B3517E695E400BDEF9D /* XDMessageViewController.m */,
+				94A46B3617E695E400BDEF9D /* XDMessageViewController.xib */,
 			);
 			path = Piazza;
 			sourceTree = "<group>";
@@ -1293,6 +1301,7 @@
 				3A63C30717CF889600976B8B /* font_3.png in Resources */,
 				3A63C30817CF889600976B8B /* font_4.png in Resources */,
 				3A63C30917CF889600976B8B /* uncheck@2x.png in Resources */,
+				94A46B3817E695E500BDEF9D /* XDMessageViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1348,6 +1357,7 @@
 				3A22D0CB17E2B296004C72D1 /* XDPiazzaViewController.m in Sources */,
 				3A039E1017A70B020050691B /* RSADataVerifier.m in Sources */,
 				3AE89B1117BC182800762505 /* XDDataCenter.m in Sources */,
+				94A46B3717E695E500BDEF9D /* XDMessageViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
