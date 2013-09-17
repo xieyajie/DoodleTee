@@ -34,7 +34,7 @@
     self = [super init];
     if (self) {
         // Custom initialization
-        _dataSource = [[NSMutableArray alloc] init];
+        _dataSource = [[NSMutableArray alloc] initWithObjects:@"这件设计的不错", @"这件设计的不错这件设计的不错这件设计的不错", @"这件设计的不错这件设计的不错这件设计的不错这件设计的不错这件设计的不错", @"这件设计的不错这件设计的不错这件设计的不错这件设计的不错这件设计的不错这件设计的不错这件设计的不错这件设计的不错", @"这件设计的不错这件设计的不错这件设计的不错这件设计的不错这件设计的不错这件设计的不错这件设计的不错这件设计的不错这件设计的不错这件设计的不错", nil];
     }
     return self;
 }
@@ -83,8 +83,8 @@
     [_bottomView addSubview:buttonBack];
     
     _operateView = [[UIView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - _bottomView.frame.size.height - 40, self.view.frame.size.width, 40.0)];
-    _operateView.backgroundColor = [UIColor blackColor];
-    _operateView.alpha = 0.7;
+    _operateView.backgroundColor = [UIColor grayColor];
+//    _operateView.alpha = 0.7;
     [self.view addSubview:_operateView];
     
     CGFloat width = (_bottomView.frame.size.width - 4 * 5) / 3;
@@ -109,11 +109,12 @@
     [praiseBt setTitle:@"赞 1k+" forState:UIControlStateNormal];
     [_operateView addSubview:praiseBt];
 
-    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(10, _topLabel.frame.origin.y + _topLabel.frame.size.height, self.view.frame.size.width - 20, self.view.frame.size.height - (_topLabel.frame.origin.y + _topLabel.frame.size.height) - _operateView.frame.size.height - _bottomView.frame.size.height) style:UITableViewStylePlain];
+    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, _topLabel.frame.origin.y + _topLabel.frame.size.height, self.view.frame.size.width, self.view.frame.size.height - (_topLabel.frame.origin.y + _topLabel.frame.size.height) - _operateView.frame.size.height - _bottomView.frame.size.height) style:UITableViewStylePlain];
     _tableView.delegate = self;
     _tableView.dataSource = self;
+    _tableView.backgroundColor = [UIColor clearColor];
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    _tableView.showsVerticalScrollIndicator = NO;
+//    _tableView.showsVerticalScrollIndicator = NO;
     [self.view addSubview:_tableView];
 }
 
@@ -134,7 +135,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return 3;
+    return [_dataSource count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -145,14 +146,14 @@
     // Configure the cell...
     if (cell == nil) {
         cell = [[XDPiazzaCommentCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-        cell.backgroundColor = [UIColor redColor];
+        cell.backgroundColor = [UIColor clearColor];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
 
     cell.headerView.image = [UIImage imageNamed:@"account_userDeaultImage.png"];
     cell.nameLabel.text = @"123";
     cell.dateLabel.text = @"2013/09/13";
-    cell.contentTextView.text = @"这件设计的不错";
+    cell.content = [_dataSource objectAtIndex:indexPath.row];
     
     return cell;
 }
@@ -162,9 +163,9 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     CGFloat height = 80;
-    NSString *str = @"这件设计的不错";
-    CGSize size = [str sizeWithFont:[UIFont systemFontOfSize:15.0] constrainedToSize:CGSizeMake(300, 500) lineBreakMode:NSLineBreakByWordWrapping];
-    height += size.height > 20 ? size.height : 20;
+    NSString *str = [_dataSource objectAtIndex:indexPath.row];
+    CGSize size = [str sizeWithFont:[UIFont systemFontOfSize:15.0] constrainedToSize:CGSizeMake(280, 500) lineBreakMode:NSLineBreakByWordWrapping];
+    height += size.height > 30 ? size.height : 30;
     return height;
 }
 

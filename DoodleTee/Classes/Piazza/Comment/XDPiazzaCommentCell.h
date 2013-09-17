@@ -11,6 +11,7 @@
 @interface XDPiazzaCommentCell : UITableViewCell
 {
     UIView *_mainView;
+    UILabel *_contentLabel;
 }
 
 @property (nonatomic) CGSize customViewSize;
@@ -18,6 +19,7 @@
 @property (nonatomic, strong) UIImageView *headerView;
 @property (nonatomic, strong) UILabel *nameLabel;
 @property (nonatomic, strong) UILabel *dateLabel;
-@property (nonatomic, strong) UITextView *contentTextView;
+
+@property (nonatomic, strong) NSString *content;
 
 @end
