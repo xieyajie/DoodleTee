@@ -17,6 +17,7 @@
 #import "XDShareViewController.h"
 #import "XDCustomMadeViewController.h"
 
+#import "MBProgressHUD.h"
 #import "XDShareMethods.h"
 #import "LocalDefault.h"
 
@@ -25,6 +26,7 @@
     AKSegmentedControl *_topView;
     UIView *_bottomView;
     UIButton *_addButton;
+    UIButton *_buttonPiazza;
     UIButton *_buttonShare;
     UIButton *_buttonEffect;
     
@@ -272,21 +274,24 @@
     UIImage *buttonBackgroundImagePressedRight = [UIImage imageNamed:@"effect_segmented_pressed_right.png"];
     
     // 广场
-    UIButton *buttonSettings = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, width, segmentedControl.frame.size.height)];
-    buttonSettings.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-    buttonSettings.contentEdgeInsets = UIEdgeInsetsMake(0, 12, 0, 13);
-    [buttonSettings setTitle:@"广场" forState:UIControlStateNormal];
-    [buttonSettings setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [buttonSettings.titleLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Bold" size:15.0]];
-    [buttonSettings setTitleEdgeInsets:UIEdgeInsetsMake(0.0, 10.0, 0.0, 0.0)];
+    _buttonPiazza = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, width, segmentedControl.frame.size.height)];
+    _buttonPiazza.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+    _buttonPiazza.contentEdgeInsets = UIEdgeInsetsMake(0, 12, 0, 13);
+    [_buttonPiazza setTitle:@"广场" forState:UIControlStateNormal];
+    [_buttonPiazza setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [_buttonPiazza.titleLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Bold" size:15.0]];
+    [_buttonPiazza setTitleEdgeInsets:UIEdgeInsetsMake(0.0, 10.0, 0.0, 0.0)];
     
-    [buttonSettings setBackgroundImage:buttonBackgroundImagePressedLeft forState:UIControlStateHighlighted];
+    [_buttonPiazza setBackgroundImage:buttonBackgroundImagePressedLeft forState:UIControlStateHighlighted];
     
     UIImage *buttonSettingsImageNormal = [UIImage imageNamed:@"root_piazza_icon.png"];
-    [buttonSettings setImage:buttonSettingsImageNormal forState:UIControlStateNormal];
+    [_buttonPiazza setImage:buttonSettingsImageNormal forState:UIControlStateNormal];
+    
+    _buttonPiazza.enabled = NO;
+    [_buttonPiazza setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
     
     //分享管理
-    _buttonShare = [[UIButton alloc] initWithFrame:CGRectMake(buttonSettings.frame.origin.x + buttonSettings.frame.size.width, 0, width, segmentedControl.frame.size.height)];
+    _buttonShare = [[UIButton alloc] initWithFrame:CGRectMake(_buttonPiazza.frame.origin.x + _buttonPiazza.frame.size.width, 0, width, segmentedControl.frame.size.height)];
     _buttonShare.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     _buttonShare.contentEdgeInsets = UIEdgeInsetsMake(0, 12, 0, 13);
     [_buttonShare setTitle:@"分享" forState:UIControlStateNormal];
@@ -299,7 +304,7 @@
     
     
     //定制
-    _buttonEffect = [[UIButton alloc] initWithFrame:CGRectMake(buttonSettings.frame.origin.x + buttonSettings.frame.size.width, 0, width, segmentedControl.frame.size.height)];
+    _buttonEffect = [[UIButton alloc] initWithFrame:CGRectMake(_buttonShare.frame.origin.x + _buttonShare.frame.size.width, 0, width, segmentedControl.frame.size.height)];
     _buttonEffect.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     _buttonEffect.contentEdgeInsets = UIEdgeInsetsMake(0, 12, 0, 13);
     [_buttonEffect setTitle:@"定制" forState:UIControlStateNormal];
@@ -310,7 +315,7 @@
     UIImage *buttonEffectImageNormal = [UIImage imageNamed:@"root_effect_icon.png"];
     [_buttonEffect setImage:buttonEffectImageNormal forState:UIControlStateNormal];
     
-    [segmentedControl setButtonsArray:@[buttonSettings, _buttonShare, _buttonEffect]];
+    [segmentedControl setButtonsArray:@[_buttonPiazza, _buttonShare, _buttonEffect]];
 }
 
 #pragma mark - button action
@@ -349,17 +354,17 @@
 
 - (void)piazzaAction
 {
-    //判断是否登录
-    NSString *userName = [[NSUserDefaults standardUserDefaults] objectForKey:kUserDefaultsUserName];
-    //未登录
-    if (userName == nil || userName.length == 0) {
-        XDAccountViewController *accountViewController = [[XDAccountViewController alloc] init];
-        [XDShareMethods presentViewController:accountViewController animated:YES formViewController:self.navigationController completion:nil];
-    }
-    else{//登陆
-        XDPiazzaViewController *piazzaVC = [[XDPiazzaViewController alloc] init];
-        [self.navigationController pushViewController:piazzaVC animated:YES];
-    }
+//    //判断是否登录
+//    NSString *userName = [[NSUserDefaults standardUserDefaults] objectForKey:kUserDefaultsUserName];
+//    //未登录
+//    if (userName == nil || userName.length == 0) {
+//        XDAccountViewController *accountViewController = [[XDAccountViewController alloc] init];
+//        [XDShareMethods presentViewController:accountViewController animated:YES formViewController:self.navigationController completion:nil];
+//    }
+//    else{//登陆
+//        XDPiazzaViewController *piazzaVC = [[XDPiazzaViewController alloc] init];
+//        [self.navigationController pushViewController:piazzaVC animated:YES];
+//    }
 }
 
 - (void)shareAction
