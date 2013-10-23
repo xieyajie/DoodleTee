@@ -263,7 +263,9 @@
         attributeLabel.text = @"数量：";
         
         _subButton = [[UIButton alloc] initWithFrame:CGRectMake(attributeLabel.frame.origin.x + attributeLabel.frame.size.width, 0, 30, height)];
-        [_subButton setImage:[UIImage imageNamed:@"check.png"] forState:UIControlStateNormal];
+        _subButton.titleLabel.font = [UIFont boldSystemFontOfSize:18.0];
+        [_subButton setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+        [_subButton setTitle:@"-" forState:UIControlStateNormal];
         [_subButton addTarget:self action:@selector(subCount:) forControlEvents:UIControlEventTouchUpInside];
         [cell.contentView addSubview:_subButton];
         _subButton.enabled = NO;
@@ -272,7 +274,9 @@
         [cell.contentView addSubview:_countField];
         
         UIButton *addButton = [[UIButton alloc] initWithFrame:CGRectMake(_countField.frame.origin.x + _countField.frame.size.width + 10, 0, 30, height)];
-        [addButton setImage:[UIImage imageNamed:@"uncheck.png"] forState:UIControlStateNormal];
+        addButton.titleLabel.font = [UIFont boldSystemFontOfSize:18.0];
+        [addButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [addButton setTitle:@"+" forState:UIControlStateNormal];
         [addButton addTarget:self action:@selector(addCount:) forControlEvents:UIControlEventTouchUpInside];
         [cell.contentView addSubview:addButton];
     }
@@ -310,9 +314,11 @@
     NSInteger count = [_countField.text integerValue];
     count - 1 > 0 ? count-- : 1;
     if (count == 1) {
+        [_subButton setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
         _subButton.enabled = NO;
     }
     else{
+        [_subButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         _subButton.enabled = YES;
     }
     _countField.text = [NSString stringWithFormat:@"%i", count];
@@ -322,6 +328,7 @@
 - (void)addCount:(id)sender
 {
     _subButton.enabled = YES;
+    [_subButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     
     NSInteger count = [_countField.text integerValue];
     _countField.text = [NSString stringWithFormat:@"%i", ++count];
