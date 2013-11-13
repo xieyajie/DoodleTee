@@ -207,7 +207,7 @@
         [[XDDataCenter sharedCenter] loginWithUserName:_userNameField.text password:_pasdField.text complete:^(id result){
             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
             if (result && [result isKindOfClass:[NSDictionary class]]) {
-                NSInteger code = [result objectForKey:kREQUESTRESULTCODE];
+                NSInteger code = [[result objectForKey:kREQUESTRESULTCODE] integerValue];
                 if (code > 0) {
                     [[NSUserDefaults standardUserDefaults] setObject:userName forKey:kUserDefaultsUserName];
                     [XDShareMethods dismissViewController:self animated:YES completion:nil];

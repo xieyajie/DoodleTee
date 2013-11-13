@@ -369,7 +369,8 @@
 
 - (void)shareAction
 {
-    XDShareViewController *shareViewController = [[XDShareViewController alloc] initWithShareImage:_clotheView.image];
+    UIImage *finishImage = [[XDShareMethods defaultShare] composeImage:self.effectImgView.image toImage:_clotheView.image finishToView:_clotheView];
+    XDShareViewController *shareViewController = [[XDShareViewController alloc] initWithShareImage:finishImage];
     [XDShareMethods presentViewController:shareViewController animated:YES formViewController:self.navigationController completion:nil];
 }
 
