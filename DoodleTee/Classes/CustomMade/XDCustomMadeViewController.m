@@ -60,7 +60,7 @@
         
         _moneyLabel = [[UILabel alloc] init];
         _moneyLabel.backgroundColor = [UIColor clearColor];
-        _moneyLabel.text = @"20 元";
+        _moneyLabel.text = [NSString stringWithFormat:@"%.2f 元", kUnitPrice];
         
         _attributeDic = [NSMutableDictionary dictionary];
     }

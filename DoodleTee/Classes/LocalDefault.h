@@ -92,7 +92,7 @@
 
 
 //其他
-#define kUnitPrice 20.0
+#define kUnitPrice 98.0
 
 #define KSETTINGPLIST @"Documents/setting.plist"
 #define kSETTINGBRAND @"品牌"
