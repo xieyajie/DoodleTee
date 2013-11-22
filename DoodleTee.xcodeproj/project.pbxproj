@@ -1418,8 +1418,8 @@
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Tixa Internet(Beijing) Technology Co., Ltd.";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Tixa Internet(Beijing) Technology Co., Ltd.";
+				CODE_SIGN_IDENTITY = "iPhone Developer: shaocong 周 (TBBR2GCVG6)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: shaocong 周 (TBBR2GCVG6)";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -1437,8 +1437,8 @@
 					"$(SRCROOT)/DoodleTee/alixPay/Utilities/**",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
-				PROVISIONING_PROFILE = "C5F82489-9F46-4F5A-8836-25DC3BBC3830";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "C5F82489-9F46-4F5A-8836-25DC3BBC3830";
+				PROVISIONING_PROFILE = "C745A0FA-671D-4657-867F-D407DD1F492F";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "C745A0FA-671D-4657-867F-D407DD1F492F";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -1452,8 +1452,8 @@
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Tixa Internet(Beijing) Technology Co., Ltd.";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Tixa Internet(Beijing) Technology Co., Ltd.";
+				CODE_SIGN_IDENTITY = "iPhone Developer: shaocong 周 (TBBR2GCVG6)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: shaocong 周 (TBBR2GCVG6)";
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
@@ -1465,8 +1465,8 @@
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
-				PROVISIONING_PROFILE = "C5F82489-9F46-4F5A-8836-25DC3BBC3830";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "C5F82489-9F46-4F5A-8836-25DC3BBC3830";
+				PROVISIONING_PROFILE = "C745A0FA-671D-4657-867F-D407DD1F492F";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "C745A0FA-671D-4657-867F-D407DD1F492F";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -1475,8 +1475,8 @@
 		3AB1FFDC17546F4200B72E93 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Tixa Internet(Beijing) Technology Co., Ltd.";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Tixa Internet(Beijing) Technology Co., Ltd.";
+				CODE_SIGN_IDENTITY = "iPhone Developer: shaocong 周 (TBBR2GCVG6)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: shaocong 周 (TBBR2GCVG6)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/DoodleTee/Classes/Share/ShareSDK_v2.2.4/Connection\"",
@@ -1503,8 +1503,8 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "C5F82489-9F46-4F5A-8836-25DC3BBC3830";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "C5F82489-9F46-4F5A-8836-25DC3BBC3830";
+				PROVISIONING_PROFILE = "C745A0FA-671D-4657-867F-D407DD1F492F";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "C745A0FA-671D-4657-867F-D407DD1F492F";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1512,8 +1512,8 @@
 		3AB1FFDD17546F4200B72E93 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Tixa Internet(Beijing) Technology Co., Ltd.";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Tixa Internet(Beijing) Technology Co., Ltd.";
+				CODE_SIGN_IDENTITY = "iPhone Developer: shaocong 周 (TBBR2GCVG6)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: shaocong 周 (TBBR2GCVG6)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/DoodleTee/Classes/Share/ShareSDK_v2.2.4/Connection\"",
@@ -1540,8 +1540,8 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "C5F82489-9F46-4F5A-8836-25DC3BBC3830";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "C5F82489-9F46-4F5A-8836-25DC3BBC3830";
+				PROVISIONING_PROFILE = "C745A0FA-671D-4657-867F-D407DD1F492F";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "C745A0FA-671D-4657-867F-D407DD1F492F";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

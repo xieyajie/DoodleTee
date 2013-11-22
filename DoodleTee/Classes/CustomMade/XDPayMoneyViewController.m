@@ -656,8 +656,8 @@
 {
     _productInfo = aInfo;
     _moneyLabel.text = [NSString stringWithFormat:@"%.2f 元", [[aInfo objectForKey:kSETTINGMONEY] floatValue]];
-//    self.product.price = [[aInfo objectForKey:kSETTINGMONEY] floatValue];
-    self.product.price = 0.01;
+    self.product.price = [[aInfo objectForKey:kSETTINGMONEY] floatValue];
+//    self.product.price = 0.01;
     self.product.subject = @"自制T恤";
     self.product.body = @"暂无介绍";
 }
