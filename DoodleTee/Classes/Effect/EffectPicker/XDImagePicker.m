@@ -92,8 +92,8 @@
 {
 //    return _staticPicture.imageFromCurrentlyProcessedOutput;
     
-    return [_filter imageFromCurrentlyProcessedOutput];
-//    return _image;
+//    return [_filter imageFromCurrentlyProcessedOutput];
+    return _image;
 }
 
 - (void)setFilter:(XDProcessType)type
@@ -147,6 +147,7 @@
         [_staticPicture addTarget:_filter];
         [_filter addTarget:_effectView];
         [_staticPicture processImage];
+        _image = [_filter imageFromCurrentlyProcessedOutput];
     }
     else{
         _staticPicture = nil;
@@ -166,8 +167,9 @@
                                    withCompletionHandler:^(UIImage *image, NSError *error){
                                        runOnMainQueueWithoutDeadlocking(^{
                                            [_stillCamera stopCameraCapture];
-//                                           [self removeAllTargets];
                                            _staticPicture = [[GPUImagePicture alloc] initWithImage:image smoothlyScaleOutput:YES];
+                                           _image = [_filter imageFromCurrentlyProcessedOutput];
+                                           [self removeAllTargets];
                                            [MBProgressHUD hideAllHUDsForView:self.effectView animated:YES];
                                            completion(YES);
                                        });
