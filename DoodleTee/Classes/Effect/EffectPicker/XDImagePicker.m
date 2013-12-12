@@ -14,8 +14,8 @@
 
 #import "ImageUtil.h"
 #import "LocalDefault.h"
-
 #import "ColorMatrix.h"
+#import "MBProgressHUD.h"
 
 #define kTagEffectViewClose 0
 #define kTagEffectViewOpen 1
@@ -90,9 +90,10 @@
 
 - (UIImage *)image
 {
-//    [_staticPicture processImage];
+//    return _staticPicture.imageFromCurrentlyProcessedOutput;
     
-    return [_filter imageFromCurrentlyProcessedOutput];
+//    return [_filter imageFromCurrentlyProcessedOutput];
+    return _image;
 }
 
 - (void)setFilter:(XDProcessType)type
@@ -134,7 +135,6 @@
 
 - (void)effectImageToType:(XDProcessType)type
 {
-//    [_activityView startAnimating];
     if ((_isStatic && _staticPicture == nil) || (!_isStatic && _effectView.tag == kTagEffectViewClose)) {
         return ;
     }
@@ -144,11 +144,11 @@
     
     if (self.isStatic) {
         _effectView.tag = kTagEffectViewOpen;
-//        [_staticPicture addTarget:_cropFilter];
-//        [_cropFilter addTarget:_filter];
         [_staticPicture addTarget:_filter];
         [_filter addTarget:_effectView];
         [_staticPicture processImage];
+        
+        _image = [_filter imageFromCurrentlyProcessedOutput];
     }
     else{
         _staticPicture = nil;
@@ -158,25 +158,24 @@
         [_filter addTarget:_effectView];
         [_filter prepareForImageCapture];
     }
-    
-//    [_activityView stopAnimating];
 }
 
-- (void)cameraTakePhoto
+- (void)cameraTakePhotoWithFinishHandler:(void (^)(BOOL finish))completion
 {
+    [MBProgressHUD showHUDAddedTo:self.effectView animated:YES];
+    [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationSetButton object:[NSNumber numberWithBool:NO]];
     [_stillCamera capturePhotoAsImageProcessedUpToFilter:_cropFilter
                                    withCompletionHandler:^(UIImage *image, NSError *error){
                                        runOnMainQueueWithoutDeadlocking(^{
-                                           @autoreleasepool
-                                           {
-                                               [_stillCamera stopCameraCapture];
-                                               [self removeAllTargets];
-                                               _staticPicture = [[GPUImagePicture alloc] initWithImage:image smoothlyScaleOutput:YES];
-                                               [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationSetButton object:[NSNumber numberWithBool:NO]];
-                                           }
+                                           _image = [image copy];
+                                           [_stillCamera stopCameraCapture];
+                                           [self removeAllTargets];
+                                           _staticPicture = [[GPUImagePicture alloc] initWithImage:image smoothlyScaleOutput:YES];
+                                           [MBProgressHUD hideAllHUDsForView:self.effectView animated:YES];
+                                           completion(YES);
                                        });
                                    }];
-}
+}                
 
 - (void)startCamera
 {
@@ -200,6 +199,7 @@
     
     [self removeAllTargets];
     [_effectView removeFromSuperview];
+    self.isStatic = YES;
     _staticPicture = nil;
     _image = nil;
 

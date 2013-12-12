@@ -40,6 +40,7 @@ typedef enum{
 - (void)effectImageToType:(XDProcessType)type;
 
 - (void)startCamera;
+- (void)cameraTakePhotoWithFinishHandler:(void (^)(BOOL finish))completion;
 
 - (void)clear;
 

@@ -259,6 +259,7 @@ typedef enum{
 - (void)segmentedViewController:(AKSegmentedControl *)segmentedControl touchedAtIndex:(NSUInteger)index
 {
     if (segmentedControl.tag == kTagTopSegmentedControl) {
+        self.imagePicker.isStatic = YES;
         switch (index) {
             case 0:
                 if (_imageTypeSelectedIndex == -1) {
@@ -433,7 +434,7 @@ typedef enum{
     [_normalSegmentedControl setSeparatorImage:[UIImage imageNamed:@"segmented_separator.png"]];
     
     //返回
-    UIButton *buttonback = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, width, _normalSegmentedControl.frame.size.height)];
+    UIButton *buttonback = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, width - 1, _normalSegmentedControl.frame.size.height)];
     buttonback.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     buttonback.contentEdgeInsets = UIEdgeInsetsMake(0, 12, 0, 13);
     [buttonback setTitle:@"返回" forState:UIControlStateNormal];
@@ -446,7 +447,7 @@ typedef enum{
     [buttonback setImage:[UIImage imageNamed:@"effect_backSelected_icon.png"] forState:UIControlStateHighlighted];
     
     // 相册
-    UIButton *buttonImage = [[UIButton alloc] initWithFrame:CGRectMake(buttonback.frame.origin.x + buttonback.frame.size.width, 0, width, _normalSegmentedControl.frame.size.height)];
+    UIButton *buttonImage = [[UIButton alloc] initWithFrame:CGRectMake(buttonback.frame.origin.x + buttonback.frame.size.width, 0, width - 1, _normalSegmentedControl.frame.size.height)];
     buttonImage.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     buttonImage.contentEdgeInsets = UIEdgeInsetsMake(0, 12, 0, 13);
     [buttonImage setTitle:@"相册" forState:UIControlStateNormal];
@@ -686,7 +687,16 @@ typedef enum{
 - (void)clearAction
 {
     if ([_buttonUndo.titleLabel.text isEqualToString:@"返回"]) {
-        [self backAction];
+        if (_currentEffectType == XDEffectTypeImage && !self.imagePicker.isStatic)
+        {
+            _imageTypeSelectedIndex = -1;
+            [self.imagePicker clear];
+            [self hideActionBottomSegmentedControl];
+        }
+        else{
+            [self backAction];
+        }
+        
         return;
     }
     
@@ -713,6 +723,14 @@ typedef enum{
 //完成
 - (void)doneAction
 {
+    if (_currentEffectType == XDEffectTypeImage && !self.imagePicker.isStatic && [_buttonUndo.titleLabel.text isEqualToString:@"返回"]) {
+        [self.imagePicker cameraTakePhotoWithFinishHandler:^(BOOL finish){
+//            XDFinishShowViewController *finishViewController = [[XDFinishShowViewController alloc] initWithClothImage:[self imageWithEffectView]];
+//            [self.navigationController pushViewController:finishViewController animated:YES];
+        }];
+        return;
+    }
+    
     XDFinishShowViewController *finishViewController = [[XDFinishShowViewController alloc] initWithClothImage:[self imageWithEffectView]];
     [self.navigationController pushViewController:finishViewController animated:YES];
 }
