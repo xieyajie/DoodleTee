@@ -172,11 +172,14 @@
         }
         
         NSString *key = [_headerTitles objectAtIndex:(indexPath.section - 2)];
-        NSDictionary *dic = [[_dataSource objectForKey:key] objectAtIndex:indexPath.row];
-        if (dic && [dic count] > 0) {
-            XDShareMethods *tool = [XDShareMethods defaultShare];
-            consigneeCell.consigneTitleLabel.text = [NSString stringWithFormat:@"%@:", [tool chineseForString:[dic objectForKey:kAccountConsigneTitle]]];
-            consigneeCell.consigneInfoLabel.text = [tool chineseForString:[dic objectForKey:kAccountInfo]];
+        NSArray *array = [_dataSource objectForKey:key];
+        if (array && array.count > 0) {
+            NSDictionary *dic = [array objectAtIndex:indexPath.row];
+            if (dic && [dic count] > 0) {
+                XDShareMethods *tool = [XDShareMethods defaultShare];
+                consigneeCell.consigneTitleLabel.text = [NSString stringWithFormat:@"%@:", [tool chineseForString:[dic objectForKey:kAccountConsigneTitle]]];
+                consigneeCell.consigneInfoLabel.text = [tool chineseForString:[dic objectForKey:kAccountInfo]];
+            }
         }
         else{
             consigneeCell.consigneInfoLabel.text = @"";
@@ -287,26 +290,6 @@
     }
     
     [self showSection:section isMore:open];
-//    switch (section) {
-//        case 2:
-//            //
-//            break;
-//        case 3:
-//            //
-//            break;
-//        case 4:
-//            //
-//            break;
-//        case 5:
-//            //
-//            break;
-//        case 6:
-//            //
-//            break;
-//            
-//        default:
-//            break;
-//    }
 }
 
 #pragma mark - data source
