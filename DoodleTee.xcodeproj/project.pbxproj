@@ -20,6 +20,8 @@
 		3A039E6017A71E7C0050691B /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A039E5E17A71E7C0050691B /* libssl.a */; };
 		3A039E6117A71F280050691B /* DataSigner.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A039DA217A70B010050691B /* DataSigner.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		3A039E6217A71FB30050691B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AEA8B8017A70AB200DC976A /* main.m */; };
+		3A10D636188CB41000D67D28 /* XDViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A10D635188CB41000D67D28 /* XDViewController.m */; };
+		3A10D638188CC8FE00D67D28 /* XDPayMoneyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A10D637188CC8FE00D67D28 /* XDPayMoneyViewController.xib */; };
 		3A22D0CB17E2B296004C72D1 /* XDPiazzaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A22D0CA17E2B296004C72D1 /* XDPiazzaViewController.m */; };
 		3A22D0CE17E2B39D004C72D1 /* XDPiazzaCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A22D0CD17E2B39D004C72D1 /* XDPiazzaCell.m */; };
 		3A23A27817A0AA220098D969 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A23A27617A0AA220098D969 /* CoreVideo.framework */; };
@@ -288,6 +290,9 @@
 		3A039E5C17A71A6E0050691B /* x509v3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = x509v3.h; sourceTree = "<group>"; };
 		3A039E5D17A71E7C0050691B /* libcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libcrypto.a; sourceTree = "<group>"; };
 		3A039E5E17A71E7C0050691B /* libssl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libssl.a; sourceTree = "<group>"; };
+		3A10D634188CB41000D67D28 /* XDViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDViewController.h; sourceTree = "<group>"; };
+		3A10D635188CB41000D67D28 /* XDViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XDViewController.m; sourceTree = "<group>"; };
+		3A10D637188CC8FE00D67D28 /* XDPayMoneyViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = XDPayMoneyViewController.xib; sourceTree = "<group>"; };
 		3A22D0C917E2B296004C72D1 /* XDPiazzaViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDPiazzaViewController.h; sourceTree = "<group>"; };
 		3A22D0CA17E2B296004C72D1 /* XDPiazzaViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XDPiazzaViewController.m; sourceTree = "<group>"; };
 		3A22D0CC17E2B39D004C72D1 /* XDPiazzaCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDPiazzaCell.h; sourceTree = "<group>"; };
@@ -668,6 +673,15 @@
 			path = openssl;
 			sourceTree = "<group>";
 		};
+		3A10D633188CB41000D67D28 /* BaseViewController */ = {
+			isa = PBXGroup;
+			children = (
+				3A10D634188CB41000D67D28 /* XDViewController.h */,
+				3A10D635188CB41000D67D28 /* XDViewController.m */,
+			);
+			path = BaseViewController;
+			sourceTree = "<group>";
+		};
 		3A22D0C517E2B263004C72D1 /* Piazza */ = {
 			isa = PBXGroup;
 			children = (
@@ -986,10 +1000,10 @@
 		3AEA8AF317A70A5D00DC976A /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				3A22D0C517E2B263004C72D1 /* Piazza */,
-				3A7204B817BB30B6005949FD /* Manager */,
-				3AEA8AF417A70A5D00DC976A /* Account */,
 				3AEA8AFC17A70A5D00DC976A /* CustomControl */,
+				3A7204B817BB30B6005949FD /* Manager */,
+				3A22D0C517E2B263004C72D1 /* Piazza */,
+				3AEA8AF417A70A5D00DC976A /* Account */,
 				3AEA8B0017A70A5D00DC976A /* CustomMade */,
 				3AEA8B0817A70A5D00DC976A /* Effect */,
 				3AEA8B2317A70A5D00DC976A /* Setting */,
@@ -1022,6 +1036,7 @@
 		3AEA8AFC17A70A5D00DC976A /* CustomControl */ = {
 			isa = PBXGroup;
 			children = (
+				3A10D633188CB41000D67D28 /* BaseViewController */,
 				3AEA8AFD17A70A5D00DC976A /* AKSegmentedControl */,
 			);
 			path = CustomControl;
@@ -1045,6 +1060,7 @@
 				3AEA8B0417A70A5D00DC976A /* XDCustomMadeViewController.m */,
 				3AEA8B0517A70A5D00DC976A /* XDPayMoneyViewController.h */,
 				3AEA8B0617A70A5D00DC976A /* XDPayMoneyViewController.m */,
+				3A10D637188CC8FE00D67D28 /* XDPayMoneyViewController.xib */,
 			);
 			path = CustomMade;
 			sourceTree = "<group>";
@@ -1248,6 +1264,7 @@
 				3AEA8B4E17A70A5D00DC976A /* 06.acv in Resources */,
 				3AEA8B4F17A70A5D00DC976A /* 17.acv in Resources */,
 				3AEA8B5017A70A5D00DC976A /* aqua.acv in Resources */,
+				3A10D638188CC8FE00D67D28 /* XDPayMoneyViewController.xib in Resources */,
 				3AEA8B5117A70A5D00DC976A /* crossprocess.acv in Resources */,
 				3AEA8B5217A70A5D00DC976A /* purple-green.acv in Resources */,
 				3AEA8B5317A70A5D00DC976A /* yellow-red.acv in Resources */,
@@ -1363,6 +1380,7 @@
 				3AEA8B5B17A70A5D00DC976A /* XDSettingViewController.m in Sources */,
 				3AEA8B6917A70A5D00DC976A /* XDShareViewController.m in Sources */,
 				3AEA8B6B17A70A5D00DC976A /* XDAppDelegate.m in Sources */,
+				3A10D636188CB41000D67D28 /* XDViewController.m in Sources */,
 				3AEA8B6C17A70A5D00DC976A /* XDFinishShowViewController.m in Sources */,
 				3AEA8B6D17A70A5D00DC976A /* XDRootViewController.m in Sources */,
 				3A5CDE5B17BC623B00B05931 /* UIImageView+MKNetworkKitAdditions.m in Sources */,

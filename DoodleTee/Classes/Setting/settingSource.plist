@@ -54,6 +54,21 @@
 					<string>XL</string>
 					<string>XXL</string>
 				</array>
+				<key>Description</key>
+				<dict>
+					<key>XS</key>
+					<string>(155-160cm)</string>
+					<key>S</key>
+					<string>(160-170cm)</string>
+					<key>M</key>
+					<string>(168-175cm)</string>
+					<key>L</key>
+					<string>(172-178cm)</string>
+					<key>XL</key>
+					<string>(175-185cm)</string>
+					<key>XXL</key>
+					<string>(180-190cm)</string>
+				</dict>
 			</dict>
 		</array>
 	</dict>

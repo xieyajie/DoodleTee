@@ -107,8 +107,6 @@
             NSMutableDictionary *colorDic = [[_dataSource objectForKey:key] objectAtIndex:colorSection];
             [colorDic setObject:[_colorSource objectForKey:[array objectAtIndex:indexPath.row]] forKey:kSettingDataSource];
             
-//            [_leftTableView reloadData];
-            
             [[_selectionDictionary objectForKey:key] setObject:[[colorDic objectForKey:kSettingDataSource] objectAtIndex:0] forKey:kSETTINGCOLOR];
             [[_selectionindexPaths objectForKey:key] setObject:[NSIndexPath indexPathForRow:0 inSection:colorSection] forKey:kSETTINGCOLOR];
             
@@ -134,42 +132,62 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"CellIdentifier";
-    static NSString *CheckCellIdentifier = @"CheckCellIdentifier";
-    NSString *cellIdentifier = nil;
-    if (0 == indexPath.section)
-    {
-        cellIdentifier = CellIdentifier;
-    }
-    else
-    {
-        cellIdentifier = CheckCellIdentifier;
-    }
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-    
-    if (nil == cell)
-    {
-        cell = [[UITableViewCell alloc] initWithStyle: UITableViewCellStyleDefault reuseIdentifier: cellIdentifier];
-        
-        cell.textLabel.backgroundColor = [UIColor clearColor];
-        UIView *selectedBackgroundView = [[UIView alloc] init];
-        selectedBackgroundView.backgroundColor = [UIColor colorWithPatternImage: [UIImage imageNamed: @"setting_cellSelectBackground"]];
-        cell.selectedBackgroundView = selectedBackgroundView;
-    }
-    
     NSString *key = tableView.tag == kTagLeftView ? kSettingLeftView : kSettingRightView;
     NSMutableDictionary *dic = [[_dataSource objectForKey:key] objectAtIndex:indexPath.section];
     NSString *title = [dic objectForKey:kSettingDataTitle];
     NSString *text = [[dic objectForKey:kSettingDataSource] objectAtIndex:indexPath.row];
+    UITableViewCell *cell = nil;
     
-    if ([CellIdentifier isEqualToString:cellIdentifier])
-    {
-        cell.imageView.image = nil;
+    if (tableView.tag == kTagLeftView) {
+        static NSString *CellIdentifier = @"CellIdentifier";
+        static NSString *CheckCellIdentifier = @"CheckCellIdentifier";
+        NSString *cellIdentifier = nil;
+        if (0 == indexPath.section)
+        {
+            cellIdentifier = CellIdentifier;
+        }
+        else
+        {
+            cellIdentifier = CheckCellIdentifier;
+        }
+        cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+        
+        if (nil == cell)
+        {
+            cell = [[UITableViewCell alloc] initWithStyle: UITableViewCellStyleDefault reuseIdentifier: cellIdentifier];
+            
+            cell.textLabel.backgroundColor = [UIColor clearColor];
+            UIView *selectedBackgroundView = [[UIView alloc] init];
+            selectedBackgroundView.backgroundColor = [UIColor colorWithPatternImage: [UIImage imageNamed: @"setting_cellSelectBackground"]];
+            cell.selectedBackgroundView = selectedBackgroundView;
+        }
+        
+        if ([CellIdentifier isEqualToString:cellIdentifier])
+        {
+            cell.imageView.image = nil;
+        }
+        else if ([CheckCellIdentifier isEqualToString:cellIdentifier])
+        {
+            NSDictionary *imageDic = [_imageSource objectForKey:text];
+            cell.imageView.image = [UIImage imageNamed: [imageDic objectForKey:kSettingImageIcon]];
+        }
     }
-    else if ([CheckCellIdentifier isEqualToString:cellIdentifier])
-    {
-        NSDictionary *imageDic = [_imageSource objectForKey:text];
-        cell.imageView.image = [UIImage imageNamed: [imageDic objectForKey:kSettingImageIcon]];
+    else{
+        static NSString *RightCellIdentifier = @"RightCellIdentifier";
+        cell = [tableView dequeueReusableCellWithIdentifier:RightCellIdentifier];
+        
+        if (nil == cell)
+        {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:RightCellIdentifier];
+            
+            cell.textLabel.backgroundColor = [UIColor clearColor];
+            UIView *selectedBackgroundView = [[UIView alloc] init];
+            selectedBackgroundView.backgroundColor = [UIColor colorWithPatternImage: [UIImage imageNamed: @"setting_cellSelectBackground"]];
+            cell.selectedBackgroundView = selectedBackgroundView;
+            cell.detailTextLabel.font = [UIFont systemFontOfSize:12.0];
+        }
+        NSString *detailStr = [[dic objectForKey:kSettingDataDescription] valueForKey:text];
+        cell.detailTextLabel.text = detailStr;
     }
     
     NSIndexPath *setIndex = [[_selectionindexPaths objectForKey:key] objectForKey:title];
@@ -205,11 +223,7 @@
 
 - (void)layoutSubviews
 {
-    UIImageView *bgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
-    bgView.image = [UIImage imageNamed:@"root_bg.png"];
-    [self.view addSubview:bgView];
-    
-    _mainView = [[UIView alloc] initWithFrame:CGRectMake(20, 10, self.view.frame.size.width - 40, self.view.frame.size.height - 10 - 62.5)];
+    _mainView = [[UIView alloc] initWithFrame:CGRectMake(20, self.mainRect.origin.y + 10, self.mainRect.size.width - 40, self.mainRect.size.height - 10 - kBottomHeight)];
     _mainView.backgroundColor = [UIColor colorWithRed:220 / 255.0 green:220 / 255.0 blue:220 / 255.0 alpha:1.0];
     [self.view addSubview:_mainView];
     
@@ -234,7 +248,7 @@
     _rightTableView.backgroundColor = [UIColor clearColor];
     [_mainView addSubview: _rightTableView];
     
-    _bottomView = [[UIView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - 62.5, self.view.frame.size.width, 62.5)];
+    _bottomView = [[UIView alloc] initWithFrame:CGRectMake(0, self.mainRect.size.height - kBottomHeight, self.mainRect.size.width, kBottomHeight)];
     UIImageView *bottomImgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"bottomBarBg.png"]];
     bottomImgView.frame = CGRectMake(0, 0, _bottomView.frame.size.width, _bottomView.frame.size.height);
     [_bottomView addSubview:bottomImgView];

@@ -6,9 +6,9 @@
 //  Copyright (c) 2013年 XD. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "XDViewController.h"
 
-@interface XDShareViewController : UIViewController<UITableViewDataSource, UITableViewDelegate>
+@interface XDShareViewController : XDViewController<UITableViewDataSource, UITableViewDelegate>
 {
     UIToolbar *_toolbar;
     UITableView *_tableView;

@@ -44,10 +44,6 @@
     [super viewDidLoad];
 
     // Uncomment the following line to preserve selection between presentations.
-    UIImageView *bgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
-    bgView.image = [UIImage imageNamed:@"root_bg.png"];
-    [self.view addSubview:bgView];
-    
     _topLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 31)];
     _topLabel.font = [UIFont systemFontOfSize:18];
     _topLabel.backgroundColor = [UIColor colorWithRed:143 / 255.0 green:143 / 255.0 blue:143 / 255.0 alpha:1.0];
@@ -59,7 +55,7 @@
     _topLabel.layer.shadowOffset = CGSizeMake(0.0f, 0.0f);
     [self.view addSubview:_topLabel];
     
-    _bottomView = [[UIView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - 62.5, self.view.frame.size.width, 62.5)];
+    _bottomView = [[UIView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - kBottomHeight, self.view.frame.size.width, kBottomHeight)];
     UIImageView *bottomImgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"bottomBarBg.png"]];
     bottomImgView.frame = CGRectMake(0, 0, _bottomView.frame.size.width, _bottomView.frame.size.height);
     [_bottomView addSubview:bottomImgView];

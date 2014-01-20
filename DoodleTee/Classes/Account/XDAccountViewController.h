@@ -6,11 +6,10 @@
 //  Copyright (c) 2013年 XD. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "XDViewController.h"
 
-@interface XDAccountViewController : UIViewController<UITextFieldDelegate>
+@interface XDAccountViewController : XDViewController<UITextFieldDelegate>
 {
-    UIImageView *_bgView;
     UIView *_mainView;
     UIView *_bottomView;
     

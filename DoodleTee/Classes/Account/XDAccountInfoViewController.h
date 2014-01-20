@@ -6,9 +6,9 @@
 //  Copyright (c) 2013年 XD. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "XDViewController.h"
 
-@interface XDAccountInfoViewController : UIViewController
+@interface XDAccountInfoViewController : XDViewController
 
 @property (nonatomic, strong) UILabel *titleLabel;
 

@@ -6,8 +6,8 @@
 //  Copyright (c) 2013年 XD. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "XDViewController.h"
 
-@interface XDEffectViewController : UIViewController
+@interface XDEffectViewController : XDViewController
 
 @end

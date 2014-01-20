@@ -63,6 +63,7 @@
         _moneyLabel.text = [NSString stringWithFormat:@"%.2f 元", kUnitPrice];
         
         _attributeDic = [NSMutableDictionary dictionary];
+        _titleArray = [NSArray array];
     }
     return self;
 }
@@ -94,18 +95,13 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    
-    UIImageView *bgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
-    bgView.image = [UIImage imageNamed:@"root_bg.png"];
-    [self.view addSubview:bgView];
-    
-    _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(kViewX, kTitleY, kViewWidth, kTitleHeight)];
+    _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(kViewX, self.mainRect.origin.y + kTitleY, kViewWidth, kTitleHeight)];
     _titleLabel.textAlignment = KTextAlignmentCenter;
     _titleLabel.backgroundColor = [UIColor colorWithRed:143 / 255.0 green:143 / 255.0 blue:143 / 255.0 alpha:1.0];
     _titleLabel.text = @"定制我设计的T恤";
     [self.view addSubview:_titleLabel];
     
-    _bottomView = [[UIView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - kBottomHeight, self.view.frame.size.width, kBottomHeight)];
+    _bottomView = [[UIView alloc] initWithFrame:CGRectMake(0, self.mainRect.size.height - kBottomHeight, self.mainRect.size.width, kBottomHeight)];
     UIImageView *bg = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, _bottomView.frame.size.width, kBottomHeight)];
     bg.contentMode = UIViewContentModeScaleAspectFit;
     bg.image = [UIImage imageNamed:@"bottomBarBg.png"];
@@ -160,6 +156,9 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    if ([self.attributeDic count] == 0) {
+        return 0;
+    }
     return self.attributeDic.count + 3;
 }
 
@@ -224,6 +223,7 @@
     }
     
     _titleArray = [self.attributeDic allKeys];
+    [self.tableView reloadData];
 }
 
 - (UITableViewCell *)configurationImageCell

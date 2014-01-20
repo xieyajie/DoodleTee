@@ -65,13 +65,13 @@
 {
     [super viewDidLoad];
     
-    _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(kViewX, kTitleY, kViewWidth, kTitleHeight)];
+    _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(kViewX, self.mainRect.origin.y + kTitleY, kViewWidth, kTitleHeight)];
     _titleLabel.textAlignment = KTextAlignmentCenter;
     _titleLabel.backgroundColor = [UIColor colorWithRed:143 / 255.0 green:143 / 255.0 blue:143 / 255.0 alpha:1.0];
     _titleLabel.text = @"付款";
     [self.view addSubview:_titleLabel];
     
-    _bottomView = [[UIView alloc] initWithFrame:CGRectMake(0, kScreenHeight - kBottomHeight, self.view.frame.size.width, kBottomHeight)];
+    _bottomView = [[UIView alloc] initWithFrame:CGRectMake(0, self.mainRect.size.height - kBottomHeight, self.mainRect.size.width, kBottomHeight)];
     UIImageView *bg = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, _bottomView.frame.size.width, kBottomHeight)];
     bg.contentMode = UIViewContentModeScaleAspectFit;
     bg.image = [UIImage imageNamed:@"bottomBarBg.png"];
@@ -100,6 +100,7 @@
     [_paymentCreditCard setTitleColor:[UIColor blackColor] forState:UIControlStateHighlighted];
     [_paymentAlipay setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [_paymentAlipay setTitleColor:[UIColor blackColor] forState:UIControlStateHighlighted];
+    [self.view bringSubviewToFront:_payMoneyView];
     
     _bottomView.layer.shadowColor = [[UIColor blackColor] CGColor];
     _bottomView.layer.shadowOpacity = 1.0;
@@ -211,7 +212,8 @@
 {
     CGFloat y = _titleLabel.frame.origin.y + _titleLabel.frame.size.height;
     CGRect rect = CGRectMake(_titleLabel.frame.origin.x, y, _titleLabel.frame.size.width, _bottomView.frame.origin.y - y);
-    _payMoneyView = [[UITableView alloc] initWithFrame:rect style:UITableViewStylePlain];
+//    _payMoneyView = [[UITableView alloc] initWithFrame:rect style:UITableViewStylePlain];
+    _payMoneyView.frame = rect;
     _payMoneyView.backgroundColor = [UIColor colorWithRed:220 / 255.0 green:220 / 255.0 blue:220 / 255.0 alpha:1.0];
 }
 

@@ -6,10 +6,10 @@
 //  Copyright (c) 2013年 XD. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "XDViewController.h"
 
 #import "AKSegmentedControl.h"
 
-@interface XDRootViewController : UIViewController<AKSegmentedControlDelegate>
+@interface XDRootViewController : XDViewController<AKSegmentedControlDelegate>
 
 @end

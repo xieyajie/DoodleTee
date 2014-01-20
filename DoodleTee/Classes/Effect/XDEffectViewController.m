@@ -91,14 +91,14 @@ typedef enum{
     
     [self configurationAbility];
     
+    [self layoutBottomView];
+    [self.view addSubview:_bottomView];
+    
     [self layoutClothBackground];
     [self.view addSubview:_clothBgView];
     
     [self layoutTopSegmentedControl];
     [self.view addSubview:_topSegmentedControl];
-    
-    [self layoutBottomView];
-    [self.view addSubview:_bottomView];
     
     [self layoutEffectTypeShowView];
     [self.view addSubview:_effectTypeShowView];
@@ -182,7 +182,7 @@ typedef enum{
 
 - (void)keyboardWillHide: (NSNotification *)aNotification
 {
-    [_clothBgView scrollRectToVisible:CGRectMake(0, 0, self.view.frame.size.width, _clothBgView.frame.size.height) animated:YES];
+    [_clothBgView scrollRectToVisible:CGRectMake(0, 0, self.mainRect.size.width, _clothBgView.frame.size.height) animated:YES];
     _clothBgView.scrollEnabled = NO;
 }
 
@@ -331,7 +331,7 @@ typedef enum{
 
 - (void)layoutTopSegmentedControl
 {
-    _topSegmentedControl = [[AKSegmentedControl alloc] initWithFrame:CGRectMake(20, 10, self.view.frame.size.width - 40, 42.5)];
+    _topSegmentedControl = [[AKSegmentedControl alloc] initWithFrame:CGRectMake(20, self.mainRect.origin.y + 10, self.mainRect.size.width - 40, 42.5)];
     _topSegmentedControl.tag = kTagTopSegmentedControl;
     [_topSegmentedControl setDelegate:self];
     [self initTopSegmentedView];
@@ -402,7 +402,7 @@ typedef enum{
 
 - (void)layoutBottomView
 {
-    _bottomView = [[UIView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - 62.5, self.view.frame.size.width, 62.5)];
+    _bottomView = [[UIView alloc] initWithFrame:CGRectMake(0, self.mainRect.size.height - kBottomHeight, self.mainRect.size.width, kBottomHeight)];
     _bottomView.layer.shadowColor = [[UIColor blackColor] CGColor];
     _bottomView.layer.shadowOpacity = 1.0;
     _bottomView.layer.shadowRadius = 10.0;
@@ -510,7 +510,7 @@ typedef enum{
 
 - (void)layoutClothBackground
 {
-    _clothBgView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height - _bottomView.frame.size.height)];
+    _clothBgView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, self.mainRect.origin.y, self.mainRect.size.width, self.mainRect.size.height - _bottomView.frame.size.height - self.mainRect.origin.y)];
     _clothBgView.bounces = NO;
     _clothBgView.showsVerticalScrollIndicator = NO;
     _clothBgView.contentSize = CGSizeMake(_clothBgView.frame.size.width, _clothBgView.frame.size.height * 1.5);
@@ -525,7 +525,7 @@ typedef enum{
 
 - (void)layoutEffectTypeShowView
 {
-    _effectTypeShowView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, _topSegmentedControl.frame.origin.y + _topSegmentedControl.frame.size.height + 5, self.view.frame.size.width, kEffectTypeShowViewHeight)];
+    _effectTypeShowView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, _topSegmentedControl.frame.origin.y + _topSegmentedControl.frame.size.height + 5, self.mainRect.size.width, kEffectTypeShowViewHeight)];
     _effectTypeShowView.backgroundColor = [UIColor blackColor];
     _effectTypeShowView.alpha = 0.7;
     _effectTypeShowView.scrollEnabled = NO;
@@ -538,10 +538,9 @@ typedef enum{
 - (void)layoutEffectView
 {
     CGFloat scale = kEffectTempWidth / kEffectTempHeight;
-    int height = self.view.frame.size.height - 120 - _bottomView.frame.size.height - 20;
+    int height = self.mainRect.size.height - 120 - _bottomView.frame.size.height - self.mainRect.origin.y;
     int width = height * scale;
-    _effectView = [[UIView alloc] initWithFrame:CGRectMake((self.view.frame.size.width - width) / 2, 120, width, height)];
-//    _effectView = [[UIView alloc] initWithFrame:CGRectMake((self.view.frame.size.width - 200) / 2, 120, 200, 250)];
+    _effectView = [[UIView alloc] initWithFrame:CGRectMake((self.mainRect.size.width - width) / 2, 110, width, height)];
     _effectView.backgroundColor = [UIColor clearColor];
     _effectView.layer.borderWidth = 1.0f;
     _effectView.layer.borderColor = [[UIColor colorWithPatternImage:[UIImage imageNamed:@"effect_border.png"]] CGColor];

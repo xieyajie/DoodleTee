@@ -55,11 +55,6 @@
     _dateFormatter = [[NSDateFormatter alloc] init ];
     _dateFormatter.dateFormat = @"yyyy-MM-dd-HH-mm-ss";
     
-    UIImageView *bgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
-    bgView.image = [UIImage imageNamed:@"root_bg.png"];
-    [self.view addSubview:bgView];
-    
-    
     UIImageView *clotheView = [[UIImageView alloc] init];
     UIImage *image = [XDShareMethods clotheImage];
     clotheView.frame = [self frameForImage:image addToView:self.view];
@@ -132,7 +127,7 @@
 {
     UIImage *backgroundImage = [UIImage imageNamed:@"functionBarBg.png"];
     
-    _topSegmentControl = [[AKSegmentedControl alloc] initWithFrame:CGRectMake(20, 10, self.view.frame.size.width - 40, 42.5)];
+    _topSegmentControl = [[AKSegmentedControl alloc] initWithFrame:CGRectMake(20, self.mainRect.origin.y + 10, self.mainRect.size.width - 40, 42.5)];
     [_topSegmentControl setBackgroundImage:backgroundImage];
     [_topSegmentControl setContentEdgeInsets:UIEdgeInsetsMake(2.0, 2.0, 3.0, 2.0)];
     [_topSegmentControl setAutoresizingMask:UIViewAutoresizingFlexibleRightMargin|UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleBottomMargin];
@@ -149,7 +144,7 @@
 
 - (void)initBottomView
 {
-    _bottomView = [[UIView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - 62.5, self.view.frame.size.width, 62.5)];
+    _bottomView = [[UIView alloc] initWithFrame:CGRectMake(0, self.mainRect.size.height - kBottomHeight, self.mainRect.size.width, kBottomHeight)];
     _bottomView.layer.shadowColor = [[UIColor blackColor] CGColor];
     _bottomView.layer.shadowOpacity = 1.0;
     _bottomView.layer.shadowRadius = 10.0;

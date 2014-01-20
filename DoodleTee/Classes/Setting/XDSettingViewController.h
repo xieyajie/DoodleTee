@@ -6,9 +6,9 @@
 //  Copyright (c) 2013年 XD. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "XDViewController.h"
 
-@interface XDSettingViewController : UIViewController<UITableViewDataSource, UITableViewDelegate>
+@interface XDSettingViewController : XDViewController<UITableViewDataSource, UITableViewDelegate>
 {
     UIView *_mainView;
     UIView *_bottomView;

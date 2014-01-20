@@ -6,9 +6,9 @@
 //  Copyright (c) 2013年 XD. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "XDViewController.h"
 
-@interface XDFinishShowViewController : UIViewController
+@interface XDFinishShowViewController : XDViewController
 
 - (id)initWithClothImage:(UIImage *)image;
 

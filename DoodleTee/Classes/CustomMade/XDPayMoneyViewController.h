@@ -6,7 +6,7 @@
 //  Copyright (c) 2013年 XD. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "XDViewController.h"
 
 //
 //商品信息封装在Product中
@@ -27,7 +27,7 @@
 @end
 
 
-@interface XDPayMoneyViewController : UIViewController
+@interface XDPayMoneyViewController : XDViewController
 {
     IBOutlet UIView *_payMoneyView;
     

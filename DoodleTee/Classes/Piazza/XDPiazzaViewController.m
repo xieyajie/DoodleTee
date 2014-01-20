@@ -281,10 +281,6 @@
 
 - (void)layoutSubviews
 {
-    UIImageView *bgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
-    bgView.image = [UIImage imageNamed:@"root_bg.png"];
-    [self.view addSubview:bgView];
-    
     _topView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 50)];
     _topView.backgroundColor = [UIColor colorWithRed:217 / 255.0 green:217 / 255.0 blue:217 / 255.0 alpha:1.0];
     _topView.layer.shadowColor = [[UIColor blackColor] CGColor];
@@ -294,7 +290,7 @@
     [self.view addSubview:_topView];
     [self initTopView];
     
-    _bottomView = [[UIView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - 62.5, self.view.frame.size.width, 62.5)];
+    _bottomView = [[UIView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - kBottomHeight, self.view.frame.size.width, kBottomHeight)];
     _bottomView.layer.shadowColor = [[UIColor blackColor] CGColor];
     _bottomView.layer.shadowOpacity = 1.0;
     _bottomView.layer.shadowRadius = 10.0;

@@ -78,6 +78,7 @@
 #define kSettingRightView @"rightView"
 #define kSettingDataTitle @"title"
 #define kSettingDataSource @"source"
+#define kSettingDataDescription @"Description"
 
 #define kSettingSourceImage @"image_source"
 #define kSettingImageIcon @"icon"
