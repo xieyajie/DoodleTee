@@ -11,6 +11,7 @@
 
 #import "XDEffectViewController.h"
 #import "XDFinishShowViewController.h"
+#import "XDEditImageController.h"
 #import "AKSegmentedControl.h"
 
 #import "XDImagePicker.h"
@@ -112,6 +113,10 @@ typedef enum{
     [[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(keyboardWillShow:) name: UIKeyboardWillShowNotification object: nil];
     [[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(keyboardWillHide:) name: UIKeyboardWillHideNotification object: nil];
     
+    if ([self respondsToSelector:@selector(imageEditFinished:)]) {
+        [[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(imageEditFinished:) name: kNotificationFinishEditImage object: nil];
+    }
+    
     if ([self respondsToSelector:@selector(setActionBottomViewUndoButtonForBack:)]) {
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setActionBottomViewUndoButtonForBack:) name:kNotificationSetButton object:nil];
     }
@@ -130,6 +135,7 @@ typedef enum{
     if (_imagePickerController == nil) {
         _imagePickerController = [[UIImagePickerController alloc] init];//图像选取器
         _imagePickerController.delegate = self;
+        _imagePickerController.allowsEditing = NO;
         _imagePickerController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;//过渡类型,有四种
     }
     return _imagePickerController;
@@ -197,6 +203,18 @@ typedef enum{
     }
 }
 
+- (void)imageEditFinished:(NSNotification *)aNotification
+{
+    NSData *imageData = [aNotification object];
+    
+    if (_imageTypeSelectedIndex == -1) {
+        _imageTypeSelectedIndex = 0;
+    }
+    self.imagePicker.image = [UIImage imageWithData:imageData];
+    [self imageEffectWithType:_imageTypeSelectedIndex];
+    [self hideNormalBottomSegmentedControl];
+}
+
 #pragma mark - UIGestureRecognizer action
 
 //tap
@@ -232,25 +250,11 @@ typedef enum{
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
     UIImage *image = [info objectForKey:@"UIImagePickerControllerOriginalImage"];//获取图片
+    
     if (picker.sourceType == UIImagePickerControllerSourceTypePhotoLibrary)
     {
-        [XDShareMethods dismissViewController:self animated:YES completion:^{
-            if (_imageTypeSelectedIndex == -1) {
-                _imageTypeSelectedIndex = 0;
-            }
-            self.imagePicker.image = image;
-            [self imageEffectWithType:_imageTypeSelectedIndex];
-            [self hideNormalBottomSegmentedControl];
-        }];//关闭模态视图控制器
-        
-//        [self dismissViewControllerAnimated:YES completion:^{
-//            if (_imageTypeSelectedIndex == -1) {
-//                _imageTypeSelectedIndex = 0;
-//            }
-//            self.imagePicker.image = image;
-//            [self imageEffectWithType:_imageTypeSelectedIndex];
-//            [self hideNormalBottomSegmentedControl];
-//        }];
+        XDEditImageController *editController = [[XDEditImageController alloc] initWithImage:image];
+        [self.imagePickerController pushViewController:editController animated:YES];
     }
 }
 
@@ -654,9 +658,7 @@ typedef enum{
 {
     self.imagePicker.isStatic = YES;
     self.imagePickerController.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;//打开相册
-    self.imagePickerController.allowsEditing = NO;//禁止对图片进行编辑
-    [XDShareMethods presentViewController:self.imagePickerController animated:YES formViewController:self.navigationController completion:nil];//打开模态视图控制器选择图像
-//    [self.navigationController presentViewController:self.imagePickerController animated:YES completion:nil];
+    [XDShareMethods presentViewController:self.imagePickerController animated:YES formViewController:self.navigationController completion:nil];
 }
 
 //相机

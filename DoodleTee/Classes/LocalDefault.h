@@ -63,6 +63,7 @@
 
 //通知名称
 #define kNotificationSetButton @"setButton"
+#define kNotificationFinishEditImage @"finishedEditImage"
 #define kNotificationFinishName @"finishedEffect"
 #define kNotificationLandSuccess @"landSuccess"
 #define kNotificationPayRecall @"payRecall"

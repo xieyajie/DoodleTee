@@ -17,22 +17,21 @@
 
 @implementation XDViewController
 
-- (id)init
-{
-    self = [super init];
-    if (self) {
-        // Custom initialization
-        _version = [[[UIDevice currentDevice] systemVersion] floatValue];
-    }
-    return self;
-}
-
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
         _version = [[[UIDevice currentDevice] systemVersion] floatValue];
+        
+        CGRect bounds = [[UIScreen mainScreen] bounds];
+        if (_version >= 7.0) {
+            self.edgesForExtendedLayout = UIRectEdgeNone;
+            _mainRect = CGRectMake(0, 20, bounds.size.width, bounds.size.height);
+        }
+        else{
+            _mainRect = CGRectMake(0, 0, bounds.size.width, bounds.size.height - 20);
+        }
     }
     return self;
 }
@@ -41,14 +40,6 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    CGRect bounds = [[UIScreen mainScreen] bounds];
-    if (_version >= 7.0) {
-        self.edgesForExtendedLayout = UIRectEdgeNone;
-        _mainRect = CGRectMake(0, 20, bounds.size.width, bounds.size.height);
-    }
-    else{
-        _mainRect = CGRectMake(0, 0, bounds.size.width, bounds.size.height - 20);
-    }
     
     _backgroundView = [[UIImageView alloc] initWithFrame:CGRectMake(_mainRect.origin.x, _mainRect.origin.y, _mainRect.size.width, _mainRect.size.height)];
     _backgroundView.image = [UIImage imageNamed:@"root_bg.png"];

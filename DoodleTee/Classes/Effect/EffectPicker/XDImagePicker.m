@@ -64,25 +64,25 @@
 - (void)setImage:(UIImage *)aImage
 {
     _image = aImage;
-    if (self.isStatic) {
-        CGFloat viewScale = _effectView.frame.size.width / _effectView.frame.size.height;
-        CGFloat imageScale = aImage.size.width / aImage.size.height;
-        CGFloat width;
-        CGFloat height;
-        if (imageScale > viewScale) {
-            height = aImage.size.height;
-            width = height * viewScale;
-        }
-        else{
-            width = aImage.size.width;
-            height = width / imageScale;
-        }
-        
-        CGRect cropRect = CGRectMake(0, 0, width, height);
-        CGImageRef tmp = CGImageCreateWithImageInRect([aImage CGImage], cropRect);
-        _image = [UIImage imageWithCGImage:tmp scale:_image.scale orientation:_image.imageOrientation];
-        CGImageRelease(tmp);
-    }
+//    if (self.isStatic) {
+//        CGFloat viewScale = _effectView.frame.size.width / _effectView.frame.size.height;
+//        CGFloat imageScale = aImage.size.width / aImage.size.height;
+//        CGFloat width;
+//        CGFloat height;
+//        if (imageScale > viewScale) {
+//            height = aImage.size.height;
+//            width = height * viewScale;
+//        }
+//        else{
+//            width = aImage.size.width;
+//            height = width / imageScale;
+//        }
+//        
+//        CGRect cropRect = CGRectMake(0, 0, width, height);
+//        CGImageRef tmp = CGImageCreateWithImageInRect([aImage CGImage], cropRect);
+//        _image = [UIImage imageWithCGImage:tmp scale:_image.scale orientation:_image.imageOrientation];
+//        CGImageRelease(tmp);
+//    }
     
     _staticPicture = [[GPUImagePicture alloc] initWithImage:_image smoothlyScaleOutput:NO];
     [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationSetButton object:[NSNumber numberWithBool:NO]];
