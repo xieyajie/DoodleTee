@@ -14,6 +14,7 @@
 @interface XDEditImageController ()
 {
     UIImage *_originalImage;
+    CGFloat _mainY;
 }
 
 - (void)saveImage;
@@ -41,7 +42,19 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
-    _toolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, self.mainRect.size.height - 44, self.mainRect.size.width, 44)];
+    CGFloat version = [[[UIDevice currentDevice] systemVersion] floatValue];
+    _mainY = 10;
+    if (version >= 7.0) {
+        _mainY = 74;
+    }
+    else{
+        if (self.navigationController.navigationBar.translucent) {
+            _mainY = 54;
+        }
+    }
+    
+    self.view.backgroundColor = [UIColor redColor];
+    _toolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - 44, self.view.frame.size.width, 44)];
     _toolbar.barStyle = UIBarStyleBlackTranslucent;
     
     UIBarButtonItem *leftItem = [[UIBarButtonItem alloc] initWithTitle:@"左转" style:UIBarButtonItemStyleBordered target:self action:@selector(rotateLeft:)];
@@ -51,8 +64,7 @@
     [_toolbar setItems:@[leftItem, rightItem, flexibleItem, doneItem]];
     [self.view addSubview:_toolbar];
     
-    CGFloat y = self.mainRect.origin.y + 10 + 44;
-    CGRect editorFrame = CGRectMake(20, y, self.mainRect.size.width - 40, _toolbar.frame.origin.y - 10 - y);
+    CGRect editorFrame = CGRectMake(20, _mainY, self.view.frame.size.width - 40, _toolbar.frame.origin.y - 10 - _mainY);
     
     _simpleImageEditorView = [[AGSimpleImageEditorView alloc] initWithAsset:nil image:_originalImage andFrame:editorFrame];
     _simpleImageEditorView.ratio = 3.0 / 4.0;
@@ -89,14 +101,13 @@
     CGRect bounds = [[UIScreen mainScreen] bounds];
     CGFloat width = bounds.size.width;
     CGFloat height = bounds.size.height;
-    CGFloat y = self.mainRect.origin.y + 10 + 44;
     
     if (UIInterfaceOrientationIsLandscape(forInterfaceOrientation)) {
         width = bounds.size.height;
         height = bounds.size.width;
     }
     
-    CGRect editorFrame = CGRectMake(20, y, width - 40, _toolbar.frame.origin.y - 10 - y);
+    CGRect editorFrame = CGRectMake(20, _mainY, width - 40, _toolbar.frame.origin.y - 10 - _mainY);
     _simpleImageEditorView.frame = editorFrame;
 }
 

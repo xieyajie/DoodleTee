@@ -6,11 +6,11 @@
 //  Copyright (c) 2013年 XD. All rights reserved.
 //
 
-#import "XDViewController.h"
+#import <UIKit/UIKit.h>
 
 #import "AGSimpleImageEditorView.h"
 
-@interface XDEditImageController : XDViewController
+@interface XDEditImageController : UIViewController
 {
     AGSimpleImageEditorView *_simpleImageEditorView;
     UIToolbar *_toolbar;
