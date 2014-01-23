@@ -160,6 +160,7 @@
             UIView *selectedBackgroundView = [[UIView alloc] init];
             selectedBackgroundView.backgroundColor = [UIColor colorWithPatternImage: [UIImage imageNamed: @"setting_cellSelectBackground"]];
             cell.selectedBackgroundView = selectedBackgroundView;
+            cell.textLabel.font = [UIFont systemFontOfSize:15.0];
         }
         
         if ([CellIdentifier isEqualToString:cellIdentifier])
