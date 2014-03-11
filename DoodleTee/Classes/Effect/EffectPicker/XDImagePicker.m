@@ -45,18 +45,12 @@
     if (self) {
         // Custom initialization
         _effectView = [[GPUImageView alloc] initWithFrame:CGRectMake(0, 0, size.width, size.height)];
-        _effectView.fillMode = kGPUImageFillModePreserveAspectRatioAndFill;
+//        _effectView.fillMode = kGPUImageFillModePreserveAspectRatioAndFill;
         
         _stillCamera = [[GPUImageStillCamera alloc] initWithSessionPreset:AVCaptureSessionPreset640x480 cameraPosition:AVCaptureDevicePositionBack];
-        _stillCamera.outputImageOrientation = UIInterfaceOrientationPortrait;
+//        _stillCamera.outputImageOrientation = UIInterfaceOrientationPortraitUpsideDown;
         
         _cropFilter = [[GPUImageCropFilter alloc] initWithCropRegion:CGRectMake(0.0f, 0.0f, 1.0f, 1.0f)];
-        
-//        _activityView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-//        _activityView.frame = CGRectMake(0, 0, 100, 100);
-//        _activityView.backgroundColor = [UIColor redColor];
-//         [_effectView addSubview:_activityView];
-//        [_effectView bringSubviewToFront:_activityView];
     }
     return self;
 }
@@ -64,25 +58,6 @@
 - (void)setImage:(UIImage *)aImage
 {
     _image = aImage;
-//    if (self.isStatic) {
-//        CGFloat viewScale = _effectView.frame.size.width / _effectView.frame.size.height;
-//        CGFloat imageScale = aImage.size.width / aImage.size.height;
-//        CGFloat width;
-//        CGFloat height;
-//        if (imageScale > viewScale) {
-//            height = aImage.size.height;
-//            width = height * viewScale;
-//        }
-//        else{
-//            width = aImage.size.width;
-//            height = width / imageScale;
-//        }
-//        
-//        CGRect cropRect = CGRectMake(0, 0, width, height);
-//        CGImageRef tmp = CGImageCreateWithImageInRect([aImage CGImage], cropRect);
-//        _image = [UIImage imageWithCGImage:tmp scale:_image.scale orientation:_image.imageOrientation];
-//        CGImageRelease(tmp);
-//    }
     
     _staticPicture = [[GPUImagePicture alloc] initWithImage:_image smoothlyScaleOutput:NO];
     [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationSetButton object:[NSNumber numberWithBool:NO]];
@@ -90,9 +65,6 @@
 
 - (UIImage *)image
 {
-//    return _staticPicture.imageFromCurrentlyProcessedOutput;
-    
-//    return [_filter imageFromCurrentlyProcessedOutput];
     return _image;
 }
 

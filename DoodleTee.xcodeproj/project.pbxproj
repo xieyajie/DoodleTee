@@ -1521,8 +1521,8 @@
 		3AB1FFDC17546F4200B72E93 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer: xiangning zhang (NHVQ3SY4K2)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: xiangning zhang (NHVQ3SY4K2)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: shaocong 周 (TBBR2GCVG6)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: shaocong 周 (TBBR2GCVG6)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/DoodleTee/Classes/Share/ShareSDK_v2.2.4/Connection\"",
@@ -1549,8 +1549,8 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "FC0947BE-1AEC-41FE-9519-547C32F2FE24";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "FC0947BE-1AEC-41FE-9519-547C32F2FE24";
+				PROVISIONING_PROFILE = "7AFE63B0-7267-42E4-B4B3-EF6D8CA55A1D";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "7AFE63B0-7267-42E4-B4B3-EF6D8CA55A1D";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1558,8 +1558,8 @@
 		3AB1FFDD17546F4200B72E93 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer: xiangning zhang (NHVQ3SY4K2)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: xiangning zhang (NHVQ3SY4K2)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: shaocong 周 (TBBR2GCVG6)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: shaocong 周 (TBBR2GCVG6)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/DoodleTee/Classes/Share/ShareSDK_v2.2.4/Connection\"",
@@ -1586,8 +1586,8 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "FC0947BE-1AEC-41FE-9519-547C32F2FE24";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "FC0947BE-1AEC-41FE-9519-547C32F2FE24";
+				PROVISIONING_PROFILE = "7AFE63B0-7267-42E4-B4B3-EF6D8CA55A1D";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "7AFE63B0-7267-42E4-B4B3-EF6D8CA55A1D";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
