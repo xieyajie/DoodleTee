@@ -48,7 +48,7 @@
 //        _effectView.fillMode = kGPUImageFillModePreserveAspectRatioAndFill;
         
         _stillCamera = [[GPUImageStillCamera alloc] initWithSessionPreset:AVCaptureSessionPreset640x480 cameraPosition:AVCaptureDevicePositionBack];
-//        _stillCamera.outputImageOrientation = UIInterfaceOrientationPortraitUpsideDown;
+        _stillCamera.outputImageOrientation = UIInterfaceOrientationPortrait;
         
         _cropFilter = [[GPUImageCropFilter alloc] initWithCropRegion:CGRectMake(0.0f, 0.0f, 1.0f, 1.0f)];
     }
