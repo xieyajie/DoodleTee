@@ -174,6 +174,7 @@
 		3AEA8B7217A70A6E00DC976A /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3AEA8B6F17A70A6E00DC976A /* Default-568h@2x.png */; };
 		3AEA8B7317A70A6E00DC976A /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 3AEA8B7017A70A6E00DC976A /* Default.png */; };
 		3AEA8B7417A70A6E00DC976A /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3AEA8B7117A70A6E00DC976A /* Default@2x.png */; };
+		3CA4122918D8779300C7C4BE /* UIImage+fixOrientation.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CA4122818D8779300C7C4BE /* UIImage+fixOrientation.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -498,6 +499,8 @@
 		3AEA8B7F17A70AB200DC976A /* DoodleTee-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "DoodleTee-Prefix.pch"; sourceTree = "<group>"; };
 		3AEA8B8017A70AB200DC976A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		3AEA8B8117A70ACE00DC976A /* LocalDefault.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = LocalDefault.h; path = Classes/LocalDefault.h; sourceTree = "<group>"; };
+		3CA4122718D8779300C7C4BE /* UIImage+fixOrientation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+fixOrientation.h"; sourceTree = "<group>"; };
+		3CA4122818D8779300C7C4BE /* UIImage+fixOrientation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+fixOrientation.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -731,6 +734,8 @@
 		3A54B12B188F77F900C5640C /* EditImage */ = {
 			isa = PBXGroup;
 			children = (
+				3CA4122718D8779300C7C4BE /* UIImage+fixOrientation.h */,
+				3CA4122818D8779300C7C4BE /* UIImage+fixOrientation.m */,
 				3A54B131188F783D00C5640C /* XDEditImageController.h */,
 				3A54B132188F783D00C5640C /* XDEditImageController.m */,
 				3A54B12C188F77F900C5640C /* AGSimpleImageEditorView.h */,
@@ -1400,6 +1405,7 @@
 				3A42290E17BF4C9300D0A884 /* JSONKit.m in Sources */,
 				3AEA8B5817A70A5D00DC976A /* XDImagePicker.m in Sources */,
 				3AEA8B5917A70A5D00DC976A /* XDTextPicker.m in Sources */,
+				3CA4122918D8779300C7C4BE /* UIImage+fixOrientation.m in Sources */,
 				3A5CDE5617BC623B00B05931 /* NSData+MKBase64.m in Sources */,
 				3A5BF48017E6B0CF002F0E97 /* XDMessageViewController.m in Sources */,
 				3AEA8B5A17A70A5D00DC976A /* XDEffectViewController.m in Sources */,
