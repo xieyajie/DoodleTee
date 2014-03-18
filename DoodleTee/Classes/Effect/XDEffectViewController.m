@@ -17,6 +17,7 @@
 #import "XDImagePicker.h"
 #import "XDDrawPicker.h"
 #import "XDTextPicker.h"
+#import "EditImage/UIImage+fixOrientation.h"
 
 #import "XDShareMethods.h"
 #import "LocalDefault.h"
@@ -250,6 +251,7 @@ typedef enum{
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
     UIImage *image = [info objectForKey:@"UIImagePickerControllerOriginalImage"];//获取图片
+    image = [image fixOrientation];
     
     if (picker.sourceType == UIImagePickerControllerSourceTypePhotoLibrary)
     {
