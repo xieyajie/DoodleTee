@@ -118,7 +118,7 @@
         [_staticPicture addTarget:_filter];
         [_filter addTarget:_effectView];
         [_staticPicture processImage];
-        _image = [_filter imageFromCurrentlyProcessedOutput];
+//        _image = [_filter imageFromCurrentlyProcessedOutput];
     }
     else{
         _staticPicture = nil;
@@ -139,7 +139,7 @@
                                        runOnMainQueueWithoutDeadlocking(^{
                                            [_stillCamera stopCameraCapture];
                                            _staticPicture = [[GPUImagePicture alloc] initWithImage:image smoothlyScaleOutput:YES];
-                                           _image = [_filter imageFromCurrentlyProcessedOutput];
+                                           _image = [_filter imageFromCurrentlyProcessedOutputWithOrientation:UIImageOrientationUp];
                                            [self removeAllTargets];
                                            [MBProgressHUD hideAllHUDsForView:self.effectView animated:YES];
                                            completion(YES);
