@@ -20,6 +20,7 @@
 		3A039E6017A71E7C0050691B /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A039E5E17A71E7C0050691B /* libssl.a */; };
 		3A039E6117A71F280050691B /* DataSigner.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A039DA217A70B010050691B /* DataSigner.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		3A039E6217A71FB30050691B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AEA8B8017A70AB200DC976A /* main.m */; };
+		3A05AB5018D8240100C40D79 /* UIImage+fixOrientation.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A05AB4F18D8240100C40D79 /* UIImage+fixOrientation.m */; };
 		3A10D636188CB41000D67D28 /* XDViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A10D635188CB41000D67D28 /* XDViewController.m */; };
 		3A10D638188CC8FE00D67D28 /* XDPayMoneyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A10D637188CC8FE00D67D28 /* XDPayMoneyViewController.xib */; };
 		3A22D0CB17E2B296004C72D1 /* XDPiazzaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A22D0CA17E2B296004C72D1 /* XDPiazzaViewController.m */; };
@@ -294,6 +295,8 @@
 		3A039E5C17A71A6E0050691B /* x509v3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = x509v3.h; sourceTree = "<group>"; };
 		3A039E5D17A71E7C0050691B /* libcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libcrypto.a; sourceTree = "<group>"; };
 		3A039E5E17A71E7C0050691B /* libssl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libssl.a; sourceTree = "<group>"; };
+		3A05AB4E18D8240100C40D79 /* UIImage+fixOrientation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+fixOrientation.h"; sourceTree = "<group>"; };
+		3A05AB4F18D8240100C40D79 /* UIImage+fixOrientation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+fixOrientation.m"; sourceTree = "<group>"; };
 		3A10D634188CB41000D67D28 /* XDViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDViewController.h; sourceTree = "<group>"; };
 		3A10D635188CB41000D67D28 /* XDViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XDViewController.m; sourceTree = "<group>"; };
 		3A10D637188CC8FE00D67D28 /* XDPayMoneyViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = XDPayMoneyViewController.xib; sourceTree = "<group>"; };
@@ -731,6 +734,8 @@
 		3A54B12B188F77F900C5640C /* EditImage */ = {
 			isa = PBXGroup;
 			children = (
+				3A05AB4E18D8240100C40D79 /* UIImage+fixOrientation.h */,
+				3A05AB4F18D8240100C40D79 /* UIImage+fixOrientation.m */,
 				3A54B131188F783D00C5640C /* XDEditImageController.h */,
 				3A54B132188F783D00C5640C /* XDEditImageController.m */,
 				3A54B12C188F77F900C5640C /* AGSimpleImageEditorView.h */,
@@ -1400,6 +1405,7 @@
 				3A42290E17BF4C9300D0A884 /* JSONKit.m in Sources */,
 				3AEA8B5817A70A5D00DC976A /* XDImagePicker.m in Sources */,
 				3AEA8B5917A70A5D00DC976A /* XDTextPicker.m in Sources */,
+				3A05AB5018D8240100C40D79 /* UIImage+fixOrientation.m in Sources */,
 				3A5CDE5617BC623B00B05931 /* NSData+MKBase64.m in Sources */,
 				3A5BF48017E6B0CF002F0E97 /* XDMessageViewController.m in Sources */,
 				3AEA8B5A17A70A5D00DC976A /* XDEffectViewController.m in Sources */,

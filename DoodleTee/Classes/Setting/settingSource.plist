@@ -23,7 +23,6 @@
 				<key>source</key>
 				<array>
 					<string>纯棉</string>
-					<string>亚麻</string>
 				</array>
 			</dict>
 			<dict>
@@ -123,20 +122,9 @@
 			<key>cloth_image</key>
 			<string>cloth_image_white.png</string>
 		</dict>
-		<key>亚麻色</key>
-		<dict>
-			<key>icon</key>
-			<string>cloth_icon_flax.png</string>
-			<key>cloth_image</key>
-			<string>cloth_image_flax.png</string>
-		</dict>
 	</dict>
 	<key>color_source</key>
 	<dict>
-		<key>亚麻</key>
-		<array>
-			<string>亚麻色</string>
-		</array>
 		<key>纯棉</key>
 		<array>
 			<string>白色</string>

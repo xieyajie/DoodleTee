@@ -224,7 +224,18 @@
 
 - (void)layoutSubviews
 {
-    _mainView = [[UIView alloc] initWithFrame:CGRectMake(20, self.mainRect.origin.y + 10, self.mainRect.size.width - 40, self.mainRect.size.height - 10 - kBottomHeight)];
+    _bottomView = [[UIView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - kBottomHeight, self.view.frame.size.width, kBottomHeight)];
+    UIImageView *bottomImgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"bottomBarBg.png"]];
+    bottomImgView.frame = CGRectMake(0, 0, _bottomView.frame.size.width, _bottomView.frame.size.height);
+    [_bottomView addSubview:bottomImgView];
+    [self.view addSubview:_bottomView];
+    _bottomView.layer.shadowColor = [[UIColor blackColor] CGColor];
+    _bottomView.layer.shadowOpacity = 1.0;
+    _bottomView.layer.shadowRadius = 10.0;
+    _bottomView.layer.shadowOffset = CGSizeMake(0.0f, 0.0f);
+    [self.view addSubview:_bottomView];
+    
+    _mainView = [[UIView alloc] initWithFrame:CGRectMake(20, self.viewX + 10, self.view.frame.size.width - 40, _bottomView.frame.origin.y - (self.viewX + 10))];
     _mainView.backgroundColor = [UIColor colorWithRed:220 / 255.0 green:220 / 255.0 blue:220 / 255.0 alpha:1.0];
     [self.view addSubview:_mainView];
     
@@ -248,17 +259,6 @@
     _rightTableView.separatorColor = [UIColor grayColor];
     _rightTableView.backgroundColor = [UIColor clearColor];
     [_mainView addSubview: _rightTableView];
-    
-    _bottomView = [[UIView alloc] initWithFrame:CGRectMake(0, self.mainRect.size.height - kBottomHeight, self.mainRect.size.width, kBottomHeight)];
-    UIImageView *bottomImgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"bottomBarBg.png"]];
-    bottomImgView.frame = CGRectMake(0, 0, _bottomView.frame.size.width, _bottomView.frame.size.height);
-    [_bottomView addSubview:bottomImgView];
-    [self.view addSubview:_bottomView];
-    _bottomView.layer.shadowColor = [[UIColor blackColor] CGColor];
-    _bottomView.layer.shadowOpacity = 1.0;
-    _bottomView.layer.shadowRadius = 10.0;
-    _bottomView.layer.shadowOffset = CGSizeMake(0.0f, 0.0f);
-    [self.view addSubview:_bottomView];
     
     AKSegmentedControl *segmentedControl = [[AKSegmentedControl alloc] initWithFrame:CGRectMake(14, 12, _bottomView.frame.size.width - 14 * 2, 35)];
     [segmentedControl setSegmentedControlMode: AKSegmentedControlModeButton];

@@ -61,7 +61,7 @@
 
 - (void)layoutSubviews
 {
-    _mainView = [[UIView alloc] initWithFrame:CGRectMake(20, self.mainRect.origin.y + 10, self.mainRect.size.width - 40, self.mainRect.size.height - 10)];
+    _mainView = [[UIView alloc] initWithFrame:CGRectMake(20, self.viewX + 10, self.view.frame.size.width - 40, self.view.frame.size.height - (self.viewX + 10))];
     _mainView.backgroundColor = [UIColor colorWithRed:220 / 255.0 green:220 / 255.0 blue:220 / 255.0 alpha:1.0];
     [self.view addSubview:_mainView];
     
@@ -112,7 +112,7 @@
     [_loginButton addTarget:self action:@selector(loginAction:) forControlEvents:UIControlEventTouchUpInside];
     [_mainView addSubview:_loginButton];
     
-    _bottomView = [[UIView alloc] initWithFrame:CGRectMake(0, self.mainRect.size.height - kBottomHeight, self.mainRect.size.width, kBottomHeight)];
+    _bottomView = [[UIView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - kBottomHeight, self.view.frame.size.width, kBottomHeight)];
     UIImageView *bottomImgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"bottomBarBg.png"]];
     bottomImgView.frame = CGRectMake(0, 0, _bottomView.frame.size.width, _bottomView.frame.size.height);
     [_bottomView addSubview:bottomImgView];

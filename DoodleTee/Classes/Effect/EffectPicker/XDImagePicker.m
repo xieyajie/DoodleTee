@@ -45,7 +45,6 @@
     if (self) {
         // Custom initialization
         _effectView = [[GPUImageView alloc] initWithFrame:CGRectMake(0, 0, size.width, size.height)];
-//        _effectView.fillMode = kGPUImageFillModePreserveAspectRatioAndFill;
         
         _stillCamera = [[GPUImageStillCamera alloc] initWithSessionPreset:AVCaptureSessionPreset640x480 cameraPosition:AVCaptureDevicePositionBack];
         _stillCamera.outputImageOrientation = UIInterfaceOrientationPortrait;

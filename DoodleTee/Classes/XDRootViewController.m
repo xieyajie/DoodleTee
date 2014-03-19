@@ -58,14 +58,14 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
-    _topView = [[AKSegmentedControl alloc] initWithFrame:CGRectMake(20, self.mainRect.origin.y + 10, self.mainRect.size.width - 40, 42.5)];
+    _topView = [[AKSegmentedControl alloc] initWithFrame:CGRectMake(20, self.viewX + 10, self.view.frame.size.width - 40, 42.5)];
     _topView.tag = kTagTopView;
     [_topView setSegmentedControlMode: AKSegmentedControlModeButton];
     [_topView setDelegate:self];
     [self initTopSegmentedView];
     [self.view addSubview:_topView];
     
-    _bottomView = [[UIView alloc] initWithFrame:CGRectMake(0, self.mainRect.size.height - kBottomHeight, self.mainRect.size.width, kBottomHeight)];
+    _bottomView = [[UIView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - kBottomHeight, self.view.frame.size.width, kBottomHeight)];
     UIImageView *bottomImgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"bottomBarBg.png"]];
     bottomImgView.frame = CGRectMake(0, 0, _bottomView.frame.size.width, _bottomView.frame.size.height);
     [_bottomView addSubview:bottomImgView];
@@ -208,8 +208,8 @@
     CGFloat width = image.size.width;
     CGFloat height = image.size.height;
     
-    return CGRectMake((self.mainRect.size.width - width) / 2,
-                      (self.mainRect.size.height - height - (_topView.frame.origin.y + _topView.frame.size.height) - _bottomView.frame.size.height) / 2 + (_topView.frame.origin.y + _topView.frame.size.height),
+    return CGRectMake((self.view.frame.size.width - width) / 2,
+                      (self.view.frame.size.height - height - (_topView.frame.origin.y + _topView.frame.size.height) - _bottomView.frame.size.height) / 2 + (_topView.frame.origin.y + _topView.frame.size.height),
                       width, height);
 }
 
@@ -374,8 +374,10 @@
 - (void)effectAction
 {
     NSString *plistPath = [NSHomeDirectory() stringByAppendingPathComponent: KSETTINGPLIST];
-    NSFileManager *fileManage = [NSFileManager defaultManager];
-    if ([fileManage fileExistsAtPath: plistPath])
+    NSMutableDictionary *settingsDic = [[NSMutableDictionary alloc] initWithContentsOfFile: plistPath];
+    NSString *userName = [[NSUserDefaults standardUserDefaults] objectForKey:kUserDefaultsUserName];
+    NSMutableDictionary *settings = [settingsDic objectForKey:userName];
+    if ([settings count] > 0)
     {
         UIImageView *tmpView = _clotheView;
         UIImage *finishImage = [[XDShareMethods defaultShare] composeImage:self.effectImgView.image toImage:_clotheView.image finishToView:tmpView];

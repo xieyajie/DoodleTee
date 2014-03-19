@@ -10,7 +10,7 @@
 
 @interface XDViewController : UIViewController
 
-@property (nonatomic) CGRect mainRect;
+@property (nonatomic) CGFloat viewX;
 @property (strong, nonatomic) UIImageView *backgroundView;
 
 @end

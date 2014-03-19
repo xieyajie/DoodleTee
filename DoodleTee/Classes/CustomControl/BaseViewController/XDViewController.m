@@ -31,17 +31,14 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    
-    CGRect bounds = [[UIScreen mainScreen] bounds];
+
+    _viewX = 0;
     if (_version >= 7.0) {
         self.edgesForExtendedLayout = UIRectEdgeNone;
-        _mainRect = CGRectMake(0, 20, bounds.size.width, bounds.size.height);
-    }
-    else{
-        _mainRect = CGRectMake(0, 0, bounds.size.width, bounds.size.height - 20);
+        _viewX = 20;
     }
     
-    _backgroundView = [[UIImageView alloc] initWithFrame:CGRectMake(_mainRect.origin.x, _mainRect.origin.y, _mainRect.size.width, _mainRect.size.height)];
+    _backgroundView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
     _backgroundView.image = [UIImage imageNamed:@"root_bg.png"];
     [self.view addSubview:_backgroundView];
 }

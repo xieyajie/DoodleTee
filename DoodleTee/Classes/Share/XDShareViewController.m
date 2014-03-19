@@ -139,7 +139,7 @@
 
 - (void)layoutSubviews
 {
-    _toolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, self.mainRect.origin.y, self.mainRect.size.width, 44)];
+    _toolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 44)];
     [self.view addSubview:_toolbar];
     
     UIBarButtonItem *flexibleSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
@@ -147,7 +147,7 @@
     UIBarButtonItem *titleItem = [[UIBarButtonItem alloc] initWithTitle:@"分享" style:UIBarButtonItemStylePlain target:nil action:nil];
     [_toolbar setItems:[NSArray arrayWithObjects:flexibleSpace, titleItem, flexibleSpace, cancelItem, nil] animated:YES];
     
-    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, _toolbar.frame.origin.y + 44, self.mainRect.size.width, self.mainRect.size.height - (_toolbar.frame.origin.y + 44)) style:UITableViewStylePlain];
+    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, _toolbar.frame.origin.y + 44, self.view.frame.size.width, self.view.frame.size.height - (_toolbar.frame.origin.y + 44)) style:UITableViewStylePlain];
     _tableView.delegate = self;
     _tableView.dataSource = self;
     [self.view addSubview:_tableView];
