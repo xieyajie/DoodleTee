@@ -9,9 +9,6 @@
 #import "XDViewController.h"
 
 @interface XDViewController ()
-{
-    CGFloat _version;
-}
 
 @end
 

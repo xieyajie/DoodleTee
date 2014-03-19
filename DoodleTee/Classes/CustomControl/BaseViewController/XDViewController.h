@@ -10,6 +10,7 @@
 
 @interface XDViewController : UIViewController
 
+@property (nonatomic) CGFloat version;
 @property (nonatomic) CGFloat viewX;
 @property (strong, nonatomic) UIImageView *backgroundView;
 

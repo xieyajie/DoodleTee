@@ -71,9 +71,12 @@
     _titleLabel.text = @"付款";
     [self.view addSubview:_titleLabel];
     
-    CGFloat height = [[UIScreen mainScreen] bounds].size.height;
+    CGFloat oy = [[UIScreen mainScreen] bounds].size.height - kBottomHeight;
+    if (self.version < 7.0) {
+        oy -= 20;
+    }
     
-    _bottomView = [[UIView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - self.viewX - kBottomHeight, self.view.frame.size.width, kBottomHeight)];
+    _bottomView = [[UIView alloc] initWithFrame:CGRectMake(0, oy, self.view.frame.size.width, kBottomHeight)];
     UIImageView *bg = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, _bottomView.frame.size.width, kBottomHeight)];
     bg.contentMode = UIViewContentModeScaleAspectFit;
     bg.image = [UIImage imageNamed:@"bottomBarBg.png"];
